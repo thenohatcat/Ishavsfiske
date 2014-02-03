@@ -1,9 +1,9 @@
-//Version: 0.1.0
+//Version: 0.1.1
 //Author: Jakob Pipping
 //Contributors: 
 
-#ifndef ISHAV_0_1_0
-#error IshavsfiskeGame_update.cpp: Wrong version 0.1.0
+#ifndef ISHAV_0_1_1
+#error IshavsfiskeGame_update.cpp: Wrong version 0.1.1
 #endif
 
 #include "IshavsfiskeGame.h"
@@ -14,7 +14,7 @@ void Ishavsfiske::IshavsfiskeGame::mUpdate(float time, float deltaTime)
 	mSceneRoot->update(this, time, deltaTime);
 
 	//Handle Input
-	input(time, deltaTime);
+	mInput(time, deltaTime);
 
 	//Collision system collide
 
