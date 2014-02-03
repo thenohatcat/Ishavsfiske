@@ -1,11 +1,11 @@
-//Version: 0.1.0
+//Version: 0.1.1
 //Author: Jakob Pipping
 //Contributors:
 
 #ifndef INC_SHIP_H
 #define INC_SHIP_H
 
-#ifdef ISHAV_0_1_0
+#ifdef ISHAV_0_1_1
 
 #include <Angler\Node.h>
 #include "IshavsfiskeGame.h"
@@ -34,7 +34,7 @@ namespace Ishavsfiske
 }
 
 #else
-#error Ishavsfiske.h: Wrong version 0.1.0
+#error Ishavsfiske.h: Wrong version 0.1.1
 #endif
 
 #endif

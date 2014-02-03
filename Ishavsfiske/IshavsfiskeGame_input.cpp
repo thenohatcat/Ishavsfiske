@@ -1,9 +1,9 @@
-//Version: 0.1.0
+//Version: 0.1.1
 //Author: 
 //Contributors: 
 
-#ifndef ISHAV_0_1_0
-#error IshavsfiskeGame_input.cpp: Wrong version 0.1.0
+#ifndef ISHAV_0_1_1
+#error IshavsfiskeGame_input.cpp: Wrong version 0.1.1
 #endif
 
 #include "IshavsfiskeGame.h"
