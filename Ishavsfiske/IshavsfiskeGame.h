@@ -1,11 +1,11 @@
-//Version: 0.1.0
+//Version: 0.1.1
 //Author: Jakob Pipping
 //Contributors:
 
 #ifndef INC_ISHAVSFISKEGAME_H
 #define INC_ISHAVSFISKEGAME_H
 
-#ifdef ISHAV_0_1_0
+#ifdef ISHAV_0_1_1
 
 #include <Angler\Game.h>
 #include <Angler\Node.h>
@@ -30,16 +30,16 @@ namespace Ishavsfiske
 
 		virtual void mInit();
 	private:
-		void input(float time, float deltaTime);
+		void mInput(float time, float deltaTime);
 
-		sf::Texture *tx;
+		sf::Texture *mTX;
 
 		Ship *mShip;
 	};
 }
 
 #else
-#error Ishavsfiske.h: Wrong version 0.1.0
+#error Ishavsfiske.h: Wrong version 0.1.1
 #endif
 
 #endif
