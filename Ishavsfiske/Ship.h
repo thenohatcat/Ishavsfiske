@@ -26,6 +26,8 @@ namespace Ishavsfiske
 
 		void update(Angler::Game *context, float time, float deltaTime);
 	private:
+		void mInit();
+
 		sf::Texture *mTX;
 		Ishavsfiske::IshavsfiskeGame *mOwner;
 		Angler::Nodes::Translation *mTransl;

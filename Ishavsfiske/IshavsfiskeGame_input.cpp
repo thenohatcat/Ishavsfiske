@@ -12,7 +12,7 @@
 
 #include <Angler\Keyboard.h>
 
-void Ishavsfiske::IshavsfiskeGame::input(float time, float deltaTime)
+void Ishavsfiske::IshavsfiskeGame::mInput(float time, float deltaTime)
 {
 	
 }

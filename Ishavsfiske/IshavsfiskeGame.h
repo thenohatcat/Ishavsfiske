@@ -30,9 +30,9 @@ namespace Ishavsfiske
 
 		virtual void mInit();
 	private:
-		void input(float time, float deltaTime);
+		void mInput(float time, float deltaTime);
 
-		sf::Texture *tx;
+		sf::Texture *mTX;
 
 		Ship *mShip;
 	};

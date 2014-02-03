@@ -12,11 +12,11 @@
 
 void Ishavsfiske::IshavsfiskeGame::mLoadContent()
 {
-	tx->loadFromFile("GasPlanet2.png");
+	mTX->loadFromFile("GasPlanet2.png");
 }
 
 void Ishavsfiske::IshavsfiskeGame::mInit()
 {
-	tx = new sf::Texture();
-	mShip = new Ship(0x10000, mSceneRoot, tx, this);
+	mTX = new sf::Texture();
+	mShip = new Ship(0x10000, mSceneRoot, mTX, this);
 }
