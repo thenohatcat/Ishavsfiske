@@ -2,8 +2,8 @@
 //Author: Jakob Pipping
 //Contributors:
 
-#ifndef INC_ISHAVSFISKE_H
-#define INC_ISHAVSFISKE_H
+#ifndef INC_SHIP_H
+#define INC_SHIP_H
 
 #ifdef ISHAV_0_1_0
 
