@@ -1,9 +1,9 @@
-//Version: 0.1.1
+//Version: 0.1.2
 //Author: Jakob Pipping
 //Contributors: 
 
-#ifndef ISHAV_0_1_1
-#error IshavsfiskeGame_draw.cpp: Wrong version 0.1.1
+#ifndef ISHAV_0_1_2
+#error IshavsfiskeGame_draw.cpp: Wrong version 0.1.2
 #endif
 
 #include "IshavsfiskeGame.h"

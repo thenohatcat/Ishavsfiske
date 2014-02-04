@@ -1,9 +1,9 @@
-//Version: 0.1.1
+//Version: 0.1.2
 //Author: Jakob Pipping
 //Contributors: 
 
-#ifndef ISHAV_0_1_1
-#error Ship.cpp: Wrong version 0.1.1
+#ifndef ISHAV_0_1_2
+#error Ship.cpp: Wrong version 0.1.2
 #endif
 
 #include "Ship.h"
