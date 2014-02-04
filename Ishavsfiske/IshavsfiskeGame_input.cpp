@@ -12,11 +12,18 @@
 
 #include <Angler\Keyboard.h>
 
+float accel = 0;
+
 void Ishavsfiske::IshavsfiskeGame::mInput(float time, float deltaTime)
 {
 	if (getKeyboardState().isKeyDown(sf::Keyboard::W))
 	{
-		mShip->move(0, -0.5 * deltaTime);
+		accel += 0.0001;
+		mShip->move(0, -accel * deltaTime);
+	}
+	else if (getKeyboardState().wasKeyDown(sf::Keyboard::W))
+	{
+		accel = 0;
 	}
 	if (getKeyboardState().isKeyDown(sf::Keyboard::A))
 	{
@@ -24,7 +31,12 @@ void Ishavsfiske::IshavsfiskeGame::mInput(float time, float deltaTime)
 	}
 	if (getKeyboardState().isKeyDown(sf::Keyboard::S))
 	{
-		mShip->move(0, 0.5 * deltaTime);
+		accel += 0.0001;
+		mShip->move(0, accel * deltaTime);
+	}
+	else if (getKeyboardState().wasKeyDown(sf::Keyboard::S))
+	{
+		accel = 0;
 	}
 	if (getKeyboardState().isKeyDown(sf::Keyboard::D))
 	{

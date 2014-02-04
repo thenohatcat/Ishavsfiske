@@ -57,7 +57,7 @@ void Ishavsfiske::Ship::move(float x, float y)
 	//This cumbersome code will be fixed by the next version
 	//Rotation r(0, mRotation->getRotation());
 	Node *n = new Node(0);
-	Scale r(0, new Rotation(0, n, mRotation->getRotation()), -0.5, 0.5);
+	Scale r(0, new Rotation(0, n, mRotation->getRotation()), -1, 1);
 	sf::Vector2f tv = r.transform(sf::Vector2f(x, y));
 	mTransl->translate(tv);
 	delete n;
