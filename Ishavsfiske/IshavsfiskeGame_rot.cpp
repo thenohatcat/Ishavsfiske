@@ -11,6 +11,6 @@
 Ishavsfiske::IshavsfiskeGame::IshavsfiskeGame()
 	: Game()
 {
-	mTitle = "Ishavsfiske v0.1.1";
+	mTitle = "Ishavsfiske v0.1.2";
 	mNumLayers = 8;
 }
