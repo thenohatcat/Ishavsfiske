@@ -11,6 +11,7 @@
 #include "IshavsfiskeGame.h"
 #include <Angler\Translation.h>
 #include <Angler\Rotation.h>
+#include <Angler\CollisionNode.h>
 
 namespace Ishavsfiske
 {
@@ -18,20 +19,22 @@ namespace Ishavsfiske
 		: public Angler::Node
 	{
 	public:
-		Ship(unsigned long id, Angler::Node *parent, sf::Texture *tx, Ishavsfiske::IshavsfiskeGame *owner);
-		Ship(unsigned long id, sf::Texture *tx, Ishavsfiske::IshavsfiskeGame *owner);
+		Ship(unsigned long id, Angler::Node *parent, sf::Texture *txShip, sf::Texture *txCrane, Ishavsfiske::IshavsfiskeGame *owner);
+		Ship(unsigned long id, sf::Texture *txShip, sf::Texture *txCrane, Ishavsfiske::IshavsfiskeGame *owner);
 
 		void move(float x, float y);
 		void rotate(float r);
 
 		void update(Angler::Game *context, float time, float deltaTime);
+		Angler::Nodes::CollisionNode getCol();
 	private:
 		void mInit();
 
-		sf::Texture *mTX;
+		sf::Texture *mTXShip, *mTXCrane;
 		Ishavsfiske::IshavsfiskeGame *mOwner;
 		Angler::Nodes::Translation *mTransl;
-		Angler::Nodes::Rotation *mRotation, *mRotationA, *mRotationB;
+		Angler::Nodes::Rotation *mRotation, *mRotationA;
+		Angler::Nodes::CollisionNode *mCol;
 	};
 }
 

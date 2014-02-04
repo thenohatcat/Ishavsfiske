@@ -12,7 +12,11 @@
 
 namespace Ishavsfiske
 {
+	std::vector<Angler::Node*> getChildren(Angler::Node* node);
+
 	class Ship;
+
+	class Wreck;
 
 	class IshavsfiskeGame
 		: public Angler::Game
@@ -32,9 +36,15 @@ namespace Ishavsfiske
 	private:
 		void mInput(float time, float deltaTime);
 
-		sf::Texture *mTX;
+		sf::Texture *mTXShip, *mTXCrane, *mTXWreck;
+
+		sf::Texture *mTXSea;
+
+		sf::Texture *mUIbackground1, *mUIbackground2, *mUIFishCount, *mUIMoneyCount, *mUITimeCount;
+		sf::Texture *mUIMenuButton, *mUIWindFlag, *mUIStatusBar, *mUIUpgrade;
 
 		Ship *mShip;
+		Wreck *mWreck;
 	};
 }
 
