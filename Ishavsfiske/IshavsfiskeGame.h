@@ -39,7 +39,7 @@ namespace Ishavsfiske
 }
 
 #else
-#error Ishavsfiske.h: Wrong version 0.1.2
+#error IshavsfiskeGame.h: Wrong version 0.1.2
 #endif
 
 #endif
