@@ -1,5 +1,5 @@
 //Version: 0.1.2
-//Author: 
+//Author: Marcus Persson
 //Contributors: 
 
 #ifndef ISHAV_0_1_2
@@ -12,5 +12,5 @@
 
 void Ishavsfiske::IshavsfiskeGame::collide(Angler::Node *nodeA, Angler::Node *nodeB)
 {
-
+	
 }
