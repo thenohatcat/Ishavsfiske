@@ -38,7 +38,7 @@ void Ishavsfiske::Ship::mInit()
 	pts.push_back(sf::Vector2f(2/3.5 * 0.5, -0.5));
 	pts.push_back(sf::Vector2f(2/3.5 * 0.5, 0.5));
 	pts.push_back(sf::Vector2f(-(2/3.5 * 0.5), 0.5));
-	mCol = new CollisionNode(0, new Scale(0, mRotation, -1, 1), pts);
+	mCol = new CollisionNode(0, new Scale(0, mRotation, 1, -1), pts);
 
 	mRotationA = new Rotation(0, mRotation, 0);
 	Scale *s2 = new Scale(0, mRotationA, 1/3.5, 1/3.5);
@@ -56,11 +56,9 @@ void Ishavsfiske::Ship::move(float x, float y)
 {
 	//This cumbersome code will be fixed by the next version
 	//Rotation r(0, mRotation->getRotation());
-	Node *n = new Node(0);
-	Scale r(0, new Rotation(0, n, mRotation->getRotation()), -1, 1);
+	Rotation r(0, mRotation->getRotation());
 	sf::Vector2f tv = r.transform(sf::Vector2f(x, y));
 	mTransl->translate(tv);
-	delete n;
 }
 
 void Ishavsfiske::Ship::update(Angler::Game *context, float time, float deltaTime)

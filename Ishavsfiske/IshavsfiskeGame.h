@@ -12,8 +12,6 @@
 
 namespace Ishavsfiske
 {
-	std::vector<Angler::Node*> getChildren(Angler::Node* node);
-
 	class Ship;
 
 	class Wreck;

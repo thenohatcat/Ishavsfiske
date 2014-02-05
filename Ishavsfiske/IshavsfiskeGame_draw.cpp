@@ -125,7 +125,7 @@ void Ishavsfiske::IshavsfiskeGame::mDraw(float time, float deltaTime)
 	mSceneRoot->draw(this, mGraphics, time, deltaTime);
 	mGraphics->end();
 
-	std::vector<Angler::Node*> nds = getChildren(mSceneRoot);
+	std::vector<Angler::Node*> nds = Angler::HelpFunctions::getDescendants(mSceneRoot);
 	
 	std::vector<Angler::Nodes::CollisionNode*> cnds;
 
@@ -138,6 +138,17 @@ void Ishavsfiske::IshavsfiskeGame::mDraw(float time, float deltaTime)
 	for (int i = 0; i < cnds.size(); i++)
 	{
 		Angler::Nodes::CollisionNode* n = cnds.at(i);
+
+		bool clds = false;
+
+		for (int i = 0; i < cnds.size(); i++)
+		{
+			for (int k = i+1; k < cnds.size(); k++)
+			{
+				if (cnds.at(i)->isColliding(cnds.at(k)) == 1)
+					clds = true;
+			}
+		}
 
 		std::vector<sf::Vector2f> ov;
 		Angler::Nodes::Transformation::transform(n, n->getPoints(), &ov);
@@ -172,7 +183,10 @@ void Ishavsfiske::IshavsfiskeGame::mDraw(float time, float deltaTime)
 			//glVertex2d(lr.x, lr.y);
 		glEnd();
 
-		glColor3d(1, 0, 0);
+		if (clds)
+			glColor3d(0, 1, 0);
+		else
+			glColor3d(1, 0, 0);
 		glBegin(GL_POLYGON);
 			for (int i = 0; i < ov.size(); i++)
 			{
