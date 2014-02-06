@@ -12,5 +12,5 @@
 
 void Ishavsfiske::IshavsfiskeGame::collide(Angler::Node *nodeA, Angler::Node *nodeB)
 {
-	
+	printf("%08X Collided with %08X", &nodeA, &nodeB);
 }
