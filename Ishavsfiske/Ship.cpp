@@ -80,8 +80,6 @@ void Ishavsfiske::Ship::update(Angler::Game *context, float time, float deltaTim
 		mVel.y -= (mVel.y / abs(mVel.y)) * (400*mVel.y*mVel.y) * deltaTime;
 	else
 		mVel.y = 0;
-
-	printf("{%06.6f, %06.6f}\n", mVel.x, mVel.y);
 }
 
 void Ishavsfiske::Ship::rotate(float r)

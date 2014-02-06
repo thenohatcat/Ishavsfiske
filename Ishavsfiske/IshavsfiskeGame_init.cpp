@@ -52,11 +52,11 @@ void Ishavsfiske::IshavsfiskeGame::mInit()
 
 	Angler::Nodes::Translation *t2 = new Angler::Nodes::Translation(0, mSceneRoot, 0.7, 0.5);
 	Angler::Nodes::Rotation *r2 = new Angler::Nodes::Rotation(0, t2, 90);
-	mWreck2 = new Wreck(0x20000, r2, mTXWreck);
+	mWreck2 = new Wreck(0x30000, r2, mTXWreck);
 
 	Angler::Nodes::Translation *t3 = new Angler::Nodes::Translation(0, mSceneRoot, 0.3, 0.7);
 	Angler::Nodes::Rotation *r3 = new Angler::Nodes::Rotation(0, t3, 0);
-	mWreck3 = new Wreck(0x20000, r3, mTXWreck);
+	mWreck3 = new Wreck(0x40000, r3, mTXWreck);
 
 	mFrame = new std::vector<sf::Vector2f>();
 	mFrame->push_back(sf::Vector2f(14/10.0, 0));

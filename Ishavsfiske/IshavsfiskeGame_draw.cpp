@@ -126,100 +126,81 @@ void Ishavsfiske::IshavsfiskeGame::mDraw(float time, float deltaTime)
 	mGraphics->end();
 
 	std::vector<Angler::Node*> nds = Angler::HelpFunctions::getDescendants(mSceneRoot);
-	
-	std::vector<Angler::Nodes::CollisionNode*> cnds;
 
 	for (int i = 0; i < nds.size(); i++)
 	{
-		if ((typeid(*(nds.at(i))) == typeid(Angler::Nodes::CollisionNode)))
-			cnds.push_back((Angler::Nodes::CollisionNode*)nds.at(i));
-	}
-
-	for (int i = 0; i < cnds.size(); i++)
-	{
-		Angler::Nodes::CollisionNode* n = cnds.at(i);
-
-		bool clds = false;
-
-		for (int i = 0; i < cnds.size(); i++)
+		if (typeid(*nds.at(i)) == typeid(Angler::Nodes::CollisionNode))
 		{
-			for (int k = i+1; k < cnds.size(); k++)
-			{
-				if (cnds.at(i)->isColliding(cnds.at(k)) == 1)
-					clds = true;
-			}
-		}
+			Angler::Nodes::CollisionNode* n = (Angler::Nodes::CollisionNode*)nds.at(i);
 
-		std::vector<sf::Vector2f> ov;
-		Angler::Nodes::Transformation::transform(n, n->getPoints(), &ov);
+			std::vector<sf::Vector2f> ov;
+			Angler::Nodes::Transformation::transform(n, n->getPoints(), &ov);
 
-		sf::Vector2f ul, lr;
-		Angler::HelpFunctions::Geometry::getBoundingPoints(&ov, &ul, &lr);
+			sf::Vector2f ul, lr;
+			Angler::HelpFunctions::Geometry::getBoundingPoints(&ov, &ul, &lr);
 		
-		glPushMatrix();
+			glPushMatrix();
 
-		glLoadIdentity();
+			glLoadIdentity();
 
-		gluLookAt(0, 0, 1, 0, 0, 0, 0, 1, 0);
+			gluLookAt(0, 0, 1, 0, 0, 0, 0, 1, 0);
 
-		glDisable(GL_TEXTURE_2D);
+			glDisable(GL_TEXTURE_2D);
 
-		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
-		glLineWidth(2);
+			glLineWidth(2);
 
-		glColor3d(1, 1, 0);
-		glBegin(GL_POLYGON);
-			glVertex2d(lr.x, lr.y);
-			//glVertex2d(lr.x, ul.y);
+			glColor3d(1, 1, 0);
+			glBegin(GL_POLYGON);
+				glVertex2d(lr.x, lr.y);
+				//glVertex2d(lr.x, ul.y);
 
-			glVertex2d(lr.x, ul.y);
-			//glVertex2d(ul.x, ul.y);
+				glVertex2d(lr.x, ul.y);
+				//glVertex2d(ul.x, ul.y);
 
-			glVertex2d(ul.x, ul.y);
-			//glVertex2d(ul.x, lr.y);
+				glVertex2d(ul.x, ul.y);
+				//glVertex2d(ul.x, lr.y);
 
-			glVertex2d(ul.x, lr.y);
-			//glVertex2d(lr.x, lr.y);
-		glEnd();
+				glVertex2d(ul.x, lr.y);
+				//glVertex2d(lr.x, lr.y);
+			glEnd();
 
-		if (clds)
-			glColor3d(0, 1, 0);
-		else
 			glColor3d(1, 0, 0);
-		glBegin(GL_POLYGON);
-			for (int i = 0; i < ov.size(); i++)
-			{
-				glVertex2d(ov.at(i).x, ov.at(i).y);
-			}
-		glEnd();
+			glBegin(GL_POLYGON);
+				for (int i = 0; i < ov.size(); i++)
+				{
+					glVertex2d(ov.at(i).x, ov.at(i).y);
+				}
+			glEnd();
 
-		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
-		glPopMatrix();
-
-		glPushMatrix();
-
-		glLoadIdentity();
-
-		gluLookAt(0, 0, 1, 0, 0, 0, 0, 1, 0);
-
-		glDisable(GL_TEXTURE_2D);
-
-		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-
-		glLineWidth(2);
-
-		glColor3d(1, 0, 1);
-		glBegin(GL_POLYGON);
-			for (int i = 0; i < mFrame->size(); i++)
-			{
-				glVertex2d(mFrame->at(i).x, mFrame->at(i).y);
-			}
-		glEnd();
-
-		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-
-		glPopMatrix();
+			glPopMatrix();
+		}
 	}
+
+	glPushMatrix();
+
+	glLoadIdentity();
+
+	gluLookAt(0, 0, 1, 0, 0, 0, 0, 1, 0);
+
+	glDisable(GL_TEXTURE_2D);
+
+	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+
+	glLineWidth(2);
+
+	glColor3d(1, 0, 1);
+	glBegin(GL_POLYGON);
+		for (int i = 0; i < mFrame->size(); i++)
+		{
+			glVertex2d(mFrame->at(i).x, mFrame->at(i).y);
+		}
+	glEnd();
+
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+	glPopMatrix();
 }
