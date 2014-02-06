@@ -67,7 +67,8 @@ void Ishavsfiske::Ship::update(Angler::Game *context, float time, float deltaTim
 	mLT = mTransl->getTranslation();
 	mLR = mRotation->getRotation();
 
-	move(mVel.x * deltaTime, mVel.y * deltaTime);
+	if (abs(mVel.x) > 0 || abs(mVel.y) > 0)
+		move(mVel.x * deltaTime, mVel.y * deltaTime);
 
 	mRotationA->setRotation(-90 + 45 * (2 - sin(time)));
 

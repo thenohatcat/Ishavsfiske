@@ -125,8 +125,9 @@ void Ishavsfiske::IshavsfiskeGame::mDraw(float time, float deltaTime)
 	mSceneRoot->draw(this, mGraphics, time, deltaTime);
 	mGraphics->end();
 
+	//Draw collision boxes
 	std::vector<Angler::Node*> nds = Angler::HelpFunctions::getDescendants(mSceneRoot);
-
+	glPushMatrix();
 	for (int i = 0; i < nds.size(); i++)
 	{
 		if (typeid(*nds.at(i)) == typeid(Angler::Nodes::CollisionNode))
@@ -138,8 +139,6 @@ void Ishavsfiske::IshavsfiskeGame::mDraw(float time, float deltaTime)
 
 			sf::Vector2f ul, lr;
 			Angler::HelpFunctions::Geometry::getBoundingPoints(&ov, &ul, &lr);
-		
-			glPushMatrix();
 
 			glLoadIdentity();
 
@@ -154,16 +153,9 @@ void Ishavsfiske::IshavsfiskeGame::mDraw(float time, float deltaTime)
 			glColor3d(1, 1, 0);
 			glBegin(GL_POLYGON);
 				glVertex2d(lr.x, lr.y);
-				//glVertex2d(lr.x, ul.y);
-
 				glVertex2d(lr.x, ul.y);
-				//glVertex2d(ul.x, ul.y);
-
 				glVertex2d(ul.x, ul.y);
-				//glVertex2d(ul.x, lr.y);
-
 				glVertex2d(ul.x, lr.y);
-				//glVertex2d(lr.x, lr.y);
 			glEnd();
 
 			glColor3d(1, 0, 0);
@@ -174,12 +166,12 @@ void Ishavsfiske::IshavsfiskeGame::mDraw(float time, float deltaTime)
 				}
 			glEnd();
 
-			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-
-			glPopMatrix();
+			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);			
 		}
 	}
+	glPopMatrix();
 
+	//Draw frame
 	glPushMatrix();
 
 	glLoadIdentity();

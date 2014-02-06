@@ -19,8 +19,24 @@
 
 #include <iostream>
 
+float av;
+unsigned int frm;
+
 void Ishavsfiske::IshavsfiskeGame::mUpdate(float time, float deltaTime)
 {
+	if (frm < 10)
+	{
+		frm++;
+		av += deltaTime;
+	}
+	else
+	{
+		printf("FPS: %04.0f\n", frm/av);
+		frm = 0;
+		av = 0;
+	}
+	//printf("FPS: %04.0f\n", 1/deltaTime);
+
 	mSceneRoot->update(this, time, deltaTime);
 
 	//Handle Input
