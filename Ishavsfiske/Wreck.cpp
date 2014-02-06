@@ -41,5 +41,5 @@ void Wreck::mInit()
 	pts.push_back(sf::Vector2f(2/3.5 * 0.5, -0.5));
 	pts.push_back(sf::Vector2f(2/3.5 * 0.5, 0.5));
 	pts.push_back(sf::Vector2f(-(2/3.5 * 0.5), 0.5));
-	CollisionNode *c = new CollisionNode(id + 0x0005, s, pts);
+	CollisionNode *c = new CollisionNode(id + 0x1005, s, pts);
 }

@@ -41,7 +41,7 @@ void Ishavsfiske::Ship::mInit()
 	pts.push_back(sf::Vector2f(2/3.5 * 0.5, -0.5));
 	pts.push_back(sf::Vector2f(2/3.5 * 0.5, 0.5));
 	pts.push_back(sf::Vector2f(-(2/3.5 * 0.5), 0.5));
-	mCol = new CollisionNode(id + 0x0005, mRotation, pts);
+	mCol = new CollisionNode(id + 0x1005, mRotation, pts);
 
 	mRotationA = new Rotation(id + 0x0006, mRotation, 0);
 	Scale *s2 = new Scale(id + 0x0007, mRotationA, 1/3.5, 1/3.5);
