@@ -11,6 +11,8 @@
 #include <Angler\Node.h>
 #include <Angler\CollisionNode.h>
 
+class MechanicsEngine;
+
 namespace Ishavsfiske
 {
 	class Ship;
@@ -34,6 +36,8 @@ namespace Ishavsfiske
 		virtual void mInit();
 	private:
 		void mInput(float time, float deltaTime);
+
+		MechanicsEngine *mMechanics;
 
 		sf::Texture *mTXShip, *mTXCrane, *mTXWreck;
 
