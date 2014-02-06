@@ -12,6 +12,10 @@
 
 #include <Angler\Keyboard.h>
 
+#include <iostream>
+
+using namespace std;
+
 float accel = 0;
 
 void Ishavsfiske::IshavsfiskeGame::mInput(float time, float deltaTime)
@@ -41,5 +45,9 @@ void Ishavsfiske::IshavsfiskeGame::mInput(float time, float deltaTime)
 	if (getKeyboardState().isKeyDown(sf::Keyboard::D))
 	{
 		mShip->rotate(90 * deltaTime);
+	}
+	if (getKeyboardState().wasKeyDown(sf::Keyboard::Escape))
+	{
+		mGraphics->close();
 	}
 }
