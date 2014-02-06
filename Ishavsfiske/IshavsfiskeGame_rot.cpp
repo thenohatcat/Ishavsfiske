@@ -8,10 +8,12 @@
 
 #include "IshavsfiskeGame.h"
 
+#include "MechanicsEngine.h"
+
 #include <stdarg.h>
 
 Ishavsfiske::IshavsfiskeGame::IshavsfiskeGame()
-	: Game()
+	: Game(), mMechanics(new MechanicsEngine(this))
 {
 	mTitle = "Ishavsfiske v0.1.2";
 	mNumLayers = 8;
