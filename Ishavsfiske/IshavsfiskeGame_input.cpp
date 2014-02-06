@@ -16,18 +16,12 @@
 
 using namespace std;
 
-float accel = 0;
 
 void Ishavsfiske::IshavsfiskeGame::mInput(float time, float deltaTime)
 {
 	if (getKeyboardState().isKeyDown(sf::Keyboard::W))
 	{
-		accel += 0.0001;
-		mShip->move(0, -accel * deltaTime);
-	}
-	else if (getKeyboardState().wasKeyDown(sf::Keyboard::W))
-	{
-		accel = 0;
+		mShip->throttle(0, -1 * deltaTime);
 	}
 	if (getKeyboardState().isKeyDown(sf::Keyboard::A))
 	{
@@ -35,12 +29,7 @@ void Ishavsfiske::IshavsfiskeGame::mInput(float time, float deltaTime)
 	}
 	if (getKeyboardState().isKeyDown(sf::Keyboard::S))
 	{
-		accel += 0.0001;
-		mShip->move(0, accel * deltaTime);
-	}
-	else if (getKeyboardState().wasKeyDown(sf::Keyboard::S))
-	{
-		accel = 0;
+		mShip->throttle(0, 1 * deltaTime);
 	}
 	if (getKeyboardState().isKeyDown(sf::Keyboard::D))
 	{
