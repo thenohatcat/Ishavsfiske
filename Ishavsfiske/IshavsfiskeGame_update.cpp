@@ -9,6 +9,8 @@
 #include "IshavsfiskeGame.h"
 #include "Ship.h"
 
+#include "MechanicsEngine.h"
+
 #include <Angler\CollisionNode.h>
 
 #include <glm\matrix.hpp>
@@ -24,19 +26,9 @@ void Ishavsfiske::IshavsfiskeGame::mUpdate(float time, float deltaTime)
 	//Handle Input
 	mInput(time, deltaTime);
 
-	if (getKeyboardState().isKeyDown(sf::Keyboard::Up))
-	{
-		mShip->throttle(0, -0.1 * deltaTime);
-	}
-	else if (getKeyboardState().isKeyDown(sf::Keyboard::Down))
-	{
-		mShip->throttle(0, 0.1 * deltaTime);
-	}
-
 	//Collision system collide
+	mMechanics->doCollide(mSceneRoot);
 
-
-	//
 	std::vector<sf::Vector2f> shipCol;
 	std::vector<Angler::Node*> shp = Angler::HelpFunctions::getDescendants(mShip);
 	Angler::Nodes::CollisionNode *nd = nullptr;
