@@ -8,6 +8,8 @@
 
 #include "IshavsfiskeGame.h"
 
+#include <stdarg.h>
+
 Ishavsfiske::IshavsfiskeGame::IshavsfiskeGame()
 	: Game()
 {

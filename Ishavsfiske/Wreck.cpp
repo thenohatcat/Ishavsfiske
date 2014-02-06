@@ -31,14 +31,15 @@ Wreck::Wreck(unsigned long id, sf::Texture *tx)
 
 void Wreck::mInit()
 {
-	Translation *t = new Translation(0, this, 1, 0.5);
-	Rotation *r = new Rotation(0, t, 45);
-	Scale *s = new Scale(0, r, 1.75/10.0, 1.75/10.0);
-	DrawNode *d = new DrawNode(0, s, 1, mTX, 0.5, 0.5);
+	unsigned long id = getID();
+	Translation *t = new Translation(id + 0x0001, this, 0, 0);
+	Rotation *r = new Rotation(id + 0x0002, t, 0);
+	Scale *s = new Scale(id + 0x0003, r, 1.75/10.0, 1.75/10.0);
+	DrawNode *d = new DrawNode(id + 0x0004, s, 1, mTX, 0.5, 0.5);
 	std::vector<sf::Vector2f> pts;
 	pts.push_back(sf::Vector2f(-(2/3.5 * 0.5), -0.5));
 	pts.push_back(sf::Vector2f(2/3.5 * 0.5, -0.5));
 	pts.push_back(sf::Vector2f(2/3.5 * 0.5, 0.5));
 	pts.push_back(sf::Vector2f(-(2/3.5 * 0.5), 0.5));
-	CollisionNode *c = new CollisionNode(0, new Scale(0, s, 1, 1), pts);
+	CollisionNode *c = new CollisionNode(id + 0x0005, s, pts);
 }

@@ -25,8 +25,12 @@ namespace Ishavsfiske
 		void move(float x, float y);
 		void rotate(float r);
 
+		void throttle(float vx, float vy);
+
 		void update(Angler::Game *context, float time, float deltaTime);
 		Angler::Nodes::CollisionNode getCol();
+
+		void revert();
 	private:
 		void mInit();
 
@@ -35,6 +39,11 @@ namespace Ishavsfiske
 		Angler::Nodes::Translation *mTransl;
 		Angler::Nodes::Rotation *mRotation, *mRotationA;
 		Angler::Nodes::CollisionNode *mCol;
+
+		sf::Vector2f mVel;
+
+		float mLR;
+		sf::Vector2f mLT;
 	};
 }
 

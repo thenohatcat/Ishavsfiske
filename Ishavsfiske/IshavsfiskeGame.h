@@ -9,6 +9,7 @@
 
 #include <Angler\Game.h>
 #include <Angler\Node.h>
+#include <Angler\CollisionNode.h>
 
 namespace Ishavsfiske
 {
@@ -42,7 +43,10 @@ namespace Ishavsfiske
 		sf::Texture *mUIMenuButton, *mUIWindFlag, *mUIStatusBar, *mUIUpgrade;
 
 		Ship *mShip;
-		Wreck *mWreck;
+		Wreck *mWreck1, *mWreck2, *mWreck3;
+
+		//Angler::Nodes::CollisionNode *mFrameCol;
+		std::vector<sf::Vector2f> *mFrame;
 	};
 }
 

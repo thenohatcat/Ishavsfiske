@@ -44,6 +44,23 @@ void Ishavsfiske::IshavsfiskeGame::mInit()
 	mUIStatusBar = new sf::Texture();
 	mUIUpgrade = new sf::Texture();
 
-	mShip = new Ship(0x10000, new Angler::Node(0, mSceneRoot), mTXShip, mTXCrane, this);
-	mWreck = new Wreck(0, new Angler::Node(0, mSceneRoot), mTXWreck);
+	mShip = new Ship(0x10000, mSceneRoot, mTXShip, mTXCrane, this);
+
+	Angler::Nodes::Translation *t1 = new Angler::Nodes::Translation(0, mSceneRoot, 0.5, 0.15);
+	Angler::Nodes::Rotation *r1 = new Angler::Nodes::Rotation(0, t1, 45);
+	mWreck1 = new Wreck(0x20000, r1, mTXWreck);
+
+	Angler::Nodes::Translation *t2 = new Angler::Nodes::Translation(0, mSceneRoot, 0.7, 0.5);
+	Angler::Nodes::Rotation *r2 = new Angler::Nodes::Rotation(0, t2, 90);
+	mWreck2 = new Wreck(0x20000, r2, mTXWreck);
+
+	Angler::Nodes::Translation *t3 = new Angler::Nodes::Translation(0, mSceneRoot, 0.3, 0.7);
+	Angler::Nodes::Rotation *r3 = new Angler::Nodes::Rotation(0, t3, 0);
+	mWreck3 = new Wreck(0x20000, r3, mTXWreck);
+
+	mFrame = new std::vector<sf::Vector2f>();
+	mFrame->push_back(sf::Vector2f(14/10.0, 0));
+	mFrame->push_back(sf::Vector2f(2/10.0, 0));
+	mFrame->push_back(sf::Vector2f(2/10.0, 1));
+	mFrame->push_back(sf::Vector2f(14/10.0, 1));
 }

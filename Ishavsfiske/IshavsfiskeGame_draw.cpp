@@ -197,5 +197,29 @@ void Ishavsfiske::IshavsfiskeGame::mDraw(float time, float deltaTime)
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
 		glPopMatrix();
+
+		glPushMatrix();
+
+		glLoadIdentity();
+
+		gluLookAt(0, 0, 1, 0, 0, 0, 0, 1, 0);
+
+		glDisable(GL_TEXTURE_2D);
+
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+
+		glLineWidth(2);
+
+		glColor3d(1, 0, 1);
+		glBegin(GL_POLYGON);
+			for (int i = 0; i < mFrame->size(); i++)
+			{
+				glVertex2d(mFrame->at(i).x, mFrame->at(i).y);
+			}
+		glEnd();
+
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+		glPopMatrix();
 	}
 }
