@@ -97,4 +97,5 @@ void Ishavsfiske::Ship::revert()
 {
 	mTransl->setTranslation(mLT);
 	mRotation->setRotation(mLR);
+	mVel.x = mVel.y = 0;
 }
