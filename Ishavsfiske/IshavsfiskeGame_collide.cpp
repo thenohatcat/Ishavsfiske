@@ -9,8 +9,22 @@
 #include "IshavsfiskeGame.h"
 
 #include <Angler\Node.h>
+#include "Ship.h"
 
 void Ishavsfiske::IshavsfiskeGame::collide(Angler::Node *nodeA, Angler::Node *nodeB)
 {
-	printf("%08X Collided with %08X", &nodeA, &nodeB);
+	//if mShip collides
+	if(nodeA->getID() >= 0x0001000 && nodeA->getID() <= 0x0001FFFF)
+	{
+		mShip->revert();
+#ifdef _DEBUG
+		//What mShip collides with
+		if(nodeB->getID() >=0x00020000 && nodeB->getID() <= 0x0002FFFF)
+			printf("Ship Collided with wreck1\n", &nodeA, &nodeB);
+		if(nodeB->getID() >=0x00030000 && nodeB->getID() <= 0x0003FFFF)
+			printf("Ship Collided with wreck2\n", &nodeA, &nodeB);
+		if(nodeB->getID() >=0x00040000 && nodeB->getID() <= 0x0004FFFF)
+			printf("Ship Collided with wreck3\n", &nodeA, &nodeB);
+#endif
+	}
 }
