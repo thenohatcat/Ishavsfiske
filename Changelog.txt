@@ -1,0 +1,9 @@
+-v0.1.2
+MechanicsEngine:
+ class added
+
+--Discovered bugs:
+
+--Solved bugs:
+
+--Bugs:

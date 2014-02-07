@@ -1,18 +1,23 @@
-//Version: 0.1.1
+//Version: 0.1.2
 //Author: Jakob Pipping
 //Contributors:
 
 #ifndef INC_ISHAVSFISKEGAME_H
 #define INC_ISHAVSFISKEGAME_H
 
-#ifdef ISHAV_0_1_1
+#ifdef ISHAV_0_1_2
 
 #include <Angler\Game.h>
 #include <Angler\Node.h>
+#include <Angler\CollisionNode.h>
+
+class MechanicsEngine;
 
 namespace Ishavsfiske
 {
 	class Ship;
+
+	class Wreck;
 
 	class IshavsfiskeGame
 		: public Angler::Game
@@ -32,14 +37,24 @@ namespace Ishavsfiske
 	private:
 		void mInput(float time, float deltaTime);
 
-		sf::Texture *mTX;
+		MechanicsEngine *mMechanics;
+
+		sf::Texture *mTXShip, *mTXCrane, *mTXWreck;
+
+		sf::Texture *mTXSea;
+
+		sf::Texture *mUIbackground1, *mUIbackground2, *mUIFishCount, *mUIMoneyCount, *mUITimeCount;
+		sf::Texture *mUIMenuButton, *mUIWindFlag, *mUIStatusBar, *mUIUpgrade;
 
 		Ship *mShip;
+		Wreck *mWreck1, *mWreck2, *mWreck3;
+
+		std::vector<sf::Vector2f> *mFrame;
 	};
 }
 
 #else
-#error Ishavsfiske.h: Wrong version 0.1.1
+#error IshavsfiskeGame.h: Wrong version 0.1.2
 #endif
 
 #endif

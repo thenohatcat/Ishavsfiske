@@ -1,16 +1,22 @@
-//Version: 0.1.1
+//Version: 0.1.2
 //Author: Jakob Pipping
 //Contributors: 
 
-#ifndef ISHAV_0_1_1
-#error IshavsfiskeGame_rot.cpp: Wrong version 0.1.1
+#ifndef ISHAV_0_1_2
+#error IshavsfiskeGame_rot.cpp: Wrong version 0.1.2
 #endif
 
 #include "IshavsfiskeGame.h"
 
+#include "MechanicsEngine.h"
+
+#include <stdarg.h>
+
 Ishavsfiske::IshavsfiskeGame::IshavsfiskeGame()
-	: Game()
+	: Game(), mMechanics(new MechanicsEngine(this))
 {
-	mTitle = "Ishavsfiske v0.1.1";
+	mTitle = "Ishavsfiske v0.1.2";
 	mNumLayers = 8;
+	mWidth = 1089;
+	mHeight = 687;
 }

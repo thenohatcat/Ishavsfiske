@@ -1,66 +1,101 @@
-//Version: 0.1.1
+//Version: 0.1.2
 //Author: Jakob Pipping
 //Contributors: 
 
-#ifndef ISHAV_0_1_1
-#error Ship.cpp: Wrong version 0.1.1
+#ifndef ISHAV_0_1_2
+#error Ship.cpp: Wrong version 0.1.2
 #endif
 
 #include "Ship.h"
 
 #include <Angler\DrawNode.h>
 #include <Angler\Scale.h>
+#include <Angler\CollisionNode.h>
 
-using Angler::Nodes::Translation;
-using Angler::Nodes::Rotation;
+#include <iostream>
 
-Ishavsfiske::Ship::Ship(unsigned long id, Angler::Node *parent, sf::Texture *tx, Ishavsfiske::IshavsfiskeGame *owner)
-	: Node(id, parent), mTX(tx), mOwner(owner)
+using namespace Angler::Nodes;
+
+Ishavsfiske::Ship::Ship(unsigned long id, Angler::Node *parent, sf::Texture *txShip, sf::Texture *txCrane, Ishavsfiske::IshavsfiskeGame *owner)
+	: Node(id, parent), mTXShip(txShip), mTXCrane(txCrane), mOwner(owner), mVel(0, 0)
 {
 	mInit();
 }
 
-Ishavsfiske::Ship::Ship(unsigned long id, sf::Texture *tx, Ishavsfiske::IshavsfiskeGame *owner)
-	: Node(id), mTX(tx), mOwner(owner)
+Ishavsfiske::Ship::Ship(unsigned long id, sf::Texture *txShip, sf::Texture *txCrane, Ishavsfiske::IshavsfiskeGame *owner)
+	: Node(id), mTXShip(txShip), mTXCrane(txCrane), mOwner(owner), mVel(0, 0)
 {
 	mInit();
 }
 
 void Ishavsfiske::Ship::mInit()
 {
-	mTransl = new Translation(getID() + 1, this, 0.5, 0.5);
-	Angler::Nodes::Scale *s = new Angler::Nodes::Scale(getID() + 2, mTransl, 0.1, 0.1);
-	mRotation = new Rotation(getID() + 3, s, 0);
-	new Angler::Nodes::DrawNode(getID() + 4, mRotation, 0, mTX, 0.5, 0.5);
+	unsigned long id = getID();
+	mTransl = new Translation(id + 0x0001, this, 0.5, 0.5);
+	Scale *s = new Scale(id + 0x0002, mTransl, 1.75/10, 1.75/10);
+	mRotation = new Rotation(id + 0x0003, s, 0);
+	new DrawNode(id + 0x0004, mRotation, 1, mTXShip, 0.5, 0.5);	
 	
-	Angler::Nodes::Translation *t1 = new Angler::Nodes::Translation(getID() + 5, mRotation, 0.375, 0);
-	
-	mRotationA = new Rotation(getID() + 6, t1, 0);
-	Angler::Nodes::Scale *s2 = new Angler::Nodes::Scale(getID() + 7, mRotationA, 0.50, 0.25);
-	new Angler::Nodes::DrawNode(getID() + 8, s2, 0, mTX, 0.25, 0.5);
+	std::vector<sf::Vector2f> pts;
+	pts.push_back(sf::Vector2f(-(2/3.5 * 0.5), -0.5));
+	pts.push_back(sf::Vector2f(2/3.5 * 0.5, -0.5));
+	pts.push_back(sf::Vector2f(2/3.5 * 0.5, 0.5));
+	pts.push_back(sf::Vector2f(-(2/3.5 * 0.5), 0.5));
+	mCol = new CollisionNode(id + 0x1005, mRotation, pts);
 
-	Angler::Nodes::Translation *t2 = new Angler::Nodes::Translation(getID() + 5, mRotation, -0.375, 0);
-
-	mRotationB = new Rotation(getID() + 9, t2, 0);
-	Angler::Nodes::Scale *s3 = new Angler::Nodes::Scale(getID() + 10, mRotationB, -0.50, 0.25);
-	new Angler::Nodes::DrawNode(getID() + 11, s3, 0, mTX, 0.25, 0.5);
+	mRotationA = new Rotation(id + 0x0006, mRotation, 0);
+	Scale *s2 = new Scale(id + 0x0007, mRotationA, 1/3.5, 1/3.5);
+	new DrawNode(id + 0x0008, s2, 2, mTXCrane, 0.25, 0.5);
 }
 
 void Ishavsfiske::Ship::move(float x, float y)
-{
-	//This cumbersome code will be fixed by the next version
-	Rotation r(0, new Node(0), -mRotation->getRotation());
+{	
+	Scale *s = new Scale(0, 5, 5);
+	Rotation r(0, s, mRotation->getRotation());
 	sf::Vector2f tv = r.transform(sf::Vector2f(x, y));
 	mTransl->translate(tv);
+	delete s;
+}
+
+void Ishavsfiske::Ship::throttle(float vx, float vy)
+{
+	mVel.x += vx; mVel.y += vy;
 }
 
 void Ishavsfiske::Ship::update(Angler::Game *context, float time, float deltaTime)
 {
+	mLT = mTransl->getTranslation();
+	mLR = mRotation->getRotation();
+
+	if (abs(mVel.x) > 0 || abs(mVel.y) > 0)
+		move(mVel.x * deltaTime, mVel.y * deltaTime);
+
 	mRotationA->setRotation(-90 + 45 * (2 - sin(time)));
-	mRotationB->setRotation(-90 + 45 * (2 - sin(time)));
+
+	if (abs(mVel.x) > 0.001)
+		mVel.x -= (mVel.x / abs(mVel.x)) * (400*mVel.x*mVel.x) * deltaTime;
+	else
+		mVel.x = 0;
+
+	if (abs(mVel.y) > 0.001)
+		mVel.y -= (mVel.y / abs(mVel.y)) * (400*mVel.y*mVel.y) * deltaTime;
+	else
+		mVel.y = 0;
 }
 
 void Ishavsfiske::Ship::rotate(float r)
 {
 	mRotation->rotate(r);
+}
+
+Angler::Nodes::CollisionNode Ishavsfiske::Ship::getCol()
+{
+	return *mCol;
+}
+
+void Ishavsfiske::Ship::revert()
+{
+	mTransl->setTranslation(mLT);
+	mRotation->setRotation(mLR);
+	mVel.x = mVel.y = 0;
 }
