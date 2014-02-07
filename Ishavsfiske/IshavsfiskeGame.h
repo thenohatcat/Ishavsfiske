@@ -49,7 +49,6 @@ namespace Ishavsfiske
 		Ship *mShip;
 		Wreck *mWreck1, *mWreck2, *mWreck3;
 
-		//Angler::Nodes::CollisionNode *mFrameCol;
 		std::vector<sf::Vector2f> *mFrame;
 	};
 }

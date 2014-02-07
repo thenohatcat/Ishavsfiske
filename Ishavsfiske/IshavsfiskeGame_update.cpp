@@ -24,6 +24,7 @@ unsigned int frm;
 
 void Ishavsfiske::IshavsfiskeGame::mUpdate(float time, float deltaTime)
 {
+#ifdef _DEBUG
 	if (frm < 10)
 	{
 		frm++;
@@ -36,6 +37,7 @@ void Ishavsfiske::IshavsfiskeGame::mUpdate(float time, float deltaTime)
 		av = 0;
 	}
 	//printf("FPS: %04.0f\n", 1/deltaTime);
+#endif
 
 	mSceneRoot->update(this, time, deltaTime);
 
@@ -64,7 +66,9 @@ void Ishavsfiske::IshavsfiskeGame::mUpdate(float time, float deltaTime)
 	{
 		if (!Angler::HelpFunctions::Geometry::pointIsWithinPolygon(mFrame, shipCol.at(i)))
 		{
+#ifdef _DEBUG
 			std::cout << "Ship is outside" << std::endl;
+#endif
 			mShip->revert();
 			break;
 		}

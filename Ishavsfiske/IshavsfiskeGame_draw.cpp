@@ -125,6 +125,7 @@ void Ishavsfiske::IshavsfiskeGame::mDraw(float time, float deltaTime)
 	mSceneRoot->draw(this, mGraphics, time, deltaTime);
 	mGraphics->end();
 
+#ifdef _DEBUG
 	//Draw collision boxes
 	std::vector<Angler::Node*> nds = Angler::HelpFunctions::getDescendants(mSceneRoot);
 	glPushMatrix();
@@ -195,4 +196,5 @@ void Ishavsfiske::IshavsfiskeGame::mDraw(float time, float deltaTime)
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
 	glPopMatrix();
+#endif
 }
