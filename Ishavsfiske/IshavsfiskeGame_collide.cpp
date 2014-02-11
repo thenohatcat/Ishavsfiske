@@ -23,7 +23,8 @@ void Ishavsfiske::IshavsfiskeGame::collide(Angler::Node *nodeA, Angler::Node *no
 			printf("Fishinboat collided with Icebreaker\n");
 #endif
 	}
-	else if(nodeA->getID() >= 0x00020000 && nodeA->getID() <= 0x0002FFFF || nodeB->getID() >= 0x00020000 && nodeB->getID() <= 0x0002FFFF)
+	
+	if(nodeA->getID() >= 0x00020000 && nodeA->getID() <= 0x0002FFFF || nodeB->getID() >= 0x00020000 && nodeB->getID() <= 0x0002FFFF)
 	{
 		mShipBreaker->revert();
 #ifdef _DEBUG
