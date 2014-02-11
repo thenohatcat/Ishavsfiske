@@ -14,17 +14,21 @@
 void Ishavsfiske::IshavsfiskeGame::collide(Angler::Node *nodeA, Angler::Node *nodeB)
 {
 	//if mShipFishing collides
-	if(nodeA->getID() >= 0x0001000 && nodeA->getID() <= 0x0001FFFF)
+	if(nodeA->getID() >= 0x00010000 && nodeA->getID() <= 0x0001FFFF || nodeB->getID() >= 0x00010000 && nodeB->getID() <= 0x0001FFFF)
 	{
 		mShipFishing->revert();
 #ifdef _DEBUG
-		//What mShip collides with
-		if(nodeB->getID() >=0x00020000 && nodeB->getID() <= 0x0002FFFF)
-			printf("Ship Collided with wreck1\n", &nodeA, &nodeB);
-		if(nodeB->getID() >=0x00030000 && nodeB->getID() <= 0x0003FFFF)
-			printf("Ship Collided with wreck2\n", &nodeA, &nodeB);
-		if(nodeB->getID() >=0x00040000 && nodeB->getID() <= 0x0004FFFF)
-			printf("Ship Collided with wreck3\n", &nodeA, &nodeB);
+		//What mShipFishing collides with
+		if(nodeA->getID() >= 0x00020000 && nodeA->getID() <= 0x0002FFFF || nodeB->getID() >= 0x00020000 && nodeB->getID() <= 0x0002FFFF)
+			printf("Fishinboat collided with Icebreaker\n");
+#endif
+	}
+	else if(nodeA->getID() >= 0x00020000 && nodeA->getID() <= 0x0002FFFF || nodeB->getID() >= 0x00020000 && nodeB->getID() <= 0x0002FFFF)
+	{
+		mShipBreaker->revert();
+#ifdef _DEBUG
+		if (nodeA->getID() >= 0x00010000 && nodeA->getID() <= 0x0001FFFF || nodeB->getID() >= 0x00010000 && nodeB->getID() <= 0x0001FFFF)
+			printf("Icebreaker collided with Fishingboat\n");
 #endif
 	}
 }
