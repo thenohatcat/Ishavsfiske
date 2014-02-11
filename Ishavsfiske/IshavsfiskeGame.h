@@ -1,17 +1,19 @@
-//Version: 0.1.2
+//Version: 0.1.3
 //Author: Jakob Pipping
 //Contributors:
 
 #ifndef INC_ISHAVSFISKEGAME_H
 #define INC_ISHAVSFISKEGAME_H
 
-#ifdef ISHAV_0_1_2
+#ifdef ISHAV_0_1_3
+
+#include <SFML\Audio.hpp>
 
 #include <Angler\Game.h>
 #include <Angler\Node.h>
 #include <Angler\CollisionNode.h>
-
-class MechanicsEngine;
+#include <Angler\Mechanics.h>
+#include <Angler\Sound.h>
 
 namespace Ishavsfiske
 {
@@ -27,6 +29,8 @@ namespace Ishavsfiske
 
 		void collide(Angler::Node *nodeA, Angler::Node *nodeB);
 
+		void throwEvent(int type, ... );
+
 	protected:
 		virtual void mDraw(float time, float deltaTime);
 		virtual void mUpdate(float time, float deltaTime);
@@ -37,24 +41,27 @@ namespace Ishavsfiske
 	private:
 		void mInput(float time, float deltaTime);
 
-		MechanicsEngine *mMechanics;
+		void mDrawUI(float time, float deltaTime);
 
-		sf::Texture *mTXShip, *mTXCrane, *mTXWreck;
+		Angler::Mechanics::MechanicsEngine *mMechanics;
+		Angler::Sound::SoundEngine *mSound;
+
+		sf::Texture *mTXBreaker, *mTXFishing, *mTXCrane;
 
 		sf::Texture *mTXSea;
 
 		sf::Texture *mUIbackground1, *mUIbackground2, *mUIFishCount, *mUIMoneyCount, *mUITimeCount;
 		sf::Texture *mUIMenuButton, *mUIWindFlag, *mUIStatusBar, *mUIUpgrade;
 
-		Ship *mShip;
-		Wreck *mWreck1, *mWreck2, *mWreck3;
-
-		std::vector<sf::Vector2f> *mFrame;
+		Ship *mShipFishing, *mShipBreaker;
+		
+		sf::Sound *mCollShipSound;
+		sf::SoundBuffer *mCollShipBuff;
 	};
 }
 
 #else
-#error IshavsfiskeGame.h: Wrong version 0.1.2
+#error IshavsfiskeGame.h: Wrong version 0.1.3
 #endif
 
 #endif

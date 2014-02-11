@@ -1,9 +1,9 @@
-//Version: 0.1.2
+//Version: 0.1.3
 //Author: Jakob Pipping
 //Contributors: 
 
-#ifndef ISHAV_0_1_2
-#error IshavsfiskeGame_draw.cpp: Wrong version 0.1.2
+#ifndef ISHAV_0_1_3
+#error IshavsfiskeGame_draw.cpp: Wrong version 0.1.3
 #endif
 
 #include "IshavsfiskeGame.h"
@@ -16,11 +16,12 @@
 #include <Angler\Transformation.h>
 #include <Angler\HelpFunctions.h>
 
-void Ishavsfiske::IshavsfiskeGame::mDraw(float time, float deltaTime)
+using namespace Ishavsfiske;
+
+void IshavsfiskeGame::mDrawUI(float time, float deltaTime)
 {
 	float ar = mGraphics->getWidth() / (float)mGraphics->getHeight();
 
-	mGraphics->begin();
 	//Draw UI
 	glPushMatrix();
 		//Left UI
@@ -103,23 +104,16 @@ void Ishavsfiske::IshavsfiskeGame::mDraw(float time, float deltaTime)
 			mGraphics->draw(3, mUIWindFlag, sf::Vector2f(0, 0));
 		glPopMatrix();
 	glPopMatrix();
+}
 
-	////Draw Sea
-	glPushMatrix();
-	glScaled(1/20.0, 1/20.0, 0);
-	glTranslated(4, 0, 0);
-	for (int y = 0; y < 20; y++)
-	{
-		glPushMatrix();
-		for (int x = 0; x < 24; x++)
-		{
-			mGraphics->draw(0, mTXSea, sf::Vector2f(0, 0), 0, 0, 1, 1);
-			glTranslated(1, 0, 0);
-		}
-		glPopMatrix();
-		glTranslated(0, 1, 0);
-	}
-	glPopMatrix();
+void IshavsfiskeGame::mDraw(float time, float deltaTime)
+{
+	mGraphics->begin();
+
+	//Draw UI
+	mDrawUI(time, deltaTime);
+
+	//Draw Map
 
 	//Draw SceneRoot
 	mSceneRoot->draw(this, mGraphics, time, deltaTime);
@@ -127,7 +121,7 @@ void Ishavsfiske::IshavsfiskeGame::mDraw(float time, float deltaTime)
 
 #ifdef _DEBUG
 	//Draw collision boxes
-	std::vector<Angler::Node*> nds = Angler::HelpFunctions::getDescendants(mSceneRoot);
+	std::vector<Angler::Node*> nds = Angler::HelpFunctions::Nodes::getDescendants(mSceneRoot);
 	glPushMatrix();
 	for (int i = 0; i < nds.size(); i++)
 	{
@@ -170,31 +164,6 @@ void Ishavsfiske::IshavsfiskeGame::mDraw(float time, float deltaTime)
 			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);			
 		}
 	}
-	glPopMatrix();
-
-	//Draw frame
-	glPushMatrix();
-
-	glLoadIdentity();
-
-	gluLookAt(0, 0, 1, 0, 0, 0, 0, 1, 0);
-
-	glDisable(GL_TEXTURE_2D);
-
-	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-
-	glLineWidth(2);
-
-	glColor3d(1, 0, 1);
-	glBegin(GL_POLYGON);
-		for (int i = 0; i < mFrame->size(); i++)
-		{
-			glVertex2d(mFrame->at(i).x, mFrame->at(i).y);
-		}
-	glEnd();
-
-	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-
 	glPopMatrix();
 #endif
 }

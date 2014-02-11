@@ -1,9 +1,9 @@
-//Version: 0.1.2
+//Version: 0.1.3
 //Author: Marcus Persson
 //Contributors: 
 
-#ifndef ISHAV_0_1_2
-#error IshavsfiskeGame_update.cpp: Wrong version 0.1.2
+#ifndef ISHAV_0_1_3
+#error IshavsfiskeGame_update.cpp: Wrong version 0.1.3
 #endif
 
 #include "IshavsfiskeGame.h"
@@ -13,10 +13,10 @@
 
 void Ishavsfiske::IshavsfiskeGame::collide(Angler::Node *nodeA, Angler::Node *nodeB)
 {
-	//if mShip collides
+	//if mShipFishing collides
 	if(nodeA->getID() >= 0x0001000 && nodeA->getID() <= 0x0001FFFF)
 	{
-		mShip->revert();
+		mShipFishing->revert();
 #ifdef _DEBUG
 		//What mShip collides with
 		if(nodeB->getID() >=0x00020000 && nodeB->getID() <= 0x0002FFFF)

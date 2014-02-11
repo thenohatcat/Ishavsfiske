@@ -1,9 +1,9 @@
-//Version: 0.1.2
+//Version: 0.1.3
 //Author: Jakob Pipping
 //Contributors: 
 
-#ifndef ISHAV_0_1_2
-#error Wreck_draw.cpp: Wrong version 0.1.2
+#ifndef ISHAV_0_1_3
+#error Wreck_draw.cpp: Wrong version 0.1.3
 #endif
 
 #include "Wreck.h"

@@ -1,11 +1,11 @@
-//Version: 0.1.2
+//Version: 0.1.3
 //Author: Jakob Pipping
 //Contributors:
 
 #ifndef INC_WRECK_H
 #define INC_WRECK_H
 
-#ifdef ISHAV_0_1_2
+#ifdef ISHAV_0_1_3
 
 #include <Angler\Node.h>
 
@@ -26,7 +26,7 @@ namespace Ishavsfiske
 }
 
 #else
-#error Wreck.h: Wrong version 0.1.2
+#error Wreck.h: Wrong version 0.1.3
 #endif
 
 #endif

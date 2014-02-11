@@ -1,19 +1,16 @@
-//Version: 0.1.2
+//Version: 0.1.3
 //Author: Jakob Pipping
 //Contributors: 
 
-#ifndef ISHAV_0_1_2
-#error IshavsfiskeGame_update.cpp: Wrong version 0.1.2
+#ifndef ISHAV_0_1_3
+#error IshavsfiskeGame_update.cpp: Wrong version 0.1.3
 #endif
 
 #include "IshavsfiskeGame.h"
 #include "Ship.h"
 
-#include "MechanicsEngine.h"
-
+#include <Angler\Mechanics.h>
 #include <Angler\CollisionNode.h>
-
-#include <glm\matrix.hpp>
 
 #include <Angler\HelpFunctions.h>
 
@@ -46,31 +43,4 @@ void Ishavsfiske::IshavsfiskeGame::mUpdate(float time, float deltaTime)
 
 	//Collision system collide
 	mMechanics->doCollide(mSceneRoot);
-
-	std::vector<sf::Vector2f> shipCol;
-	std::vector<Angler::Node*> shp = Angler::HelpFunctions::getDescendants(mShip);
-	Angler::Nodes::CollisionNode *nd = nullptr;
-	for (int i = 0; i < shp.size(); i++)
-	{
-		if (typeid(*(shp.at(i))) == typeid(Angler::Nodes::CollisionNode))
-		{
-			nd = (Angler::Nodes::CollisionNode*)shp.at(i);
-			break;
-		}
-	}
-
-	Angler::Nodes::Transformation::transform(nd, nd->getPoints(), &shipCol);
-
-	//Leaving the frame
-	for (int i = 0; i < shipCol.size(); i++)
-	{
-		if (!Angler::HelpFunctions::Geometry::pointIsWithinPolygon(mFrame, shipCol.at(i)))
-		{
-#ifdef _DEBUG
-			std::cout << "Ship is outside" << std::endl;
-#endif
-			mShip->revert();
-			break;
-		}
-	}
 }
