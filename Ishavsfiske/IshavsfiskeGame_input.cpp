@@ -19,6 +19,7 @@ using namespace std;
 
 void Ishavsfiske::IshavsfiskeGame::mInput(float time, float deltaTime)
 {
+	// Fishing boat key inputs
 	if (getKeyboardState().isKeyDown(sf::Keyboard::W))
 	{
 		mShipFishing->throttle(0, -1 * deltaTime);
@@ -35,8 +36,26 @@ void Ishavsfiske::IshavsfiskeGame::mInput(float time, float deltaTime)
 	{
 		mShipFishing->rotate(90 * deltaTime);
 	}
+	// Close game key
 	if (getKeyboardState().wasKeyDown(sf::Keyboard::Escape))
 	{
-		mGraphics->close();
+		close();
+	}
+	// Icebreaker key inputs
+	if(getKeyboardState().isKeyDown(sf::Keyboard::Up))
+	{
+		mShipBreaker->throttle(0, -1 * deltaTime);
+	}
+	if(getKeyboardState().isKeyDown(sf::Keyboard::Down))
+	{
+		mShipBreaker->throttle(0, 1 * deltaTime);
+	}
+	if(getKeyboardState().isKeyDown(sf::Keyboard::Left))
+	{
+		mShipBreaker->rotate(-90 * deltaTime);
+	}
+	if(getKeyboardState().isKeyDown(sf::Keyboard::Right))
+	{
+		mShipBreaker->rotate(90 * deltaTime);
 	}
 }
