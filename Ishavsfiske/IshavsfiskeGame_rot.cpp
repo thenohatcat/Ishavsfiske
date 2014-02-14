@@ -14,6 +14,8 @@
 
 #include <stdarg.h>
 
+#include <iostream>
+
 using namespace Ishavsfiske;
 using namespace Angler;
 using namespace Angler::Mechanics;
@@ -27,6 +29,11 @@ IshavsfiskeGame::IshavsfiskeGame()
 	mNumLayers = 8;
 	mWidth = 1089;
 	mHeight = 687;
+}
+
+IshavsfiskeGame::~IshavsfiskeGame()
+{
+
 }
 
 void IshavsfiskeGame::throwEvent(int type, ... )

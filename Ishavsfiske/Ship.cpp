@@ -40,11 +40,9 @@ void Ishavsfiske::Ship::mInit()
 
 void Ishavsfiske::Ship::move(float x, float y)
 {	
-	Scale *s = new Scale(0, 5, 5);
-	Rotation r(0, s, mRootRotation->getRotation());
-	sf::Vector2f tv = r.transform(sf::Vector2f(x, y));
+	Rotation r(0, mRootRotation->getRotation());
+	sf::Vector2f tv = r.transform(sf::Vector2f(5*x, 5*y));
 	mRootTranslation->translate(tv);
-	delete s;
 }
 
 void Ishavsfiske::Ship::throttle(float vx, float vy)
@@ -52,8 +50,12 @@ void Ishavsfiske::Ship::throttle(float vx, float vy)
 	mVel.x += vx; mVel.y += vy;
 }
 
-void Ishavsfiske::Ship::update(Angler::Game *context, float time, float deltaTime)
+void Ishavsfiske::Ship::update(Angler::Game *context, float time, float deltaTime, bool changed)
 {
+	mChanged |= changed;
+	
+	mOT = mLT;
+	mOR = mLR;
 	mLT = mRootTranslation->getTranslation();
 	mLR = mRootRotation->getRotation();
 
@@ -69,6 +71,8 @@ void Ishavsfiske::Ship::update(Angler::Game *context, float time, float deltaTim
 		mVel.y -= (mVel.y / abs(mVel.y)) * (400*mVel.y*mVel.y) * deltaTime;
 	else
 		mVel.y = 0;
+
+	mUpdateChildren(context, time, deltaTime);
 }
 
 void Ishavsfiske::Ship::rotate(float r)
@@ -78,7 +82,13 @@ void Ishavsfiske::Ship::rotate(float r)
 
 void Ishavsfiske::Ship::revert()
 {
-	mRootTranslation->setTranslation(mLT);
-	mRootRotation->setRotation(mLR);
+	mRootTranslation->setTranslation(mOT);
+	mRootRotation->setRotation(mOR);
 	mVel.x = mVel.y = 0;
+	mChanged = true;
+}
+
+sf::Vector2f Ishavsfiske::Ship::getVelocity()
+{
+	return sf::Vector2f(mVel);
 }

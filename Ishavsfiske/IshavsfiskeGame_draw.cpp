@@ -106,6 +106,8 @@ void IshavsfiskeGame::mDrawUI(float time, float deltaTime)
 	glPopMatrix();
 }
 
+int tm;
+
 void IshavsfiskeGame::mDraw(float time, float deltaTime)
 {
 	mGraphics->begin();
@@ -120,50 +122,60 @@ void IshavsfiskeGame::mDraw(float time, float deltaTime)
 	mGraphics->end();
 
 #ifdef _DEBUG
-	//Draw collision boxes
-	std::vector<Angler::Node*> nds = Angler::HelpFunctions::Nodes::getDescendants(mSceneRoot);
-	glPushMatrix();
-	for (int i = 0; i < nds.size(); i++)
+	tm++;
+	if ((tm % 4) == 0)
 	{
-		if (typeid(*nds.at(i)) == typeid(Angler::Nodes::CollisionNode))
+		tm %= 16;
+
+		glLoadIdentity();
+
+		gluLookAt(0, 0, 1, 0, 0, 0, 0, 1, 0);
+
+		glDisable(GL_TEXTURE_2D);
+
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+
+		glLineWidth(2);
+
+		//Draw collision boxes
+		std::vector<Angler::Node*> nds = Angler::HelpFunctions::Nodes::getDescendants(mSceneRoot);
+		glPushMatrix();
+		for (int i = 0; i < nds.size(); i++)
 		{
-			Angler::Nodes::CollisionNode* n = (Angler::Nodes::CollisionNode*)nds.at(i);
+			if (typeid(*nds.at(i)) == typeid(Angler::Nodes::CollisionNode))
+			{
+				Angler::Nodes::CollisionNode* n = (Angler::Nodes::CollisionNode*)nds.at(i);
 
-			std::vector<sf::Vector2f> ov;
-			Angler::Nodes::Transformation::transform(n, n->getPoints(), &ov);
+				std::vector<sf::Vector2f> ov = n->getTransformedPoints();
+				/*Angler::Nodes::Transformation::transform(n, n->getPoints(), &ov);*/
 
-			sf::Vector2f ul, lr;
-			Angler::HelpFunctions::Geometry::getBoundingPoints(&ov, &ul, &lr);
+				sf::Vector2f ul = n->getBoundingUL(), lr = n->getBoundingLR();
 
-			glLoadIdentity();
+				/*Angler::HelpFunctions::Geometry::getBoundingPoints(&ov, &ul, &lr);*/
 
-			gluLookAt(0, 0, 1, 0, 0, 0, 0, 1, 0);
+				glLineWidth(3);
 
-			glDisable(GL_TEXTURE_2D);
+				glColor3d(1, 1, 0);
+				glBegin(GL_POLYGON);
+					glVertex2d(lr.x, lr.y);
+					glVertex2d(lr.x, ul.y);
+					glVertex2d(ul.x, ul.y);
+					glVertex2d(ul.x, lr.y);
+				glEnd();
 
-			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+				glLineWidth(2);
 
-			glLineWidth(2);
-
-			glColor3d(1, 1, 0);
-			glBegin(GL_POLYGON);
-				glVertex2d(lr.x, lr.y);
-				glVertex2d(lr.x, ul.y);
-				glVertex2d(ul.x, ul.y);
-				glVertex2d(ul.x, lr.y);
-			glEnd();
-
-			glColor3d(1, 0, 0);
-			glBegin(GL_POLYGON);
-				for (int i = 0; i < ov.size(); i++)
-				{
-					glVertex2d(ov.at(i).x, ov.at(i).y);
-				}
-			glEnd();
-
-			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);			
+				glColor3d(1, 0, 0);
+				glBegin(GL_POLYGON);
+					for (int i = 0; i < ov.size(); i++)
+					{
+						glVertex2d(ov.at(i).x, ov.at(i).y);
+					}
+				glEnd();
+			}
 		}
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+		glPopMatrix();
 	}
-	glPopMatrix();
 #endif
 }

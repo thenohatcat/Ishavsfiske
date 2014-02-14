@@ -14,6 +14,7 @@
 #include <Angler\CollisionNode.h>
 #include <Angler\Mechanics.h>
 #include <Angler\Sound.h>
+#include <Angler\SpriteNode.h>
 
 namespace Ishavsfiske
 {
@@ -26,6 +27,7 @@ namespace Ishavsfiske
 	{
 	public:
 		IshavsfiskeGame();
+		~IshavsfiskeGame();
 
 		void collide(Angler::Node *nodeA, Angler::Node *nodeB);
 
@@ -46,7 +48,7 @@ namespace Ishavsfiske
 		Angler::Mechanics::MechanicsEngine *mMechanics;
 		Angler::Sound::SoundEngine *mSound;
 
-		sf::Texture *mTXBreaker, *mTXFishing, *mTXCrane;
+		sf::Texture *mTXBreaker, *mTXFishing, *mTXCrane, *mTXLamp;
 
 		sf::Texture *mTXSea;
 
@@ -55,8 +57,10 @@ namespace Ishavsfiske
 
 		Ship *mShipFishing, *mShipBreaker;
 		
-		sf::Sound *mCollShipSound;
-		sf::SoundBuffer *mCollShipBuff;
+		sf::Sound *mCollFishingSound, *mCollBreakerSound, *mCollIceSound, *mEngineSound;
+		sf::SoundBuffer *mCollFishingBuff, *mCollBreakerBuff, *mCollIceBuff, *mEngineBuff;
+
+		Angler::Nodes::SpriteNode *mTiles[24*20];
 	};
 }
 

@@ -20,7 +20,7 @@ namespace Ishavsfiske
 		IceBreaker(unsigned long id, sf::Texture *textureShip, 
 			Ishavsfiske::IshavsfiskeGame *owner);
 
-		void update(Angler::Game *context, float time, float deltaTime);
+		void update(Angler::Game *context, float time, float deltaTime, bool changed);
 
 	protected:
 		virtual void mInit();

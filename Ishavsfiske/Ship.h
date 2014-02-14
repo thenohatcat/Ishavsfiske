@@ -28,9 +28,11 @@ namespace Ishavsfiske
 
 		void throttle(float vx, float vy);
 
-		void update(Angler::Game *context, float time, float deltaTime);
+		void update(Angler::Game *context, float time, float deltaTime, bool changed);
 
 		void revert();
+
+		sf::Vector2f getVelocity();
 	protected:
 		Angler::Game *mOwner;
 
@@ -45,8 +47,8 @@ namespace Ishavsfiske
 
 		sf::Vector2f mVel;
 
-		float mLR;
-		sf::Vector2f mLT;
+		float mLR, mOR;
+		sf::Vector2f mLT, mOT;
 	};
 }
 
