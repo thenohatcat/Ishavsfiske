@@ -13,20 +13,14 @@
 
 using namespace Ishavsfiske;
 
-FishingBoat::FishingBoat(unsigned long id, Angler::Node *parent,
-			sf::Texture *textureShip, sf::Texture *textureCrane, 
-			sf::Texture *textureLamp, Ishavsfiske::IshavsfiskeGame *owner)
-			: Ship(id, parent, owner), mTextureCrane(textureCrane), mTextureShip(textureShip),
-			mTextureLamp(textureLamp)
+FishingBoat::FishingBoat(unsigned long id, Angler::Node *parent, Ishavsfiske::IshavsfiskeGame *owner)
+			: Ship(id, parent, owner)
 {
 	mInit();
 }
 
-FishingBoat::FishingBoat(unsigned long id, sf::Texture *textureShip, 
-			sf::Texture *textureCrane, sf::Texture *textureLamp, 
-			Ishavsfiske::IshavsfiskeGame *owner)
-			: Ship(id, owner), mTextureCrane(textureCrane), mTextureShip(textureShip),
-			mTextureLamp(textureLamp)
+FishingBoat::FishingBoat(unsigned long id, Ishavsfiske::IshavsfiskeGame *owner)
+			: Ship(id, owner)
 {
 	mInit();
 }
@@ -40,7 +34,7 @@ void FishingBoat::mInit()
 
 	Angler::Nodes::Scale *s = new Angler::Nodes::Scale(getID() + 0x0100,
 		mShipRoot, 2.5/20, 2.5/20);
-	new Angler::Nodes::DrawNode(getID() + 0x0101, s, 1, mTextureShip, 0.5, 0.5);
+	new Angler::Nodes::DrawNode(getID() + 0x0101, s, 1, 0.5, 0.5);
 
 	std::vector<sf::Vector2f> pts;
 	pts.push_back(sf::Vector2f(1.5/2.5*(-0.5 + (37.5 / 75.0)), -0.5 + (-2 / 125.0)));
@@ -67,13 +61,13 @@ void FishingBoat::mInit()
 		2.5/20 * 1.5/2.5*(-0.5+0.506), 2.5/20 * (-0.5+0.672));
 	Angler::Nodes::Scale *craneS = new Angler::Nodes::Scale(getID() + 0x0104, craneT, 1.0/20, 1.0/20);
 	mCraneRotation = new Angler::Nodes::Rotation(getID() + 0x0105, craneS, 0);
-	new Angler::Nodes::DrawNode(getID() + 0x0106, mCraneRotation, 2, mTextureCrane, 2/3.0*0.075, 0.5);
+	new Angler::Nodes::DrawNode(getID() + 0x0106, mCraneRotation, 2, 2/3.0*0.075, 0.5);
 
 	Angler::Nodes::Translation *lampT = new Angler::Nodes::Translation(getID() + 0x0103, mShipRoot, 
 		2.5/20 * 1.5/2.5 * (-0.5+0.586), 2.5/20 * (-0.5+0.304));
 	Angler::Nodes::Scale *lampS = new Angler::Nodes::Scale(getID() + 0x0104, lampT, 1.0/40, 1.0/40);
 	mLampRotation = new Angler::Nodes::Rotation(getID() + 0x0105, lampS, 0);
-	new Angler::Nodes::DrawNode(getID() + 0x0106, mLampRotation, 2, mTextureLamp, 0.5, 0.5);
+	new Angler::Nodes::DrawNode(getID() + 0x0106, mLampRotation, 2, 0.5, 0.5);
 }
 
 void FishingBoat::update(Angler::Game *context, float time, float deltaTime, bool changed)

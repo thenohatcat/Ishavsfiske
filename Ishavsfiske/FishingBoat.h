@@ -15,20 +15,14 @@ namespace Ishavsfiske
 		: public Ship
 	{
 	public:
-		FishingBoat(unsigned long id, Angler::Node *parent,
-			sf::Texture *textureShip, sf::Texture *textureCrane, 
-			sf::Texture *textureLamp, Ishavsfiske::IshavsfiskeGame *owner);
-		FishingBoat(unsigned long id, sf::Texture *textureShip, 
-			sf::Texture *textureCrane, sf::Texture *textureLamp, 
-			Ishavsfiske::IshavsfiskeGame *owner);
+		FishingBoat(unsigned long id, Angler::Node *parent, Ishavsfiske::IshavsfiskeGame *owner);
+		FishingBoat(unsigned long id, Ishavsfiske::IshavsfiskeGame *owner);
 
 		void update(Angler::Game *context, float time, float deltaTime, bool changed);
 
 	protected:
 		virtual void mInit();
 	private:
-		sf::Texture *mTextureShip, *mTextureCrane, *mTextureLamp;
-
 		Angler::Nodes::Rotation *mCraneRotation, *mLampRotation;
 	};
 }

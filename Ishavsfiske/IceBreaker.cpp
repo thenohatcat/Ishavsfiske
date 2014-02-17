@@ -9,20 +9,20 @@
 #include "IceBreaker.h"
 
 #include <Angler\DrawNode.h>
+#include <Angler\SpriteNode.h>
 #include <Angler\Scale.h>
 
 using namespace Ishavsfiske;
 
 IceBreaker::IceBreaker(unsigned long id, Angler::Node *parent,
-			sf::Texture *textureShip, Ishavsfiske::IshavsfiskeGame *owner)
-			: Ship(id, parent, owner), mTextureShip(textureShip)
+					   Ishavsfiske::IshavsfiskeGame *owner)
+					   : Ship(id, parent, owner)
 {
 	mInit();
 }
 
-IceBreaker::IceBreaker(unsigned long id, sf::Texture *textureShip, 
-			Ishavsfiske::IshavsfiskeGame *owner)
-			: Ship(id, owner), mTextureShip(textureShip)
+IceBreaker::IceBreaker(unsigned long id, Ishavsfiske::IshavsfiskeGame *owner)
+					   : Ship(id, owner)
 {
 	mInit();
 }
@@ -36,7 +36,7 @@ void IceBreaker::mInit()
 
 	Angler::Nodes::Scale *s = new Angler::Nodes::Scale(getID() + 0x0100,
 		mShipRoot, 3.5/20, 3.5/20);
-	new Angler::Nodes::DrawNode(getID() + 0x0101, s, 1, mTextureShip, 0.5, 0.5);
+	new Angler::Nodes::DrawNode(getID() + 0x0101, s, 1, 0.5, 0.5);
 
 	std::vector<sf::Vector2f> pts;
 	pts.push_back(sf::Vector2f(2/3.5*(-0.5 + (49.5 / 100.0)), -0.5 + (-1 / 175.0)));

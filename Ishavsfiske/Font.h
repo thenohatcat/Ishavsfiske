@@ -12,7 +12,9 @@
 class Font
 {
 public:
-	void drawString(Angler::Graphics::GraphicsEngine* graphics, std::string st, sf::Texture *tx, float size);
+	Font();
+
+	void drawString(Angler::Graphics::GraphicsEngine* graphics, std::string st, int layer, float size);
 private:
 	void loadDistance();
 	float rightDistance[256];

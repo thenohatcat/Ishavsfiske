@@ -35,7 +35,7 @@ void Wreck::mInit()
 	Translation *t = new Translation(id + 0x0001, this, 0, 0);
 	Rotation *r = new Rotation(id + 0x0002, t, 0);
 	Scale *s = new Scale(id + 0x0003, r, 1.75/10.0, 1.75/10.0);
-	DrawNode *d = new DrawNode(id + 0x0004, s, 1, mTX, 0.5, 0.5);
+	DrawNode *d = new DrawNode(id + 0x0004, s, 1, 0.5, 0.5);
 	std::vector<sf::Vector2f> pts;
 	pts.push_back(sf::Vector2f(-(2/3.5 * 0.5), -0.5));
 	pts.push_back(sf::Vector2f(2/3.5 * 0.5, -0.5));

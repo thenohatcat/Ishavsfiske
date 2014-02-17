@@ -16,16 +16,34 @@
 #include <Angler\Transformation.h>
 #include <Angler\HelpFunctions.h>
 
+#include "Font.h"
+
 using namespace Ishavsfiske;
+
+float avd;
+unsigned int frmd;
+float fps;
 
 void IshavsfiskeGame::mDrawUI(float time, float deltaTime)
 {
 	float ar = mGraphics->getWidth() / (float)mGraphics->getHeight();
 
+	if (frmd < 50)
+	{
+		frmd++;
+		avd += deltaTime;
+	}
+	else
+	{
+		fps = frmd/avd;
+		frmd = 0;
+		avd = 0;
+	}
+
 	//Draw UI
 	glPushMatrix();
 		//Left UI
-		mGraphics->draw(3, mUIbackground1, sf::Vector2f(0, 0));
+		mGraphics->draw(3, sf::Vector2f(0, 0));
 
 		// Status Left
 		glPushMatrix();
@@ -33,7 +51,7 @@ void IshavsfiskeGame::mDrawUI(float time, float deltaTime)
 				glScaled(1/15.0, 1/15.0, 1);
 					glTranslated(1, 25, 0);
 				glScaled(15.0, 15.0, 1);
-			mGraphics->draw(3, mUIStatusBar, sf::Vector2f(0, 0));
+			mGraphics->draw(3, sf::Vector2f(0, 0));
 		glPopMatrix();
 
 		// Upgrades
@@ -48,14 +66,15 @@ void IshavsfiskeGame::mDrawUI(float time, float deltaTime)
 					glScaled(1/3.0, 1/3.0, 1);
 						glTranslated(0, 3, 0);
 					glScaled(3.0, 3.0, 1);
-				mGraphics->draw(3, mUIUpgrade, sf::Vector2f(0, 0));
+				mGraphics->draw(3, sf::Vector2f(0, 0));
 			}
 		glPopMatrix();
 
 		//Right UI
 		glPushMatrix();
 			glTranslated(14/10.0, 0, 0);
-			mGraphics->draw(3, mUIbackground2, sf::Vector2f(0, 0));
+			glScaled(-1, 1, 1);
+			mGraphics->draw(3, sf::Vector2f(1, 0));
 		glPopMatrix();
 
 		// Status Right
@@ -64,28 +83,28 @@ void IshavsfiskeGame::mDrawUI(float time, float deltaTime)
 				glScaled(1/15.0, 1/15.0, 1);
 					glTranslated(14*4 + 1, 25, 0);
 				glScaled(15.0, 15.0, 1);
-			mGraphics->draw(3, mUIStatusBar, sf::Vector2f(0, 0));
+			mGraphics->draw(3, sf::Vector2f(0, 0));
 		glPopMatrix();
 
 		//Fish Counter
 		glPushMatrix();
 			glScaled(1/20.0, 1/20.0, 1);
 			glTranslated(6, 1/2.0, 0);
-			mGraphics->draw(3, mUIFishCount, sf::Vector2f(0, 0));
+			mGraphics->draw(3, sf::Vector2f(0, 0));
 		glPopMatrix();
 
 		//Timer
 		glPushMatrix();
 			glScaled(1/20.0, 1/20.0, 1);
 			glTranslated(14, 1/2.0, 0);
-			mGraphics->draw(3, mUITimeCount, sf::Vector2f(0, 0));
+			mGraphics->draw(3, sf::Vector2f(0, 0));
 		glPopMatrix();
 
 		//Cash
 		glPushMatrix();
 			glScaled(1/20.0, 1/20.0, 1);
 			glTranslated(22, 1/2.0, 0);
-			mGraphics->draw(3, mUIMoneyCount, sf::Vector2f(0, 0));
+			mGraphics->draw(3, sf::Vector2f(0, 0));
 		glPopMatrix();
 
 		//Menu button
@@ -94,15 +113,21 @@ void IshavsfiskeGame::mDrawUI(float time, float deltaTime)
 			glScaled(1/3.0, 1/3.0, 1);
 				glTranslated(4, 17, 0);
 			glScaled(3, 3, 1);
-			mGraphics->draw(3, mUIMenuButton, sf::Vector2f(0, 0));
+			mGraphics->draw(3, sf::Vector2f(0, 0));
 		glPopMatrix();
 
 		//Wind Flag
 		glPushMatrix();
 			glScaled(1/10.0, 1/10.0, 1);
 			glTranslated(13, 9, 0);
-			mGraphics->draw(3, mUIWindFlag, sf::Vector2f(0, 0));
+			mGraphics->draw(3, sf::Vector2f(0, 0));
 		glPopMatrix();
+
+		char *s = new char[32];
+		sprintf_s(s, 32, "FPS: %03.0f", fps);
+		mFont->drawString(mGraphics, "Ishavsfiske 0.1.3", 4, 1);
+		glTranslatef(0, 1/40.0, 0);
+		mFont->drawString(mGraphics, std::string(s), 4, 1);
 	glPopMatrix();
 }
 
@@ -134,8 +159,6 @@ void IshavsfiskeGame::mDraw(float time, float deltaTime)
 		glDisable(GL_TEXTURE_2D);
 
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-
-		glLineWidth(2);
 
 		//Draw collision boxes
 		std::vector<Angler::Node*> nds = Angler::HelpFunctions::Nodes::getDescendants(mSceneRoot);

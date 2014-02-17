@@ -16,6 +16,8 @@
 #include <Angler\Sound.h>
 #include <Angler\SpriteNode.h>
 
+class Font;
+
 namespace Ishavsfiske
 {
 	class Ship;
@@ -53,7 +55,7 @@ namespace Ishavsfiske
 		sf::Texture *mTXSea;
 
 		sf::Texture *mUIbackground1, *mUIbackground2, *mUIFishCount, *mUIMoneyCount, *mUITimeCount;
-		sf::Texture *mUIMenuButton, *mUIWindFlag, *mUIStatusBar, *mUIUpgrade;
+		sf::Texture *mUIMenuButton, *mUIWindFlag, *mUIStatusBar, *mUIUpgrade, *mUIFont;
 
 		Ship *mShipFishing, *mShipBreaker;
 		
@@ -61,6 +63,8 @@ namespace Ishavsfiske
 		sf::SoundBuffer *mCollFishingBuff, *mCollBreakerBuff, *mCollIceBuff, *mEngineBuff;
 
 		Angler::Nodes::SpriteNode *mTiles[24*20];
+
+		Font *mFont;
 	};
 }
 

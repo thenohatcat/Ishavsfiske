@@ -16,16 +16,14 @@ namespace Ishavsfiske
 	{
 	public:
 		IceBreaker(unsigned long id, Angler::Node *parent,
-			sf::Texture *textureShip, Ishavsfiske::IshavsfiskeGame *owner);
-		IceBreaker(unsigned long id, sf::Texture *textureShip, 
 			Ishavsfiske::IshavsfiskeGame *owner);
+		IceBreaker(unsigned long id, Ishavsfiske::IshavsfiskeGame *owner);
 
 		void update(Angler::Game *context, float time, float deltaTime, bool changed);
 
 	protected:
 		virtual void mInit();
 	private:
-		sf::Texture *mTextureShip;
 	};
 }
 
