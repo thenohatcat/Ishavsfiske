@@ -1,11 +1,11 @@
-//Version: 0.1.3
+//Version: 0.1.4
 //Author: Jakob Pipping
 //Contributors:
 
 #ifndef INC_ISHAVSFISKEGAME_H
 #define INC_ISHAVSFISKEGAME_H
 
-#ifdef ISHAV_0_1_3
+#ifdef ISHAV_0_1_4
 
 #include <SFML\Audio.hpp>
 
@@ -69,7 +69,7 @@ namespace Ishavsfiske
 }
 
 #else
-#error IshavsfiskeGame.h: Wrong version 0.1.3
+#error IshavsfiskeGame.h: Wrong version 0.1.4
 #endif
 
 #endif
