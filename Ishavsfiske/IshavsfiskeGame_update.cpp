@@ -36,8 +36,6 @@ void Ishavsfiske::IshavsfiskeGame::mUpdate(float time, float deltaTime)
 	//printf("FPS: %04.0f\n", 1/deltaTime);
 //#endif
 
-	mSceneRoot->update(this, time, deltaTime);
-
 	//Handle Input
 	mInput(time, deltaTime);
 

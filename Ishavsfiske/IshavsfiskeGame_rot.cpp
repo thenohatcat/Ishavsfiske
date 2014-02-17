@@ -22,8 +22,7 @@ using namespace Angler::Mechanics;
 using namespace Angler::Sound;
 
 IshavsfiskeGame::IshavsfiskeGame()
-	: Game(), mMechanics(new MechanicsEngine(this)), 
-	mSound(new SoundEngine(this))
+	: Game()
 {
 	mTitle = "Ishavsfiske v0.1.3";
 	mNumLayers = 8;

@@ -47,15 +47,12 @@ namespace Ishavsfiske
 
 		void mDrawUI(float time, float deltaTime);
 
-		Angler::Mechanics::MechanicsEngine *mMechanics;
-		Angler::Sound::SoundEngine *mSound;
+		sf::Texture *mTXShips;
 
-		sf::Texture *mTXBreaker, *mTXFishing, *mTXCrane, *mTXLamp;
+		sf::Texture *mTXMap;
 
-		sf::Texture *mTXSea;
-
-		sf::Texture *mUIbackground1, *mUIbackground2, *mUIFishCount, *mUIMoneyCount, *mUITimeCount;
-		sf::Texture *mUIMenuButton, *mUIWindFlag, *mUIStatusBar, *mUIUpgrade, *mUIFont;
+		sf::Texture *mTXUI;
+		sf::Texture *mUIFont;
 
 		Ship *mShipFishing, *mShipBreaker;
 		
