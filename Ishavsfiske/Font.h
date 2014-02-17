@@ -5,6 +5,8 @@
 #ifndef INC_FONT_H
 #define INC_FONT_H
 
+#ifdef ISHAV_0_1_3
+
 #include <Angler\Graphics.h>
 
 #include <string>
@@ -20,5 +22,9 @@ private:
 	float rightDistance[256];
 	float leftDistance[256];
 };
+
+#else
+#error Font.h: Wrong version 0.1.3
+#endif
 
 #endif

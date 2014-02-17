@@ -4,6 +4,10 @@
 
 #include "Font.h"
 
+#ifndef ISHAV_0_1_3
+#error Font.cpp: Wrong version 0.1.3
+#endif
+
 Font::Font()
 {
 	//loadDistance();
