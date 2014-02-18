@@ -12,45 +12,51 @@
 #include <Angler\Graphics.h>
 #include <Angler\Scale.h>
 #include <Angler\Translation.h>
+#include <Angler\HelpFunctions.h>
 
 #include <iostream>
+#include <cstdlib>
 
-int mapTemp[24][20] = {
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
-}; 
+int randomValue(int number) {
+	return rand() % number;
+}
+//
+//int tempMap[48][40] = {
+//	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+//	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+//	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+//	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+//	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+//	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+//	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+//	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+//	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+//	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+//	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+//	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+//	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+//	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+//	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+//	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+//	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+//	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+//	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+//	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+//	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+//	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+//	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+//	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+//}; 
 
 Map::Map(unsigned long id, Angler::Node *parent, Angler::Game *owner)
-	: Node(id, parent), mParent(owner)
+	: Node(id, parent), mParent(owner), mPos(0, 0)
 {
-	setMap();
+	genMap(1);
 	mInit();
 }
 
 Map::Map(unsigned long id, Angler::Node *parent, Angler::Game *owner, int lvl)
-	: Node(id, parent), mParent(owner)
+	: Node(id, parent), mParent(owner), mPos(0, 0)
 {
 	genMap(lvl);
 	mInit();
@@ -74,19 +80,20 @@ void Map::mInit()
 
 
 	Angler::Nodes::Scale *s = new Angler::Nodes::Scale(0, this, 1/20.0, 1/20.0);
-	Angler::Nodes::Translation *t = new Angler::Nodes::Translation(0, s, 4.5, 0.5);
+	Angler::Nodes::Translation *t = new Angler::Nodes::Translation(0, s, 4, 0);
 	for(int y = 0; y < 20; y++)
 	{
 		Angler::Nodes::Translation *row = new Angler::Nodes::Translation(0, t, 0, y);
 		for(int x = 0; x < 24; x++)
 		{
 			Angler::Nodes::Translation *col = new Angler::Nodes::Translation(0, row, x, 0);
-			new MapNode(x + y * 24, col, mParent, mMap[x][y]);
+			new MapNode(0x80010000 + x + y * 24, col, mParent, 0);
 
 			
 			/*std::cout << mMap[x][y] << std::endl;*/
 		}
 	}
+	mUpdateMap();
 }
 
 void Map::genMap(int lvl)
@@ -100,13 +107,12 @@ void Map::genMap(int lvl)
 			{
 				if (y == 0 || x == 0 ||x == 23 || y == 19)
 				{
-					mapTemp[x][y] = 0;
+					mMap[x + y * 48] = 0;
 				}
 				else
-					mapTemp[x][y] = 1;
+					mMap[x + y * 48] = 1;
 			}
 		}
-		setMap();
 		break;
 	case 2:
 		for(int y = 0; y < 20; y++)
@@ -115,52 +121,49 @@ void Map::genMap(int lvl)
 			{
 				if (x == y)
 				{
-					mapTemp[x][y] = 0;
+					mMap[x + y * 48] = 0;
 				}
 				else
-					mapTemp[x][y] = 1;
+					mMap[x + y * 48] = 1;
 			}
 		}
-		setMap();
 		break;
 	}
 }
 
-void Map::setMap()
+
+int Map::getTile(int index)
 {
-	memcpy(mMap, mapTemp, sizeof(mapTemp));
+	int x = index % 24;
+	int y = index / 24;
+	return mMap[(x + mPos.x) + (y + mPos.y) * 48];
 }
 
-//Commented as it has errors!
-//void Map::perlin2d(double **x, double **y, double **z, int xn, int yn, int sps)
-//{
-//	int m = yn * sps;
-//	int n = xn * sps;
-//
-//	double **U = new double *[yn+1];
-//	double **V = new double *[yn+1];
-//	x = new double *[m];
-//	y = new double *[m];
-//	z = new double *[m];
-//
-//	for(int i = 0; i < m; i++)
-//	{
-//		x[i] = new double[n];
-//		y[i] = new double[n];
-//		z[i] = new double[n];
-//	}
-//
-//	for(int i = 0; i < m; i++)
-//	{
-//		U[i] = new double[xn+1];
-//		V[i] = new double[xn+1];
-//	}
-//	for(int i = 0; i < yn+1; i++)
-//	{
-//		for(int j = 0; j < yn+1; j++)
-//		{
-//			U[i][j] = randRange[-1, 1];
-//			V[i][j] = randRange[-1, 1];
-//		}
-//	}
-//}
+void Map::setTile(int index, int tile)
+{
+	int x = index % 24;
+	int y = index / 24;
+
+	mMap[(x + mPos.x) + (y + mPos.y) * 48] = tile;
+	mUpdateMap();
+}
+
+void Map::setPos(sf::Vector2i position)
+{
+	mPos = position;
+}
+
+sf::Vector2i Map::getPos()
+{
+	return mPos;
+}
+
+void Map::mUpdateMap()
+{
+	for(int y = 0; y < 20; y++)
+		for(int x = 0; x < 24; x++)
+		{
+			MapNode *n = (MapNode *)Angler::HelpFunctions::Nodes::getNode(0x80010000 + x + y * 24, this);
+			n->setTile(mMap[(x + mPos.x) + (y + mPos.y) * 48]);
+		}
+}
