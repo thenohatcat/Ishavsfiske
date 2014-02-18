@@ -1,9 +1,9 @@
-//Version: 0.1.3
+//Version: 0.1.4
 //Author: Sihao Li
 //Contributors:
 
-#ifndef ISHAV_0_1_3
-#error MapNode.cpp: Wrong version 0.1.3
+#ifndef ISHAV_0_1_4
+#error MapNode.cpp: Wrong version 0.1.4
 #endif
 
 #include "MapNode.h"

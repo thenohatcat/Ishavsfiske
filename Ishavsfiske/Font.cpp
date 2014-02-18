@@ -1,11 +1,11 @@
-//Version: 0.1.3
+//Version: 0.1.4
 //Author: Marcus Persson
 //Contributors: 
 
 #include "Font.h"
 
-#ifndef ISHAV_0_1_3
-#error Font.cpp: Wrong version 0.1.3
+#ifndef ISHAV_0_1_4
+#error Font.cpp: Wrong version 0.1.4
 #endif
 
 Font::Font()

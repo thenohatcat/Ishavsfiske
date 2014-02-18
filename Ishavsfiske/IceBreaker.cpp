@@ -1,9 +1,9 @@
-//Version: 0.1.3
+//Version: 0.1.4
 //Author: Jakob Pipping
 //Contributors: 
 
-#ifndef ISHAV_0_1_3
-#error IceBreaker.cpp: Wrong version 0.1.3
+#ifndef ISHAV_0_1_4
+#error IceBreaker.cpp: Wrong version 0.1.4
 #endif
 
 #include "IceBreaker.h"
