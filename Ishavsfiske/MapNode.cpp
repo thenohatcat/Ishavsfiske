@@ -13,6 +13,7 @@
 #include <Angler\Scale.h>
 #include <Angler\Translation.h>
 #include <Angler\DrawNode.h>
+#include <Angler\CollisionNode.h>
 
 MapNode::MapNode(unsigned long id, Angler::Node *parent, Angler::Game *owner, int tile)
 	: Node(id, parent), mTile(tile)
@@ -38,14 +39,14 @@ void MapNode::update(Angler::Game* context, float time, float deltaTime)
 
 void MapNode::mInit()
 {
-	mSprite = new Angler::Nodes::SpriteNode(0, this, 0, sf::Vector2f(0.5, 0.5), sf::Vector2f(0, 0.5 * mTile), sf::Vector2f(0.5, 0.5));
+	mSprite = new Angler::Nodes::SpriteNode(getID() + 0x1000, this, 0, sf::Vector2f(0, 0), sf::Vector2f(0, 0.5 * mTile), sf::Vector2f(0.5, 0.5));
 
 	std::vector<sf::Vector2f> pts;
+	pts.push_back(sf::Vector2f(1, 0));
 	pts.push_back(sf::Vector2f(0, 0));
 	pts.push_back(sf::Vector2f(0, 1));
-	pts.push_back(sf::Vector2f(1, 0));
 	pts.push_back(sf::Vector2f(1, 1));
-	new Angler::Nodes::CollisionNode(getID() + 0x1000, this, pts, 1);
+	new Angler::Nodes::CollisionNode(getID() + 0x2000, this, pts, 1);
 }
 
 int MapNode::getTile()

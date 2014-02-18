@@ -7,8 +7,7 @@
 
 #ifdef ISHAV_0_1_4
 
-#include "IshavsfiskeGame.h"
-
+#include <Angler\Game.h>
 #include <Angler\Graphics.h>
 #include <Angler\Node.h>
 #include <Angler\SpriteNode.h>

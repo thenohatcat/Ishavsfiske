@@ -19,15 +19,22 @@ public:
 	Map(unsigned long id, Angler::Node *parent, Angler::Game *owner);
 	Map(unsigned long id, Angler::Node *parent, Angler::Game *owner, int lvl);
 	
-	void genMap(int lvl);
-	void setMap();
+	int getTile(int index);
+	void setTile(int index, int tile);
 
-	void perlin2d(double **x, double **y, double **z, int xn, int yn, int sps);
+	void setPos(sf::Vector2i pos);
+	sf::Vector2i getPos();
+
+	void genMap(int lvl);
+
 protected:
 	virtual void mInit();
 private:
-	int mMap[24][20], mapTemp[24][20];
+	int mMap [48 * 40];
 	Angler::Game *mParent;
+	int mTile;
+	sf::Vector2i mPos;
+	void mUpdateMap();
 };
 
 #else
