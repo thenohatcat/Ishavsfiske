@@ -44,3 +44,20 @@ void Font::loadDistance()
 			rightDistance[k] = 1;
 	}
 }
+
+float Font::getWidth(char c)
+{
+	return rightDistance[c] - leftDistance[c];
+}
+
+float Font::getWidth(std::string s)
+{
+	float width = 0.0;
+
+	for(int i = 0; i < s.length(); i++)
+	{
+		width += getWidth(s[i]);
+	}
+
+	return width;
+}
