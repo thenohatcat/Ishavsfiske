@@ -19,13 +19,13 @@
 using namespace Angler::Nodes;
 
 Ishavsfiske::Ship::Ship(unsigned long id, Angler::Node *parent, Ishavsfiske::IshavsfiskeGame *owner)
-	: Node(id, parent), mOwner(owner), mVel(0, 0), mStartX(0.5), mStartY(0.5)
+	: Node(id, parent), mOwner(owner), mVel(0, 0), mStartX(0.5f), mStartY(0.5f)
 {
 	
 }
 
 Ishavsfiske::Ship::Ship(unsigned long id, Ishavsfiske::IshavsfiskeGame *owner)
-	: Node(id), mOwner(owner), mVel(0, 0), mStartX(0.5), mStartY(0.5)
+	: Node(id), mOwner(owner), mVel(0, 0), mStartX(0.5f), mStartY(0.5f)
 {
 	
 }
@@ -62,12 +62,12 @@ void Ishavsfiske::Ship::update(Angler::Game *context, float time, float deltaTim
 	if (abs(mVel.x) > 0 || abs(mVel.y) > 0)
 		move(mVel.x * deltaTime, mVel.y * deltaTime);
 
-	if (abs(mVel.x) > 0.001)
+	if (abs(mVel.x) > 0.001f)
 		mVel.x -= (mVel.x / abs(mVel.x)) * (400*mVel.x*mVel.x) * deltaTime;
 	else
 		mVel.x = 0;
 
-	if (abs(mVel.y) > 0.001)
+	if (abs(mVel.y) > 0.001f)
 		mVel.y -= (mVel.y / abs(mVel.y)) * (400*mVel.y*mVel.y) * deltaTime;
 	else
 		mVel.y = 0;

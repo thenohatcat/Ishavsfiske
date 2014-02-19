@@ -147,6 +147,7 @@ void IshavsfiskeGame::mDraw(float time, float deltaTime)
 	mGraphics->end();
 
 #ifdef _DEBUG
+#ifdef _DEBUG_COLL
 	tm++;
 	if ((tm % 4) == 0)
 	{
@@ -200,5 +201,6 @@ void IshavsfiskeGame::mDraw(float time, float deltaTime)
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 		glPopMatrix();
 	}
+#endif
 #endif
 }

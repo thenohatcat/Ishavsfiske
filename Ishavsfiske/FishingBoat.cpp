@@ -33,24 +33,24 @@ void FishingBoat::mInit()
 	Ship::mInit();
 
 	Angler::Nodes::Scale *s = new Angler::Nodes::Scale(getID() + 0x0100,
-		mShipRoot, 2.5/20, 2.5/20);
-	new Angler::Nodes::DrawNode(getID() + 0x0101, s, 1, 0.5, 0.5);
+		mShipRoot, 2.5f/20, 2.5f/20);
+	new Angler::Nodes::DrawNode(getID() + 0x0101, s, 1, 0.5f, 0.5f);
 
 	std::vector<sf::Vector2f> pts;
-	pts.push_back(sf::Vector2f(1.5/2.5*(-0.5f + (37.5f / 75.0f)), -0.5f + (-2 / 125.0f)));
-	pts.push_back(sf::Vector2f(1.5/2.5*(-0.5f + (29 / 75.0f)), -0.5f + (2 / 125.0f)));
-	pts.push_back(sf::Vector2f(1.5/2.5*(-0.5f + (23 / 75.0f)), -0.5f + (8 / 125.0f)));
-	pts.push_back(sf::Vector2f(1.5/2.5*(-0.5f + (12 / 75.0f)), -0.5f + (32 / 125.0f)));
-	pts.push_back(sf::Vector2f(1.5/2.5*(-0.5f + (12 / 75.0f)), -0.5f + (69 / 125.0f)));
-	pts.push_back(sf::Vector2f(1.5/2.5*(-0.5f + (17 / 75.0f)), -0.5f + (103 / 125.0f)));
-	pts.push_back(sf::Vector2f(1.5/2.5*(-0.5f + (18 / 75.0f)), -0.5f + (125 / 125.0f)));
+	pts.push_back(sf::Vector2f(1.5f/2.5f*(-0.5f + (37.5f / 75.0f)), -0.5f + (-2 / 125.0f)));
+	pts.push_back(sf::Vector2f(1.5f/2.5f*(-0.5f + (29 / 75.0f)), -0.5f + (2 / 125.0f)));
+	pts.push_back(sf::Vector2f(1.5f/2.5f*(-0.5f + (23 / 75.0f)), -0.5f + (8 / 125.0f)));
+	pts.push_back(sf::Vector2f(1.5f/2.5f*(-0.5f + (12 / 75.0f)), -0.5f + (32 / 125.0f)));
+	pts.push_back(sf::Vector2f(1.5f/2.5f*(-0.5f + (12 / 75.0f)), -0.5f + (69 / 125.0f)));
+	pts.push_back(sf::Vector2f(1.5f/2.5f*(-0.5f + (17 / 75.0f)), -0.5f + (103 / 125.0f)));
+	pts.push_back(sf::Vector2f(1.5f/2.5f*(-0.5f + (18 / 75.0f)), -0.5f + (125 / 125.0f)));
 
-	pts.push_back(sf::Vector2f(1.5/2.5*(-0.5f + (56 / 75.0f)), -0.5f + (125 / 125.0f)));
-	pts.push_back(sf::Vector2f(1.5/2.5*(-0.5f + (57 / 75.0f)), -0.5f + (103 / 125.0f)));
-	pts.push_back(sf::Vector2f(1.5/2.5*(-0.5f + (62 / 75.0f)), -0.5f + (69 / 125.0f)));
-	pts.push_back(sf::Vector2f(1.5/2.5*(-0.5f + (62 / 75.0f)), -0.5f + (32 / 125.0f)));
-	pts.push_back(sf::Vector2f(1.5/2.5*(-0.5f + (51 / 75.0f)), -0.5f + (8 / 125.0f)));
-	pts.push_back(sf::Vector2f(1.5/2.5*(-0.5f + (45 / 75.0f)), -0.5f + (2 / 125.0f)));
+	pts.push_back(sf::Vector2f(1.5f/2.5f*(-0.5f + (56 / 75.0f)), -0.5f + (125 / 125.0f)));
+	pts.push_back(sf::Vector2f(1.5f/2.5f*(-0.5f + (57 / 75.0f)), -0.5f + (103 / 125.0f)));
+	pts.push_back(sf::Vector2f(1.5f/2.5f*(-0.5f + (62 / 75.0f)), -0.5f + (69 / 125.0f)));
+	pts.push_back(sf::Vector2f(1.5f/2.5f*(-0.5f + (62 / 75.0f)), -0.5f + (32 / 125.0f)));
+	pts.push_back(sf::Vector2f(1.5f/2.5f*(-0.5f + (51 / 75.0f)), -0.5f + (8 / 125.0f)));
+	pts.push_back(sf::Vector2f(1.5f/2.5f*(-0.5f + (45 / 75.0f)), -0.5f + (2 / 125.0f)));
 	/*pts.push_back(sf::Vector2f(-(2/3.5 * 0.5), -0.5));
 	pts.push_back(sf::Vector2f(2/3.5 * 0.5, -0.5));
 	pts.push_back(sf::Vector2f(2/3.5 * 0.5, 0.5));
