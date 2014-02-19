@@ -107,10 +107,12 @@ void Map::genMap(int lvl)
 			{
 				if (y == 0 || x == 0 ||x == 23 || y == 19)
 				{
-					mMap[x + y * 48] = 0;
-				}
-				else
 					mMap[x + y * 48] = 1;
+				}
+				else if (x >= 2 && x <= 5 && y >= 2 && y <= 5)
+					mMap[x + y * 48] = 1;
+				else
+					mMap[x + y * 48] = 0;
 			}
 		}
 		break;
@@ -121,10 +123,10 @@ void Map::genMap(int lvl)
 			{
 				if (x == y)
 				{
-					mMap[x + y * 48] = 0;
+					mMap[x + y * 48] = 1;
 				}
 				else
-					mMap[x + y * 48] = 1;
+					mMap[x + y * 48] = 0;
 			}
 		}
 		break;
@@ -151,6 +153,7 @@ void Map::setTile(int index, int tile)
 void Map::setPos(sf::Vector2i position)
 {
 	mPos = position;
+	mUpdateMap();
 }
 
 sf::Vector2i Map::getPos()

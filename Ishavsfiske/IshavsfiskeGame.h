@@ -16,6 +16,8 @@
 #include <Angler\Sound.h>
 #include <Angler\SpriteNode.h>
 
+#include "Map.h"
+
 class Font;
 
 namespace Ishavsfiske
@@ -59,7 +61,7 @@ namespace Ishavsfiske
 		sf::Sound *mCollFishingSound, *mCollBreakerSound, *mCollIceSound, *mEngineSound;
 		sf::SoundBuffer *mCollFishingBuff, *mCollBreakerBuff, *mCollIceBuff, *mEngineBuff;
 
-		Angler::Nodes::SpriteNode *mTiles[24*20];
+		Map *mMap;
 
 		Font *mFont;
 	};
