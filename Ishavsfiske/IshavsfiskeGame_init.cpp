@@ -24,7 +24,8 @@ void Ishavsfiske::IshavsfiskeGame::mLoadContent()
 {
 	mTXShips->loadFromFile("boat_icebreaker_1.png");
 	mTXMap->loadFromFile("env_sea1.png");
-	mTXUI->loadFromFile("ui_background1.png");
+	//mTXUI->loadFromFile("ui_background1.png");
+	mTXUI->loadFromFile("Sheet_1.png");
 	mUIFont->loadFromFile("font_bitmap.png");
 
 	mCollFishingBuff->loadFromFile("Fiskebåt_Kollision_01.wav");

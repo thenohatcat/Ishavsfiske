@@ -43,16 +43,18 @@ void IshavsfiskeGame::mDrawUI(float time, float deltaTime)
 	//Draw UI
 	glPushMatrix();
 		//Left UI
-		mGraphics->draw(3, sf::Vector2f(0, 0));
+		glPushMatrix();
+			mGraphics->draw(3, sf::Vector2f(0, 0), sf::Vector2f(0, 0), sf::Vector2f(200/1500.0f, 1000/1600.0f));
+		glPopMatrix();
 
 		// Status Left
-		glPushMatrix();
+		/*glPushMatrix();
 			glScaled(15/40.0, 15/40.0, 1);
 				glScaled(1/15.0, 1/15.0, 1);
 					glTranslated(1, 25, 0);
 				glScaled(15.0, 15.0, 1);
 			mGraphics->draw(3, sf::Vector2f(0, 0));
-		glPopMatrix();
+		glPopMatrix();*/
 
 		// Upgrades
 		glPushMatrix();
@@ -66,62 +68,61 @@ void IshavsfiskeGame::mDrawUI(float time, float deltaTime)
 					glScaled(1/3.0, 1/3.0, 1);
 						glTranslated(0, 3, 0);
 					glScaled(3.0, 3.0, 1);
-				mGraphics->draw(3, sf::Vector2f(0, 0));
+				mGraphics->draw(3, sf::Vector2f(0, 0), sf::Vector2f(560/1500.0f, 150/1600.0f), sf::Vector2f(150/1500.0f, 75/1600.0f));
 			}
 		glPopMatrix();
 
 		//Right UI
 		glPushMatrix();
 			glTranslated(14/10.0, 0, 0);
-			glScaled(-1, 1, 1);
-			mGraphics->draw(3, sf::Vector2f(1, 0));
+			mGraphics->draw(3, sf::Vector2f(0, 0), sf::Vector2f(200/1500.0f, 0), sf::Vector2f(200/1500.0f, 1000/1600.0f));
 		glPopMatrix();
 
-		// Status Right
-		glPushMatrix();
-			glScaled(15/40.0, 15/40.0, 1);
-				glScaled(1/15.0, 1/15.0, 1);
-					glTranslated(14*4 + 1, 25, 0);
-				glScaled(15.0, 15.0, 1);
-			mGraphics->draw(3, sf::Vector2f(0, 0));
-		glPopMatrix();
+		//// Status Right
+		//glPushMatrix();
+		//	glScaled(15/40.0, 15/40.0, 1);
+		//		glScaled(1/15.0, 1/15.0, 1);
+		//			glTranslated(14*4 + 1, 25, 0);
+		//		glScaled(15.0, 15.0, 1);
+		//	mGraphics->draw(3, sf::Vector2f(0, 0));
+		//glPopMatrix();
 
-		//Fish Counter
-		glPushMatrix();
-			glScaled(1/20.0, 1/20.0, 1);
-			glTranslated(6, 1/2.0, 0);
-			mGraphics->draw(3, sf::Vector2f(0, 0));
-		glPopMatrix();
+		////Fish Counter
+		//glPushMatrix();
+		//	glScaled(1/20.0, 1/20.0, 1);
+		//	glTranslated(6, 1/2.0, 0);
+		//	mGraphics->draw(3, sf::Vector2f(0, 0));
+		//glPopMatrix();
 
-		//Timer
-		glPushMatrix();
-			glScaled(1/20.0, 1/20.0, 1);
-			glTranslated(14, 1/2.0, 0);
-			mGraphics->draw(3, sf::Vector2f(0, 0));
-		glPopMatrix();
+		////Timer
+		//glPushMatrix();
+		//	glScaled(1/20.0, 1/20.0, 1);
+		//	glTranslated(14, 1/2.0, 0);
+		//	mGraphics->draw(3, sf::Vector2f(0, 0));
+		//glPopMatrix();
 
-		//Cash
-		glPushMatrix();
-			glScaled(1/20.0, 1/20.0, 1);
-			glTranslated(22, 1/2.0, 0);
-			mGraphics->draw(3, sf::Vector2f(0, 0));
-		glPopMatrix();
+		////Cash
+		//glPushMatrix();
+		//	glScaled(1/20.0, 1/20.0, 1);
+		//	glTranslated(22, 1/2.0, 0);
+		//	mGraphics->draw(3, sf::Vector2f(0, 0));
+		//glPopMatrix();
 
-		//Menu button
-		glPushMatrix();
+		////Menu button
+		/*glPushMatrix();
 			glScaled(3/20.0, 3/20.0, 1);
 			glScaled(1/3.0, 1/3.0, 1);
 				glTranslated(4, 17, 0);
 			glScaled(3, 3, 1);
-			mGraphics->draw(3, sf::Vector2f(0, 0));
-		glPopMatrix();
+			mGraphics->draw(3, sf::Vector2f(0, 0), sf::Vector2f(400/1500.0f, 0), sf::Vector2f(150/1500.0f, 150/1600.0f));
+		glPopMatrix();*/
 
-		//Wind Flag
-		glPushMatrix();
-			glScaled(1/10.0, 1/10.0, 1);
-			glTranslated(13, 9, 0);
-			mGraphics->draw(3, sf::Vector2f(0, 0));
-		glPopMatrix();
+		////Wind Flag
+		//glPushMatrix();
+		//	glScaled(1/10.0, 1/10.0, 1);
+		//	glTranslated(13, 9, 0);
+		//	mGraphics->draw(3, sf::Vector2f(0, 0));
+		//glPopMatrix();
 
 		char *s = new char[32];
 		sprintf_s(s, 32, "FPS: %03.0f", fps);

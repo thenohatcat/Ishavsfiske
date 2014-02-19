@@ -38,11 +38,18 @@ void Ishavsfiske::Ship::mInit()
 	mShipRoot = new Node(id + 0x0004, mRootRotation);
 }
 
-void Ishavsfiske::Ship::move(float x, float y)
+void Ishavsfiske::Ship::move(float x, float y, bool global)
 {	
-	Rotation r(0, mRootRotation->getRotation());
-	sf::Vector2f tv = r.transform(sf::Vector2f(5*x, 5*y));
-	mRootTranslation->translate(tv);
+	if (global)
+	{
+		mRootTranslation->translate(x, y);
+	}
+	else
+	{
+		Rotation r(0, mRootRotation->getRotation());
+		sf::Vector2f tv = r.transform(sf::Vector2f(5*x, 5*y));
+		mRootTranslation->translate(tv);
+	}
 }
 
 void Ishavsfiske::Ship::throttle(float vx, float vy)
