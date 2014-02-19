@@ -35,6 +35,8 @@ private:
 	sf::Vector2i mPos;
 	void mUpdateMap();
 	bool isBorderIce(int x, int y);
+
+	MapNode *mMapNodes[24 * 20];
 };
 
 #else

@@ -72,7 +72,7 @@ void Map::mInit()
 		for(int x = 0; x < 24; x++)
 		{
 			Angler::Nodes::Translation *col = new Angler::Nodes::Translation(0, row, x, 0);
-			new MapNode(0x80010000 + x + y * 24, col, mParent, 0);
+			mMapNodes[x + y * 24] = new MapNode(0x80010000 + x + y * 24, col, mParent, 0);
 		}
 	}
 	mUpdateMap();
@@ -95,7 +95,7 @@ void Map::genMap(int lvl)
 						mMap[x + y * 48] = 0x10;
 				}
 				if (x >= 2 && x <= 5 && y >= 2 && y <= 5)
-					mMap[x + y * 48] = 0;
+					mMap[x + y * 48] = 0x10;
 				else
 					mMap[x + y * 48] = 0;
 			}
@@ -173,8 +173,7 @@ void Map::mUpdateMap()
 	for(int y = 0; y < 20; y++)
 		for(int x = 0; x < 24; x++)
 		{
-			MapNode *n = (MapNode *)Angler::HelpFunctions::Nodes::getNode(0x80010000 + x + y * 24, this);
-			n->setTile(mMap[(x + mPos.x) + (y + mPos.y) * 48]);
+			mMapNodes[x + y * 24]->setTile(mMap[(x + mPos.x) + (y + mPos.y) * 48]);
 		}
 }
 
