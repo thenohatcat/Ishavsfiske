@@ -89,10 +89,10 @@ void Map::genMap(int lvl)
 			{
 				if (y == 0 || x == 0 ||x == 23 || y == 19)
 				{
-					mMap[x + y * 48] = 1;
+					mMap[x + y * 48] = 0x10;
 				}
 				else if (x >= 2 && x <= 5 && y >= 2 && y <= 5)
-					mMap[x + y * 48] = 1;
+					mMap[x + y * 48] = 0;
 				else
 					mMap[x + y * 48] = 0;
 			}
@@ -105,7 +105,7 @@ void Map::genMap(int lvl)
 			{
 				if (x == y)
 				{
-					mMap[x + y * 48] = 1;
+					mMap[x + y * 48] = 0x10;
 				}
 				else
 					mMap[x + y * 48] = 0;
@@ -116,13 +116,21 @@ void Map::genMap(int lvl)
 		for(int y = 0; y < 20; y++)
 			for(int x = 0; x < 24; x++)
 			{
-				mMap[x + y * 48] = randomValue(2);
+				switch(randomValue(2))
+				{
+				case 0:
+					mMap[x + y * 48] = 0;
+					break;
+				case 1:
+					mMap[x + y * 48] = 0x10;
+					break;
 				/*if(mMap[x + y * 48] == 1)
 				{
 					mMap[x - 1 + y * 48] = 1;
 					mMap[x + y - 1 * 48] = 1;
 					mMap[x + 1 + y * 48] = 1;
 					mMap[x + y + 1 * 48] = 1;*/
+				}
 			}
 		/*srand();*/
 		break;

@@ -57,5 +57,5 @@ int MapNode::getTile()
 void MapNode::setTile(int tileID)
 {
 	mTile = tileID;
-	mSprite->setCropOrigin(0, 0.5 * mTile);
+	mSprite->setCropOrigin((mTile % 2) * 0.5, (mTile / 2) * 0.5);
 }
