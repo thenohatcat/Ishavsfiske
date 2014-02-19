@@ -32,6 +32,9 @@ namespace Ishavsfiske
 
 		void revert();
 
+		sf::Vector2f getPosition();
+		float getRotation();
+
 		sf::Vector2f getVelocity();
 	protected:
 		Angler::Game *mOwner;

@@ -39,6 +39,9 @@ void Ishavsfiske::IshavsfiskeGame::mUpdate(float time, float deltaTime)
 	//Handle Input
 	mInput(time, deltaTime);
 
+	float dx, dy;
+	
+
 	//Collision system collide
 	mMechanics->doCollide(mSceneRoot);
 }

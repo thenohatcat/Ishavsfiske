@@ -92,3 +92,13 @@ sf::Vector2f Ishavsfiske::Ship::getVelocity()
 {
 	return sf::Vector2f(mVel);
 }
+
+sf::Vector2f Ishavsfiske::Ship::getPosition()
+{
+	return mRootTranslation->getTranslation();
+}
+
+float Ishavsfiske::Ship::getRotation()
+{
+	return mRootRotation->getRotation();
+}
