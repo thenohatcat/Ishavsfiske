@@ -39,7 +39,7 @@ void Ishavsfiske::IshavsfiskeGame::mLoadContent()
 	mEngineBuff->loadFromFile("Motor_Collage_Test.wav");
 	mEngineSound->setBuffer(*mEngineBuff);
 	
-	mSound->playSound(mEngineSound, false, 0, 1.0f, true);
+	mSound->playSound(mEngineSound, false, 0, 1.46f, true);
 
 	mGraphics->getLayer(0)->setTexture(mTXMap);
 	mGraphics->getLayer(1)->setTexture(mTXShips);
