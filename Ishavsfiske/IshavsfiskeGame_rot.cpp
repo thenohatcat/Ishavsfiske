@@ -1,9 +1,9 @@
-//Version: 0.1.3
+//Version: 0.1.4
 //Author: Jakob Pipping
 //Contributors: 
 
-#ifndef ISHAV_0_1_3
-#error IshavsfiskeGame_rot.cpp: Wrong version 0.1.3
+#ifndef ISHAV_0_1_4
+#error IshavsfiskeGame_rot.cpp: Wrong version 0.1.4
 #endif
 
 #include "IshavsfiskeGame.h"
@@ -22,8 +22,7 @@ using namespace Angler::Mechanics;
 using namespace Angler::Sound;
 
 IshavsfiskeGame::IshavsfiskeGame()
-	: Game(), mMechanics(new MechanicsEngine(this)), 
-	mSound(new SoundEngine(this))
+	: Game()
 {
 	mTitle = "Ishavsfiske v0.1.3";
 	mNumLayers = 8;

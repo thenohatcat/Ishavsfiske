@@ -1,9 +1,9 @@
-//Version: 0.1.3
+//Version: 0.1.4
 //Author: Jakob Pipping
 //Contributors: 
 
-#ifndef ISHAV_0_1_3
-#error FishingBoat.cpp: Wrong version 0.1.3
+#ifndef ISHAV_0_1_4
+#error FishingBoat.cpp: Wrong version 0.1.4
 #endif
 
 #include "FishingBoat.h"
@@ -37,20 +37,20 @@ void FishingBoat::mInit()
 	new Angler::Nodes::DrawNode(getID() + 0x0101, s, 1, 0.5, 0.5);
 
 	std::vector<sf::Vector2f> pts;
-	pts.push_back(sf::Vector2f(1.5/2.5*(-0.5 + (37.5 / 75.0)), -0.5 + (-2 / 125.0)));
-	pts.push_back(sf::Vector2f(1.5/2.5*(-0.5 + (29 / 75.0)), -0.5 + (2 / 125.0)));
-	pts.push_back(sf::Vector2f(1.5/2.5*(-0.5 + (23 / 75.0)), -0.5 + (8 / 125.0)));
-	pts.push_back(sf::Vector2f(1.5/2.5*(-0.5 + (12 / 75.0)), -0.5 + (32 / 125.0)));
-	pts.push_back(sf::Vector2f(1.5/2.5*(-0.5 + (12 / 75.0)), -0.5 + (69 / 125.0)));
-	pts.push_back(sf::Vector2f(1.5/2.5*(-0.5 + (17 / 75.0)), -0.5 + (103 / 125.0)));
-	pts.push_back(sf::Vector2f(1.5/2.5*(-0.5 + (18 / 75.0)), -0.5 + (125 / 125.0)));
+	pts.push_back(sf::Vector2f(1.5/2.5*(-0.5f + (37.5f / 75.0f)), -0.5f + (-2 / 125.0f)));
+	pts.push_back(sf::Vector2f(1.5/2.5*(-0.5f + (29 / 75.0f)), -0.5f + (2 / 125.0f)));
+	pts.push_back(sf::Vector2f(1.5/2.5*(-0.5f + (23 / 75.0f)), -0.5f + (8 / 125.0f)));
+	pts.push_back(sf::Vector2f(1.5/2.5*(-0.5f + (12 / 75.0f)), -0.5f + (32 / 125.0f)));
+	pts.push_back(sf::Vector2f(1.5/2.5*(-0.5f + (12 / 75.0f)), -0.5f + (69 / 125.0f)));
+	pts.push_back(sf::Vector2f(1.5/2.5*(-0.5f + (17 / 75.0f)), -0.5f + (103 / 125.0f)));
+	pts.push_back(sf::Vector2f(1.5/2.5*(-0.5f + (18 / 75.0f)), -0.5f + (125 / 125.0f)));
 
-	pts.push_back(sf::Vector2f(1.5/2.5*(-0.5 + (56 / 75.0)), -0.5 + (125 / 125.0)));
-	pts.push_back(sf::Vector2f(1.5/2.5*(-0.5 + (57 / 75.0)), -0.5 + (103 / 125.0)));
-	pts.push_back(sf::Vector2f(1.5/2.5*(-0.5 + (62 / 75.0)), -0.5 + (69 / 125.0)));
-	pts.push_back(sf::Vector2f(1.5/2.5*(-0.5 + (62 / 75.0)), -0.5 + (32 / 125.0)));
-	pts.push_back(sf::Vector2f(1.5/2.5*(-0.5 + (51 / 75.0)), -0.5 + (8 / 125.0)));
-	pts.push_back(sf::Vector2f(1.5/2.5*(-0.5 + (45 / 75.0)), -0.5 + (2 / 125.0)));
+	pts.push_back(sf::Vector2f(1.5/2.5*(-0.5f + (56 / 75.0f)), -0.5f + (125 / 125.0f)));
+	pts.push_back(sf::Vector2f(1.5/2.5*(-0.5f + (57 / 75.0f)), -0.5f + (103 / 125.0f)));
+	pts.push_back(sf::Vector2f(1.5/2.5*(-0.5f + (62 / 75.0f)), -0.5f + (69 / 125.0f)));
+	pts.push_back(sf::Vector2f(1.5/2.5*(-0.5f + (62 / 75.0f)), -0.5f + (32 / 125.0f)));
+	pts.push_back(sf::Vector2f(1.5/2.5*(-0.5f + (51 / 75.0f)), -0.5f + (8 / 125.0f)));
+	pts.push_back(sf::Vector2f(1.5/2.5*(-0.5f + (45 / 75.0f)), -0.5f + (2 / 125.0f)));
 	/*pts.push_back(sf::Vector2f(-(2/3.5 * 0.5), -0.5));
 	pts.push_back(sf::Vector2f(2/3.5 * 0.5, -0.5));
 	pts.push_back(sf::Vector2f(2/3.5 * 0.5, 0.5));
@@ -58,16 +58,16 @@ void FishingBoat::mInit()
 	new Angler::Nodes::CollisionNode(getID() + 0x0102, s, pts, 0);
 
 	Angler::Nodes::Translation *craneT = new Angler::Nodes::Translation(getID() + 0x0103, mShipRoot, 
-		2.5/20 * 1.5/2.5*(-0.5+0.506), 2.5/20 * (-0.5+0.672));
-	Angler::Nodes::Scale *craneS = new Angler::Nodes::Scale(getID() + 0x0104, craneT, 1.0/20, 1.0/20);
+		2.5f/20.0f * 1.5f/2.5f*(-0.5f+0.506f), 2.5f/20.0f * (-0.5+0.672f));
+	Angler::Nodes::Scale *craneS = new Angler::Nodes::Scale(getID() + 0x0104, craneT, 1/20.0f, 1/20.0f);
 	mCraneRotation = new Angler::Nodes::Rotation(getID() + 0x0105, craneS, 0);
-	new Angler::Nodes::DrawNode(getID() + 0x0106, mCraneRotation, 2, 2/3.0*0.075, 0.5);
+	new Angler::Nodes::DrawNode(getID() + 0x0106, mCraneRotation, 2, 2.0f/3.0f*0.075f, 0.5);
 
 	Angler::Nodes::Translation *lampT = new Angler::Nodes::Translation(getID() + 0x0103, mShipRoot, 
-		2.5/20 * 1.5/2.5 * (-0.5+0.586), 2.5/20 * (-0.5+0.304));
-	Angler::Nodes::Scale *lampS = new Angler::Nodes::Scale(getID() + 0x0104, lampT, 1.0/40, 1.0/40);
+		2.5f/20.0f * 1.5f/2.5f * (-0.5f+0.586f), 2.5f/20.0f * (-0.5f+0.304f));
+	Angler::Nodes::Scale *lampS = new Angler::Nodes::Scale(getID() + 0x0104, lampT, 1.0f/40.0f, 1.0f/40.0f);
 	mLampRotation = new Angler::Nodes::Rotation(getID() + 0x0105, lampS, 0);
-	new Angler::Nodes::DrawNode(getID() + 0x0106, mLampRotation, 2, 0.5, 0.5);
+	new Angler::Nodes::DrawNode(getID() + 0x0106, mLampRotation, 2, 0.5f, 0.5f);
 }
 
 void FishingBoat::update(Angler::Game *context, float time, float deltaTime, bool changed)

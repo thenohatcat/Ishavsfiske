@@ -1,9 +1,9 @@
-//Version: 0.1.3
+//Version: 0.1.4
 //Author: Jakob Pipping
 //Contributors: 
 
-#ifndef ISHAV_0_1_3
-#error IshavsfiskeGame_draw.cpp: Wrong version 0.1.3
+#ifndef ISHAV_0_1_4
+#error IshavsfiskeGame_draw.cpp: Wrong version 0.1.4
 #endif
 
 #include "IshavsfiskeGame.h"
@@ -126,7 +126,7 @@ void IshavsfiskeGame::mDrawUI(float time, float deltaTime)
 		char *s = new char[32];
 		sprintf_s(s, 32, "FPS: %03.0f", fps);
 		mFont->drawString(mGraphics, "Ishavsfiske 0.1.3", 4, 1);
-		glTranslatef(0, 1/40.0, 0);
+		glTranslatef(0, 1/40.0f, 0);
 		mFont->drawString(mGraphics, std::string(s), 4, 1);
 	glPopMatrix();
 }

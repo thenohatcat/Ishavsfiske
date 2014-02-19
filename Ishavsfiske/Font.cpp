@@ -1,11 +1,11 @@
-//Version: 0.1.3
+//Version: 0.1.4
 //Author: Marcus Persson
 //Contributors: 
 
 #include "Font.h"
 
-#ifndef ISHAV_0_1_3
-#error Font.cpp: Wrong version 0.1.3
+#ifndef ISHAV_0_1_4
+#error Font.cpp: Wrong version 0.1.4
 #endif
 
 Font::Font()
@@ -43,4 +43,21 @@ void Font::loadDistance()
 		else
 			rightDistance[k] = 1;
 	}
+}
+
+float Font::getWidth(char c)
+{
+	return rightDistance[c] - leftDistance[c];
+}
+
+float Font::getWidth(std::string s)
+{
+	float width = 0.0;
+
+	for(int i = 0; i < s.length(); i++)
+	{
+		width += getWidth(s[i]);
+	}
+
+	return width;
 }
