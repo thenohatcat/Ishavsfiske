@@ -20,27 +20,34 @@ void Ishavsfiske::IshavsfiskeGame::collide(Angler::Node *nodeA, Angler::Node *no
 		{
 			int indx = nodeB->getID()& 0xFFF;
 			if(mMap->getTile(indx) >= 0x10 && mMap->getTile(indx) <= 0x1F)
+			{
+				mShipBreaker->revert();
+				mSound->playSound(mCollIceSound);
 				mMap->setTile(indx, 0);
 #ifdef _DEBUG
 			printf("Icebreaker collide with ice\n");
 #endif
+			}
 		}
 		//ice and fishingboat
 		if(nodeA->getID() >= 0x00010000 && nodeA->getID() <= 0x0001FFFF)
 		{
 			int indx = nodeB->getID()& 0xFFF;
 			if(mMap->getTile(indx) >= 0x10 && mMap->getTile(indx) <= 0x1F)
+			{
 				mShipFishing->revert();
+				mSound->playSound(mCollFishingSound);
+			}
 		}	
 	}
 	//if mShipFishing collides
 	if((nodeA->getID() >= 0x00010000 && nodeA->getID() <= 0x0001FFFF) || (nodeB->getID() >= 0x00010000 && nodeB->getID() <= 0x0001FFFF))
 	{
-		mSound->playSound(mCollFishingSound);
 		//Fishingboat and iceBreaker
 		if(nodeB->getID() >= 0x00020000 && nodeB->getID() <= 0x0002FFFF)
 		{
-		mShipFishing->revert();
+			mShipFishing->revert();
+			mSound->playSound(mCollFishingSound);
 #ifdef _DEBUG
 			printf("Fishingboat and Icebreaker collided\n");
 #endif
@@ -49,11 +56,11 @@ void Ishavsfiske::IshavsfiskeGame::collide(Angler::Node *nodeA, Angler::Node *no
 	
 	if((nodeA->getID() >= 0x00020000 && nodeA->getID() <= 0x0002FFFF) || (nodeB->getID() >= 0x00020000 && nodeB->getID() <= 0x0002FFFF))
 	{
-		mSound->playSound(mCollBreakerSound);
 		//icebreaker and fishinboat
 		if (nodeA->getID() >= 0x00010000 && nodeA->getID() <= 0x0001FFFF)
 		{
 			mShipBreaker->revert();
+			mSound->playSound(mCollBreakerSound);
 		}
 	}
 }
