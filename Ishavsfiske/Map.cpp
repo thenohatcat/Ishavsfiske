@@ -88,14 +88,13 @@ void Map::genMap(int lvl)
 			for(int x = 0; x < 24; x++)
 			{
 				if (y == 0 || x == 0 ||x == 23 || y == 19)
-				{/*
-					if(isBorderIce(x, y))
-						mMap[x + y * 48] = 0x11;
-					else*/
-						mMap[x + y * 48] = 0x10;
-				}
-				if (x >= 2 && x <= 5 && y >= 2 && y <= 5)
+				{
 					mMap[x + y * 48] = 0x10;
+				}
+				else if (x >= 2 && x <= 5 && y >= 2 && y <= 5)
+				{
+					mMap[x + y * 48] = 0x10;
+				}
 				else
 					mMap[x + y * 48] = 0;
 			}
@@ -173,12 +172,55 @@ void Map::mUpdateMap()
 	for(int y = 0; y < 20; y++)
 		for(int x = 0; x < 24; x++)
 		{
+			if(isWater(x, y) && mMap[x + y * 48] == 0x10)
+			{
+				mMap[x + y * 48] = 0x11;
+			}
 			mMapNodes[x + y * 24]->setTile(mMap[(x + mPos.x) + (y + mPos.y) * 48]);
 		}
 }
 
-bool Map::isBorderIce(int x, int y)
+bool Map::isWater(int x, int y)
 {
-	return mMap[x-1 + y-1 * 48] == 0 || mMap[x + y-1 * 48] == 0 || mMap[x+1 + y-1 * 48] == 0 || mMap[x-1 + y * 48] == 0
-		|| mMap[x+1 + y * 48] == 0 || mMap[x-1 + y+1 * 48] == 0 || mMap[x + y+1 * 48] == 0 || mMap[x+1 + y+1 * 48] == 0;
+	return isWaterTop(x, y) || isWaterBot(x, y) || isWaterLeft(x, y) || isWaterRight(x, y) || isWaterTopRight(x, y), isWaterTopLeft(x, y), isWaterBotLeft(x, y), isWaterBotRight(x, y);
+}
+
+bool Map::isWaterTop(int x, int y)
+{
+	return mMap[x + (y-1) * 48] == 0;
+}
+
+bool Map::isWaterRight(int x, int y)
+{
+	return mMap[(x+1) + y * 48] == 0;
+}
+
+bool Map::isWaterLeft(int x, int y)
+{
+	return mMap[(x-1) + y * 48] == 0;
+}
+
+bool Map::isWaterBot(int x, int y)
+{
+	return mMap[x + (y+1) * 48] == 0;
+}
+
+bool Map::isWaterTopLeft(int x, int y)
+{
+	return mMap[(x-1) + (y-1) * 48] == 0;
+}
+
+bool Map::isWaterTopRight(int x, int y)
+{
+	return mMap[(x+1) + (y-1) * 48] == 0;
+}
+
+bool Map::isWaterBotLeft(int x, int y)
+{
+	return mMap[(x-1) + (y+1) * 48] == 0;
+}
+
+bool Map::isWaterBotRight(int x, int y)
+{
+	return mMap[(x+1) + (y+1) * 48] == 0;
 }

@@ -35,6 +35,9 @@ private:
 	sf::Vector2i mPos;
 	void mUpdateMap();
 	bool isBorderIce(int x, int y);
+	bool isBorder(int x, int y);
+	bool isWater(int x, int y), isWaterTop(int x, int y), isWaterRight(int x, int y), isWaterLeft(int x, int y), isWaterBot(int x, int y),
+		isWaterTopLeft(int x, int y), isWaterTopRight(int x, int y), isWaterBotLeft(int x, int y), isWaterBotRight(int x, int y);
 
 	MapNode *mMapNodes[24 * 20];
 };
