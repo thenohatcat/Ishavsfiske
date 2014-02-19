@@ -32,7 +32,6 @@ protected:
 private:
 	int mMap [48 * 40];
 	Angler::Game *mParent;
-	int mTile;
 	sf::Vector2i mPos;
 	void mUpdateMap();
 };

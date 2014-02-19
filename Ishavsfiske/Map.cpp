@@ -64,21 +64,6 @@ Map::Map(unsigned long id, Angler::Node *parent, Angler::Game *owner, int lvl)
 
 void Map::mInit()
 {
-	// Draw map
-
-	/*Angler::Nodes::Scale *s = new Angler::Nodes::Scale(0, this, 1/20.0, 1/20.0);
-	Angler::Nodes::Translation *t = new Angler::Nodes::Translation(0, s, 4.5, 0.5);
-	for(int y = 0; y < 20; y++)
-	{
-		Angler::Nodes::Translation *row = new Angler::Nodes::Translation(0, t, 0, y);
-		for(int x = 0; x < 24; x++)
-		{
-			Angler::Nodes::Translation *col = new Angler::Nodes::Translation(0, row, x, 0);
-			new MapNode(0, col, mTXMap, mParent, x == y);
-		}
-	}*/
-
-
 	Angler::Nodes::Scale *s = new Angler::Nodes::Scale(0, this, 1/20.0, 1/20.0);
 	Angler::Nodes::Translation *t = new Angler::Nodes::Translation(0, s, 4, 0);
 	for(int y = 0; y < 20; y++)
@@ -88,9 +73,6 @@ void Map::mInit()
 		{
 			Angler::Nodes::Translation *col = new Angler::Nodes::Translation(0, row, x, 0);
 			new MapNode(0x80010000 + x + y * 24, col, mParent, 0);
-
-			
-			/*std::cout << mMap[x][y] << std::endl;*/
 		}
 	}
 	mUpdateMap();
@@ -127,6 +109,20 @@ void Map::genMap(int lvl)
 					mMap[x + y * 48] = 1;
 			}
 		}
+		break;
+	case 3:
+		for(int y = 0; y < 20; y++)
+			for(int x = 0; x < 24; x++)
+			{
+				mMap[x + y * 48] = randomValue(2);
+				/*if(mMap[x + y * 48] == 1)
+				{
+					mMap[x - 1 + y * 48] = 1;
+					mMap[x + y - 1 * 48] = 1;
+					mMap[x + 1 + y * 48] = 1;
+					mMap[x + y + 1 * 48] = 1;*/
+			}
+		/*srand();*/
 		break;
 	}
 }
