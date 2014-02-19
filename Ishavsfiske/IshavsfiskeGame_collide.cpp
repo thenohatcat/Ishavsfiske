@@ -13,25 +13,47 @@
 
 void Ishavsfiske::IshavsfiskeGame::collide(Angler::Node *nodeA, Angler::Node *nodeB)
 {
-	//if mShipFishing collides
-	if(nodeA->getID() >= 0x00010000 && nodeA->getID() <= 0x0001FFFF || nodeB->getID() >= 0x00010000 && nodeB->getID() <= 0x0001FFFF)
+	if((nodeA->getID() >= 0x80012000 && nodeA->getID() <= 0x80013000) || (nodeB->getID() >= 0x80012000 && nodeB->getID() <= 0x80013000))
 	{
-		mShipFishing->revert();
-		mSound->playSound(mCollFishingSound);
+		//ice and icebreaker
+		if(nodeA->getID() >= 0x00020000 && nodeA->getID() <= 0x0002FFFF)
+		{
+			int indx = nodeB->getID()& 0xFFF;
+			if(mMap->getTile(indx) >= 0x10 && mMap->getTile(indx) <= 0x1F)
+				mMap->setTile(indx, 0);
 #ifdef _DEBUG
-		//What mShipFishing collides with
-		if(nodeA->getID() >= 0x00020000 && nodeA->getID() <= 0x0002FFFF || nodeB->getID() >= 0x00020000 && nodeB->getID() <= 0x0002FFFF)
-			printf("Fishingboat collided with Icebreaker\n");
+			printf("Icebreaker collide with ice\n");
 #endif
+		}
+		//ice and fishingboat
+		if(nodeA->getID() >= 0x00010000 && nodeA->getID() <= 0x0001FFFF)
+		{
+			int indx = nodeB->getID()& 0xFFF;
+			if(mMap->getTile(indx) >= 0x10 && mMap->getTile(indx) <= 0x1F)
+				mShipFishing->revert();
+		}	
+	}
+	//if mShipFishing collides
+	if((nodeA->getID() >= 0x00010000 && nodeA->getID() <= 0x0001FFFF) || (nodeB->getID() >= 0x00010000 && nodeB->getID() <= 0x0001FFFF))
+	{
+		mSound->playSound(mCollFishingSound);
+		//Fishingboat and iceBreaker
+		if(nodeB->getID() >= 0x00020000 && nodeB->getID() <= 0x0002FFFF)
+		{
+		mShipFishing->revert();
+#ifdef _DEBUG
+			printf("Fishingboat and Icebreaker collided\n");
+#endif
+		}
 	}
 	
-	if(nodeA->getID() >= 0x00020000 && nodeA->getID() <= 0x0002FFFF || nodeB->getID() >= 0x00020000 && nodeB->getID() <= 0x0002FFFF)
+	if((nodeA->getID() >= 0x00020000 && nodeA->getID() <= 0x0002FFFF) || (nodeB->getID() >= 0x00020000 && nodeB->getID() <= 0x0002FFFF))
 	{
-		mShipBreaker->revert();
 		mSound->playSound(mCollBreakerSound);
-#ifdef _DEBUG
-		if (nodeA->getID() >= 0x00010000 && nodeA->getID() <= 0x0001FFFF || nodeB->getID() >= 0x00010000 && nodeB->getID() <= 0x0001FFFF)
-			printf("Icebreaker collided with Fishingboat\n");
-#endif
+		//icebreaker and fishinboat
+		if (nodeA->getID() >= 0x00010000 && nodeA->getID() <= 0x0001FFFF)
+		{
+			mShipBreaker->revert();
+		}
 	}
 }
