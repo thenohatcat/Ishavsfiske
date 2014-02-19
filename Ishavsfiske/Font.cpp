@@ -10,12 +10,11 @@
 
 Font::Font()
 {
-	//loadDistance();
+	loadDistance();
 }
 
 void Font::drawString(Angler::Graphics::GraphicsEngine* graphics, std::string st, int layer, float size)
 {
-	loadDistance();
 	glPushMatrix();
 	glScalef(size*(1/40.0), size*(1/40.0), 1);
 	for(std::string::size_type i = 0; i < st.length(); i++)
