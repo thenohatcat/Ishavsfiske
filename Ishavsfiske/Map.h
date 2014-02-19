@@ -34,6 +34,7 @@ private:
 	Angler::Game *mParent;
 	sf::Vector2i mPos;
 	void mUpdateMap();
+	bool isBorderIce(int x, int y);
 };
 
 #else

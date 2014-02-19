@@ -88,10 +88,13 @@ void Map::genMap(int lvl)
 			for(int x = 0; x < 24; x++)
 			{
 				if (y == 0 || x == 0 ||x == 23 || y == 19)
-				{
-					mMap[x + y * 48] = 0x10;
+				{/*
+					if(isBorderIce(x, y))
+						mMap[x + y * 48] = 0x11;
+					else*/
+						mMap[x + y * 48] = 0x10;
 				}
-				else if (x >= 2 && x <= 5 && y >= 2 && y <= 5)
+				if (x >= 2 && x <= 5 && y >= 2 && y <= 5)
 					mMap[x + y * 48] = 0;
 				else
 					mMap[x + y * 48] = 0;
@@ -173,4 +176,10 @@ void Map::mUpdateMap()
 			MapNode *n = (MapNode *)Angler::HelpFunctions::Nodes::getNode(0x80010000 + x + y * 24, this);
 			n->setTile(mMap[(x + mPos.x) + (y + mPos.y) * 48]);
 		}
+}
+
+bool Map::isBorderIce(int x, int y)
+{
+	return mMap[x-1 + y-1 * 48] == 0 || mMap[x + y-1 * 48] == 0 || mMap[x+1 + y-1 * 48] == 0 || mMap[x-1 + y * 48] == 0
+		|| mMap[x+1 + y * 48] == 0 || mMap[x-1 + y+1 * 48] == 0 || mMap[x + y+1 * 48] == 0 || mMap[x+1 + y+1 * 48] == 0;
 }
