@@ -50,14 +50,13 @@ void Ishavsfiske::IshavsfiskeGame::mMoveFrame(float dx, float dy)
 	{
 		mShipBreaker->move((floor(lastX) - floor(mx))/20.0f, 0, true);
 		mShipFishing->move((floor(lastX) - floor(mx))/20.0f, 0, true);
+		mMap->setPos(sf::Vector2i((int)mx, (int)my));
 	}
-
-	mMap->setPos(sf::Vector2i((int)mx, (int)my));
 
 	lastX = mx;
 	lastY = my;
 
-	printf("Vel: {%03f, %03f}\n", mx, my);
+	//printf("Vel: {%03f, %03f}\n", mx, my);
 }
 
 void Ishavsfiske::IshavsfiskeGame::mUpdate(float time, float deltaTime)

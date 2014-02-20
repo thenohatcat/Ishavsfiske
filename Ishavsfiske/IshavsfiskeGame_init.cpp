@@ -42,9 +42,12 @@ void Ishavsfiske::IshavsfiskeGame::mLoadContent()
 	
 	mSound->playSound(mEngineSound, false, 0, 1.46f, true);
 
-	mGraphics->getLayer(0)->setTexture(mTXMap);
-	mGraphics->getLayer(1)->setTexture(mTXShips);
-	mGraphics->getLayer(2)->setTexture(mTXShips);
+	//mGraphics->getLayer(0)->setTexture(mTXMap);
+	mGraphics->getLayer(0)->setTexture(mTXUI);
+	//mGraphics->getLayer(1)->setTexture(mTXShips);
+	mGraphics->getLayer(1)->setTexture(mTXUI);
+	//mGraphics->getLayer(2)->setTexture(mTXShips);
+	mGraphics->getLayer(2)->setTexture(mTXUI);
 	mGraphics->getLayer(3)->setTexture(mTXUI);
 	mGraphics->getLayer(4)->setTexture(mUIFont);
 }

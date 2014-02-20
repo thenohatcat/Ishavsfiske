@@ -21,11 +21,11 @@ void Ishavsfiske::IshavsfiskeGame::collide(Angler::Node *nodeA, Angler::Node *no
 			int indx = nodeB->getID()& 0xFFF;
 			if(mMap->getTile(indx) >= 0x10 && mMap->getTile(indx) <= 0x1F)
 			{
-				mShipBreaker->revert();
+				//mShipBreaker->revert();
 				mSound->playSound(mCollIceSound);
 				mMap->setTile(indx, 0);
 #ifdef _DEBUG
-			printf("Icebreaker collide with ice\n");
+				printf("Icebreaker collide with ice\n");
 #endif
 			}
 		}

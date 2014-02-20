@@ -108,14 +108,24 @@ void IshavsfiskeGame::mDrawUI(float time, float deltaTime)
 		//	mGraphics->draw(3, sf::Vector2f(0, 0));
 		//glPopMatrix();
 
-		////Menu button
-		/*glPushMatrix();
-			glScaled(3/20.0, 3/20.0, 1);
-			glScaled(1/3.0, 1/3.0, 1);
-				glTranslated(4, 17, 0);
-			glScaled(3, 3, 1);
+		//Menu button
+		glPushMatrix();
+			glScalef(3/20.0f, 3/20.0f, 1.0f);
+			glScalef(1/3.0f, 1/3.0f, 1.0f);
+				glTranslatef(4.0f, 17.0f, 0);
+			glScalef(3.0f, 3.0f, 1.0f);
 			mGraphics->draw(3, sf::Vector2f(0, 0), sf::Vector2f(400/1500.0f, 0), sf::Vector2f(150/1500.0f, 150/1600.0f));
-		glPopMatrix();*/
+		glPopMatrix();
+
+		//Menu needle
+		glPushMatrix();
+			glScalef(3/20.0f, 3/20.0f, 1.0f);
+			glScalef(1/3.0f, 1/3.0f, 1.0f);
+				glTranslatef(5.5f, 18.5f, 0.0f);
+			glScalef(3.0f, 3.0f, 1.0f);
+			glRotatef(time / 1.337f * 360.0f, 0, 0, 1);
+			mGraphics->draw(3, sf::Vector2f(10.0f/20.0f, 55.0f/108.0f), sf::Vector2f(400/1500.0f, 150/1600.0f), sf::Vector2f(20/1500.0f, 108/1600.0f));
+		glPopMatrix();
 
 		////Wind Flag
 		//glPushMatrix();
@@ -150,7 +160,8 @@ void IshavsfiskeGame::mDraw(float time, float deltaTime)
 #ifdef _DEBUG
 #ifdef _DEBUG_COLL
 	tm++;
-	if ((tm % 4) == 0)
+	//if ((tm % 4) == 0)
+	if (1)
 	{
 		tm %= 16;
 

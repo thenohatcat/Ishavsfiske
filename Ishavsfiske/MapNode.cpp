@@ -39,7 +39,7 @@ void MapNode::update(Angler::Game* context, float time, float deltaTime)
 
 void MapNode::mInit()
 {
-	mSprite = new Angler::Nodes::SpriteNode(getID() + 0x1000, this, 0, sf::Vector2f(0, 0), sf::Vector2f(0, 0.5 * mTile), sf::Vector2f(0.5, 0.5));
+	mSprite = new Angler::Nodes::SpriteNode(getID() + 0x1000, this, 0, sf::Vector2f(0, 0), sf::Vector2f(0, 0.5f * mTile), sf::Vector2f(50/1500.0f, 50/1600.0f));
 
 	std::vector<sf::Vector2f> pts;
 	pts.push_back(sf::Vector2f(1, 0));
@@ -60,12 +60,12 @@ void MapNode::setTile(int tileID)
 	switch(mTile)
 	{
 	case 0:
-		mSprite->setCropOrigin(0, 0);
+		mSprite->setCropOrigin(700/1500.0, 0);
 		break;
 	case 0x10:
-		mSprite->setCropOrigin(0.5, 0);
+		mSprite->setCropOrigin(500.0/1500.0f, 625.0/1600.0f);
 		break;
 	case 0x11:
-		mSprite->setCropOrigin(0, 0.5);
+		mSprite->setCropOrigin(450.0/1500.0f, 625.0/1600.0f);
 	}
 }

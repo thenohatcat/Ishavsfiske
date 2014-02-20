@@ -9,6 +9,7 @@
 #include "FishingBoat.h"
 
 #include <Angler\DrawNode.h>
+#include <Angler\SpriteNode.h>
 #include <Angler\Scale.h>
 
 using namespace Ishavsfiske;
@@ -34,7 +35,8 @@ void FishingBoat::mInit()
 
 	Angler::Nodes::Scale *s = new Angler::Nodes::Scale(getID() + 0x0100,
 		mShipRoot, 2.5f/20, 2.5f/20);
-	new Angler::Nodes::DrawNode(getID() + 0x0101, s, 1, 0.5f, 0.5f);
+	//new Angler::Nodes::DrawNode(getID() + 0x0101, s, 1, 0.5f, 0.5f);
+	new Angler::Nodes::SpriteNode(getID() + 0x0101, s, 1, sf::Vector2f(0.5f, 0.5f), sf::Vector2f(430/1500.0f, 225/1600.0f), sf::Vector2f(55/1500.0f, 125/1600.0f));
 
 	std::vector<sf::Vector2f> pts;
 	pts.push_back(sf::Vector2f(1.5f/2.5f*(-0.5f + (37.5f / 75.0f)), -0.5f + (-2 / 125.0f)));
@@ -53,11 +55,21 @@ void FishingBoat::mInit()
 	pts.push_back(sf::Vector2f(1.5f/2.5f*(-0.5f + (45 / 75.0f)), -0.5f + (2 / 125.0f)));
 	new Angler::Nodes::CollisionNode(getID() + 0x0102, s, pts, 0);
 
+	Angler::Nodes::Translation *rightFishT = new Angler::Nodes::Translation(getID() + 0x0200, s, 0.5, 0);
+	std::vector<sf::Vector2f> fishPTS;
+	for (int i = 0; i < 16; i++)
+	{
+		fishPTS.push_back(sf::Vector2f(1/3.0f*cos(i/16.0f * 2*3.14159f), sin(i/16.0f * 2*3.14159f)));
+	}
+	//new Angler::Nodes::CollisionNode(getID() + 0x0201, rightFishT, fishPTS, 0);
+	//new Angler::Nodes::CollisionNode(0x0201, rightFishT, fishPTS, 0);
+
 	Angler::Nodes::Translation *craneT = new Angler::Nodes::Translation(getID() + 0x0103, mShipRoot, 
 		2.5f/20.0f * 1.5f/2.5f*(-0.5f+0.506f), 2.5f/20.0f * (-0.5+0.672f));
-	Angler::Nodes::Scale *craneS = new Angler::Nodes::Scale(getID() + 0x0104, craneT, 1/20.0f, 1/20.0f);
+	Angler::Nodes::Scale *craneS = new Angler::Nodes::Scale(getID() + 0x0104, craneT, 14/1600.0f, 14/1600.0f);
 	mCraneRotation = new Angler::Nodes::Rotation(getID() + 0x0105, craneS, 0);
-	new Angler::Nodes::DrawNode(getID() + 0x0106, mCraneRotation, 2, 2.0f/3.0f*0.075f, 0.5);
+	//new Angler::Nodes::DrawNode(getID() + 0x0106, mCraneRotation, 2, 2.0f/3.0f*0.075f, 0.5);
+	new Angler::Nodes::SpriteNode(getID() + 0x0106, mCraneRotation, 2, sf::Vector2f(0, 0), sf::Vector2f(560/1500.0f, 318/1600.0f), sf::Vector2f(93/1500.0f, 14/1600.0f));
 
 	Angler::Nodes::Translation *lampT = new Angler::Nodes::Translation(getID() + 0x0103, mShipRoot, 
 		2.5f/20.0f * 1.5f/2.5f * (-0.5f+0.586f), 2.5f/20.0f * (-0.5f+0.304f));

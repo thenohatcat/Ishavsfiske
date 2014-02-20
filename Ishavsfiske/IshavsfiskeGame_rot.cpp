@@ -26,8 +26,10 @@ IshavsfiskeGame::IshavsfiskeGame()
 {
 	mTitle = "Ishavsfiske v0.1.3";
 	mNumLayers = 8;
-	mWidth = 1089;
-	mHeight = 687;
+	mWidth = 1600;
+	mHeight = 1000;
+	//mWidth = 1089;
+	//mHeight = 687;
 }
 
 IshavsfiskeGame::~IshavsfiskeGame()
