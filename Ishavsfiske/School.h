@@ -9,7 +9,6 @@
 
 #include <Angler/Node.h>
 #include <Angler/Translation.h>
-#include <Angler/Rotation.h>
 #include <Angler/CollisionNode.h>
 
 namespace Ishavsfiske
@@ -24,8 +23,10 @@ namespace Ishavsfiske
 		School(unsigned long id, Ishavsfiske::IshavsfiskeGame *owner);
 
 		void move(float x, float y);
-		void getPosition();
+
+		sf::Vector2f getPosition();
 		void setPosition(float x, float y);
+
 		int fish(int ammount);
 	protected:
 		Angler::Game *mOwner;
@@ -37,9 +38,6 @@ namespace Ishavsfiske
 		Angler::Node *mSchoolRoot;
 	private:
 		Angler::Nodes::Translation *mRootTranslation;
-		Angler::Nodes::Rotation *mRootRotation;
-
-		sf::Vector2f mVel;
 	};
 }
 #else
