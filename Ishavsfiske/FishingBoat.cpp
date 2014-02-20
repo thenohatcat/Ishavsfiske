@@ -51,10 +51,6 @@ void FishingBoat::mInit()
 	pts.push_back(sf::Vector2f(1.5f/2.5f*(-0.5f + (62 / 75.0f)), -0.5f + (32 / 125.0f)));
 	pts.push_back(sf::Vector2f(1.5f/2.5f*(-0.5f + (51 / 75.0f)), -0.5f + (8 / 125.0f)));
 	pts.push_back(sf::Vector2f(1.5f/2.5f*(-0.5f + (45 / 75.0f)), -0.5f + (2 / 125.0f)));
-	/*pts.push_back(sf::Vector2f(-(2/3.5 * 0.5), -0.5));
-	pts.push_back(sf::Vector2f(2/3.5 * 0.5, -0.5));
-	pts.push_back(sf::Vector2f(2/3.5 * 0.5, 0.5));
-	pts.push_back(sf::Vector2f(-(2/3.5 * 0.5), 0.5));*/
 	new Angler::Nodes::CollisionNode(getID() + 0x0102, s, pts, 0);
 
 	Angler::Nodes::Translation *craneT = new Angler::Nodes::Translation(getID() + 0x0103, mShipRoot, 
@@ -72,7 +68,7 @@ void FishingBoat::mInit()
 
 void FishingBoat::update(Angler::Game *context, float time, float deltaTime, bool changed)
 {
-	mCraneRotation->setRotation(45*sin(time));
+	mCraneRotation->setRotation(90-45*sin(time));
 	mLampRotation->setRotation(90*sin(time));
 
 	Ship::update(context, time, deltaTime, changed);
