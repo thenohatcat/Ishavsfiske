@@ -37,7 +37,7 @@ void IceBreaker::mInit()
 	Angler::Nodes::Scale *s = new Angler::Nodes::Scale(getID() + 0x0100,
 		mShipRoot, 175/1000.0f, 175/1000.0f);
 	//new Angler::Nodes::DrawNode(getID() + 0x0101, s, 1, 0.5f, 0.5f);
-	new Angler::Nodes::SpriteNode(getID() + 0x0101, s, 1, sf::Vector2f(0.5f, 0.5f), sf::Vector2f(422/1500.0f, 350/1600.0f), sf::Vector2f(56/1500.0f, 175/1600.0f));
+	new Angler::Nodes::SpriteNode(getID() + 0x0101, s, 2, sf::Vector2f(0.5f, 0.5f), sf::Vector2f(422/1500.0f, 350/1600.0f), sf::Vector2f(56/1500.0f, 175/1600.0f));
 
 	std::vector<sf::Vector2f> pts;
 	pts.push_back(sf::Vector2f(2/3.5f*(-0.5f + (49.5f / 100.0f)), -0.5f + (-1 / 175.0f)));
