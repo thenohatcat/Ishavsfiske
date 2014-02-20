@@ -56,11 +56,11 @@ void Ishavsfiske::IshavsfiskeGame::collide(Angler::Node *nodeA, Angler::Node *no
 		}
 	}
 	
-//	if((nodeA->getID() >= 0x00020000 && nodeA->getID() <= 0x0002FFFF) || (nodeB->getID() >= 0x00020000 && nodeB->getID() <= 0x0002FFFF))
-//	{
-//		//icebreaker and fishinboat
-//		if (nodeA->getID() >= 0x00010000 && nodeA->getID() <= 0x0001FFFF)
-//		{
-//		}
-//	}
+	//if((nodeA->getID() >= 0x00020000 && nodeA->getID() <= 0x0002FFFF) || (nodeB->getID() >= 0x00020000 && nodeB->getID() <= 0x0002FFFF))
+	//{
+	//	icebreaker and fishinboat
+	//	if (nodeA->getID() >= 0x00010000 && nodeA->getID() <= 0x0001FFFF)
+	//	{
+	//	}
+	//}
 }
