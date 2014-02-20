@@ -172,7 +172,7 @@ void Map::mUpdateMap()
 	for(int y = 0; y < 20; y++)
 		for(int x = 0; x < 24; x++)
 		{
-			if(isWater(x, y) && mMap[x + y * 48] == 0x10)
+			if(mMap[x + y * 48] == 0x10 && isWater(x, y))
 			{
 				mMap[x + y * 48] = 0x11;
 			}
@@ -182,7 +182,7 @@ void Map::mUpdateMap()
 
 bool Map::isWater(int x, int y)
 {
-	return isWaterTop(x, y) || isWaterBot(x, y) || isWaterLeft(x, y) || isWaterRight(x, y) || isWaterTopRight(x, y), isWaterTopLeft(x, y), isWaterBotLeft(x, y), isWaterBotRight(x, y);
+	return isWaterTop(x, y) || isWaterBot(x, y) || isWaterLeft(x, y) || isWaterRight(x, y) || isWaterTopRight(x, y) || isWaterTopLeft(x, y) || isWaterBotLeft(x, y) || isWaterBotRight(x, y);
 }
 
 bool Map::isWaterTop(int x, int y)
