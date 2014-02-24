@@ -22,7 +22,6 @@
 
 void Ishavsfiske::IshavsfiskeGame::mLoadContent()
 {
-	mTXShips->loadFromFile("boat_icebreaker_1.png");
 	mTXMap->loadFromFile("env_sea1.png");
 	//mTXUI->loadFromFile("ui_background1.png");
 	mTXUI->loadFromFile("Sheet_1.png");
@@ -56,7 +55,6 @@ void Ishavsfiske::IshavsfiskeGame::mLoadContent()
 void Ishavsfiske::IshavsfiskeGame::mInit()
 {
 	mTXMap = new sf::Texture();
-	mTXShips = new sf::Texture();
 	mTXUI = new sf::Texture();
 	mUIFont = new sf::Texture();
 

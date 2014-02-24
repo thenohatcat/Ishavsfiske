@@ -51,10 +51,7 @@ namespace Ishavsfiske
 
 		void mMoveFrame(float dx, float dy);
 
-		sf::Texture *mTXShips;
-
 		sf::Texture *mTXMap;
-
 		sf::Texture *mTXUI;
 		sf::Texture *mUIFont;
 

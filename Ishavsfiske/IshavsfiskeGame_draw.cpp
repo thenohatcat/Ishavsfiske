@@ -145,7 +145,7 @@ void IshavsfiskeGame::mDrawUI(float time, float deltaTime)
 
 		char s[32];
 		sprintf_s(s, 32, "FPS: %03.0f", fps);
-		mFont->drawString(mGraphics, "Ishavsfiske 0.1.3", 5, 1);
+		mFont->drawString(mGraphics, "Ishavsfiske 0.1.4", 5, 1);
 		glTranslatef(0, 1/40.0f, 0);
 		mFont->drawString(mGraphics, std::string(s), 5, 1);
 	glPopMatrix();
