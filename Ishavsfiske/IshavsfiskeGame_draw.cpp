@@ -160,8 +160,6 @@ void IshavsfiskeGame::mDraw(float time, float deltaTime)
 	//Draw UI
 	mDrawUI(time, deltaTime);
 
-	//Draw Map
-
 	//Draw SceneRoot
 	mSceneRoot->draw(this, mGraphics, time, deltaTime);
 	mGraphics->end();
@@ -192,11 +190,8 @@ void IshavsfiskeGame::mDraw(float time, float deltaTime)
 				Angler::Nodes::CollisionNode* n = (Angler::Nodes::CollisionNode*)nds.at(i);
 
 				std::vector<sf::Vector2f> ov = n->getTransformedPoints();
-				/*Angler::Nodes::Transformation::transform(n, n->getPoints(), &ov);*/
 
 				sf::Vector2f ul = n->getBoundingUL(), lr = n->getBoundingLR();
-
-				/*Angler::HelpFunctions::Geometry::getBoundingPoints(&ov, &ul, &lr);*/
 
 				glLineWidth(3);
 

@@ -23,7 +23,6 @@
 void Ishavsfiske::IshavsfiskeGame::mLoadContent()
 {
 	mTXMap->loadFromFile("env_sea1.png");
-	//mTXUI->loadFromFile("ui_background1.png");
 	mTXUI->loadFromFile("Sheet_1.png");
 	mUIFont->loadFromFile("font_bitmap.png");
 
@@ -42,11 +41,8 @@ void Ishavsfiske::IshavsfiskeGame::mLoadContent()
 	mSound->playSound(mEngineSound, false, 0, 1.46f, true);
 
 	mGraphics->getLayer(0)->setTexture(mTXUI);
-	//mGraphics->getLayer(1)->setTexture(mTXMap);
 	mGraphics->getLayer(1)->setTexture(mTXUI);
-	//mGraphics->getLayer(2)->setTexture(mTXShips);
 	mGraphics->getLayer(2)->setTexture(mTXUI);
-	//mGraphics->getLayer(3)->setTexture(mTXShips);
 	mGraphics->getLayer(3)->setTexture(mTXUI);
 	mGraphics->getLayer(4)->setTexture(mTXUI);
 	mGraphics->getLayer(5)->setTexture(mUIFont);
@@ -72,8 +68,8 @@ void Ishavsfiske::IshavsfiskeGame::mInit()
 
 	mGraphics->addLayer(512);
 	mGraphics->addLayer(512);
-	mGraphics->addLayer(128);
-	mGraphics->addLayer(128);
+	mGraphics->addLayer(64);
+	mGraphics->addLayer(64);
 	mGraphics->addLayer(64);
 	mGraphics->addLayer(512);
 
@@ -88,34 +84,28 @@ void Ishavsfiske::IshavsfiskeGame::mInit()
 	leftBox.push_back(sf::Vector2f(1/10.0f, 0));
 	leftBox.push_back(sf::Vector2f(1/10.0f, 1));
 	leftBox.push_back(sf::Vector2f(2/10.0f, 1));
-	new Angler::Nodes::CollisionNode(0x100000, mSceneRoot, leftBox, 1);
+	new Angler::Nodes::CollisionNode(0x70000000, mSceneRoot, leftBox, 1);
 
 	std::vector<sf::Vector2f> rightBox;
 	rightBox.push_back(sf::Vector2f(15/10.0f, 0));
 	rightBox.push_back(sf::Vector2f(14/10.0f, 0));
 	rightBox.push_back(sf::Vector2f(14/10.0f, 1));
 	rightBox.push_back(sf::Vector2f(15/10.0f, 1));
-	new Angler::Nodes::CollisionNode(0x100001, mSceneRoot, rightBox, 1);
+	new Angler::Nodes::CollisionNode(0x70000001, mSceneRoot, rightBox, 1);
 
 	std::vector<sf::Vector2f> topBox;
 	topBox.push_back(sf::Vector2f(15/10.0f, -1/10.0f));
 	topBox.push_back(sf::Vector2f(1/10.0f, -1/10.0f));
 	topBox.push_back(sf::Vector2f(1/10.0f, 0));
 	topBox.push_back(sf::Vector2f(15/10.0f, 0));
-	new Angler::Nodes::CollisionNode(0x100002, mSceneRoot, topBox, 1);
+	new Angler::Nodes::CollisionNode(0x70000002, mSceneRoot, topBox, 1);
 
 	std::vector<sf::Vector2f> bottomBox;
 	bottomBox.push_back(sf::Vector2f(15/10.0f, 1));
 	bottomBox.push_back(sf::Vector2f(1/10.0f, 1));
 	bottomBox.push_back(sf::Vector2f(1/10.0f, 11/10.0f));
 	bottomBox.push_back(sf::Vector2f(15/10.0f, 11/10.0f));
-	new Angler::Nodes::CollisionNode(0x100003, mSceneRoot, bottomBox, 1);
+	new Angler::Nodes::CollisionNode(0x70000003, mSceneRoot, bottomBox, 1);
 
 	mFont = new Font();
-
-	/*mFrame = new std::vector<sf::Vector2f>();
-	mFrame->push_back(sf::Vector2f(14/10.0, 0));
-	mFrame->push_back(sf::Vector2f(2/10.0, 0));
-	mFrame->push_back(sf::Vector2f(2/10.0, 1));
-	mFrame->push_back(sf::Vector2f(14/10.0, 1));*/
 }
