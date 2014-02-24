@@ -37,9 +37,10 @@ private:
 	bool isWater(int x, int y), isWaterTop(int x, int y), isWaterRight(int x, int y), isWaterLeft(int x, int y), isWaterBot(int x, int y),
 		isWaterTopLeft(int x, int y), isWaterTopRight(int x, int y), isWaterBotLeft(int x, int y), isWaterBotRight(int x, int y);
 	int isIceDir(int x, int y);
-
-	bool isIce(int x, int y), isIceLeft(int x, int y), isIceRight(int x, int y), isIceTop(int x, int y), isIceBot(int x, int y),
+	bool isIceLeft(int x, int y), isIceRight(int x, int y), isIceTop(int x, int y), isIceBot(int x, int y),
 		isIceBotLeft(int x, int y), isIceBotRight(int x, int y), isIceTopLeft(int x, int y), isIceTopRight(int x, int y);
+	bool outsideMap(int x, int y);
+
 
 	MapNode *mMapNodes[24 * 20];
 };

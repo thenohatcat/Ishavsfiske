@@ -148,7 +148,6 @@ void Map::mUpdateMap()
 		{
 			if(mMap[(x + mPos.x) + (y + mPos.y) * 48] == 0x10 && isWater((x + mPos.x), (y + mPos.y)))
 			{
-				/*mMapNodes[x + y * 24]->setTile(0x11);*/
 					switch(isIceDir((x + mPos.x), (y + mPos.y)))
 					{
 					case 8:
@@ -194,126 +193,125 @@ bool Map::isWater(int x, int y)
 
 bool Map::isWaterTop(int x, int y)
 {
-	return mMap[x + (y-1) * 48] == 0;
+	return mMap[x + (y-1) * 48] == 0 && !outsideMap(x, y);
 }
 
 bool Map::isWaterRight(int x, int y)
 {
-	return mMap[(x+1) + y * 48] == 0;
+	return mMap[(x+1) + y * 48] == 0 && !outsideMap(x, y);
 }
 
 bool Map::isWaterLeft(int x, int y)
 {
-	return mMap[(x-1) + y * 48] == 0;
+	return mMap[(x-1) + y * 48] == 0 && !outsideMap(x, y);
 }
 
 bool Map::isWaterBot(int x, int y)
 {
-	return mMap[x + (y+1) * 48] == 0;
+	return mMap[x + (y+1) * 48] == 0 && !outsideMap(x, y);
 }
 
 bool Map::isWaterTopLeft(int x, int y)
 {
-	return mMap[(x-1) + (y-1) * 48] == 0;
+	return mMap[(x-1) + (y-1) * 48] == 0 && !outsideMap(x, y);
 }
 
 bool Map::isWaterTopRight(int x, int y)
 {
-	return mMap[(x+1) + (y-1) * 48] == 0;
+	return mMap[(x+1) + (y-1) * 48] == 0 && !outsideMap(x, y);
 }
 
 bool Map::isWaterBotLeft(int x, int y)
 {
-	return mMap[(x-1) + (y+1) * 48] == 0;
+	return mMap[(x-1) + (y+1) * 48] == 0 && !outsideMap(x, y);
 }
 
 bool Map::isWaterBotRight(int x, int y)
 {
-	return mMap[(x+1) + (y+1) * 48] == 0;
+	return mMap[(x+1) + (y+1) * 48] == 0 && !outsideMap(x, y);
 }
 
 // ICE CHECKS
-bool Map::isIce(int x, int y)
-{
-	return isIceLeft(x, y) && isIceRight(x, y);
-}
 
 bool Map::isIceLeft(int x, int y)
 {
-	return mMap[(x-1) + y * 48] == 0x10;
+	return mMap[(x-1) + y * 48] == 0x10 || outsideMap(x-1, y);
 }
 
 bool Map::isIceRight(int x, int y)
 {
-	return mMap[(x+1) + y * 48] == 0x10;
+	return mMap[(x+1) + y * 48] == 0x10 || outsideMap(x+1, y);
 }
 
 bool Map::isIceTop(int x, int y)
 {
-	return mMap[x + (y-1) * 48] == 0x10;
+	return mMap[x + (y-1) * 48] == 0x10 || outsideMap(x, y-1);
 }
 
 bool Map::isIceBot(int x, int y)
 {
-	return mMap[x + (y+1) * 48] == 0x10;
+	return mMap[x + (y+1) * 48] == 0x10 || outsideMap(x, y+1);
 }
 
 bool Map::isIceBotLeft(int x, int y)
 {
-	return mMap[(x-1) + (y+1) * 48] == 0x10;
+	return mMap[(x-1) + (y+1) * 48] == 0x10 || outsideMap(x-1, y+1);
 }
 
 bool Map::isIceBotRight(int x, int y)
 {
-	return mMap[(x+1) + (y+1) * 48] == 0x10;
+	return mMap[(x+1) + (y+1) * 48] == 0x10 || outsideMap(x+1, y+1);
 }
 
 bool Map::isIceTopLeft(int x, int y)
 {
-	return mMap[(x-1) + (y-1) * 48] == 0x10;
+	return mMap[(x-1) + (y-1) * 48] == 0x10 || outsideMap(x-1, y-1);
 }
 
 bool Map::isIceTopRight(int x, int y)
 {
-	return mMap[(x+1) + (y-1) * 48] == 0x10;
+	return mMap[(x+1) + (y-1) * 48] == 0x10 || outsideMap(x+1, y-1);
 }
 
 
 int Map::isIceDir(int x, int y)
 {
-	if(mMap[x + (y-1) * 48] == 0x10 && !isWaterTop(x, y) && !isIceBot(x, y) && !isIceRight(x, y) && !isWaterLeft(x, y))
+	if(isIceTop(x, y) && !(isWaterTop(x, y) || isIceBot(x, y) || (isIceRight(x, y) && isWaterLeft(x, y)) || (isIceLeft(x, y) && isWaterRight(x, y))))
 	{
 		return 8;
 	}
-	else if(mMap[(x+1) + y * 48] == 0x10 && !isWaterRight(x, y) && !isIceLeft(x, y) && !isIceTop(x, y))
-	{
-		return 6;
-	}
-	else if(mMap[(x-1) + y * 48] == 0x10 && !isWaterLeft(x, y) && !isIceRight(x, y) && !isIceTop(x, y))
-	{
-		return 4;
-	}
-	else if(mMap[x + (y+1) * 48] == 0x10 && !isWaterBot(x, y) && !isIceTop(x, y) && !isIceRight(x, y) && !isWaterLeft(x, y))
-	{
-		return 2;
-	}
-	else if(mMap[(x-1) + (y-1) * 48] == 0x10 && !isWaterTopLeft(x, y) && !isIceTopRight(x, y) && !isWaterBotLeft(x, y))
-	{
-		return 7;
-	}
-	else if(mMap[(x+1) + (y-1) * 48] == 0x10 && !isWaterTopRight(x, y) && !isIceTopLeft(x, y) /*&&
-		!isIceBotRight(x, y) && !isWaterTopLeft(x, y)*/)
+	else if(/*isIceTopRight(x, y) &&*/ !(isWaterTopRight(x, y) || isIceBotLeft(x, y) || (isWaterTopLeft(x, y) && isIceBotRight(x, y)) || (isWaterBotRight(x, y) && isIceTopLeft(x, y))))
 	{
 		return 9;
 	}
-	else if(mMap[(x-1) + (y+1) * 48] == 0x10 && !isWaterBotLeft(x, y) && !isIceTopLeft(x, y) && !isWaterBotRight(x, y) /*&&
-		!isIceBotRight(x, y) && !isWaterTopLeft(x, y)*/)
+	else if(isIceRight(x, y) && !(isWaterRight(x, y) || isIceLeft(x, y) || (isWaterBot(x, y) && isIceTop(x, y)) || (isWaterTop(x, y) && isIceBot(x, y))))
 	{
-		return 1;
+		return 6;
 	}
-	else if(mMap[(x+1) + (y+1) * 48] == 0x10 && !isWaterBotRight(x, y) && !isIceTopRight(x, y) && !isWaterBotLeft(x, y))
+	else if(isIceBotRight(x, y) && !(isWaterBotRight(x, y) || isIceTopLeft(x, y) || (isWaterBotLeft(x, y) && isIceTopRight(x, y)) || (isWaterTopRight(x, y) && isIceBotLeft(x, y))))
 	{
 		return 3;
 	}
+	else if(isIceBot(x, y) && !(isWaterBot(x, y) || isIceTop(x, y) || (isIceLeft(x, y) && isWaterRight(x, y)) || (isIceRight(x, y) && isWaterLeft(x, y))))
+	{
+		return 2;
+	}
+	else if(/*isIceBotLeft(x, y) &&*/ !(isWaterBotLeft(x, y) || isIceTopRight(x, y) || (isWaterBotRight(x, y) && isIceTopLeft(x, y)) || (isWaterTopLeft(x, y) && isIceBotRight(x, y))))
+	{
+		return 1;
+	}
+	else if(isIceLeft(x, y) && !(isWaterLeft(x, y) || isIceRight(x, y) || (isWaterBot(x, y) && isIceTop(x, y)) || (isWaterTop(x, y) && isIceBot(x, y))))
+	{
+		return 4;
+	}
+	else if(isIceTopLeft(x, y) && !(isWaterTopLeft(x, y) || isIceBotRight(x, y) || (isWaterBotLeft(x, y) && isIceTopRight(x, y)) || (isWaterTopRight(x, y) && isIceBotLeft(x, y))))
+	{
+		return 7;
+	}
 	return 0;
+}
+
+bool Map::outsideMap(int x, int y)
+{
+	return x < 0 || x >= 48 || y < 0 || y >= 40;
 }
