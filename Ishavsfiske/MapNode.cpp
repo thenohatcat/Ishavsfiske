@@ -72,7 +72,7 @@ void MapNode::setTile(int tileID)
 		mSprite->setCropOrigin(0.75, 0);
 		break;
 	case 0x13:
-		mSprite->setCropOrigin(0.25, 0.25);
+		mSprite->setCropOrigin(0.25, 0.5);
 		break;
 	case 0x14:
 		mSprite->setCropOrigin(0.5, 0.25);
@@ -84,7 +84,7 @@ void MapNode::setTile(int tileID)
 		mSprite->setCropOrigin(0, 0.5);
 		break;
 	case 0x17:
-		mSprite->setCropOrigin(0.25, 0.5);
+		mSprite->setCropOrigin(0.25, 0.25);
 		break;
 	case 0x18:
 		mSprite->setCropOrigin(0.5, 0.5);
