@@ -39,8 +39,12 @@ void MapNode::update(Angler::Game* context, float time, float deltaTime)
 
 void MapNode::mInit()
 {
+<<<<<<< HEAD
 	new Angler::Nodes::SpriteNode(getID() + 0x4000, this, 0, sf::Vector2f(0, 0), sf::Vector2f(700/1500.0f, 0), sf::Vector2f(50/1500.0f, 50/1600.0f));
 	mSprite = new Angler::Nodes::SpriteNode(getID() + 0x1000, this, 1, sf::Vector2f(0, 0), sf::Vector2f(0, 0), sf::Vector2f(50/1500.0f, 50/1600.0f));
+=======
+	mSprite = new Angler::Nodes::SpriteNode(getID() + 0x1000, this, 0, sf::Vector2f(0, 0), sf::Vector2f(0, 0.25 * mTile), sf::Vector2f(0.25, 0.25));
+>>>>>>> v0.1.4.a22
 
 	std::vector<sf::Vector2f> pts;
 	pts.push_back(sf::Vector2f(1, 0));
@@ -68,6 +72,29 @@ void MapNode::setTile(int tileID)
 		break;
 	case 0x11:
 		mSprite->setCropOrigin(450.0/1500.0f, 625.0/1600.0f);
+	case 0x12:
+		mSprite->setCropOrigin(0.75, 0);
+		break;
+	case 0x13:
+		mSprite->setCropOrigin(0.25, 0.25);
+		break;
+	case 0x14:
+		mSprite->setCropOrigin(0.5, 0.25);
+		break;
+	case 0x15:
+		mSprite->setCropOrigin(0.75, 0.25);
+		break;
+	case 0x16:
+		mSprite->setCropOrigin(0, 0.5);
+		break;
+	case 0x17:
+		mSprite->setCropOrigin(0.25, 0.5);
+		break;
+	case 0x18:
+		mSprite->setCropOrigin(0.5, 0.5);
+		break;
+	case 0x19:
+		mSprite->setCropOrigin(0.5, 0);
 		break;
 	}
 }
