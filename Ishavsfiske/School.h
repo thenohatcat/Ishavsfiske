@@ -28,6 +28,8 @@ namespace Ishavsfiske
 		void setPosition(float x, float y);
 
 		int fish(int ammount);
+
+		virtual void update(Angler::Game *context, float time, float deltaTime, bool changed);
 	protected:
 		Angler::Game *mOwner;
 
@@ -38,6 +40,8 @@ namespace Ishavsfiske
 		Angler::Node *mSchoolRoot;
 	private:
 		Angler::Nodes::Translation *mRootTranslation;
+
+		int mAmmount;
 	};
 }
 #else
