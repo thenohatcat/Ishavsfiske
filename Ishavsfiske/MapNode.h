@@ -28,7 +28,7 @@ public:
 protected:
 	virtual void mInit();
 private:
-	Angler::Nodes::SpriteNode *mSprite; 
+	Angler::Nodes::SpriteNode *mSprite;	
 	int mTile;
 };
 
