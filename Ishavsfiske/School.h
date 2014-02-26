@@ -45,7 +45,7 @@ namespace Ishavsfiske
 	};
 }
 #else
-#error Font.h: Wrong version 0.1.4
+#error School.h: Wrong version 0.1.4
 #endif
 
 #endif

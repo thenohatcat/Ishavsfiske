@@ -18,11 +18,13 @@
 #include "FishingBoat.h"
 #include "IceBreaker.h"
 
+#include "School.h"
 #include "Font.h"
 
 void Ishavsfiske::IshavsfiskeGame::mLoadContent()
 {
 	mTXMap->loadFromFile("env_sea1.png");
+	mTXSchool->loadFromFile("Swim_Capelin_spritesheet.png");
 	mTXUI->loadFromFile("Sheet_2.png");
 	mUIFont->loadFromFile("font_bitmap.png");
 
@@ -42,15 +44,17 @@ void Ishavsfiske::IshavsfiskeGame::mLoadContent()
 
 	mGraphics->getLayer(0)->setTexture(mTXUI);
 	mGraphics->getLayer(1)->setTexture(mTXUI);
-	mGraphics->getLayer(2)->setTexture(mTXUI);
+	mGraphics->getLayer(2)->setTexture(mTXSchool);
 	mGraphics->getLayer(3)->setTexture(mTXUI);
 	mGraphics->getLayer(4)->setTexture(mTXUI);
-	mGraphics->getLayer(5)->setTexture(mUIFont);
+	mGraphics->getLayer(5)->setTexture(mTXUI);
+	mGraphics->getLayer(6)->setTexture(mUIFont);
 }
 
 void Ishavsfiske::IshavsfiskeGame::mInit()
 {
 	mTXMap = new sf::Texture();
+	mTXSchool = new sf::Texture();
 	mTXUI = new sf::Texture();
 	mUIFont = new sf::Texture();
 
@@ -68,6 +72,7 @@ void Ishavsfiske::IshavsfiskeGame::mInit()
 
 	mGraphics->addLayer(512);
 	mGraphics->addLayer(512);
+	mGraphics->addLayer(32);
 	mGraphics->addLayer(64);
 	mGraphics->addLayer(64);
 	mGraphics->addLayer(64);
@@ -77,6 +82,8 @@ void Ishavsfiske::IshavsfiskeGame::mInit()
 	mShipBreaker = new IceBreaker(0x20000, mSceneRoot, this);
 
 	mMap = new Map(0x80000000, mSceneRoot, this);
+
+	new School(0x20000000, mSceneRoot, this);
 
 	//Map Collisions
 	std::vector<sf::Vector2f> leftBox;
