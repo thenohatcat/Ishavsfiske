@@ -20,6 +20,8 @@ namespace Ishavsfiske
 
 		void update(Angler::Game *context, float time, float deltaTime, bool changed);
 
+		void setFishing(int);
+
 	protected:
 		virtual void mInit();
 	private:

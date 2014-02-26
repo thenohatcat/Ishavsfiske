@@ -8,11 +8,27 @@
 
 #include "IshavsfiskeGame.h"
 
+#include "FishingBoat.h"
+
 #include <Angler\Node.h>
 #include "Ship.h"
 
 void Ishavsfiske::IshavsfiskeGame::collide(Angler::Node *nodeA, Angler::Node *nodeB)
 {
+	if (nodeB->getID() >= 0x20000000 && nodeB->getID() <= 0x2000FFFF)
+	{
+		if (nodeA->getID() == 0x00002201 || nodeB->getID() == 0x00002201)
+		{
+			((FishingBoat*)mShipFishing)->setFishing(1);
+			printf("Fishing Right\n");
+		}
+		else if (nodeA->getID() == 0x00002202 || nodeB->getID() == 0x00002202)
+		{
+			((FishingBoat*)mShipFishing)->setFishing(2);
+			printf("Fishing Left\n");
+		}
+	}
+
 	if((nodeA->getID() >= 0x80012000 && nodeA->getID() <= 0x80013000) || (nodeB->getID() >= 0x80012000 && nodeB->getID() <= 0x80013000))
 	{
 		//ice and icebreaker

@@ -26,6 +26,25 @@ FishingBoat::FishingBoat(unsigned long id, Ishavsfiske::IshavsfiskeGame *owner)
 	mInit();
 }
 
+void FishingBoat::setFishing(int mode)
+{
+	//Not fishing
+	if (mode == 0)
+	{
+		mCraneRotation->setRotation(90.0f);
+	}
+	//Fishing right
+	else if (mode == 1)
+	{
+		mCraneRotation->setRotation(0);
+	}
+	//Fishing left
+	else if (mode == 2)
+	{
+		mCraneRotation->setRotation(180.0f);
+	}
+}
+
 void FishingBoat::mInit()
 {
 	mStartX = 0.5;
@@ -56,7 +75,7 @@ void FishingBoat::mInit()
 	new Angler::Nodes::CollisionNode(getID() + 0x2102, s, pts, 0);
 
 	std::vector<sf::Vector2f> fishPTS;
-	for (int i = 0; i < 16; i++)
+	for (int i = 0; i < 15; i++)
 	{
 		fishPTS.push_back(sf::Vector2f(1/4.0f*cos(i/16.0f * 2*3.14159f), 0.5f*sin(i/16.0f * 2*3.14159f)));
 	}

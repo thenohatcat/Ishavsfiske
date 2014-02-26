@@ -37,7 +37,6 @@ void Ishavsfiske::School::mInit()
 	pts.push_back(sf::Vector2f(0, 0));
 	pts.push_back(sf::Vector2f(0, 1));
 	pts.push_back(sf::Vector2f(1 ,1));
-
 	new Angler::Nodes::CollisionNode(getID() + 0x5000, mSchoolRoot, pts, 0);
 
 	std::vector<sf::Vector2f> anim;
@@ -57,7 +56,7 @@ void Ishavsfiske::School::mInit()
 	anim.push_back(sf::Vector2f(13/16.0f, 0));
 	anim.push_back(sf::Vector2f(14/16.0f, 0));
 	anim.push_back(sf::Vector2f(15/16.0f, 0));
-	new Angler::Nodes::AnimatedNode(getID() + 0x1000, mSchoolRoot, 2, anim, 1/8.0f, 0.5f, 0.5f, 1/16.0f, 1);
+	new Angler::Nodes::AnimatedNode(getID() + 0x1000, mSchoolRoot, 2, anim, 1/8.0f, 0, 0, 1/16.0f, 1);
 }
 
 void Ishavsfiske::School::move(float x, float y)
