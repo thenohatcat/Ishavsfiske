@@ -49,11 +49,11 @@ namespace Ishavsfiske
 
 		void mDrawUI(float time, float deltaTime);
 
-		sf::Texture *mTXShips;
+		void mMoveFrame(float dx, float dy);
 
 		sf::Texture *mTXMap;
-
 		sf::Texture *mTXUI;
+		sf::Texture *mTXSchool;
 		sf::Texture *mUIFont;
 
 		Ship *mShipFishing, *mShipBreaker;

@@ -43,16 +43,18 @@ void IshavsfiskeGame::mDrawUI(float time, float deltaTime)
 	//Draw UI
 	glPushMatrix();
 		//Left UI
-		mGraphics->draw(3, sf::Vector2f(0, 0));
+		glPushMatrix();
+			mGraphics->draw(5, sf::Vector2f(0, 0), sf::Vector2f(0, 0), sf::Vector2f(200/1500.0f, 1000/1600.0f));
+		glPopMatrix();
 
 		// Status Left
-		glPushMatrix();
+		/*glPushMatrix();
 			glScaled(15/40.0, 15/40.0, 1);
 				glScaled(1/15.0, 1/15.0, 1);
 					glTranslated(1, 25, 0);
 				glScaled(15.0, 15.0, 1);
-			mGraphics->draw(3, sf::Vector2f(0, 0));
-		glPopMatrix();
+			mGraphics->draw(4, sf::Vector2f(0, 0));
+		glPopMatrix();*/
 
 		// Upgrades
 		glPushMatrix();
@@ -66,68 +68,86 @@ void IshavsfiskeGame::mDrawUI(float time, float deltaTime)
 					glScaled(1/3.0, 1/3.0, 1);
 						glTranslated(0, 3, 0);
 					glScaled(3.0, 3.0, 1);
-				mGraphics->draw(3, sf::Vector2f(0, 0));
+				mGraphics->draw(5, sf::Vector2f(0, 0), sf::Vector2f(560/1500.0f, 150/1600.0f), sf::Vector2f(150/1500.0f, 75/1600.0f));
 			}
 		glPopMatrix();
 
 		//Right UI
 		glPushMatrix();
 			glTranslated(14/10.0, 0, 0);
-			glScaled(-1, 1, 1);
-			mGraphics->draw(3, sf::Vector2f(1, 0));
+			mGraphics->draw(5, sf::Vector2f(0, 0), sf::Vector2f(200/1500.0f, 0), sf::Vector2f(200/1500.0f, 1000/1600.0f));
 		glPopMatrix();
 
-		// Status Right
-		glPushMatrix();
-			glScaled(15/40.0, 15/40.0, 1);
-				glScaled(1/15.0, 1/15.0, 1);
-					glTranslated(14*4 + 1, 25, 0);
-				glScaled(15.0, 15.0, 1);
-			mGraphics->draw(3, sf::Vector2f(0, 0));
-		glPopMatrix();
+		//// Status Right
+		//glPushMatrix();
+		//	glScaled(15/40.0, 15/40.0, 1);
+		//		glScaled(1/15.0, 1/15.0, 1);
+		//			glTranslated(14*4 + 1, 25, 0);
+		//		glScaled(15.0, 15.0, 1);
+		//	mGraphics->draw(4, sf::Vector2f(0, 0));
+		//glPopMatrix();
 
-		//Fish Counter
-		glPushMatrix();
-			glScaled(1/20.0, 1/20.0, 1);
-			glTranslated(6, 1/2.0, 0);
-			mGraphics->draw(3, sf::Vector2f(0, 0));
-		glPopMatrix();
+		////Fish Counter
+		//glPushMatrix();
+		//	glScaled(1/20.0, 1/20.0, 1);
+		//	glTranslated(6, 1/2.0, 0);
+		//	mGraphics->draw(4, sf::Vector2f(0, 0));
+		//glPopMatrix();
 
-		//Timer
-		glPushMatrix();
-			glScaled(1/20.0, 1/20.0, 1);
-			glTranslated(14, 1/2.0, 0);
-			mGraphics->draw(3, sf::Vector2f(0, 0));
-		glPopMatrix();
+		////Timer
+		//glPushMatrix();
+		//	glScaled(1/20.0, 1/20.0, 1);
+		//	glTranslated(14, 1/2.0, 0);
+		//	mGraphics->draw(4, sf::Vector2f(0, 0));
+		//glPopMatrix();
 
-		//Cash
-		glPushMatrix();
-			glScaled(1/20.0, 1/20.0, 1);
-			glTranslated(22, 1/2.0, 0);
-			mGraphics->draw(3, sf::Vector2f(0, 0));
-		glPopMatrix();
+		////Cash
+		//glPushMatrix();
+		//	glScaled(1/20.0, 1/20.0, 1);
+		//	glTranslated(22, 1/2.0, 0);
+		//	mGraphics->draw(4, sf::Vector2f(0, 0));
+		//glPopMatrix();
 
 		//Menu button
 		glPushMatrix();
-			glScaled(3/20.0, 3/20.0, 1);
-			glScaled(1/3.0, 1/3.0, 1);
-				glTranslated(4, 17, 0);
-			glScaled(3, 3, 1);
-			mGraphics->draw(3, sf::Vector2f(0, 0));
+			glScalef(3/20.0f, 3/20.0f, 1.0f);
+			glScalef(1/3.0f, 1/3.0f, 1.0f);
+				glTranslatef(4.0f, 17.0f, 0);
+			glScalef(3.0f, 3.0f, 1.0f);
+			mGraphics->draw(5, sf::Vector2f(0, 0), sf::Vector2f(400/1500.0f, 0), sf::Vector2f(150/1500.0f, 150/1600.0f));
 		glPopMatrix();
 
-		//Wind Flag
+		//Menu needle
 		glPushMatrix();
-			glScaled(1/10.0, 1/10.0, 1);
-			glTranslated(13, 9, 0);
-			mGraphics->draw(3, sf::Vector2f(0, 0));
+			glScalef(3/20.0f, 3/20.0f, 1.0f);
+			glScalef(1/3.0f, 1/3.0f, 1.0f);
+				glTranslatef(5.5f, 18.5f, 0.0f);
+			glScalef(3.0f, 3.0f, 1.0f);
+			glRotatef(time / 1.337f * 360.0f, 0, 0, 1);
+			mGraphics->draw(5, sf::Vector2f(10.0f/20.0f, 55.0f/108.0f), sf::Vector2f(400/1500.0f, 150/1600.0f), sf::Vector2f(20/1500.0f, 108/1600.0f));
 		glPopMatrix();
 
-		char *s = new char[32];
+		////Wind Flag
+		//glPushMatrix();
+		//	glScaled(1/10.0, 1/10.0, 1);
+		//	glTranslated(13, 9, 0);
+		//	mGraphics->draw(4, sf::Vector2f(0, 0));
+		//glPopMatrix();
+
+		//Radio
+		glPushMatrix();
+			glScalef(1/20.f, 1/20.f, 1);
+				glTranslatef(28, 20, 0);
+			glScalef(20.f, 20.f, 1);
+			glScalef(75/1000.0f, 75/1000.0f, 1);
+			mGraphics->draw(5, sf::Vector2f(1, 1), sf::Vector2f(420/1500.0f, 150/1600.0f), sf::Vector2f(140/1500.0f, 75/1600.0f));
+		glPopMatrix();
+
+		char s[32];
 		sprintf_s(s, 32, "FPS: %03.0f", fps);
-		mFont->drawString(mGraphics, "Ishavsfiske 0.1.3", 4, 1);
+		mFont->drawString(mGraphics, "Ishavsfiske 0.1.4", 6, 1);
 		glTranslatef(0, 1/40.0f, 0);
-		mFont->drawString(mGraphics, std::string(s), 4, 1);
+		mFont->drawString(mGraphics, std::string(s), 6, 1);
 	glPopMatrix();
 }
 
@@ -140,8 +160,6 @@ void IshavsfiskeGame::mDraw(float time, float deltaTime)
 	//Draw UI
 	mDrawUI(time, deltaTime);
 
-	//Draw Map
-
 	//Draw SceneRoot
 	mSceneRoot->draw(this, mGraphics, time, deltaTime);
 	mGraphics->end();
@@ -149,7 +167,8 @@ void IshavsfiskeGame::mDraw(float time, float deltaTime)
 #ifdef _DEBUG
 #ifdef _DEBUG_COLL
 	tm++;
-	if ((tm % 4) == 0)
+	//if ((tm % 4) == 0)
+	if (1)
 	{
 		tm %= 16;
 
@@ -171,11 +190,8 @@ void IshavsfiskeGame::mDraw(float time, float deltaTime)
 				Angler::Nodes::CollisionNode* n = (Angler::Nodes::CollisionNode*)nds.at(i);
 
 				std::vector<sf::Vector2f> ov = n->getTransformedPoints();
-				/*Angler::Nodes::Transformation::transform(n, n->getPoints(), &ov);*/
 
 				sf::Vector2f ul = n->getBoundingUL(), lr = n->getBoundingLR();
-
-				/*Angler::HelpFunctions::Geometry::getBoundingPoints(&ov, &ul, &lr);*/
 
 				glLineWidth(3);
 

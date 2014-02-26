@@ -19,9 +19,49 @@
 float av;
 unsigned int frm;
 
+float mx = 0, my = 0;
+float lastX, lastY;
+
+void Ishavsfiske::IshavsfiskeGame::mMoveFrame(float dx, float dy)
+{
+	if (mx <= 0 && dx < 0)
+		dx = 0;
+	else if (mx >= 23 && dx > 0)
+		dx = 0;
+
+	if (my <= 0 && dy < 0)
+		dy = 0;
+	else if (my >= 19 && dy > 0)
+		dy = 0;
+
+	if (mx < 0)
+		mx = 0;
+	else if (mx > 23)
+		mx = 23;
+	if (my < 0)
+		my = 0;
+	else if (my > 19)
+		my = 19;
+
+	mx += 5 * dx;
+	my += 5 * dy;
+
+	if (floor(lastX) != floor(mx))
+	{
+		mShipBreaker->move((floor(lastX) - floor(mx))/20.0f, 0, true);
+		mShipFishing->move((floor(lastX) - floor(mx))/20.0f, 0, true);
+		mMap->setPos(sf::Vector2i((int)mx, (int)my));
+	}
+
+	lastX = mx;
+	lastY = my;
+
+	//printf("Vel: {%03f, %03f}\n", mx, my);
+}
+
 void Ishavsfiske::IshavsfiskeGame::mUpdate(float time, float deltaTime)
 {
-//#ifdef _DEBUG
+#ifdef _DEBUG
 	if (frm < 50)
 	{
 		frm++;
@@ -33,11 +73,26 @@ void Ishavsfiske::IshavsfiskeGame::mUpdate(float time, float deltaTime)
 		frm = 0;
 		av = 0;
 	}
-	//printf("FPS: %04.0f\n", 1/deltaTime);
-//#endif
+#endif
 
 	//Handle Input
 	mInput(time, deltaTime);
+
+	float mvx = 0, mvy = 0;
+
+	float breakerX = ((mShipBreaker->getPosition().x - 4/20.0f) * 20), breakerY = (mShipBreaker->getPosition().y * 20);
+	float fishingX = ((mShipFishing->getPosition().x - 4/20.0f) * 20), fishingY = (mShipFishing->getPosition().y * 20);
+
+	mvx = ((breakerX < 6.0f && fishingX < 18.0f) ? -((6-breakerX) * (6-breakerX)) / 36.0f : 0) + 
+		((breakerX > 18.0f && fishingX > 6.0f) ? ((6-(24-breakerX)) * (6-(24-breakerX))) / 36.0f : 0) +
+		((fishingX < 6.0f && breakerX < 18.0f) ? -((6-fishingX) * (6-fishingX)) / 36.0f : 0) + 
+		((fishingX > 18.0f && breakerX > 6.0f) ? ((6-(24-fishingX)) * (6-(24-fishingX))) / 36.0f : 0);
+	mvy = ((breakerY < 5.0f && fishingY < 15.0f) ? -((5-breakerY) * (5-breakerY)) / 25.0f : 0) + 
+		((breakerY > 15.0f && fishingY > 5.0f) ? ((5-(20-breakerY)) * (5-(20-breakerY))) / 25.0f : 0) +
+		((fishingY < 5.0f && breakerY < 15.0f) ? -((5-fishingY) * (5-fishingY)) / 25.0f : 0) + 
+		((fishingY > 15.0f && breakerY > 5.0f) ? ((5-(20-fishingY)) * (5-(20-fishingY))) / 25.0f : 0);
+
+	mMoveFrame(mvx * deltaTime, mvy * deltaTime);
 
 	//Collision system collide
 	mMechanics->doCollide(mSceneRoot);

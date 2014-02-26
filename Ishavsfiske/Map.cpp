@@ -37,7 +37,7 @@ Map::Map(unsigned long id, Angler::Node *parent, Angler::Game *owner, int lvl)
 
 void Map::mInit()
 {
-	Angler::Nodes::Scale *s = new Angler::Nodes::Scale(0, this, 1/20.0, 1/20.0);
+	Angler::Nodes::Scale *s = new Angler::Nodes::Scale(0, this, 1/20.0f, 1/20.0f);
 	Angler::Nodes::Translation *t = new Angler::Nodes::Translation(0, s, 4, 0);
 	for(int y = 0; y < 20; y++)
 	{

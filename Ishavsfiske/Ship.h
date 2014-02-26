@@ -23,7 +23,7 @@ namespace Ishavsfiske
 		Ship(unsigned long id, Angler::Node *parent, Ishavsfiske::IshavsfiskeGame *owner);
 		Ship(unsigned long id, Ishavsfiske::IshavsfiskeGame *owner);
 
-		void move(float x, float y);
+		void move(float x, float y, bool global = false);
 		void rotate(float r);
 
 		void throttle(float vx, float vy);
@@ -31,6 +31,9 @@ namespace Ishavsfiske
 		void update(Angler::Game *context, float time, float deltaTime, bool changed);
 
 		void revert();
+
+		sf::Vector2f getPosition();
+		float getRotation();
 
 		sf::Vector2f getVelocity();
 	protected:
