@@ -23,7 +23,7 @@
 void Ishavsfiske::IshavsfiskeGame::mLoadContent()
 {
 	mTXMap->loadFromFile("env_sea1.png");
-	mTXUI->loadFromFile("Sheet_1.png");
+	mTXUI->loadFromFile("Sheet_2.png");
 	mUIFont->loadFromFile("font_bitmap.png");
 
 	mCollFishingBuff->loadFromFile("Fiskebåt_Kollision_01.wav");
