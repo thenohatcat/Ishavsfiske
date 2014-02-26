@@ -4,6 +4,8 @@
 
 #include "Font.h"
 
+#include <fstream>
+
 #ifndef ISHAV_0_1_4
 #error Font.cpp: Wrong version 0.1.4
 #endif
@@ -42,6 +44,23 @@ void Font::loadDistance()
 		else
 			rightDistance[k] = 1;
 	}
+
+	/*std::ifstream file("asciiDistance.txt");
+	if(file.is_open())
+	{
+		for(int i = 0; i < 512; i++)
+		{
+			if(i < 256)
+			{
+				file >> leftDistance[i];
+			}
+			else if(i > 255 && i < 512)
+			{
+				file >> rightDistance[i - 256];
+			}
+		}
+		file.close();
+	}*/
 }
 
 float Font::getWidth(char c)
