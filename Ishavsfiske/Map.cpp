@@ -56,9 +56,9 @@ void Map::genMap(int lvl)
 	switch(lvl)
 	{
 	case 1:
-		for(int y = 0; y < 20; y++)
+		for(int y = 0; y < 40; y++)
 		{
-			for(int x = 0; x < 24; x++)
+			for(int x = 0; x < 48; x++)
 			{
 				if (y == 0 || x == 0 ||x == 23 || y == 19)
 				{
@@ -193,42 +193,42 @@ bool Map::isWater(int x, int y)
 
 bool Map::isWaterTop(int x, int y)
 {
-	return mMap[x + (y-1) * 48] == 0 && !outsideMap(x, y);
+	return mMap[x + (y-1) * 48] == 0 && !outsideMap(x, y-1);
 }
 
 bool Map::isWaterRight(int x, int y)
 {
-	return mMap[(x+1) + y * 48] == 0 && !outsideMap(x, y);
+	return mMap[(x+1) + y * 48] == 0 && !outsideMap(x+1, y);
 }
 
 bool Map::isWaterLeft(int x, int y)
 {
-	return mMap[(x-1) + y * 48] == 0 && !outsideMap(x, y);
+	return mMap[(x-1) + y * 48] == 0 && !outsideMap(x-1, y);
 }
 
 bool Map::isWaterBot(int x, int y)
 {
-	return mMap[x + (y+1) * 48] == 0 && !outsideMap(x, y);
+	return mMap[x + (y+1) * 48] == 0 && !outsideMap(x, y+1);
 }
 
 bool Map::isWaterTopLeft(int x, int y)
 {
-	return mMap[(x-1) + (y-1) * 48] == 0 && !outsideMap(x, y);
+	return mMap[(x-1) + (y-1) * 48] == 0 && !outsideMap(x-1, y-1);
 }
 
 bool Map::isWaterTopRight(int x, int y)
 {
-	return mMap[(x+1) + (y-1) * 48] == 0 && !outsideMap(x, y);
+	return mMap[(x+1) + (y-1) * 48] == 0 && !outsideMap(x+1, y-1);
 }
 
 bool Map::isWaterBotLeft(int x, int y)
 {
-	return mMap[(x-1) + (y+1) * 48] == 0 && !outsideMap(x, y);
+	return mMap[(x-1) + (y+1) * 48] == 0 && !outsideMap(x-1, y+1);
 }
 
 bool Map::isWaterBotRight(int x, int y)
 {
-	return mMap[(x+1) + (y+1) * 48] == 0 && !outsideMap(x, y);
+	return mMap[(x+1) + (y+1) * 48] == 0 && !outsideMap(x+1, y+1);
 }
 
 // ICE CHECKS
@@ -276,35 +276,35 @@ bool Map::isIceTopRight(int x, int y)
 
 int Map::isIceDir(int x, int y)
 {
-	if(isIceTop(x, y) && !(isWaterTop(x, y) || isIceBot(x, y) || (isIceRight(x, y) && isWaterLeft(x, y)) || (isIceLeft(x, y) && isWaterRight(x, y))))
+	if(!(isWaterTop(x, y) || isIceBot(x, y) || (isIceRight(x, y) && isWaterLeft(x, y)) || (isIceLeft(x, y) && isWaterRight(x, y))))
 	{
 		return 8;
 	}
-	else if(/*isIceTopRight(x, y) &&*/ !(isWaterTopRight(x, y) || isIceBotLeft(x, y) || (isWaterTopLeft(x, y) && isIceBotRight(x, y)) || (isWaterBotRight(x, y) && isIceTopLeft(x, y))))
-	{
-		return 9;
-	}
-	else if(isIceRight(x, y) && !(isWaterRight(x, y) || isIceLeft(x, y) || (isWaterBot(x, y) && isIceTop(x, y)) || (isWaterTop(x, y) && isIceBot(x, y))))
+	else if(!(isWaterRight(x, y) || isIceLeft(x, y) || (isWaterBot(x, y) && isIceTop(x, y)) || (isWaterTop(x, y) && isIceBot(x, y))))
 	{
 		return 6;
 	}
-	else if(isIceBotRight(x, y) && !(isWaterBotRight(x, y) || isIceTopLeft(x, y) || (isWaterBotLeft(x, y) && isIceTopRight(x, y)) || (isWaterTopRight(x, y) && isIceBotLeft(x, y))))
-	{
-		return 3;
-	}
-	else if(isIceBot(x, y) && !(isWaterBot(x, y) || isIceTop(x, y) || (isIceLeft(x, y) && isWaterRight(x, y)) || (isIceRight(x, y) && isWaterLeft(x, y))))
+	else if(!(isWaterBot(x, y) || isIceTop(x, y) || (isIceLeft(x, y) && isWaterRight(x, y)) || (isIceRight(x, y) && isWaterLeft(x, y))))
 	{
 		return 2;
 	}
-	else if(/*isIceBotLeft(x, y) &&*/ !(isWaterBotLeft(x, y) || isIceTopRight(x, y) || (isWaterBotRight(x, y) && isIceTopLeft(x, y)) || (isWaterTopLeft(x, y) && isIceBotRight(x, y))))
-	{
-		return 1;
-	}
-	else if(isIceLeft(x, y) && !(isWaterLeft(x, y) || isIceRight(x, y) || (isWaterBot(x, y) && isIceTop(x, y)) || (isWaterTop(x, y) && isIceBot(x, y))))
+	else if(!(isWaterLeft(x, y) || isIceRight(x, y) || (isWaterBot(x, y) && isIceTop(x, y)) || (isWaterTop(x, y) && isIceBot(x, y))))
 	{
 		return 4;
 	}
-	else if(isIceTopLeft(x, y) && !(isWaterTopLeft(x, y) || isIceBotRight(x, y) || (isWaterBotLeft(x, y) && isIceTopRight(x, y)) || (isWaterTopRight(x, y) && isIceBotLeft(x, y))))
+	else if(!(isWaterTopRight(x, y) || isIceBotLeft(x, y) || (isWaterTopLeft(x, y) && isIceBotRight(x, y)) || (isWaterBotRight(x, y) && isIceTopLeft(x, y)) || (isIceBot(x, y) && isIceLeft(x, y))))
+	{
+		return 9;
+	}
+	else if(!(isWaterBotRight(x, y) || isIceTopLeft(x, y) || (isWaterBotLeft(x, y) && isIceTopRight(x, y)) || (isWaterTopRight(x, y) && isIceBotLeft(x, y))))
+	{
+		return 3;
+	}
+	else if(!(isWaterBotLeft(x, y) || isIceTopRight(x, y) || (isWaterBotRight(x, y) && isIceTopLeft(x, y)) || (isWaterTopLeft(x, y) && isIceBotRight(x, y))))
+	{
+		return 1;
+	}
+	else if(!(isWaterTopLeft(x, y) || isIceBotRight(x, y) || (isWaterBotLeft(x, y) && isIceTopRight(x, y)) || (isWaterTopRight(x, y) && isIceBotLeft(x, y))))
 	{
 		return 7;
 	}
