@@ -17,14 +17,13 @@
 #include <Angler\SpriteNode.h>
 
 #include "Map.h"
+#include "School.h"
 
 class Font;
 
 namespace Ishavsfiske
 {
 	class Ship;
-
-	class Wreck;
 
 	class IshavsfiskeGame
 		: public Angler::Game
@@ -58,6 +57,9 @@ namespace Ishavsfiske
 
 		Ship *mShipFishing, *mShipBreaker;
 		
+		int mSchoolID;
+		std::vector<School*> mSchools;
+
 		sf::Sound *mCollFishingSound, *mCollBreakerSound, *mCollIceSound, *mEngineSound;
 		sf::SoundBuffer *mCollFishingBuff, *mCollBreakerBuff, *mCollIceBuff, *mEngineBuff;
 

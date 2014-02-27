@@ -7,6 +7,7 @@
 #endif
 
 #include "IshavsfiskeGame.h"
+#include "School.h"
 
 #include "FishingBoat.h"
 
@@ -15,16 +16,26 @@
 
 void Ishavsfiske::IshavsfiskeGame::collide(Angler::Node *nodeA, Angler::Node *nodeB)
 {
-	if (nodeB->getID() >= 0x20000000 && nodeB->getID() <= 0x2000FFFF)
+	if ((nodeA->getID() >= 0x200005000 && nodeA->getID() <= 0x20005FFF) || (nodeB->getID() >= 0x20005000 && nodeB->getID() <= 0x20005FFF))
 	{
 		if (nodeA->getID() == 0x00002201 || nodeB->getID() == 0x00002201)
 		{
-			((FishingBoat*)mShipFishing)->setFishing(1);
+			School *school = nullptr;
+			if (nodeA->getID() >= 0x20000000 && nodeA->getID() <= 0x2000FFFF)
+				school = (School*)(nodeA->getParent()->getParent()->getParent()->getParent());
+			else if (nodeB->getID() >= 0x20000000 && nodeB->getID() <= 0x2000FFFF)
+				school = (School*)(nodeB->getParent()->getParent()->getParent()->getParent());
+			((FishingBoat*)mShipFishing)->setFishing(1, school);
 			printf("Fishing Right\n");
 		}
 		else if (nodeA->getID() == 0x00002202 || nodeB->getID() == 0x00002202)
 		{
-			((FishingBoat*)mShipFishing)->setFishing(2);
+			School *school = nullptr;
+			if (nodeA->getID() >= 0x20000000 && nodeA->getID() <= 0x2000FFFF)
+				school = (School*)(nodeA->getParent()->getParent()->getParent()->getParent());
+			else if (nodeB->getID() >= 0x20000000 && nodeB->getID() <= 0x2000FFFF)
+				school = (School*)(nodeB->getParent()->getParent()->getParent()->getParent());
+			((FishingBoat*)mShipFishing)->setFishing(2, school);
 			printf("Fishing Left\n");
 		}
 	}

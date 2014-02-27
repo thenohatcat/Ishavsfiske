@@ -9,6 +9,7 @@
 #include "IshavsfiskeGame.h"
 
 #include "Ship.h"
+#include "FishingBoat.h"
 
 #include <glm\glm.hpp>
 
@@ -144,7 +145,7 @@ void IshavsfiskeGame::mDrawUI(float time, float deltaTime)
 		glPopMatrix();
 
 		char s[32];
-		sprintf_s(s, 32, "FPS: %03.0f", fps);
+		sprintf_s(s, 32, "FPS: %03.0f, Fish: %04u", fps, ((FishingBoat*)mShipFishing)->getAmmount());
 		mFont->drawString(mGraphics, "Ishavsfiske 0.1.4", 6, 1);
 		glTranslatef(0, 1/40.0f, 0);
 		mFont->drawString(mGraphics, std::string(s), 6, 1);

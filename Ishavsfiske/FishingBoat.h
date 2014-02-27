@@ -8,6 +8,7 @@
 #ifdef ISHAV_0_1_4
 
 #include "Ship.h"
+#include "School.h"
 
 namespace Ishavsfiske
 {
@@ -20,12 +21,16 @@ namespace Ishavsfiske
 
 		void update(Angler::Game *context, float time, float deltaTime, bool changed);
 
-		void setFishing(int);
+		void setFishing(int, School*);
+
+		int getAmmount();
 
 	protected:
 		virtual void mInit();
 	private:
 		Angler::Nodes::Rotation *mCraneRotation, *mLampRotation;
+		School *mSchool;
+		int mAmmount;
 	};
 }
 

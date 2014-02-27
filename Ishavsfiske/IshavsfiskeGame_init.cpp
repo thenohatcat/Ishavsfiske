@@ -83,9 +83,6 @@ void Ishavsfiske::IshavsfiskeGame::mInit()
 
 	mMap = new Map(0x80000000, mSceneRoot, this);
 
-	School *s = new School(0x20000000, mSceneRoot, this);
-	s->setPosition(0.7, 0.5);
-
 	//Map Collisions
 	std::vector<sf::Vector2f> leftBox;
 	leftBox.push_back(sf::Vector2f(2/10.0f, 0));
