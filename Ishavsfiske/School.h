@@ -29,6 +29,8 @@ namespace Ishavsfiske
 
 		int fish(int ammount);
 
+		int getAmmount();
+
 		virtual void update(Angler::Game *context, float time, float deltaTime, bool changed);
 	protected:
 		Angler::Game *mOwner;

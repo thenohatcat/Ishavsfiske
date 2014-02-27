@@ -26,6 +26,14 @@ FishingBoat::FishingBoat(unsigned long id, Ishavsfiske::IshavsfiskeGame *owner)
 	mInit();
 }
 
+FishingBoat::~FishingBoat()
+{
+	delete mCraneRotation;
+	delete mLampRotation;
+
+	Ship::~Ship();
+}
+
 void FishingBoat::setFishing(int mode, School *school)
 {
 	//Not fishing

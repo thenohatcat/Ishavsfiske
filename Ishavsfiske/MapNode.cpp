@@ -28,6 +28,11 @@ MapNode::MapNode(unsigned long id, Angler::Game *owner, int tile)
 	mInit();
 }
 
+MapNode::~MapNode()
+{
+	Node::~Node();
+}
+
 void MapNode::draw(Angler::Game* context, Angler::Graphics::GraphicsEngine* graphics, float time, float deltaTime)
 {
 	mDrawChildren(context, graphics, time, deltaTime);

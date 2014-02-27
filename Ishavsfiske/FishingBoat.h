@@ -19,6 +19,8 @@ namespace Ishavsfiske
 		FishingBoat(unsigned long id, Angler::Node *parent, Ishavsfiske::IshavsfiskeGame *owner);
 		FishingBoat(unsigned long id, Ishavsfiske::IshavsfiskeGame *owner);
 
+		virtual ~FishingBoat();
+
 		void update(Angler::Game *context, float time, float deltaTime, bool changed);
 
 		void setFishing(int, School*);

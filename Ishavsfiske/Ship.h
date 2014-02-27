@@ -23,6 +23,8 @@ namespace Ishavsfiske
 		Ship(unsigned long id, Angler::Node *parent, Ishavsfiske::IshavsfiskeGame *owner);
 		Ship(unsigned long id, Ishavsfiske::IshavsfiskeGame *owner);
 
+		virtual ~Ship();
+
 		void move(float x, float y, bool global = false);
 		void rotate(float r);
 
