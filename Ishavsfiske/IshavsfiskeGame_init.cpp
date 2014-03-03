@@ -79,7 +79,7 @@ void Ishavsfiske::IshavsfiskeGame::mInit()
 	mGraphics->addLayer(512);
 
 	mObjectsRoot = new Angler::Node(0, mSceneRoot);
-	mObjectsRoot->pause(true);
+	mUIRoot = new Angler::Node(0, mSceneRoot);
 
 	mShipFishing = new FishingBoat(0x10000, mObjectsRoot, this);
 	mShipBreaker = new IceBreaker(0x20000, mObjectsRoot, this);

@@ -21,12 +21,6 @@
 
 using namespace Ishavsfiske;
 
-float avd;
-unsigned int frmd;
-float fps;
-
-int tm;
-
 void IshavsfiskeGame::mDraw(float time, float deltaTime)
 {
 	mGraphics->begin();
