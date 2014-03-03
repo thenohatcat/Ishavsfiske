@@ -118,5 +118,5 @@ void Ishavsfiske::IshavsfiskeGame::mUpdate(float time, float deltaTime)
 
 	((FishingBoat*)mShipFishing)->setFishing(0, nullptr);
 	//Collision system collide
-	mMechanics->doCollide(mSceneRoot);
+	mMechanics->doCollide(mObjectsRoot);
 }

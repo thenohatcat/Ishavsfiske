@@ -57,6 +57,8 @@ namespace Ishavsfiske
 
 		Ship *mShipFishing, *mShipBreaker;
 		
+		Angler::Node *mUIRoot, *mObjectsRoot;
+
 		int mSchoolID;
 		std::vector<School*> mSchools;
 
