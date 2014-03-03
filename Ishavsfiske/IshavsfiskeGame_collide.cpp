@@ -18,7 +18,7 @@ void Ishavsfiske::IshavsfiskeGame::collide(Angler::Node *nodeA, Angler::Node *no
 {
 	if ((nodeA->getID() >= 0x200005000 && nodeA->getID() <= 0x20005FFF) || (nodeB->getID() >= 0x20005000 && nodeB->getID() <= 0x20005FFF))
 	{
-		if (nodeA->getID() == 0x00002201 || nodeB->getID() == 0x00002201)
+		if (nodeA->getID() == 0x00012201 || nodeB->getID() == 0x00012201)
 		{
 			School *school = nullptr;
 			if (nodeA->getID() >= 0x20000000 && nodeA->getID() <= 0x2000FFFF)
@@ -28,7 +28,7 @@ void Ishavsfiske::IshavsfiskeGame::collide(Angler::Node *nodeA, Angler::Node *no
 			((FishingBoat*)mShipFishing)->setFishing(1, school);
 			printf("Fishing Right\n");
 		}
-		else if (nodeA->getID() == 0x00002202 || nodeB->getID() == 0x00002202)
+		else if (nodeA->getID() == 0x00012202 || nodeB->getID() == 0x00012202)
 		{
 			School *school = nullptr;
 			if (nodeA->getID() >= 0x20000000 && nodeA->getID() <= 0x2000FFFF)
@@ -43,7 +43,7 @@ void Ishavsfiske::IshavsfiskeGame::collide(Angler::Node *nodeA, Angler::Node *no
 	if((nodeA->getID() >= 0x80012000 && nodeA->getID() <= 0x80013000) || (nodeB->getID() >= 0x80012000 && nodeB->getID() <= 0x80013000))
 	{
 		//ice and icebreaker
-		if(nodeA->getID() >= 0x00020000 && nodeA->getID() <= 0x0002FFFF)
+		if(nodeA->getID() == 0x00022102 || nodeB->getID() == 0x00022102)
 		{
 			int indx = nodeB->getID()& 0xFFF;
 			if(mMap->getTile(indx) >= 0x10 && mMap->getTile(indx) <= 0x1F)
@@ -57,7 +57,7 @@ void Ishavsfiske::IshavsfiskeGame::collide(Angler::Node *nodeA, Angler::Node *no
 			}
 		}
 		//ice and fishingboat
-		if(nodeA->getID() >= 0x00010000 && nodeA->getID() <= 0x0001FFFF)
+		if(nodeA->getID() == 0x00012102 || nodeB->getID() == 0x00012102)
 		{
 			int indx = nodeB->getID()& 0xFFF;
 			if(mMap->getTile(indx) >= 0x10 && mMap->getTile(indx) <= 0x1F)
@@ -68,10 +68,10 @@ void Ishavsfiske::IshavsfiskeGame::collide(Angler::Node *nodeA, Angler::Node *no
 		}	
 	}
 	//if mShipFishing collides
-	if((nodeA->getID() >= 0x00010000 && nodeA->getID() <= 0x0001FFFF) || (nodeB->getID() >= 0x00010000 && nodeB->getID() <= 0x0001FFFF))
+	if(nodeA->getID() == 0x00012102 || nodeB->getID() == 0x00012102)
 	{
 		//Fishingboat and iceBreaker
-		if(nodeB->getID() >= 0x00020000 && nodeB->getID() <= 0x0002FFFF)
+		if(nodeA->getID() == 0x00022102 || nodeB->getID() == 0x00022102)
 		{
 			mShipFishing->revert();
 			mSound->playSound(mCollFishingSound);

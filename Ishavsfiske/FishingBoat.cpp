@@ -97,10 +97,10 @@ void FishingBoat::mInit()
 	}
 	//new Angler::Nodes::CollisionNode(getID() + 0x0201, rightFishT, fishPTS, 0);
 	Angler::Nodes::Translation *rightFishT = new Angler::Nodes::Translation(getID() + 0x4200, s, 0.45f, 0.15f);
-	new Angler::Nodes::CollisionNode(0x2201, rightFishT, fishPTS, 0);
+	new Angler::Nodes::CollisionNode(getID() + 0x2201, rightFishT, fishPTS, 0);
 
 	Angler::Nodes::Translation *leftFishT = new Angler::Nodes::Translation(getID() + 0x4200, s, -0.45f, 0.15f);
-	new Angler::Nodes::CollisionNode(0x2202, leftFishT, fishPTS, 0);
+	new Angler::Nodes::CollisionNode(getID() + 0x2202, leftFishT, fishPTS, 0);
 
 	Angler::Nodes::Translation *craneT = new Angler::Nodes::Translation(getID() + 0x4103, mShipRoot, 
 		2.5f/20.0f * 1.5f/2.5f*(-0.5f+0.506f), 2.5f/20.0f * (-0.5+0.672f));
