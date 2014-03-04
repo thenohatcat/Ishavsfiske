@@ -38,11 +38,6 @@ void MapNode::draw(Angler::Game* context, Angler::Graphics::GraphicsEngine* grap
 	mDrawChildren(context, graphics, time, deltaTime);
 }
 
-void MapNode::update(Angler::Game* context, float time, float deltaTime)
-{
-	mUpdateChildren(context, time, deltaTime);
-}
-
 void MapNode::mInit()
 {
 	std::vector<sf::Vector2f> ptsa;

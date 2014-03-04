@@ -63,6 +63,8 @@ void Ishavsfiske::IshavsfiskeGame::collide(Angler::Node *nodeA, Angler::Node *no
 			if(mMap->getTile(indx) >= 0x10 && mMap->getTile(indx) <= 0x1F)
 			{
 				mShipFishing->revert();
+				mShipBreaker->revert();
+				mMap->revert();
 				mSound->playSound(mCollFishingSound);
 			}
 		}	

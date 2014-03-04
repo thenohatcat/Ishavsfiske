@@ -34,7 +34,7 @@ IceBreaker::~IceBreaker()
 
 void IceBreaker::mInit()
 {
-	mStartX = 0.7f;
+	mStartX = 0.8f;
 	mStartY = 0.5f;
 
 	Ship::mInit();
