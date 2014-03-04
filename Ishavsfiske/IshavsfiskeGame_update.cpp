@@ -27,31 +27,36 @@ void Ishavsfiske::IshavsfiskeGame::mMoveFrame(float dx, float dy)
 {
 	if (mx <= 0 && dx < 0)
 		dx = 0;
-	else if (mx >= 23 && dx > 0)
+	else if (mx >= 47 && dx > 0)
 		dx = 0;
 
 	if (my <= 0 && dy < 0)
 		dy = 0;
-	else if (my >= 19 && dy > 0)
+	else if (my >= 39 && dy > 0)
 		dy = 0;
 
 	if (mx < 0)
 		mx = 0;
-	else if (mx > 23)
-		mx = 23;
+	else if (mx > 47)
+		mx = 47;
 	if (my < 0)
 		my = 0;
-	else if (my > 19)
-		my = 19;
+	else if (my > 39)
+		my = 39;
 
-	mx += 5 * dx;
-	my += 5 * dy;
+	mx += dx;
+	my += dy;
+	
+	mMapRoot->translate(-dx, -dy);
 
-	if (floor(lastX) != floor(mx))
+	mShipBreaker->move(-5*dx, -dy, true);
+	mShipFishing->move(-dx, -dy, true);
+
+	if (floor(lastX*20) != floor(mx*20))
+	//if (fmod(mx, 0) == 0)
 	{
-		mShipBreaker->move((floor(lastX) - floor(mx))/20.0f, 0, true);
-		mShipFishing->move((floor(lastX) - floor(mx))/20.0f, 0, true);
-		mMap->setPos(sf::Vector2i((int)mx, (int)my));
+		mMapRoot->setTranslation(0, 0);
+		mMap->setPos(sf::Vector2i((int)(mx*20), (int)(my*20)));	
 	}
 
 	lastX = mx;
@@ -84,14 +89,22 @@ void Ishavsfiske::IshavsfiskeGame::mUpdate(float time, float deltaTime)
 	float breakerX = ((mShipBreaker->getPosition().x - 4/20.0f) * 20), breakerY = (mShipBreaker->getPosition().y * 20);
 	float fishingX = ((mShipFishing->getPosition().x - 4/20.0f) * 20), fishingY = (mShipFishing->getPosition().y * 20);
 
-	mvx = ((breakerX < 6.0f && fishingX < 18.0f) ? -((6-breakerX) * (6-breakerX)) / 36.0f : 0) + 
+	float breakerVX = mShipBreaker->getGlobalVelocity().x, breakerVY = mShipBreaker->getGlobalVelocity().y;
+	float fishingVX = mShipFishing->getGlobalVelocity().x, fishingVY = mShipFishing->getGlobalVelocity().y;
+
+	/*mvx = ((breakerX < 6.0f && fishingX < 18.0f) ? -((6-breakerX) * (6-breakerX)) / 36.0f : 0) + 
 		((breakerX > 18.0f && fishingX > 6.0f) ? ((6-(24-breakerX)) * (6-(24-breakerX))) / 36.0f : 0) +
 		((fishingX < 6.0f && breakerX < 18.0f) ? -((6-fishingX) * (6-fishingX)) / 36.0f : 0) + 
 		((fishingX > 18.0f && breakerX > 6.0f) ? ((6-(24-fishingX)) * (6-(24-fishingX))) / 36.0f : 0);
 	mvy = ((breakerY < 5.0f && fishingY < 15.0f) ? -((5-breakerY) * (5-breakerY)) / 25.0f : 0) + 
 		((breakerY > 15.0f && fishingY > 5.0f) ? ((5-(20-breakerY)) * (5-(20-breakerY))) / 25.0f : 0) +
 		((fishingY < 5.0f && breakerY < 15.0f) ? -((5-fishingY) * (5-fishingY)) / 25.0f : 0) + 
-		((fishingY > 15.0f && breakerY > 5.0f) ? ((5-(20-fishingY)) * (5-(20-fishingY))) / 25.0f : 0);
+		((fishingY > 15.0f && breakerY > 5.0f) ? ((5-(20-fishingY)) * (5-(20-fishingY))) / 25.0f : 0);*/
+
+	if ((breakerX > 18.0f && fishingX > 6.0f))
+	{
+		mvx = breakerVX;
+	}
 
 	mMoveFrame(mvx * deltaTime, mvy * deltaTime);
 

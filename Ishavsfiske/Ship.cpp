@@ -107,7 +107,13 @@ void Ship::revert()
 
 sf::Vector2f Ship::getVelocity()
 {
-	return sf::Vector2f(mVel);
+	return sf::Vector2f(mVel.x, mVel.y);
+}
+
+sf::Vector2f Ship::getGlobalVelocity()
+{
+	Rotation r(0, mRootRotation->getRotation());
+	return r.transform(mVel);
 }
 
 sf::Vector2f Ship::getPosition()

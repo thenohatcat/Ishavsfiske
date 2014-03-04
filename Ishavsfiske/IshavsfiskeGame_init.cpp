@@ -40,7 +40,14 @@ void Ishavsfiske::IshavsfiskeGame::mLoadContent()
 	mEngineBuff->loadFromFile("Motor_Collage_Test.wav");
 	mEngineSound->setBuffer(*mEngineBuff);
 	
+	mMusicFishingBuff->loadFromFile("Hav_Fiske.wav");
+
+	mMusic->setBuffer(*mMusicFishingBuff);
+
+	mSound->playSound(mMusic, false, -1, -1, true);
+
 	mSound->playSound(mEngineSound, false, 0, 1.46f, true);
+	mSound->setVolume(mEngineSound, 60.0f);
 
 	mGraphics->getLayer(0)->setTexture(mTXUI);
 	mGraphics->getLayer(1)->setTexture(mTXUI);
@@ -70,6 +77,10 @@ void Ishavsfiske::IshavsfiskeGame::mInit()
 	mEngineSound = new sf::Sound();
 	mEngineBuff = new sf::SoundBuffer();
 
+	mMusicFishingBuff = new sf::SoundBuffer();
+
+	mMusic = new sf::Sound();
+
 	mGraphics->addLayer(512);
 	mGraphics->addLayer(512);
 	mGraphics->addLayer(32);
@@ -84,7 +95,9 @@ void Ishavsfiske::IshavsfiskeGame::mInit()
 	mShipFishing = new FishingBoat(0x10000, mObjectsRoot, this);
 	mShipBreaker = new IceBreaker(0x20000, mObjectsRoot, this);
 
-	mMap = new Map(0x80000000, mObjectsRoot, this);
+	//mMap = new Map(0x80000000, mObjectsRoot, this);
+	mMapRoot = new Angler::Nodes::Translation(0x0, mObjectsRoot, 0, 0);
+	mMap = new Map(0x80000000, mMapRoot, this);
 
 	//Map Collisions
 	std::vector<sf::Vector2f> leftBox;

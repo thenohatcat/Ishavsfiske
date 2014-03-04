@@ -42,7 +42,7 @@ private:
 	bool outsideMap(int x, int y);
 
 
-	MapNode *mMapNodes[24 * 20];
+	MapNode *mMapNodes[25 * 20];
 };
 
 #else

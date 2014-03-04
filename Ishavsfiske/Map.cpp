@@ -42,10 +42,10 @@ void Map::mInit()
 	for(int y = 0; y < 20; y++)
 	{
 		Angler::Nodes::Translation *row = new Angler::Nodes::Translation(0, t, 0, y);
-		for(int x = 0; x < 24; x++)
+		for(int x = 0; x < 25; x++)
 		{
 			Angler::Nodes::Translation *col = new Angler::Nodes::Translation(0, row, x, 0);
-			mMapNodes[x + y * 24] = new MapNode(0x80010000 + x + y * 24, col, mParent, 0);
+			mMapNodes[x + y * 25] = new MapNode(0x80010000 + x + y * 25, col, mParent, 0);
 		}
 	}
 	mUpdateMap();
@@ -115,15 +115,15 @@ void Map::genMap(int lvl)
 
 int Map::getTile(int index)
 {
-	int x = index % 24;
-	int y = index / 24;
+	int x = index % 25;
+	int y = index / 25;
 	return mMap[(x + mPos.x) + (y + mPos.y) * 48];
 }
 
 void Map::setTile(int index, int tile)
 {
-	int x = index % 24;
-	int y = index / 24;
+	int x = index % 25;
+	int y = index / 25;
 
 	mMap[(x + mPos.x) + (y + mPos.y) * 48] = tile;
 	mUpdateMap();
@@ -144,43 +144,43 @@ void Map::mUpdateMap()
 {
 	for(int y = 0; y < 20; y++)
 	{
-		for(int x = 0; x < 24; x++)
+		for(int x = 0; x < 25; x++)
 		{
 			if(mMap[(x + mPos.x) + (y + mPos.y) * 48] == 0x10 && isWater((x + mPos.x), (y + mPos.y)))
 			{
 					switch(isIceDir((x + mPos.x), (y + mPos.y)))
 					{
 					case 8:
-						mMapNodes[x + y * 24]->setTile(0x12);
+						mMapNodes[x + y * 25]->setTile(0x12);
 						break;
 					case 1:
-						mMapNodes[x + y * 24]->setTile(0x13);
+						mMapNodes[x + y * 25]->setTile(0x13);
 						break;
 					case 6:
-						mMapNodes[x + y * 24]->setTile(0x14);
+						mMapNodes[x + y * 25]->setTile(0x14);
 						break;
 					case 3:
-						mMapNodes[x + y * 24]->setTile(0x15);
+						mMapNodes[x + y * 25]->setTile(0x15);
 						break;
 					case 2:
-						mMapNodes[x + y * 24]->setTile(0x16);
+						mMapNodes[x + y * 25]->setTile(0x16);
 						break;
 					case 9:
-						mMapNodes[x + y * 24]->setTile(0x17);
+						mMapNodes[x + y * 25]->setTile(0x17);
 						break;
 					case 4:
-						mMapNodes[x + y * 24]->setTile(0x18);
+						mMapNodes[x + y * 25]->setTile(0x18);
 						break;
 					case 7:
-						mMapNodes[x + y * 24]->setTile(0x19);
+						mMapNodes[x + y * 25]->setTile(0x19);
 						break;
 					default:
-						mMapNodes[x + y * 24]->setTile(0x11);
+						mMapNodes[x + y * 25]->setTile(0x11);
 						break;
 					}
 			}
 			else
-				mMapNodes[x + y * 24]->setTile(mMap[(x + mPos.x) + (y + mPos.y) * 48]);
+				mMapNodes[x + y * 25]->setTile(mMap[(x + mPos.x) + (y + mPos.y) * 48]);
 		}
 	}
 }
