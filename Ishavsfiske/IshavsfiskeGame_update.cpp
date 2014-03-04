@@ -98,7 +98,7 @@ void Ishavsfiske::IshavsfiskeGame::mUpdate(float time, float deltaTime)
 	if (fmod(time, 1) < deltaTime)
 		if (mSchools.size() < 5)
 		{
-			School *s = new School(0x20000000 + mSchoolID++, mSceneRoot, this);
+			School *s = new School(0x20000000 + mSchoolID++, mObjectsRoot, this);
 			s->setPosition(((rand() % 1000)/1000.0f) * 12/10.0f + 2/10.0f, (rand() % 1000)/1000.0f);
 			mSchools.push_back(s);
 			printf("Added school: %04X { %04.2f, %04.2f }\n", s->getID(), s->getPosition().x * 10, s->getPosition().y * 10);
