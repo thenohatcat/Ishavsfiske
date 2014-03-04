@@ -19,6 +19,8 @@ namespace Ishavsfiske
 			Ishavsfiske::IshavsfiskeGame *owner);
 		IceBreaker(unsigned long id, Ishavsfiske::IshavsfiskeGame *owner);
 
+		virtual ~IceBreaker();
+
 		void update(Angler::Game *context, float time, float deltaTime, bool changed);
 
 	protected:

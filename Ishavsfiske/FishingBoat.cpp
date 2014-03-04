@@ -15,15 +15,50 @@
 using namespace Ishavsfiske;
 
 FishingBoat::FishingBoat(unsigned long id, Angler::Node *parent, Ishavsfiske::IshavsfiskeGame *owner)
-			: Ship(id, parent, owner)
+			: Ship(id, parent, owner), mAmmount(0), mSchool(nullptr)
 {
 	mInit();
 }
 
 FishingBoat::FishingBoat(unsigned long id, Ishavsfiske::IshavsfiskeGame *owner)
-			: Ship(id, owner)
+			: Ship(id, owner), mAmmount(0), mSchool(nullptr)
 {
 	mInit();
+}
+
+FishingBoat::~FishingBoat()
+{
+	delete mCraneRotation;
+	delete mLampRotation;
+
+	Ship::~Ship();
+}
+
+void FishingBoat::setFishing(int mode, School *school)
+{
+	//Not fishing
+	if (mode == 0)
+	{
+		mSchool = nullptr;
+		mCraneRotation->setRotation(90.0f);
+	}
+	//Fishing right
+	else if (mode == 1)
+	{
+		mSchool = school;
+		mCraneRotation->setRotation(0);
+	}
+	//Fishing left
+	else if (mode == 2)
+	{
+		mSchool = school;
+		mCraneRotation->setRotation(180.0f);
+	}
+}
+
+int FishingBoat::getAmmount()
+{
+	return mAmmount;
 }
 
 void FishingBoat::mInit()
@@ -56,7 +91,7 @@ void FishingBoat::mInit()
 	new Angler::Nodes::CollisionNode(getID() + 0x2102, s, pts, 0);
 
 	std::vector<sf::Vector2f> fishPTS;
-	for (int i = 0; i < 16; i++)
+	for (int i = 0; i < 15; i++)
 	{
 		fishPTS.push_back(sf::Vector2f(1/4.0f*cos(i/16.0f * 2*3.14159f), 0.5f*sin(i/16.0f * 2*3.14159f)));
 	}
@@ -86,6 +121,13 @@ void FishingBoat::update(Angler::Game *context, float time, float deltaTime, boo
 {
 	//mCraneRotation->setRotation(45/2.0f*sin(time));
 	mLampRotation->setRotation(90*sin(time));
+
+	if (mSchool != nullptr)
+		if (fmod(time, 0.25f) < deltaTime)
+		{
+			printf("{ %03.2f, %03.2f }\n", mSchool->getPosition().x, mSchool->getPosition().y);
+			mAmmount += mSchool->fish(5);
+		}
 
 	Ship::update(context, time, deltaTime, changed);
 }

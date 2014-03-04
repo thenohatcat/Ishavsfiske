@@ -12,21 +12,22 @@
 #include "IshavsfiskeGame.h"
 #include "School.h"
 
+using namespace Ishavsfiske;
 using namespace Angler::Nodes;
 
-Ishavsfiske::School::School(unsigned long id, Angler::Node *parent, Ishavsfiske::IshavsfiskeGame *owner)
+School::School(unsigned long id, Angler::Node *parent, Ishavsfiske::IshavsfiskeGame *owner)
 	: Node(id, parent), mOwner(owner), mStartX(0.5f), mStartY(0.5f), mAmmount(10)
 {
 	mInit();
 }
 
-Ishavsfiske::School::School(unsigned long id, Ishavsfiske::IshavsfiskeGame *owner)
+School::School(unsigned long id, Ishavsfiske::IshavsfiskeGame *owner)
 	: Node(id), mOwner(owner), mStartX(0.5f), mStartY(0.5f), mAmmount(10)
 {
 	mInit();
 }
 
-void Ishavsfiske::School::mInit()
+void School::mInit()
 {
 	mRootTranslation = new Translation(getID() + 0x2000, this, mStartX, mStartY);
 	Angler::Nodes::Scale *s = new Angler::Nodes::Scale(getID() + 0x3000, mRootTranslation, 1/20.0f, 1/20.0f);
@@ -37,8 +38,7 @@ void Ishavsfiske::School::mInit()
 	pts.push_back(sf::Vector2f(0, 0));
 	pts.push_back(sf::Vector2f(0, 1));
 	pts.push_back(sf::Vector2f(1 ,1));
-
-	new Angler::Nodes::CollisionNode(getID() + 0x5000, mSchoolRoot, pts, 0);
+	new Angler::Nodes::CollisionNode(getID() + 0x5000, mSchoolRoot, pts, 1);
 
 	std::vector<sf::Vector2f> anim;
 	anim.push_back(sf::Vector2f(0, 0));
@@ -57,25 +57,30 @@ void Ishavsfiske::School::mInit()
 	anim.push_back(sf::Vector2f(13/16.0f, 0));
 	anim.push_back(sf::Vector2f(14/16.0f, 0));
 	anim.push_back(sf::Vector2f(15/16.0f, 0));
-	new Angler::Nodes::AnimatedNode(getID() + 0x1000, mSchoolRoot, 2, anim, 1/8.0f, 0.5f, 0.5f, 1/16.0f, 1);
+	new Angler::Nodes::AnimatedNode(getID() + 0x1000, mSchoolRoot, 2, anim, 1/8.0f, 0, 0, 1/16.0f, 1);
 }
 
-void Ishavsfiske::School::move(float x, float y)
+void School::move(float x, float y)
 {
 	mRootTranslation->translate(sf::Vector2f(5*x, 5*y));
 }
 
-sf::Vector2f Ishavsfiske::School::getPosition()
+sf::Vector2f School::getPosition()
 {
 	return mRootTranslation->getTranslation();
 }
 
-void Ishavsfiske::School::setPosition(float x, float y)
+void School::setPosition(float x, float y)
 {
 	mRootTranslation->setTranslation(sf::Vector2f(x, y));
 }
 
-int Ishavsfiske::School::fish(int ammount)
+int School::getAmmount()
+{
+	return mAmmount;
+}
+
+int School::fish(int ammount)
 {
 	if(ammount <= mAmmount)
 	{
@@ -90,7 +95,7 @@ int Ishavsfiske::School::fish(int ammount)
 	}
 }
 
-void Ishavsfiske::School::update(Angler::Game *context, float time, float deltaTime, bool changed)
+void School::update(Angler::Game *context, float time, float deltaTime, bool changed)
 {
 	mChanged |= changed;
 

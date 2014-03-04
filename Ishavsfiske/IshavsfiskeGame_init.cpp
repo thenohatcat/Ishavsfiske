@@ -78,12 +78,13 @@ void Ishavsfiske::IshavsfiskeGame::mInit()
 	mGraphics->addLayer(64);
 	mGraphics->addLayer(512);
 
-	mShipFishing = new FishingBoat(0x10000, mSceneRoot, this);
-	mShipBreaker = new IceBreaker(0x20000, mSceneRoot, this);
+	mObjectsRoot = new Angler::Node(0, mSceneRoot);
+	mUIRoot = new Angler::Node(0, mSceneRoot);
 
-	mMap = new Map(0x80000000, mSceneRoot, this);
+	mShipFishing = new FishingBoat(0x10000, mObjectsRoot, this);
+	mShipBreaker = new IceBreaker(0x20000, mObjectsRoot, this);
 
-	new School(0x20000000, mSceneRoot, this);
+	mMap = new Map(0x80000000, mObjectsRoot, this);
 
 	//Map Collisions
 	std::vector<sf::Vector2f> leftBox;
@@ -91,28 +92,28 @@ void Ishavsfiske::IshavsfiskeGame::mInit()
 	leftBox.push_back(sf::Vector2f(1/10.0f, 0));
 	leftBox.push_back(sf::Vector2f(1/10.0f, 1));
 	leftBox.push_back(sf::Vector2f(2/10.0f, 1));
-	new Angler::Nodes::CollisionNode(0x70000000, mSceneRoot, leftBox, 1);
+	new Angler::Nodes::CollisionNode(0x70000000, mObjectsRoot, leftBox, 1);
 
 	std::vector<sf::Vector2f> rightBox;
 	rightBox.push_back(sf::Vector2f(15/10.0f, 0));
 	rightBox.push_back(sf::Vector2f(14/10.0f, 0));
 	rightBox.push_back(sf::Vector2f(14/10.0f, 1));
 	rightBox.push_back(sf::Vector2f(15/10.0f, 1));
-	new Angler::Nodes::CollisionNode(0x70000001, mSceneRoot, rightBox, 1);
+	new Angler::Nodes::CollisionNode(0x70000001, mObjectsRoot, rightBox, 1);
 
 	std::vector<sf::Vector2f> topBox;
 	topBox.push_back(sf::Vector2f(15/10.0f, -1/10.0f));
 	topBox.push_back(sf::Vector2f(1/10.0f, -1/10.0f));
 	topBox.push_back(sf::Vector2f(1/10.0f, 0));
 	topBox.push_back(sf::Vector2f(15/10.0f, 0));
-	new Angler::Nodes::CollisionNode(0x70000002, mSceneRoot, topBox, 1);
+	new Angler::Nodes::CollisionNode(0x70000002, mObjectsRoot, topBox, 1);
 
 	std::vector<sf::Vector2f> bottomBox;
 	bottomBox.push_back(sf::Vector2f(15/10.0f, 1));
 	bottomBox.push_back(sf::Vector2f(1/10.0f, 1));
 	bottomBox.push_back(sf::Vector2f(1/10.0f, 11/10.0f));
 	bottomBox.push_back(sf::Vector2f(15/10.0f, 11/10.0f));
-	new Angler::Nodes::CollisionNode(0x70000003, mSceneRoot, bottomBox, 1);
+	new Angler::Nodes::CollisionNode(0x70000003, mObjectsRoot, bottomBox, 1);
 
 	mFont = new Font();
 }

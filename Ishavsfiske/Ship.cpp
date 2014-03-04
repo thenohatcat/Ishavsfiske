@@ -16,21 +16,31 @@
 
 #include <iostream>
 
+using namespace Ishavsfiske;
 using namespace Angler::Nodes;
 
-Ishavsfiske::Ship::Ship(unsigned long id, Angler::Node *parent, Ishavsfiske::IshavsfiskeGame *owner)
+Ship::Ship(unsigned long id, Angler::Node *parent, Ishavsfiske::IshavsfiskeGame *owner)
 	: Node(id, parent), mOwner(owner), mVel(0, 0), mStartX(0.5f), mStartY(0.5f)
 {
 	
 }
 
-Ishavsfiske::Ship::Ship(unsigned long id, Ishavsfiske::IshavsfiskeGame *owner)
+Ship::Ship(unsigned long id, Ishavsfiske::IshavsfiskeGame *owner)
 	: Node(id), mOwner(owner), mVel(0, 0), mStartX(0.5f), mStartY(0.5f)
 {
 	
 }
 
-void Ishavsfiske::Ship::mInit()
+Ship::~Ship()
+{
+	delete mShipRoot;
+	delete mRootRotation;
+	delete mRootTranslation;
+
+	Node::~Node();
+}
+
+void Ship::mInit()
 {
 	unsigned long id = getID();
 	mRootTranslation = new Translation(id + 0x0001, this, mStartX, mStartY);
@@ -38,7 +48,7 @@ void Ishavsfiske::Ship::mInit()
 	mShipRoot = new Node(id + 0x0004, mRootRotation);
 }
 
-void Ishavsfiske::Ship::move(float x, float y, bool global)
+void Ship::move(float x, float y, bool global)
 {	
 	if (global)
 	{
@@ -52,12 +62,12 @@ void Ishavsfiske::Ship::move(float x, float y, bool global)
 	}
 }
 
-void Ishavsfiske::Ship::throttle(float vx, float vy)
+void Ship::throttle(float vx, float vy)
 {
 	mVel.x += vx; mVel.y += vy;
 }
 
-void Ishavsfiske::Ship::update(Angler::Game *context, float time, float deltaTime, bool changed)
+void Ship::update(Angler::Game *context, float time, float deltaTime, bool changed)
 {
 	mChanged |= changed;
 	
@@ -82,12 +92,12 @@ void Ishavsfiske::Ship::update(Angler::Game *context, float time, float deltaTim
 	mUpdateChildren(context, time, deltaTime);
 }
 
-void Ishavsfiske::Ship::rotate(float r)
+void Ship::rotate(float r)
 {
 	mRootRotation->rotate(r);
 }
 
-void Ishavsfiske::Ship::revert()
+void Ship::revert()
 {
 	mRootTranslation->setTranslation(mOT);
 	mRootRotation->setRotation(mOR);
@@ -95,17 +105,17 @@ void Ishavsfiske::Ship::revert()
 	mChanged = true;
 }
 
-sf::Vector2f Ishavsfiske::Ship::getVelocity()
+sf::Vector2f Ship::getVelocity()
 {
 	return sf::Vector2f(mVel);
 }
 
-sf::Vector2f Ishavsfiske::Ship::getPosition()
+sf::Vector2f Ship::getPosition()
 {
 	return mRootTranslation->getTranslation();
 }
 
-float Ishavsfiske::Ship::getRotation()
+float Ship::getRotation()
 {
 	return mRootRotation->getRotation();
 }

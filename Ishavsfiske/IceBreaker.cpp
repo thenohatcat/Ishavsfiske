@@ -27,6 +27,11 @@ IceBreaker::IceBreaker(unsigned long id, Ishavsfiske::IshavsfiskeGame *owner)
 	mInit();
 }
 
+IceBreaker::~IceBreaker()
+{
+	Ship::~Ship();
+}
+
 void IceBreaker::mInit()
 {
 	mStartX = 0.7f;
