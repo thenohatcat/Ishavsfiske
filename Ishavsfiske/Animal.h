@@ -12,34 +12,47 @@
 #include <Angler\Rotation.h>
 #include <Angler\CollisionNode.h>
 
-class isHavsFiskeGame;
-
-class Animal
-	: public Angler::Node
+namespace Ishavsfiske
 {
-public:
-	Animal(unsigned long id, Angler::Node *parent, Angler::Game *owner);
-	Animal(unsigned long id, Angler::Game *owner);
+	class IshavsfiskeGame;
 
-	/*virtual void move(float x, float y);
-	virtual void attack();*/
+	class Animal
+		: public Angler::Node
+	{
+	public:
+		Animal(unsigned long id, Angler::Node *parent, Angler::Game *owner);
+		Animal(unsigned long id, Angler::Game *owner);
 
-	void update(Angler::Game *context, float time, float deltaTime, bool changed);
-protected:
-	Angler::Game *mOwner;
+		virtual void move(float x, float y);
+	/*	virtual void attack();*/
 
-	virtual void mInit();
+		void update(Angler::Game *context, float time, float deltaTime, bool changed);
+	protected:
+		Angler::Game *mOwner;
 
-	float mStartX, mStartY;
+		virtual void mInit();
 
-	Angler::Node *mAnimalRoot;
-private:
-	/*Angler::Nodes::SpriteNode *mBearSprite;*/
+		float mStartX, mStartY;
+	
+		Angler::Node *mAnimalRoot;
+	private:
+		/*Angler::Nodes::SpriteNode *mBearSprite;*/
 
-	Angler::Nodes::Translation *mRootTranslation;
-	Angler::Nodes::Rotation *mRootRotation;
-};
+		Angler::Nodes::Translation *mRootTranslation;
+		Angler::Nodes::Rotation *mRootRotation;
+	
+		float mLR, mOR;
+		sf::Vector2f mLT, mOT;
 
+		sf::Vector2f mVel, mDis;
+
+		sf::Vector2f mFishPos;
+		bool atShip();
+		int direction(sf::Vector2f position);
+
+		void setSpeed(float vx, float vy);
+	};
+}
 
 #else
 #error Animal.h: Wrong version 0.1.4

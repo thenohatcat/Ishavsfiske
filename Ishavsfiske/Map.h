@@ -22,11 +22,13 @@ public:
 	int getTile(int index);
 	void setTile(int index, int tile);
 
+	// Behövs dessa funktioner?
 	void setPos(sf::Vector2i pos);
 	sf::Vector2i getPos();
 
 	void genMap(int lvl);
 
+	int getMap();
 protected:
 	virtual void mInit();
 private:

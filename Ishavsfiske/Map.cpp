@@ -135,6 +135,8 @@ void Map::setPos(sf::Vector2i position)
 	mUpdateMap();
 }
 
+
+// Behövs denna funktion?
 sf::Vector2i Map::getPos()
 {
 	return mPos;
@@ -314,4 +316,9 @@ int Map::isIceDir(int x, int y)
 bool Map::outsideMap(int x, int y)
 {
 	return x < 0 || x >= 48 || y < 0 || y >= 40;
+}
+
+int Map::getMap()
+{
+	return mMap[48 * 40];
 }
