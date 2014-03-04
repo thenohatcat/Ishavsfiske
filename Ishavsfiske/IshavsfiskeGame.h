@@ -25,6 +25,9 @@ namespace Ishavsfiske
 {
 	class Ship;
 
+	class IceBreaker;
+	class FishingBoat;
+
 	class IshavsfiskeGame
 		: public Angler::Game
 	{
@@ -35,6 +38,12 @@ namespace Ishavsfiske
 		void collide(Angler::Node *nodeA, Angler::Node *nodeB);
 
 		void throwEvent(int type, ... );
+
+		void pause(bool paused);
+		bool getPaused();
+
+		IceBreaker *getIceBreaker();
+		FishingBoat *getShipFishing();
 
 	protected:
 		virtual void mDraw(float time, float deltaTime);
@@ -64,6 +73,9 @@ namespace Ishavsfiske
 
 		sf::Sound *mCollFishingSound, *mCollBreakerSound, *mCollIceSound, *mEngineSound;
 		sf::SoundBuffer *mCollFishingBuff, *mCollBreakerBuff, *mCollIceBuff, *mEngineBuff;
+		
+		sf::Sound *mMusic;
+		sf::SoundBuffer *mMusicFishingBuff;
 
 		Map *mMap;
 

@@ -63,7 +63,7 @@ int FishingBoat::getAmmount()
 
 void FishingBoat::mInit()
 {
-	mStartX = 0.5;
+	mStartX = 0.6;
 	mStartY = 0.5;
 
 	Ship::mInit();
