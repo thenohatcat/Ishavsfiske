@@ -81,8 +81,8 @@ void Ishavsfiske::IshavsfiskeGame::mInit()
 
 	mMusic = new sf::Sound();
 
-	mGraphics->addLayer(512);
-	mGraphics->addLayer(512);
+	mGraphics->addLayer(600);
+	mGraphics->addLayer(600);
 	mGraphics->addLayer(32);
 	mGraphics->addLayer(64);
 	mGraphics->addLayer(64);
@@ -95,9 +95,7 @@ void Ishavsfiske::IshavsfiskeGame::mInit()
 	mShipFishing = new FishingBoat(0x10000, mObjectsRoot, this);
 	mShipBreaker = new IceBreaker(0x20000, mObjectsRoot, this);
 
-	//mMap = new Map(0x80000000, mObjectsRoot, this);
-	mMapRoot = new Angler::Nodes::Translation(0x0, mObjectsRoot, 0, 0);
-	mMap = new Map(0x80000000, mMapRoot, this);
+	mMap = new Map(0x80000000, mObjectsRoot, this);
 
 	//Map Collisions
 	std::vector<sf::Vector2f> leftBox;

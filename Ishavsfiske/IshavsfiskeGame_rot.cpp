@@ -37,6 +37,26 @@ IshavsfiskeGame::~IshavsfiskeGame()
 
 }
 
+IceBreaker *IshavsfiskeGame::getIceBreaker()
+{
+	return (IceBreaker*)mShipBreaker;
+}
+
+FishingBoat *IshavsfiskeGame::getShipFishing()
+{
+	return (FishingBoat*)mShipFishing;
+}
+
+void IshavsfiskeGame::pause(bool paused)
+{
+	mObjectsRoot->pause(paused);
+}
+
+bool IshavsfiskeGame::getPaused()
+{
+	return mObjectsRoot->getPaused();
+}
+
 void IshavsfiskeGame::throwEvent(int type, ... )
 {
 	va_list vl;

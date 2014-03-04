@@ -25,6 +25,9 @@ namespace Ishavsfiske
 {
 	class Ship;
 
+	class IceBreaker;
+	class FishingBoat;
+
 	class IshavsfiskeGame
 		: public Angler::Game
 	{
@@ -36,7 +39,11 @@ namespace Ishavsfiske
 
 		void throwEvent(int type, ... );
 
+		void pause(bool paused);
+		bool getPaused();
 
+		IceBreaker *getIceBreaker();
+		FishingBoat *getShipFishing();
 
 	protected:
 		virtual void mDraw(float time, float deltaTime);
@@ -60,8 +67,6 @@ namespace Ishavsfiske
 		Ship *mShipFishing, *mShipBreaker;
 		
 		Angler::Node *mUIRoot, *mObjectsRoot;
-
-		Angler::Nodes::Translation *mMapRoot;
 
 		int mSchoolID;
 		std::vector<School*> mSchools;

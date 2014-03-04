@@ -23,8 +23,6 @@ public:
 
 	virtual void draw(Angler::Game* context, Angler::Graphics::GraphicsEngine* graphics, float time, float deltaTime);
 
-	virtual void update(Angler::Game* context, float time, float deltaTime);
-
 	int getTile();
 	void setTile(int tileID);
 protected:

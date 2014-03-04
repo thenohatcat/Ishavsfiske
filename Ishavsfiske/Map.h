@@ -9,6 +9,7 @@
 
 #include <Angler\Game.h>
 #include <Angler\Node.h>
+#include <Angler\Translation.h>
 
 #include "MapNode.h"
 
@@ -25,14 +26,24 @@ public:
 	void setPos(sf::Vector2i pos);
 	sf::Vector2i getPos();
 
+	void move(sf::Vector2f diff);
+
 	void genMap(int lvl);
+
+	void revert();
+
+	void update(Angler::Game* context, float time, float deltaTime, bool changed);
 
 protected:
 	virtual void mInit();
 private:
+	void mSetTranslation(float x, float y);
+
 	int mMap [48 * 40];
 	Angler::Game *mParent;
 	sf::Vector2i mPos;
+	sf::Vector2i mOldPos, mLPos;
+	sf::Vector2f mOldTransPos, mLTransPos;
 	void mUpdateMap();
 	bool isWater(int x, int y), isWaterTop(int x, int y), isWaterRight(int x, int y), isWaterLeft(int x, int y), isWaterBot(int x, int y),
 		isWaterTopLeft(int x, int y), isWaterTopRight(int x, int y), isWaterBotLeft(int x, int y), isWaterBotRight(int x, int y);
@@ -41,8 +52,9 @@ private:
 		isIceBotLeft(int x, int y), isIceBotRight(int x, int y), isIceTopLeft(int x, int y), isIceTopRight(int x, int y);
 	bool outsideMap(int x, int y);
 
+	Angler::Nodes::Translation *mMapPosition;
 
-	MapNode *mMapNodes[25 * 20];
+	MapNode *mMapNodes[26 * 22];
 };
 
 #else
