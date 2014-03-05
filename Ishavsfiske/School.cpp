@@ -62,7 +62,7 @@ void School::mInit()
 
 void School::move(float x, float y)
 {
-	mRootTranslation->translate(sf::Vector2f(5*x, 5*y));
+	mRootTranslation->translate(sf::Vector2f(x, y));
 }
 
 sf::Vector2f School::getPosition()

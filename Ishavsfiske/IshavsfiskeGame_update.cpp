@@ -27,6 +27,12 @@ void Ishavsfiske::IshavsfiskeGame::mMoveFrame(float dx, float dy)
 	if ((dx > 0 && mapPos.x >= 24) || (dx < 0 && mapPos.x <= 0))
 		dx = 0;
 
+	for (std::vector<School*>::const_iterator i = mSchools.begin(); i != mSchools.end(); i++)
+	{
+		(*i)->move(-dx, -dy);
+
+	}
+
 	mShipBreaker->move(-dx, -dy, true);
 	mShipFishing->move(-dx, -dy, true);
 
@@ -158,7 +164,14 @@ void Ishavsfiske::IshavsfiskeGame::mUpdate(float time, float deltaTime)
 
 	for (std::vector<School*>::const_iterator i = mSchools.begin(); i != mSchools.end(); )
 	{
+		sf::Vector2f pos = (*i)->getPosition();
 		if ((*i)->getAmmount() == 0)
+		{
+			Angler::Node *n = *i;
+			i = mSchools.erase(i);
+			delete n;
+		}
+		else if (pos.x < 0 || pos.x > 23 || pos.y < 0 || pos.y > 19)
 		{
 			Angler::Node *n = *i;
 			i = mSchools.erase(i);
