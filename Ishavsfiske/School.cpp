@@ -109,10 +109,10 @@ void School::update(Angler::Game *context, float time, float deltaTime, bool cha
 {
 	mChanged |= changed;
 
-	if(scaredDistance(((IshavsfiskeGame*)context)->getBreaker()->getPosition()))
-		scaredByBoat(((IshavsfiskeGame*)context)->getBreaker()->getPosition(), deltaTime);
-	if(scaredDistance(((IshavsfiskeGame*)context)->getFishing()->getPosition()))
-		scaredByBoat(((IshavsfiskeGame*)context)->getFishing()->getPosition(), deltaTime);
+	if(scaredDistance(((IshavsfiskeGame*)context)->getIceBreaker()->getPosition()))
+		scaredByBoat(((IshavsfiskeGame*)context)->getIceBreaker()->getPosition(), deltaTime);
+	if(scaredDistance(((IshavsfiskeGame*)context)->getShipFishing()->getPosition()))
+		scaredByBoat(((IshavsfiskeGame*)context)->getShipFishing()->getPosition(), deltaTime);
 
 	mUpdateChildren(context, time, deltaTime);
 }
