@@ -40,7 +40,14 @@ void Ishavsfiske::IshavsfiskeGame::mLoadContent()
 	mEngineBuff->loadFromFile("Motor_Collage_Test.wav");
 	mEngineSound->setBuffer(*mEngineBuff);
 	
+	mMusicFishingBuff->loadFromFile("Hav_Fiske.wav");
+
+	mMusic->setBuffer(*mMusicFishingBuff);
+
+	mSound->playSound(mMusic, false, -1, -1, true);
+
 	mSound->playSound(mEngineSound, false, 0, 1.46f, true);
+	mSound->setVolume(mEngineSound, 60.0f);
 
 	mGraphics->getLayer(0)->setTexture(mTXUI);
 	mGraphics->getLayer(1)->setTexture(mTXUI);
@@ -70,8 +77,12 @@ void Ishavsfiske::IshavsfiskeGame::mInit()
 	mEngineSound = new sf::Sound();
 	mEngineBuff = new sf::SoundBuffer();
 
-	mGraphics->addLayer(512);
-	mGraphics->addLayer(512);
+	mMusicFishingBuff = new sf::SoundBuffer();
+
+	mMusic = new sf::Sound();
+
+	mGraphics->addLayer(600);
+	mGraphics->addLayer(600);
 	mGraphics->addLayer(32);
 	mGraphics->addLayer(64);
 	mGraphics->addLayer(64);

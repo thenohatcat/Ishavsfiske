@@ -53,12 +53,14 @@ void Ship::move(float x, float y, bool global)
 	if (global)
 	{
 		mRootTranslation->translate(x, y);
+		mChanged = true;
 	}
 	else
 	{
 		Rotation r(0, mRootRotation->getRotation());
 		sf::Vector2f tv = r.transform(sf::Vector2f(5*x, 5*y));
 		mRootTranslation->translate(tv);
+		mChanged = true;
 	}
 }
 
@@ -95,6 +97,7 @@ void Ship::update(Angler::Game *context, float time, float deltaTime, bool chang
 void Ship::rotate(float r)
 {
 	mRootRotation->rotate(r);
+	mChanged = true;
 }
 
 void Ship::revert()
@@ -107,7 +110,13 @@ void Ship::revert()
 
 sf::Vector2f Ship::getVelocity()
 {
-	return sf::Vector2f(mVel);
+	return sf::Vector2f(mVel.x, mVel.y);
+}
+
+sf::Vector2f Ship::getGlobalVelocity()
+{
+	Rotation r(0, mRootRotation->getRotation());
+	return r.transform(mVel);
 }
 
 sf::Vector2f Ship::getPosition()
