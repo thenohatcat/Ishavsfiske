@@ -18,6 +18,7 @@
 
 using namespace Ishavsfiske;
 using namespace Angler;
+using namespace Angler::Graphics;
 using namespace Angler::Mechanics;
 using namespace Angler::Sound;
 
@@ -39,12 +40,17 @@ IshavsfiskeGame::~IshavsfiskeGame()
 
 IceBreaker *IshavsfiskeGame::getIceBreaker()
 {
-	return (IceBreaker*)mShipBreaker;
+	return mFishingMode->getIceBreaker();
 }
 
 FishingBoat *IshavsfiskeGame::getShipFishing()
 {
-	return (FishingBoat*)mShipFishing;
+	return mFishingMode->getShipFishing();
+}
+
+FishingMode *IshavsfiskeGame::getFishingMode()
+{
+	return mFishingMode;
 }
 
 void IshavsfiskeGame::pause(bool paused)
@@ -55,6 +61,11 @@ void IshavsfiskeGame::pause(bool paused)
 bool IshavsfiskeGame::getPaused()
 {
 	return mObjectsRoot->getPaused();
+}
+
+void IshavsfiskeGame::collide(Node *nodeA, Node *nodeB)
+{
+	mFishingMode->collide(nodeA, nodeB);
 }
 
 void IshavsfiskeGame::throwEvent(int type, ... )

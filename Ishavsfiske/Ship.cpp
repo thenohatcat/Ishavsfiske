@@ -71,27 +71,30 @@ void Ship::throttle(float vx, float vy)
 
 void Ship::update(Angler::Game *context, float time, float deltaTime, bool changed)
 {
-	mChanged |= changed;
+	if (!mPaused)
+	{
+		mChanged |= changed;
 	
-	mOT = mLT;
-	mOR = mLR;
-	mLT = mRootTranslation->getTranslation();
-	mLR = mRootRotation->getRotation();
+		mOT = mLT;
+		mOR = mLR;
+		mLT = mRootTranslation->getTranslation();
+		mLR = mRootRotation->getRotation();
 
-	if (abs(mVel.x) > 0 || abs(mVel.y) > 0)
-		move(mVel.x * deltaTime, mVel.y * deltaTime);
+		if (abs(mVel.x) > 0 || abs(mVel.y) > 0)
+			move(mVel.x * deltaTime, mVel.y * deltaTime);
 
-	if (abs(mVel.x) > 0.001f)
-		mVel.x -= (mVel.x / abs(mVel.x)) * (400*mVel.x*mVel.x) * deltaTime;
-	else
-		mVel.x = 0;
+		if (abs(mVel.x) > 0.001f)
+			mVel.x -= (mVel.x / abs(mVel.x)) * (400*mVel.x*mVel.x) * deltaTime;
+		else
+			mVel.x = 0;
 
-	if (abs(mVel.y) > 0.001f)
-		mVel.y -= (mVel.y / abs(mVel.y)) * (400*mVel.y*mVel.y) * deltaTime;
-	else
-		mVel.y = 0;
+		if (abs(mVel.y) > 0.001f)
+			mVel.y -= (mVel.y / abs(mVel.y)) * (400*mVel.y*mVel.y) * deltaTime;
+		else
+			mVel.y = 0;
 
-	mUpdateChildren(context, time, deltaTime);
+		mUpdateChildren(context, time, deltaTime);
+	}
 }
 
 void Ship::rotate(float r)

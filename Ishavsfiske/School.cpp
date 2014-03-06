@@ -97,7 +97,10 @@ int School::fish(int ammount)
 
 void School::update(Angler::Game *context, float time, float deltaTime, bool changed)
 {
-	mChanged |= changed;
-
-	mUpdateChildren(context, time, deltaTime);
+	if (!mPaused)
+	{
+		mChanged |= changed;
+		
+		mUpdateChildren(context, time, deltaTime);
+	}
 }

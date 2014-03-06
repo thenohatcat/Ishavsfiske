@@ -35,7 +35,8 @@ MapNode::~MapNode()
 
 void MapNode::draw(Angler::Game* context, Angler::Graphics::GraphicsEngine* graphics, float time, float deltaTime)
 {
-	mDrawChildren(context, graphics, time, deltaTime);
+	if (mVisible)
+		mDrawChildren(context, graphics, time, deltaTime);
 }
 
 void MapNode::mInit()

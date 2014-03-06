@@ -17,6 +17,8 @@
 #include <iostream>
 #include <cstdlib>
 
+using namespace Ishavsfiske;
+
 int randomValue(int number) {
 	return rand() % number;
 }

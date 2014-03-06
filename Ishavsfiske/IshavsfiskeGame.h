@@ -18,6 +18,7 @@
 
 #include "Map.h"
 #include "School.h"
+#include "FishingMode.h"
 
 class Font;
 
@@ -45,6 +46,12 @@ namespace Ishavsfiske
 		IceBreaker *getIceBreaker();
 		FishingBoat *getShipFishing();
 
+		FishingMode *getFishingMode();
+
+		void clearGraphicsLayers();
+
+		void setupGraphicsLayers(int numLayers, int layerSizes[], sf::Texture *layerTextures[]);
+
 	protected:
 		virtual void mDraw(float time, float deltaTime);
 		virtual void mUpdate(float time, float deltaTime);
@@ -59,25 +66,12 @@ namespace Ishavsfiske
 
 		void mMoveFrame(float dx, float dy);
 
-		sf::Texture *mTXMap;
-		sf::Texture *mTXUI;
-		sf::Texture *mTXSchool;
-		sf::Texture *mUIFont;
-
-		Ship *mShipFishing, *mShipBreaker;
+		FishingMode *mFishingMode;
 		
 		Angler::Node *mUIRoot, *mObjectsRoot;
 
 		int mSchoolID;
 		std::vector<School*> mSchools;
-
-		sf::Sound *mCollFishingSound, *mCollBreakerSound, *mCollIceSound, *mEngineSound;
-		sf::SoundBuffer *mCollFishingBuff, *mCollBreakerBuff, *mCollIceBuff, *mEngineBuff;
-		
-		sf::Sound *mMusic;
-		sf::SoundBuffer *mMusicFishingBuff;
-
-		Map *mMap;
 
 		Font *mFont;
 	};
