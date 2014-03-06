@@ -23,41 +23,42 @@ public:
 	typedef vector<PathNode*> closedList;
 	typedef vector<PathNode*> cameFrom;
 
-	void findPath(int start, int goal);
+	//void findPath(int start, int goal);
 
-	void findPath1(int start, int goal);
+	void findPath1(PathNode *start, PathNode *goal);
 
 
-	int firstNode;
+	//// Arguments are goal position
+	//void startInit(int x, int y);
 
-	// Arguments are goal position
-	void startInit(int x, int y);
-
-	// Arguments are goal position
-	void calcAllH(int x, int y);
+	//// Arguments are goal position
+	//void calcAllH(int x, int y);
 protected:
 private:
 	int mStart;
 	int mGoal;
 
-	int mCurrent;
+	PathNode *mCurrent;
 
-	// Arguments are start position and goal position
-	int detHScore(int xx, int yy, int x, int y);
-	
-	//void calcFVal();
-	int lowFScoreOpen();
-	void addToOpen(int node);
-	void addToClosed(int node);
+	//// Arguments are start position and goal position
+	//int detHScore(int xx, int yy, int x, int y);
+	//
+	////void calcFVal();
+
+	// Determine the node with the lowest f value in openlist
+	PathNode *lowFValueOpen();
 
 
 
 
 	openList mOpenList;
+	closedList mClosedList;
 
-	void recStructPath(int cameFrom, int goal);
-	void rmCurrentOpen();
-	void addCurrentClosed();
+	void genSuccessors(PathNode *node);
+
+	//void recStructPath(int cameFrom, int goal);
+	//void rmCurrentOpen();
+	//void addCurrentClosed();
 };
 
 

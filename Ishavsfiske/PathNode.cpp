@@ -8,10 +8,14 @@
 
 #include "PathNode.h"
 
-PathNode::PathNode(int h_score, int g_score, int dir)
-	: mH(h_score), mG(g_score), mF(h_score + g_score), mDir(dir)
+PathNode::PathNode()
+	: mH(0), mG(0), mF(0)
 {
+}
 
+PathNode::PathNode(PathNode *parent, PathNode *child)
+	: mH(0), mG(0), mF(0), mParent(parent), mChild(child)
+{
 }
 
 void PathNode::setH(int h)
@@ -71,4 +75,14 @@ int PathNode::getPathDir()
 void PathNode::calcF()
 {
 	mF = mH + mG;
+}
+
+PathNode *PathNode::getParent()
+{
+	return mParent;
+}
+
+void PathNode::setParent(PathNode *parent)
+{
+	mParent = parent;
 }
