@@ -82,7 +82,7 @@ void FishingMode::init()
 	mShipBreaker = new IceBreaker(0x20000, this, mOwner);
 
 	mMap = new Map(0x80000000, this, mOwner);
-	//mMap->show(false);
+	//mMap->setPos(sf::Vector2i(12, 10));
 
 	//Map Collisions
 	std::vector<sf::Vector2f> leftBox;

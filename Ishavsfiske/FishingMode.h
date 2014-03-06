@@ -36,7 +36,9 @@ namespace Ishavsfiske
 		FishingBoat *getShipFishing();
 
 		void draw(Angler::Game* context, Angler::Graphics::GraphicsEngine* graphics, float time, float deltaTime);
-		void update(Angler::Game* context, float time, float deltaTime);
+		void update(Angler::Game* context, float time, float deltaTime, bool changed = false);
+
+		void fish(int dir, School* school);
 
 	protected:
 		void mEnable(bool enabled);
@@ -49,6 +51,11 @@ namespace Ishavsfiske
 
 		sf::Sound *mMusic;
 		sf::SoundBuffer *mMusicFishingBuff;
+
+		void mMoveFrame(float dx, float dy);
+
+		int mSchoolID;
+		std::vector<School*> mSchools;
 
 		Map *mMap;
 		

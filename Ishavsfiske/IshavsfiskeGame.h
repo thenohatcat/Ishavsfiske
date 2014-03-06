@@ -52,6 +52,12 @@ namespace Ishavsfiske
 
 		void setupGraphicsLayers(int numLayers, int layerSizes[], sf::Texture *layerTextures[]);
 
+		typedef enum
+		{
+			Collide = Game::Events::Collide,
+			Fishing
+		} Events;
+
 	protected:
 		virtual void mDraw(float time, float deltaTime);
 		virtual void mUpdate(float time, float deltaTime);
@@ -64,14 +70,9 @@ namespace Ishavsfiske
 
 		void mDrawUI(float time, float deltaTime);
 
-		void mMoveFrame(float dx, float dy);
-
 		FishingMode *mFishingMode;
 		
 		Angler::Node *mUIRoot, *mObjectsRoot;
-
-		int mSchoolID;
-		std::vector<School*> mSchools;
 
 		Font *mFont;
 	};

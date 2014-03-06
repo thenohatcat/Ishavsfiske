@@ -20,13 +20,13 @@ using namespace Ishavsfiske;
 using namespace Angler::Nodes;
 
 Ship::Ship(unsigned long id, Angler::Node *parent, Ishavsfiske::IshavsfiskeGame *owner)
-	: Node(id, parent), mOwner(owner), mVel(0, 0), mStartX(0.5f), mStartY(0.5f)
+	: Node(id, parent), mOwner(owner), mVel(0, 0), mStartX(0.5f), mStartY(0.5f), mTimeDiff(0)
 {
 	
 }
 
 Ship::Ship(unsigned long id, Ishavsfiske::IshavsfiskeGame *owner)
-	: Node(id), mOwner(owner), mVel(0, 0), mStartX(0.5f), mStartY(0.5f)
+	: Node(id), mOwner(owner), mVel(0, 0), mStartX(0.5f), mStartY(0.5f), mTimeDiff(0)
 {
 	
 }
@@ -75,10 +75,19 @@ void Ship::update(Angler::Game *context, float time, float deltaTime, bool chang
 	{
 		mChanged |= changed;
 	
-		mOT = mLT;
-		mOR = mLR;
-		mLT = mRootTranslation->getTranslation();
-		mLR = mRootRotation->getRotation();
+		if (mTimeDiff > 0.005f)
+		{
+			mOldRotations.push_back(mRootRotation->getRotation());
+			mOldTranslations.push_back(mRootTranslation->getTranslation());
+
+			if (mOldRotations.size() > 128)
+			{
+				mOldRotations.erase(mOldRotations.begin());
+				mOldTranslations.erase(mOldTranslations.begin());
+			}
+
+			mTimeDiff = 0;
+		}
 
 		if (abs(mVel.x) > 0 || abs(mVel.y) > 0)
 			move(mVel.x * deltaTime, mVel.y * deltaTime);
@@ -94,6 +103,8 @@ void Ship::update(Angler::Game *context, float time, float deltaTime, bool chang
 			mVel.y = 0;
 
 		mUpdateChildren(context, time, deltaTime);
+
+		mTimeDiff += deltaTime;
 	}
 }
 
@@ -105,8 +116,11 @@ void Ship::rotate(float r)
 
 void Ship::revert()
 {
-	mRootTranslation->setTranslation(mOT);
-	mRootRotation->setRotation(mOR);
+	mRootRotation->setRotation(mOldRotations.back());
+	mRootTranslation->setTranslation(mOldTranslations.back());
+	mOldRotations.pop_back();
+	mOldTranslations.pop_back();
+
 	mVel.x = mVel.y = 0;
 	mChanged = true;
 }

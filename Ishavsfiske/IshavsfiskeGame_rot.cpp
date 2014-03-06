@@ -23,7 +23,7 @@ using namespace Angler::Mechanics;
 using namespace Angler::Sound;
 
 IshavsfiskeGame::IshavsfiskeGame()
-	: Game(), mSchoolID(0)
+	: Game()
 {
 	mTitle = "Ishavsfiske v0.1.3";
 	mNumLayers = 8;
@@ -63,11 +63,6 @@ bool IshavsfiskeGame::getPaused()
 	return mObjectsRoot->getPaused();
 }
 
-void IshavsfiskeGame::collide(Node *nodeA, Node *nodeB)
-{
-	mFishingMode->collide(nodeA, nodeB);
-}
-
 void IshavsfiskeGame::throwEvent(int type, ... )
 {
 	va_list vl;
@@ -76,12 +71,19 @@ void IshavsfiskeGame::throwEvent(int type, ... )
 
 	switch (type)
 	{
-	case Game::Events::Collide:
+	case Events::Collide:
 		//Node*, Node*
 		Node *nodeA, *nodeB;
 		nodeA = va_arg(vl, Node*);
 		nodeB = va_arg(vl, Node*);
 		collide(nodeA, nodeB);
+		break;
+	case Events::Fishing:
+		int dir;
+		School *school;
+		dir = va_arg(vl, int);
+		school = va_arg(vl, School*);
+		mFishingMode->fish(dir, school);
 		break;
 	}
 

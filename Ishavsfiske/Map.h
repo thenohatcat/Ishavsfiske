@@ -47,12 +47,13 @@ namespace Ishavsfiske
 		sf::Vector2i mOldPos, mLPos;
 		sf::Vector2f mOldTransPos, mLTransPos;
 		void mUpdateMap();
-		bool isWater(int x, int y), isWaterTop(int x, int y), isWaterRight(int x, int y), isWaterLeft(int x, int y), isWaterBot(int x, int y),
-			isWaterTopLeft(int x, int y), isWaterTopRight(int x, int y), isWaterBotLeft(int x, int y), isWaterBotRight(int x, int y);
-		int isIceDir(int x, int y);
-		bool isIceLeft(int x, int y), isIceRight(int x, int y), isIceTop(int x, int y), isIceBot(int x, int y),
-			isIceBotLeft(int x, int y), isIceBotRight(int x, int y), isIceTopLeft(int x, int y), isIceTopRight(int x, int y);
-		bool outsideMap(int x, int y);
+		bool mIsEdge(int x, int y);
+		bool mIsWater(int x, int y), mIsWaterTop(int x, int y), mIsWaterRight(int x, int y), mIsWaterLeft(int x, int y), mIsWaterBot(int x, int y),
+			mIsWaterTopLeft(int x, int y), mIsWaterTopRight(int x, int y), mIsWaterBotLeft(int x, int y), mIsWaterBotRight(int x, int y);
+		int mIsIceDir(int x, int y);
+		bool mIsIceLeft(int x, int y), mIsIceRight(int x, int y), mIsIceTop(int x, int y), mIsIceBot(int x, int y),
+			mIsIceBotLeft(int x, int y), mIsIceBotRight(int x, int y), mIsIceTopLeft(int x, int y), mIsIceTopRight(int x, int y);
+		bool mOutsideMap(int x, int y);
 
 		Angler::Nodes::Translation *mMapPosition;
 

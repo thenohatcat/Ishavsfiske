@@ -53,8 +53,10 @@ namespace Ishavsfiske
 
 		sf::Vector2f mVel;
 
-		float mLR, mOR;
-		sf::Vector2f mLT, mOT;
+		std::vector<float> mOldRotations;
+		std::vector<sf::Vector2f> mOldTranslations;
+
+		float mTimeDiff;
 	};
 }
 

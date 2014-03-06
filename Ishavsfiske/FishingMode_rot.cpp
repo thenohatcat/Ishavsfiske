@@ -12,13 +12,13 @@
 using namespace Ishavsfiske;
 
 FishingMode::FishingMode(unsigned long id, Angler::Node *parent, Ishavsfiske::IshavsfiskeGame *owner)
-	: Node(id, parent), mOwner(owner)
+	: Node(id, parent), mOwner(owner), mSchoolID(0)
 {
 
 }
 
 FishingMode::FishingMode(unsigned long id, Ishavsfiske::IshavsfiskeGame *owner)
-	: Node(id), mOwner(owner)
+	: Node(id), mOwner(owner), mSchoolID(0)
 {
 
 }
