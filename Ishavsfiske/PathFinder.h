@@ -54,7 +54,9 @@ private:
 	openList mOpenList;
 	closedList mClosedList;
 
-	void genSuccessors(PathNode *node);
+	void genSuccessors(PathNode *currentNode);
+
+	bool inClosed(PathNode *node);
 
 	//void recStructPath(int cameFrom, int goal);
 	//void rmCurrentOpen();

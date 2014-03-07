@@ -9,6 +9,8 @@
 #include "IshavsfiskeGame.h"
 #include "Animal.h"
 #include "Ship.h"
+#include "FishingBoat.h"
+#include "IceBreaker.h"
 
 #include <Angler\DrawNode.h>
 #include <Angler\Scale.h>
@@ -47,10 +49,10 @@ void Animal::update(Angler::Game *context, float time, float deltaTime, bool cha
 	mLT = mRootTranslation->getTranslation();
 	mLR = mRootRotation->getRotation();
 
-	mFishPos = ((IshavsfiskeGame*) context)->getFishing()->getPosition();
+	mFishPos = ((IshavsfiskeGame*) context)->getShipFishing()->getPosition();
 
-	mDis.x = ((IshavsfiskeGame*) context)->getFishing()->getPosition().x - mRootTranslation->getTranslationX();
-	mDis.y = ((IshavsfiskeGame*) context)->getFishing()->getPosition().y - mRootTranslation->getTranslationY();
+	mDis.x = ((IshavsfiskeGame*) context)->getShipFishing()->getPosition().x - mRootTranslation->getTranslationX();
+	mDis.y = ((IshavsfiskeGame*) context)->getShipFishing()->getPosition().y - mRootTranslation->getTranslationY();
 
 	if (!atShip())
 	{

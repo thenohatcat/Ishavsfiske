@@ -48,7 +48,7 @@ void PathFinder::findPath1(PathNode *start, PathNode *goal)
 	{
 		mCurrent = lowFValueOpen();
 		
-		for (vector<PathNode*>::const_iterator i = mOpenList.begin(); i != mOpenList.end(); )
+		for (vector<PathNode*>::const_iterator i = mOpenList.begin(); i != mOpenList.end(); i++)
 		{
 			if ((*i) == mCurrent)
 			{
@@ -57,7 +57,6 @@ void PathFinder::findPath1(PathNode *start, PathNode *goal)
 			}
 		}
 		
-
 		genSuccessors(mCurrent);
 
 		openList open(mOpenList);
@@ -66,16 +65,19 @@ void PathFinder::findPath1(PathNode *start, PathNode *goal)
 			PathNode *node = mOpenList[i];
 			if(node->getParent() == mCurrent)
 			{
-				node->setG(mCurrent->getG() + moveCostWASD);
-				if(node->getF() < mCurrent->getF())
+				if(!inClosed(node))
 				{
-					node->setParent(mCurrent);
-					mCurrent = node;
-				}
-				else
-				{
-					mClosedList.push_back(node);
-					mOpenList.pop_back(); // !!!!!!!!!!!!!!!!!!!!!!!!
+					node->setG(mCurrent->getG() + moveCostWASD);
+					if(node->getF() < mCurrent->getF())
+					{
+						node->setParent(mCurrent);
+						mCurrent = node;
+					}
+					else
+					{
+						mClosedList.push_back(node);
+						mOpenList.erase(node);
+					}
 				}
 			}
 			else
@@ -160,14 +162,23 @@ PathNode *PathFinder::lowFValueOpen()
 //	// Same as rmCurrentOpen
 //}
 
-void PathFinder::genSuccessors(PathNode *node)
+void PathFinder::genSuccessors(PathNode *currentNode)
 {
-	PathNode *left = new PathNode();
+	PathNode *left = new PathNode(0, currentNode, 0, sf::Vector2i(currentNode->getPos().x - 1, currentNode->getPos().y));
 	mOpenList.push_back(left);
-	PathNode *right = new PathNode();
+	PathNode *right = new PathNode(0, currentNode, 0, sf::Vector2i(currentNode->getPos().x + 1, currentNode->getPos().y));
 	mOpenList.push_back(right);
-	PathNode *top = new PathNode();
+	PathNode *top = new PathNode(0, currentNode, 0, sf::Vector2i(currentNode->getPos().x, currentNode->getPos().y));
 	mOpenList.push_back(top);
-	PathNode *bot = new PathNode();
+	PathNode *bot = new PathNode(0, currentNode, 0, sf::Vector2i(currentNode->getPos().x - 1, currentNode->getPos().y));
 	mOpenList.push_back(bot);
 }
+
+bool PathFinder::inClosed(PathNode *node)
+{
+	for(closedList::size_type i = 0; i < mClosedList.size(); i++)
+	{
+		return node == mClosedList[i];
+	}
+}
+

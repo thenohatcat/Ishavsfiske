@@ -13,8 +13,8 @@ PathNode::PathNode()
 {
 }
 
-PathNode::PathNode(PathNode *parent, PathNode *child)
-	: mH(0), mG(0), mF(0), mParent(parent), mChild(child)
+PathNode::PathNode(unsigned int id, PathNode *parent, PathNode *child, sf::Vector2i pos)
+	: mH(0), mG(0), mF(0), mParent(parent), mChild(child), mID(id), mPos(pos)
 {
 }
 
@@ -85,4 +85,14 @@ PathNode *PathNode::getParent()
 void PathNode::setParent(PathNode *parent)
 {
 	mParent = parent;
+}
+
+unsigned long PathNode::getID()
+{
+	return mID;
+}
+
+sf::Vector2i PathNode::getPos()
+{
+	return mPos;
 }
