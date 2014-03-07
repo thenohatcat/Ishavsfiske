@@ -145,3 +145,8 @@ float Ship::getRotation()
 {
 	return mRootRotation->getRotation();
 }
+
+void Ship::collide()
+{
+	revert();
+}

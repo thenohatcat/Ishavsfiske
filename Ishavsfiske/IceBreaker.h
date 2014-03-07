@@ -23,9 +23,15 @@ namespace Ishavsfiske
 
 		void update(Angler::Game *context, float time, float deltaTime, bool changed);
 
+		void damage(float v);
+		void repair(float v);
+
+		float getHealth();
+		float getHull();
 	protected:
 		virtual void mInit();
 	private:
+		float mHealth, mHull;
 	};
 }
 

@@ -39,6 +39,8 @@ namespace Ishavsfiske
 
 		sf::Vector2f getVelocity();
 		sf::Vector2f getGlobalVelocity();
+
+		virtual void collide();
 	protected:
 		Angler::Game *mOwner;
 

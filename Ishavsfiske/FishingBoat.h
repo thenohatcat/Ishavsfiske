@@ -25,6 +25,10 @@ namespace Ishavsfiske
 
 		void setFishing(int, School*);
 
+		void setRepair(int);
+
+		bool getRepairing();
+
 		int getAmmount();
 
 	protected:
@@ -33,6 +37,8 @@ namespace Ishavsfiske
 		Angler::Nodes::Rotation *mCraneRotation, *mLampRotation;
 		School *mSchool;
 		int mAmmount;
+		bool mRepairing;
+		float mRepairTime;
 	};
 }
 

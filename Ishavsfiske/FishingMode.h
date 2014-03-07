@@ -16,6 +16,8 @@
 #include "Map.h"
 #include "School.h"
 
+#include "Tutorial.h"
+
 namespace Ishavsfiske
 {
 	class FishingMode
@@ -40,6 +42,8 @@ namespace Ishavsfiske
 
 		void fish(int dir, School* school);
 
+		void repair(int dir);
+
 	protected:
 		void mEnable(bool enabled);
 
@@ -52,6 +56,12 @@ namespace Ishavsfiske
 		sf::Sound *mMusic;
 		sf::SoundBuffer *mMusicFishingBuff;
 
+		sf::Sound *mSeaAmbient;
+		sf::SoundBuffer *mSeaAmbientBuff;
+
+		sf::Sound *mTutorialSound;
+		sf::SoundBuffer *mTutorialBuff;
+
 		void mMoveFrame(float dx, float dy);
 
 		int mSchoolID;
@@ -62,6 +72,8 @@ namespace Ishavsfiske
 		Ship *mShipFishing, *mShipBreaker;
 
 		Ishavsfiske::IshavsfiskeGame *mOwner;
+
+		Tutorial *mTutorial;
 	};
 }
 	

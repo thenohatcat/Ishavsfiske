@@ -36,6 +36,9 @@ namespace Ishavsfiske
 	private:
 		sf::Texture *mTextureBG, *mTexturePress;
 
+		sf::Sound *mMusic;
+		sf::SoundBuffer *mMusicIntroBuff;
+
 		Ishavsfiske::IshavsfiskeGame *mOwner;
 	};
 }

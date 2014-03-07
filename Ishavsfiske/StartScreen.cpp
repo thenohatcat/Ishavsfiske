@@ -29,7 +29,6 @@ void StartScreen::input(float time, float deltaTime)
 	{
 		mOwner->throwEvent(IshavsfiskeGame::Events::StartScreenHide);
 		mOwner->throwEvent(IshavsfiskeGame::Events::FishingModeShow);
-		mOwner->throwEvent(IshavsfiskeGame::Events::GameOverScreenShow);
 	}
 }
 
@@ -37,12 +36,20 @@ void StartScreen::loadContent()
 {
 	mTextureBG->loadFromFile("start_screen.png");
 	mTexturePress->loadFromFile("Press_start.png");
+	 
+	mMusicIntroBuff->loadFromFile("Intro_Music.wav");
+
+	mMusic->setBuffer(*mMusicIntroBuff);
 }
 
 void StartScreen::init()
 {
 	mTextureBG = new sf::Texture();
 	mTexturePress = new sf::Texture();
+
+	mMusic = new sf::Sound();
+
+	mMusicIntroBuff = new sf::SoundBuffer();
 }
 
 void StartScreen::mEnable(bool enabled)
@@ -52,10 +59,14 @@ void StartScreen::mEnable(bool enabled)
 		int sizes[2] = { 1, 1 };
 		sf::Texture* textures[2] = { mTextureBG, mTexturePress };
 		mOwner->setupGraphicsLayers(2, sizes, textures);
+
+		mOwner->getSound()->playSound(mMusic, false, -1, -1, true);
 	}
 	else
 	{
 		mOwner->clearGraphicsLayers();
+
+		mOwner->getSound()->stopSound(mMusic);
 	}
 }
 
@@ -80,7 +91,7 @@ void StartScreen::draw(Angler::Game* context, Angler::Graphics::GraphicsEngine* 
 		glPushMatrix();
 			glScalef(1/20.0f, 1/20.0f, 1);
 			glTranslatef(16, 12, 0);
-			graphics->draw(1, sf::Vector2f(0.5f, 0.5f), 1, 1, 1, sin(fmod(time * 1.5f, 3.1415f)) / 2.0f + 0.5f);
+			graphics->draw(1, sf::Vector2f(0.5f, 0.5f), 1, 1, 1, abs(sin(fmod(time * 1.25f, 2*3.1415f))) * 0.75 + 0.25f);
 		glPopMatrix();
 	}
 }

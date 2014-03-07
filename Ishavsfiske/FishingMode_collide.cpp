@@ -16,9 +16,10 @@ void FishingMode::collide(Node *nodeA, Node *nodeB)
 {
 	if (!mPaused)
 	{
-		if ((nodeA->getID() >= 0x200005000 && nodeA->getID() <= 0x20005FFF) || (nodeB->getID() >= 0x20005000 && nodeB->getID() <= 0x20005FFF))
+
+		if (nodeA->getID() == 0x00012201 || nodeB->getID() == 0x00012201)
 		{
-			if (nodeA->getID() == 0x00012201 || nodeB->getID() == 0x00012201)
+			if ((nodeA->getID() >= 0x200005000 && nodeA->getID() <= 0x20005FFF) || (nodeB->getID() >= 0x20005000 && nodeB->getID() <= 0x20005FFF))
 			{
 				School *school = nullptr;
 				if (nodeA->getID() >= 0x20000000 && nodeA->getID() <= 0x2000FFFF)
@@ -27,7 +28,15 @@ void FishingMode::collide(Node *nodeA, Node *nodeB)
 					school = (School*)(nodeB->getParent()->getParent()->getParent()->getParent());
 				mOwner->throwEvent(IshavsfiskeGame::Events::Fishing, 1, school);
 			}
-			else if (nodeA->getID() == 0x00012202 || nodeB->getID() == 0x00012202)
+			else if (nodeA->getID() == 0x00022102 || nodeB->getID() == 0x00022102)
+			{
+				if (((IceBreaker*)mShipBreaker)->getHull() < 1)
+					mOwner->throwEvent(IshavsfiskeGame::Events::Repairing, 1);
+			}
+		}
+		else if (nodeA->getID() == 0x00012202 || nodeB->getID() == 0x00012202)
+		{
+			if ((nodeA->getID() >= 0x200005000 && nodeA->getID() <= 0x20005FFF) || (nodeB->getID() >= 0x20005000 && nodeB->getID() <= 0x20005FFF))
 			{
 				School *school = nullptr;
 				if (nodeA->getID() >= 0x20000000 && nodeA->getID() <= 0x2000FFFF)
@@ -35,6 +44,11 @@ void FishingMode::collide(Node *nodeA, Node *nodeB)
 				else if (nodeB->getID() >= 0x20000000 && nodeB->getID() <= 0x2000FFFF)
 					school = (School*)(nodeB->getParent()->getParent()->getParent()->getParent());
 				mOwner->throwEvent(IshavsfiskeGame::Events::Fishing, 2, school);
+			}
+			else if (nodeA->getID() == 0x00022102 || nodeB->getID() == 0x00022102)
+			{
+				if (((IceBreaker*)mShipBreaker)->getHull() < 1)
+					mOwner->throwEvent(IshavsfiskeGame::Events::Repairing, 2);
 			}
 		}
 
@@ -48,6 +62,7 @@ void FishingMode::collide(Node *nodeA, Node *nodeB)
 				{
 					printf("%u\n", mMap->getTile(indx));
 					//mShipBreaker->revert();
+					((IceBreaker*)mShipBreaker)->damage(0.1f);
 					mOwner->getSound()->playSound(mCollIceSound);
 					mMap->setTile(indx, 0);
 	#ifdef _DEBUG

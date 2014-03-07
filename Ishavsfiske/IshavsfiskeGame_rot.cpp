@@ -85,6 +85,11 @@ void IshavsfiskeGame::throwEvent(int type, ... )
 		school = va_arg(vl, School*);
 		mFishingMode->fish(dir, school);
 		break;
+	case Events::Repairing:
+		int rdir;
+		rdir = va_arg(vl, int);
+		mFishingMode->repair(rdir);
+		break;
 	case Events::StartScreenShow:
 		mStartScreen->enable(true);
 		break;

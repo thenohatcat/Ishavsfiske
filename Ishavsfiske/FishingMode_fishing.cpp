@@ -22,3 +22,8 @@ void FishingMode::fish(int i, School *school)
 //		printf("Fishing Left\n");
 //#endif
 }
+
+void FishingMode::repair(int dir)
+{
+	((FishingBoat*)mShipFishing)->setRepair(dir);
+}

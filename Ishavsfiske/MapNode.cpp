@@ -117,5 +117,21 @@ void MapNode::setTile(int tileID)
 	case 0x29:
 		mSprite->setCropOrigin(600/1500.0f, 675/1600.0f);
 		break;
+	case 0x1A:
+	case 0x2A:
+		mSprite->setCropOrigin(700/1500.0f, 550/1600.0f);
+		break;
+	case 0x1B:
+	case 0x2B:
+		mSprite->setCropOrigin(650/1500.0f, 550/1600.0f);
+		break;
+	case 0x1C:
+	case 0x2C:
+		mSprite->setCropOrigin(650/1500.0f, 500/1600.0f);
+		break;
+	case 0x1D:
+	case 0x2D:
+		mSprite->setCropOrigin(700/1500.0f, 500/1600.0f);
+		break;
 	}
 }

@@ -16,6 +16,8 @@
 
 using namespace Ishavsfiske;
 
+int v;
+
 void FishingMode::input(float time, float deltaTime)
 {
 	// Fishing boat key inputs
@@ -35,6 +37,45 @@ void FishingMode::input(float time, float deltaTime)
 	{
 		mShipFishing->rotate(90 * deltaTime);
 	}
+
+	if (mOwner->getKeyboardState().isKeyDown(sf::Keyboard::Return) && 
+		!mOwner->getKeyboardState().wasKeyDown(sf::Keyboard::Return))
+	{
+		mTutorial->show("A\nB\nC\nD\nE", 2);
+	}
+	if (mOwner->getKeyboardState().isKeyDown(sf::Keyboard::Space) && 
+		!mOwner->getKeyboardState().wasKeyDown(sf::Keyboard::Space))
+	{
+		pause(true);
+
+		mOwner->getSound()->stopSound(mSeaAmbient);
+		mOwner->getSound()->stopSound(mMusic);
+		mOwner->getSound()->stopSound(mEngineSound);
+
+		mOwner->throwEvent(IshavsfiskeGame::Events::GameOverScreenShow);
+	}
+
+	if (mOwner->getKeyboardState().isKeyDown(sf::Keyboard::Q) &&
+		mOwner->getKeyboardState().isKeyDown(sf::Keyboard::E))
+	{
+		mMap->genMap(1, v = 0);
+		mMap->setTile(49, 0x20);
+	}
+	else if (mOwner->getKeyboardState().isKeyDown(sf::Keyboard::Q) &&
+		!mOwner->getKeyboardState().wasKeyDown(sf::Keyboard::Q))
+	{
+		 mMap->genMap(1, v -= 4);
+		 mMap->setTile(49, 0x20);
+	}
+	else if (mOwner->getKeyboardState().isKeyDown(sf::Keyboard::E) &&
+		!mOwner->getKeyboardState().wasKeyDown(sf::Keyboard::E))
+	{
+		mMap->genMap(1, v += 4);
+		mMap->setTile(49, 0x20);
+	}
+
+	printf("%u\n", v);
+
 	// Close game key
 	if (mOwner->getKeyboardState().wasKeyDown(sf::Keyboard::Escape))
 	{

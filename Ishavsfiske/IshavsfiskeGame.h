@@ -57,7 +57,7 @@ namespace Ishavsfiske
 		typedef enum
 		{
 			Collide = Game::Events::Collide,
-			Fishing,
+			Fishing, Repairing,
 			StartScreenShow,
 			StartScreenHide,
 			GameOverScreenShow,

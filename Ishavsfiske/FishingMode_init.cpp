@@ -46,14 +46,14 @@ void FishingMode::loadContent()
 	mEngineBuff->loadFromFile("Motor_Collage_Test.wav");
 	mEngineSound->setBuffer(*mEngineBuff);
 	
+	mSeaAmbientBuff->loadFromFile("Hav.wav");
+	mSeaAmbient->setBuffer(*mSeaAmbientBuff);
+
+	mTutorial->loadContent();
+
 	mMusicFishingBuff->loadFromFile("Hav_Fiske.wav");
 
 	mMusic->setBuffer(*mMusicFishingBuff);
-
-	mOwner->getSound()->playSound(mMusic, false, -1, -1, true);
-
-	mOwner->getSound()->playSound(mEngineSound, false, 0, 1.46f, true);
-	mOwner->getSound()->setVolume(mEngineSound, 60.0f);
 }
 
 void FishingMode::init()
@@ -70,6 +70,12 @@ void FishingMode::init()
 	mEngineSound = new sf::Sound();
 	mEngineBuff = new sf::SoundBuffer();
 
+	mSeaAmbient = new sf::Sound();
+	mSeaAmbientBuff = new sf::SoundBuffer();
+
+	mTutorialSound = new sf::Sound();
+	mTutorialBuff = new sf::SoundBuffer();
+
 	mMusicFishingBuff = new sf::SoundBuffer();
 
 	mMusic = new sf::Sound();
@@ -85,6 +91,9 @@ void FishingMode::init()
 
 	mMap = new Map(0x80000000, this, mOwner);
 	//mMap->setPos(sf::Vector2i(12, 10));
+
+	mTutorial = new Tutorial(0, this, mOwner);
+	mTutorial->init();
 
 	//Map Collisions
 	std::vector<sf::Vector2f> leftBox;

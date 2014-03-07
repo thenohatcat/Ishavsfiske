@@ -115,22 +115,63 @@ void FishingBoat::mInit()
 
 void FishingBoat::update(Angler::Game *context, float time, float deltaTime, bool changed)
 {
-	//mCraneRotation->setRotation(45/2.0f*sin(time));
-	mLampRotation->setRotation(90*sin(time));
-
-	if (mSchool != nullptr)
+	if (!mPaused)
 	{
-		if (fmod(time, 0.25f) < deltaTime)
+		//mCraneRotation->setRotation(45/2.0f*sin(time));
+		mLampRotation->setRotation(90*sin(time));
+
+		if (mRepairing)
 		{
-			printf("{ %03.2f, %03.2f }\n", mSchool->getPosition().x, mSchool->getPosition().y);
-			mAmmount += mSchool->fish(5);
+			if (mRepairTime >= 1.0f)
+			{
+				mRepairing = false;
+				mCraneRotation->setRotation(90.0f);
+			}
+
+			mRepairTime += deltaTime;
 		}
 
-		if (mSchool->getAmmount() <= 0)
+		if (mSchool != nullptr)
 		{
-			setFishing(0, nullptr);
+			if (fmod(time, 0.25f) < deltaTime)
+			{
+				printf("{ %03.2f, %03.2f }\n", mSchool->getPosition().x, mSchool->getPosition().y);
+				mAmmount += mSchool->fish(5);
+			}
+
+			if (mSchool->getAmmount() <= 0)
+			{
+				setFishing(0, nullptr);
+			}
+		}
+
+		Ship::update(context, time, deltaTime, changed);
+	}
+}
+
+void FishingBoat::setRepair(int dir)
+{
+	if (!mRepairing)
+	{
+		if (dir == 1)
+		{
+			mRepairing = true;
+			mRepairTime = 0;
+			mCraneRotation->setRotation(0);
+			return;
+		}
+		//Fishing left
+		else if (dir == 2)
+		{
+			mRepairing = true;
+			mRepairTime = 0;
+			mCraneRotation->setRotation(180.0f);
+			return;
 		}
 	}
+}
 
-	Ship::update(context, time, deltaTime, changed);
+bool FishingBoat::getRepairing()
+{
+	return mRepairing;
 }

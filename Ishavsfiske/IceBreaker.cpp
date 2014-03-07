@@ -16,13 +16,13 @@ using namespace Ishavsfiske;
 
 IceBreaker::IceBreaker(unsigned long id, Angler::Node *parent,
 					   Ishavsfiske::IshavsfiskeGame *owner)
-					   : Ship(id, parent, owner)
+					   : Ship(id, parent, owner), mHealth(1.0f), mHull(0.5f)
 {
 	mInit();
 }
 
 IceBreaker::IceBreaker(unsigned long id, Ishavsfiske::IshavsfiskeGame *owner)
-					   : Ship(id, owner)
+					   : Ship(id, owner), mHealth(1.0f), mHull(1.0f)
 {
 	mInit();
 }
@@ -69,4 +69,27 @@ void IceBreaker::mInit()
 void IceBreaker::update(Angler::Game *context, float time, float deltaTime, bool changed)
 {
 	Ship::update(context, time, deltaTime, changed);
+}
+
+void IceBreaker::damage(float v)
+{
+	if (mHull > 0)
+		mHull -= v;
+	else
+		mHealth -= v;
+}
+
+void IceBreaker::repair(float v)
+{
+	mHull += v;
+}
+
+float IceBreaker::getHealth()
+{
+	return mHealth;
+}
+
+float IceBreaker::getHull()
+{
+	return mHull;
 }
