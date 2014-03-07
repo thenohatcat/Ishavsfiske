@@ -19,6 +19,8 @@
 #include "Map.h"
 #include "School.h"
 #include "FishingMode.h"
+#include "StartScreen.h"
+#include "GameOverScreen.h"
 
 class Font;
 
@@ -55,7 +57,13 @@ namespace Ishavsfiske
 		typedef enum
 		{
 			Collide = Game::Events::Collide,
-			Fishing
+			Fishing,
+			StartScreenShow,
+			StartScreenHide,
+			GameOverScreenShow,
+			GameOverScreenHide,
+			FishingModeShow,
+			FishingModeHide
 		} Events;
 
 	protected:
@@ -71,6 +79,8 @@ namespace Ishavsfiske
 		void mDrawUI(float time, float deltaTime);
 
 		FishingMode *mFishingMode;
+		StartScreen *mStartScreen;
+		GameOverScreen *mGameOverScreen;
 		
 		Angler::Node *mUIRoot, *mObjectsRoot;
 

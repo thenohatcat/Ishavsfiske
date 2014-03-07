@@ -85,6 +85,25 @@ void IshavsfiskeGame::throwEvent(int type, ... )
 		school = va_arg(vl, School*);
 		mFishingMode->fish(dir, school);
 		break;
+	case Events::StartScreenShow:
+		mStartScreen->enable(true);
+		break;
+	case Events::StartScreenHide:
+		mStartScreen->enable(false);
+		break;
+	case Events::GameOverScreenShow:
+		mFishingMode->pause(true);
+		mGameOverScreen->enable(true);
+		break;
+	case Events::GameOverScreenHide:
+		mGameOverScreen->enable(false);
+		break;
+	case Events::FishingModeShow:
+		mFishingMode->enable(true);
+		break;
+	case Events::FishingModeHide:
+		mFishingMode->enable(false);
+		break;
 	}
 
 	va_end(vl);

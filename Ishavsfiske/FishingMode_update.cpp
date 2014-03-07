@@ -51,6 +51,8 @@ void FishingMode::update(Angler::Game* context, float time, float deltaTime, boo
 	{
 		mChanged |= changed;
 
+		input(time, deltaTime);
+
 		float fishingMVX = 0, fishingMVY = 0;
 		float breakerMVX = 0, breakerMVY = 0;
 

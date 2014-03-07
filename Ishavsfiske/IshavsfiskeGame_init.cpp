@@ -39,8 +39,15 @@ void Ishavsfiske::IshavsfiskeGame::setupGraphicsLayers(int numLayers, int layerS
 void Ishavsfiske::IshavsfiskeGame::mLoadContent()
 {
 	mFishingMode->loadContent();
+	mFishingMode->enable(false);
 
-	mFishingMode->enable(true);
+	mStartScreen->loadContent();
+	mStartScreen->enable(false);
+
+	mGameOverScreen->loadContent();
+	mGameOverScreen->enable(false);
+
+	mStartScreen->enable(true);
 }
 
 void Ishavsfiske::IshavsfiskeGame::mInit()
@@ -50,6 +57,12 @@ void Ishavsfiske::IshavsfiskeGame::mInit()
 
 	mFishingMode = new FishingMode(0, mObjectsRoot, this);
 	mFishingMode->init();
+
+	mStartScreen = new StartScreen(0, mObjectsRoot, this);
+	mStartScreen->init();
+
+	mGameOverScreen = new GameOverScreen(0, mObjectsRoot, this);
+	mGameOverScreen->init();
 
 	mFont = new Font();
 }

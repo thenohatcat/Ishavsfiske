@@ -19,5 +19,5 @@ using namespace std;
 
 void Ishavsfiske::IshavsfiskeGame::mInput(float time, float deltaTime)
 {
-	mFishingMode->input(time, deltaTime);
+
 }

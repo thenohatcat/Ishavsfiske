@@ -56,7 +56,6 @@ void Map::mInit()
 
 void Map::genMap(int lvl)
 {
-	srand(time(NULL));
 	switch(lvl)
 	{
 	case 1:
@@ -69,24 +68,24 @@ void Map::genMap(int lvl)
 				{
 					mMap[x + y * 48] = 0x20;
 				}
-				else if (x >= 3 && y >= 3 && x < 6 && y < 6)
-				{
-					/*if (rand() % 3 == 0)
-						mMap[x + y * 48] = 0x00;
-					else
-						mMap[x + y * 48] = 0x10;*/
-					if ((x == 4 && y == 3) || (x == 4 && y == 5))
-						mMap[x + y * 48] = 0x00;
-					else
-						mMap[x + y * 48] = 0x10;
-				}
-				else if (x >= 7 && y >= 3 && x < 11 && y < 6)
-				{
-					if (rand() % 3 == 0)
-						mMap[x + y * 48] = 0x00;
-					else
-						mMap[x + y * 48] = 0x10;
-				}
+				//else if (x >= 3 && y >= 3 && x < 6 && y < 6)
+				//{
+				//	/*if (rand() % 3 == 0)
+				//		mMap[x + y * 48] = 0x00;
+				//	else
+				//		mMap[x + y * 48] = 0x10;*/
+				//	if ((x == 4 && y == 3) || (x == 4 && y == 5))
+				//		mMap[x + y * 48] = 0x00;
+				//	else
+				//		mMap[x + y * 48] = 0x10;
+				//}
+				//else if (x >= 7 && y >= 3 && x < 11 && y < 6)
+				//{
+				//	if (rand() % 3 == 0)
+				//		mMap[x + y * 48] = 0x00;
+				//	else
+				//		mMap[x + y * 48] = 0x10;
+				//}
 				/*else if (x >= 2 && x <= 8 && y >= 2 && y <= 6)
 				{
 					mMap[x + y * 48] = 0x10;

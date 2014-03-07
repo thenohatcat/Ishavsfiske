@@ -32,6 +32,7 @@ void FishingMode::loadContent()
 	mTXSchool->loadFromFile("Swim_Capelin_spritesheet.png");
 	mTXUI->loadFromFile("Sheet_2.png");
 	mUIFont->loadFromFile("font_bitmap.png");
+	mTXGameOver->loadFromFile("game_over__.png");
 
 	mCollFishingBuff->loadFromFile("Fiskebåt_Kollision_01.wav");
 	mCollFishingSound->setBuffer(*mCollFishingBuff);
@@ -77,6 +78,7 @@ void FishingMode::init()
 	mTXSchool = new sf::Texture();
 	mTXUI = new sf::Texture();
 	mUIFont = new sf::Texture();
+	mTXGameOver = new sf::Texture();
 
 	mShipFishing = new FishingBoat(0x10000, this, mOwner);
 	mShipBreaker = new IceBreaker(0x20000, this, mOwner);

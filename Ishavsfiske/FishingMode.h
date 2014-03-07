@@ -47,7 +47,7 @@ namespace Ishavsfiske
 		sf::Sound *mCollFishingSound, *mCollBreakerSound, *mCollIceSound, *mEngineSound;
 		sf::SoundBuffer *mCollFishingBuff, *mCollBreakerBuff, *mCollIceBuff, *mEngineBuff;
 
-		sf::Texture *mTXMap, *mTXUI, *mTXSchool, *mUIFont;
+		sf::Texture *mTXMap, *mTXUI, *mTXSchool, *mUIFont, *mTXGameOver;
 
 		sf::Sound *mMusic;
 		sf::SoundBuffer *mMusicFishingBuff;

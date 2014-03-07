@@ -37,9 +37,9 @@ void FishingMode::mEnable(bool enabled)
 {
 	if (enabled)
 	{
-		int sizes[7] = { 600, 600, 32, 64, 64, 64, 512 };
-		sf::Texture* textures[7] = { mTXUI, mTXUI, mTXSchool, mTXUI, mTXUI, mTXUI, mUIFont };
-		mOwner->setupGraphicsLayers(7, sizes, textures);
+		int sizes[8] = { 600, 600, 32, 64, 64, 64, 512, 1 };
+		sf::Texture* textures[8] = { mTXUI, mTXUI, mTXSchool, mTXUI, mTXUI, mTXUI, mUIFont, mTXGameOver };
+		mOwner->setupGraphicsLayers(8, sizes, textures);
 	}
 	else
 	{
