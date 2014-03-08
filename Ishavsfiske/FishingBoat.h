@@ -10,6 +10,8 @@
 #include "Ship.h"
 #include "School.h"
 
+#include <Angler\AnimatedNode.h>
+
 namespace Ishavsfiske
 {
 	class FishingBoat
@@ -37,8 +39,12 @@ namespace Ishavsfiske
 		Angler::Nodes::Rotation *mCraneRotation, *mLampRotation;
 		School *mSchool;
 		int mAmmount;
+		bool mFishing;
+		float mFishTime;
 		bool mRepairing;
 		float mRepairTime;
+
+		Angler::Nodes::AnimatedNode *mLeftNet, *mRightNet;
 	};
 }
 

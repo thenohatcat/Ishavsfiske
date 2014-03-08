@@ -16,13 +16,13 @@ using namespace Ishavsfiske;
 using namespace Angler::Nodes;
 
 School::School(unsigned long id, Angler::Node *parent, Ishavsfiske::IshavsfiskeGame *owner)
-	: Node(id, parent), mOwner(owner), mStartX(0.5f), mStartY(0.5f), mAmmount(10)
+	: Node(id, parent), mOwner(owner), mStartX(0.5f), mStartY(0.5f), mAmmount(16)
 {
 	mInit();
 }
 
 School::School(unsigned long id, Ishavsfiske::IshavsfiskeGame *owner)
-	: Node(id), mOwner(owner), mStartX(0.5f), mStartY(0.5f), mAmmount(10)
+	: Node(id), mOwner(owner), mStartX(0.5f), mStartY(0.5f), mAmmount(16)
 {
 	mInit();
 }
@@ -34,10 +34,10 @@ void School::mInit()
 	mSchoolRoot = new Node(getID() + 0x0004, s);
 
 	std::vector<sf::Vector2f> pts;
-	pts.push_back(sf::Vector2f(1, 0));
-	pts.push_back(sf::Vector2f(0, 0));
-	pts.push_back(sf::Vector2f(0, 1));
-	pts.push_back(sf::Vector2f(1 ,1));
+	pts.push_back(sf::Vector2f(0.75f, 0.25f));
+	pts.push_back(sf::Vector2f(0.25f, 0.25f));
+	pts.push_back(sf::Vector2f(0.25f, 0.75f));
+	pts.push_back(sf::Vector2f(0.75f ,0.75f));
 	new Angler::Nodes::CollisionNode(getID() + 0x5000, mSchoolRoot, pts, 1);
 
 	std::vector<sf::Vector2f> anim;

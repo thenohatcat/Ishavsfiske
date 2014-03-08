@@ -110,9 +110,8 @@ void FishingMode::draw(Angler::Game* context, Angler::Graphics::GraphicsEngine* 
 
 					//Needle
 					glPushMatrix();
-						printf("%f\n", mShipBreaker->getVelocity().y);
 						glScalef(1/40.0f, 1/40.0f, 1);
-							glTranslatef(-mShipBreaker->getVelocity().y * 1/0.0458f * 4 - 2, 0, 0);
+							glTranslatef(abs(mShipBreaker->getVelocity().y) * 1/0.0458f * 4 - 2, 0, 0);
 						glScalef(40.0f, 40.0f, 1);
 						glScalef(15/1000.0f, 15/1000.0f, 1);
 						graphics->draw(5, sf::Vector2f(0.5f, 0.0f), sf::Vector2f(150/1500.0f, 1071.0f/1600.0f), sf::Vector2f(3/1500.0f, 15/1600.0f));

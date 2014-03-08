@@ -30,10 +30,7 @@ void FishingMode::mMoveFrame(float dx, float dy)
 	if ((dy > 0 && mapPos.y >= 20) || (dy < 0 && mapPos.y <= 0))
 		dy = 0;
 
-	for (std::vector<School*>::const_iterator i = mSchools.begin(); i != mSchools.end(); i++)
-	{
-		(*i)->move(-dx, -dy);
-	}
+	mFishBase->translate(-dx, -dy);
 
 	mShipBreaker->move(-dx, -dy, true);
 	mShipFishing->move(-dx, -dy, true);
@@ -51,7 +48,11 @@ void FishingMode::update(Angler::Game* context, float time, float deltaTime, boo
 	{
 		mChanged |= changed;
 
+		mDoRepair = false;
+
 		input(time, deltaTime);
+
+		mUpdateChildren(context, time, deltaTime);
 
 		float fishingMVX = 0, fishingMVY = 0;
 		float breakerMVX = 0, breakerMVY = 0;
@@ -66,45 +67,45 @@ void FishingMode::update(Angler::Game* context, float time, float deltaTime, boo
 		if ((breakerX > 18.0f && fishingX > 6.0f) && breakerVX > 0)
 		{
 			base = ((breakerX - 18.0f) / 1.732);
-			breakerMVX = 1 * std::max(std::min(base*base/12.0f, 1.0f), 0.0f);
+			breakerMVX = breakerVX / 0.0458f * std::max(std::min(base*base/12.0f, 1.0f), 0.0f);
 		}
 		else if ((breakerX < 6.0f && fishingX < 18.0f) && breakerVX < 0)
 		{
 			base = ((-breakerX + 6.0f) / 1.732f);
-			breakerMVX = -1 * std::max(std::min(base*base/12.0f, 1.0f), 0.0f);
+			breakerMVX = breakerVX / 0.0458f * std::max(std::min(base*base/12.0f, 1.0f), 0.0f);
 		}
 
 		if ((breakerY > 15.0f && fishingY > 5.0f) && breakerVY > 0)
 		{
 			base = ((breakerY - 15.0f) / 1.581f);
-			breakerMVY = 1 * std::max(std::min(base*base/10.0f, 1.0f), 0.0f);
+			breakerMVY = breakerVY / 0.0458f * std::max(std::min(base*base/10.0f, 1.0f), 0.0f);
 		}
 		else if ((breakerY < 5.0f && fishingY < 15.0f) && breakerVY < 0)
 		{
 			base = ((-breakerY + 5.0f) / 1.581f);
-			breakerMVY = -1 * std::max(std::min(base*base/10.0f, 1.0f), 0.0f);
+			breakerMVY = breakerVY / 0.0458f * std::max(std::min(base*base/10.0f, 1.0f), 0.0f);
 		}
 
 		if ((fishingX > 18.0f && breakerX > 6.0f) && fishingVX > 0)
 		{
 			base = ((fishingX - 18.0f) / 1.732);
-			fishingMVX = 1 * std::max(std::min(base*base/12.0f, 1.0f), 0.0f);
+			fishingMVX = fishingVX / 0.0458f * std::max(std::min(base*base/12.0f, 1.0f), 0.0f);
 		}
 		else if ((fishingX < 6.0f && breakerX < 18.0f) && fishingVX < 0)
 		{
 			base = ((-fishingX + 6.0f) / 1.732f);
-			fishingMVX = -1 * std::max(std::min(base*base/12.0f, 1.0f), 0.0f);
+			fishingMVX = fishingVX / 0.0458f * std::max(std::min(base*base/12.0f, 1.0f), 0.0f);
 		}
 
 		if ((fishingY > 15.0f && breakerY > 5.0f) && fishingVY > 0)
 		{
 			base = ((fishingY - 15.0f) / 1.581f);
-			fishingMVY = 1 * std::max(std::min(base*base/10.0f, 1.0f), 0.0f);
+			fishingMVY = fishingVY / 0.0458f * std::max(std::min(base*base/10.0f, 1.0f), 0.0f);
 		}
 		else if ((fishingY < 5.0f && breakerY < 15.0f) && fishingVY < 0)
 		{
 			base = ((-fishingY + 5.0f) / 1.581f);
-			fishingMVY = -1 * std::max(std::min(base*base/10.0f, 1.0f), 0.0f);
+			fishingMVY = fishingVY / 0.0458f * std::max(std::min(base*base/10.0f, 1.0f), 0.0f);
 		}
 
 		float mvx = 0, mvy = 0;
@@ -147,24 +148,26 @@ void FishingMode::update(Angler::Game* context, float time, float deltaTime, boo
 		mMoveFrame(mvx * deltaTime, mvy * deltaTime);
 	
 		if (fmod(time, 1) < deltaTime)
-			if (mSchools.size() < 5)
+			if (mSchools.size() < 25)
 			{
-				School *s = new School(0x20000000 + mSchoolID++, this, mOwner);
-				s->setPosition(((rand() % 1000)/1000.0f) * 12/10.0f + 2/10.0f, (rand() % 1000)/1000.0f);
+				School *s = new School(0x20000000 + mSchoolID++, mFishBase, mOwner);
+				float x = (rand() % 1000)/1000.0f * 46/20.0f, y = (rand() % 1000)/1000.0f * 30/20.0f;
+				while ((
+					x >= mMap->getPos().x && x <= mMap->getPos().x + 24/20.0f && 
+					x >= mMap->getPos().x && x <= mMap->getPos().x + 20/20.0f))
+				{
+					x = (rand() % 1000)/1000.0f * 46/20.0f;
+					y = (rand() % 1000)/1000.0f * 30/20.0f;
+				}
+
+				s->setPosition(x + 1/10.0f, y + 1/10.0f);
 				mSchools.push_back(s);
-				printf("Added school: %04X { %04.2f, %04.2f }\n", s->getID(), s->getPosition().x * 10, s->getPosition().y * 10);
 			}
 
 		for (std::vector<School*>::const_iterator i = mSchools.begin(); i != mSchools.end(); )
 		{
 			sf::Vector2f pos = (*i)->getPosition();
 			if ((*i)->getAmmount() <= 0)
-			{
-				Angler::Node *n = *i;
-				i = mSchools.erase(i);
-				delete n;
-			}
-			else if (pos.x < 0 || pos.x > 23 || pos.y < 0 || pos.y > 19)
 			{
 				Angler::Node *n = *i;
 				i = mSchools.erase(i);
@@ -177,8 +180,7 @@ void FishingMode::update(Angler::Game* context, float time, float deltaTime, boo
 		if (((FishingBoat*)mShipFishing)->getRepairing() && ((IceBreaker*)mShipBreaker)->getHull() < 1)
 		{
 			((IceBreaker*)mShipBreaker)->repair(0.25 * deltaTime);
+			((IceBreaker*)mShipBreaker)->block();
 		}
-
-		mUpdateChildren(context, time, deltaTime);
 	}
 }

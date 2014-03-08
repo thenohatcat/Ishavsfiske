@@ -52,21 +52,28 @@ void Ship::move(float x, float y, bool global)
 {	
 	if (global)
 	{
-		mRootTranslation->translate(x, y);
-		mChanged = true;
+		if (!mBlocked)
+		{
+			mRootTranslation->translate(x, y);
+			mChanged = true;
+		}
 	}
 	else
 	{
-		Rotation r(0, mRootRotation->getRotation());
-		sf::Vector2f tv = r.transform(sf::Vector2f(5*x, 5*y));
-		mRootTranslation->translate(tv);
-		mChanged = true;
+		if (!mBlocked)
+		{
+			Rotation r(0, mRootRotation->getRotation());
+			sf::Vector2f tv = r.transform(sf::Vector2f(5*x, 5*y));
+			mRootTranslation->translate(tv);
+			mChanged = true;
+		}
 	}
 }
 
 void Ship::throttle(float vx, float vy)
 {
-	mVel.x += vx; mVel.y += vy;
+	if (!mBlocked)
+		mVel.x += vx; mVel.y += vy;
 }
 
 void Ship::update(Angler::Game *context, float time, float deltaTime, bool changed)
@@ -75,7 +82,7 @@ void Ship::update(Angler::Game *context, float time, float deltaTime, bool chang
 	{
 		mChanged |= changed;
 	
-		if (mTimeDiff > 0.005f)
+		if (mTimeDiff > 0.005f && !mBlocked)
 		{
 			mOldRotations.push_back(mRootRotation->getRotation());
 			mOldTranslations.push_back(mRootTranslation->getTranslation());
@@ -102,27 +109,38 @@ void Ship::update(Angler::Game *context, float time, float deltaTime, bool chang
 		else
 			mVel.y = 0;
 
+		if (mBlocked)
+			mVel = sf::Vector2f(0, 0);
+
 		mUpdateChildren(context, time, deltaTime);
 
 		mTimeDiff += deltaTime;
+
+		mBlocked = false;
 	}
 }
 
 void Ship::rotate(float r)
 {
-	mRootRotation->rotate(r);
-	mChanged = true;
+	if (!mBlocked)
+	{
+		mRootRotation->rotate(r);
+		mChanged = true;
+	}
 }
 
 void Ship::revert()
 {
-	mRootRotation->setRotation(mOldRotations.back());
-	mRootTranslation->setTranslation(mOldTranslations.back());
-	mOldRotations.pop_back();
-	mOldTranslations.pop_back();
+	if (!mBlocked)
+	{
+		mRootRotation->setRotation(mOldRotations.back());
+		mRootTranslation->setTranslation(mOldTranslations.back());
+		mOldRotations.pop_back();
+		mOldTranslations.pop_back();
 
-	mVel.x = mVel.y = 0;
-	mChanged = true;
+		mVel.x = mVel.y = 0;
+		mChanged = true;
+	}
 }
 
 sf::Vector2f Ship::getVelocity()
@@ -149,4 +167,19 @@ float Ship::getRotation()
 void Ship::collide()
 {
 	revert();
+}
+
+void Ship::block()
+{
+	mOldRotations.push_back(mRootRotation->getRotation());
+	mOldTranslations.push_back(mRootTranslation->getTranslation());
+
+	if (mOldRotations.size() > 128)
+	{
+		mOldRotations.erase(mOldRotations.begin());
+		mOldTranslations.erase(mOldTranslations.begin());
+	}
+
+	mBlocked = true;
+	mVel = sf::Vector2f(0, 0);
 }

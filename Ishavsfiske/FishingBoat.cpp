@@ -15,13 +15,13 @@
 using namespace Ishavsfiske;
 
 FishingBoat::FishingBoat(unsigned long id, Angler::Node *parent, Ishavsfiske::IshavsfiskeGame *owner)
-			: Ship(id, parent, owner), mAmmount(0), mSchool(nullptr)
+	: Ship(id, parent, owner), mAmmount(0), mSchool(nullptr), mRepairing(false), mFishing(false)
 {
 	mInit();
 }
 
 FishingBoat::FishingBoat(unsigned long id, Ishavsfiske::IshavsfiskeGame *owner)
-			: Ship(id, owner), mAmmount(0), mSchool(nullptr)
+	: Ship(id, owner), mAmmount(0), mSchool(nullptr), mRepairing(false), mFishing(false)
 {
 	mInit();
 }
@@ -39,20 +39,34 @@ void FishingBoat::setFishing(int mode, School *school)
 	//Not fishing
 	if (mode == 0)
 	{
+		mFishing = false;
 		mSchool = nullptr;
 		mCraneRotation->setRotation(90.0f);
+		mLeftNet->show(false);
+		mRightNet->show(false);
 	}
 	//Fishing right
-	else if (mode == 1)
+	else if (!mRepairing && !mFishing)
 	{
-		mSchool = school;
-		mCraneRotation->setRotation(0);
-	}
-	//Fishing left
-	else if (mode == 2)
-	{
-		mSchool = school;
-		mCraneRotation->setRotation(180.0f);
+		if (mode == 1)
+		{
+			mFishing = true;
+			mFishTime = 0;
+			mSchool = school;
+			mCraneRotation->setRotation(0);
+			mRightNet->show(true);
+			mRightNet->setFrame(0);
+		}
+		//Fishing left
+		else if (mode == 2)
+		{
+			mFishing = true;
+			mFishTime = 0;
+			mSchool = school;
+			mCraneRotation->setRotation(180.0f);
+			mLeftNet->show(true);
+			mLeftNet->setFrame(0);
+		}
 	}
 }
 
@@ -92,12 +106,12 @@ void FishingBoat::mInit()
 	std::vector<sf::Vector2f> fishPTS;
 	for (int i = 0; i < 15; i++)
 	{
-		fishPTS.push_back(sf::Vector2f(1/4.0f*cos(i/16.0f * 2*3.14159f), 0.5f*sin(i/16.0f * 2*3.14159f)));
+		fishPTS.push_back(sf::Vector2f(1/4.0f*cos(i/16.0f * 2*3.14159f), 1/4.0f*sin(i/16.0f * 2*3.14159f)));
 	}
-	Angler::Nodes::Translation *rightFishT = new Angler::Nodes::Translation(getID() + 0x4200, s, 0.45f, 0.15f);
+	Angler::Nodes::Translation *rightFishT = new Angler::Nodes::Translation(getID() + 0x4200, s, 0.70f, 0.20f);
 	new Angler::Nodes::CollisionNode(getID() + 0x2201, rightFishT, fishPTS, 0);
 
-	Angler::Nodes::Translation *leftFishT = new Angler::Nodes::Translation(getID() + 0x4200, s, -0.45f, 0.15f);
+	Angler::Nodes::Translation *leftFishT = new Angler::Nodes::Translation(getID() + 0x4200, s, -0.70f, 0.20f);
 	new Angler::Nodes::CollisionNode(getID() + 0x2202, leftFishT, fishPTS, 0);
 
 	Angler::Nodes::Translation *craneT = new Angler::Nodes::Translation(getID() + 0x4103, mShipRoot, 
@@ -111,47 +125,75 @@ void FishingBoat::mInit()
 	Angler::Nodes::Scale *lampS = new Angler::Nodes::Scale(getID() + 0x3104, lampT, 14/1000.0f, 14.0f/1000.0f);
 	mLampRotation = new Angler::Nodes::Rotation(getID() + 0x5105, lampS, 0);
 	new Angler::Nodes::SpriteNode(getID() + 0x1106, mLampRotation, 4, sf::Vector2f(0.5f, 0.5f), sf::Vector2f(475/1500.0f, 225/1600.0f), sf::Vector2f(12/1500.0f, 14/1600.0f));
+
+	std::vector<sf::Vector2f> animPts;
+	animPts.push_back(sf::Vector2f(700/1500.0f, 50/1600.0f));
+	animPts.push_back(sf::Vector2f(766/1500.0f, 50/1600.0f));
+	animPts.push_back(sf::Vector2f(832/1500.0f, 50/1600.0f));
+	animPts.push_back(sf::Vector2f(898/1500.0f, 50/1600.0f));
+	Angler::Nodes::Scale *leftNetS = new Angler::Nodes::Scale(getID() + 0x3107, leftFishT, (66/125.0f), (75/125.0f));
+	mLeftNet = new Angler::Nodes::AnimatedNode(getID() + 0x1108, leftNetS, 4, animPts, 0.5f, 0.5f, 0.5f, 66/1500.0f, 75/1600.0f);
+	mLeftNet->show(false);
+
+	Angler::Nodes::Scale *rightNetS = new Angler::Nodes::Scale(getID() + 0x3107, rightFishT, (66/125.0f), (75/125.0f));
+	mRightNet = new Angler::Nodes::AnimatedNode(getID() + 0x1108, rightNetS, 4, animPts, 0.5f, 0.5f, 0.5f, 66/1500.0f, 75/1600.0f);
+	mRightNet->show(false);
 }
 
 void FishingBoat::update(Angler::Game *context, float time, float deltaTime, bool changed)
 {
 	if (!mPaused)
 	{
-		//mCraneRotation->setRotation(45/2.0f*sin(time));
+		Ship::update(context, time, deltaTime, changed);
+
 		mLampRotation->setRotation(90*sin(time));
 
 		if (mRepairing)
 		{
+			mBlocked = true;
+
 			if (mRepairTime >= 1.0f)
 			{
-				mRepairing = false;
-				mCraneRotation->setRotation(90.0f);
+				setRepair(0);
 			}
 
 			mRepairTime += deltaTime;
 		}
 
-		if (mSchool != nullptr)
+		if (mFishing)
 		{
-			if (fmod(time, 0.25f) < deltaTime)
-			{
-				printf("{ %03.2f, %03.2f }\n", mSchool->getPosition().x, mSchool->getPosition().y);
-				mAmmount += mSchool->fish(5);
-			}
+			mBlocked = true;
 
-			if (mSchool->getAmmount() <= 0)
+			if (mFishTime >= 2.0f)
 			{
 				setFishing(0, nullptr);
 			}
-		}
 
-		Ship::update(context, time, deltaTime, changed);
+			if (mSchool != nullptr && mSchool->getAmmount() <= 0)
+			{
+				mSchool = nullptr;
+			}
+
+			if (mSchool != nullptr && fmod(mFishTime, 0.25f) < deltaTime)
+			{
+				mAmmount += mSchool->fish(1);
+			}
+
+			mFishTime += deltaTime;
+		}
 	}
 }
 
 void FishingBoat::setRepair(int dir)
 {
-	if (!mRepairing)
+	if (dir == 0)
+	{
+		mRepairing = false;
+		mRepairTime = 0;
+		mCraneRotation->setRotation(90);
+		return;
+	}
+	else if (!mRepairing && !mFishing)
 	{
 		if (dir == 1)
 		{

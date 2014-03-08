@@ -21,6 +21,8 @@
 
 using namespace Ishavsfiske;
 
+int tm;
+
 void IshavsfiskeGame::mDraw(float time, float deltaTime)
 {
 	mGraphics->begin();

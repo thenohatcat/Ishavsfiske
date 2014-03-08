@@ -173,7 +173,11 @@ void Map::genMap(int lvl, int v)
 					mMap[x + y * 48] = 
 						((((((v+3) & 0xF) + 0x10 + (((v+3) & 0xF0) << 1))) & (1 << ((x-15) + (y-3) * 3))) ? 0x10 : 0x00);
 				}*/
-				else if (x >= 2 && x <= 8 && y >= 2 && y <= 6)
+				else if (x >= 3 && x <= 7 && y >= 2 && y <= 6)
+				{
+					mMap[x + y * 48] = 0x10;
+				}
+				else if (x >= 2 && x <= 8 && y >= 3 && y <= 5)
 				{
 					mMap[x + y * 48] = 0x10;
 				}

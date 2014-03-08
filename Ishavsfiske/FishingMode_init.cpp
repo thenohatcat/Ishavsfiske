@@ -95,6 +95,8 @@ void FishingMode::init()
 	mTutorial = new Tutorial(0, this, mOwner);
 	mTutorial->init();
 
+	mFishBase = new Angler::Nodes::Translation(0, this, 2/10.0f, 0);
+
 	//Map Collisions
 	std::vector<sf::Vector2f> leftBox;
 	leftBox.push_back(sf::Vector2f(2/10.0f, 0));

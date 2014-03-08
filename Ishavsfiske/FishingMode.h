@@ -62,6 +62,8 @@ namespace Ishavsfiske
 		sf::Sound *mTutorialSound;
 		sf::SoundBuffer *mTutorialBuff;
 
+		Angler::Nodes::Translation *mFishBase;
+
 		void mMoveFrame(float dx, float dy);
 
 		int mSchoolID;
@@ -72,6 +74,8 @@ namespace Ishavsfiske
 		Ship *mShipFishing, *mShipBreaker;
 
 		Ishavsfiske::IshavsfiskeGame *mOwner;
+
+		bool mDoRepair;
 
 		Tutorial *mTutorial;
 	};

@@ -10,6 +10,7 @@
 #include <Angler\Game.h>
 #include <Angler\Graphics.h>
 #include <Angler\Node.h>
+#include <Angler\CollisionNode.h>
 #include <Angler\SpriteNode.h>
 
 class MapNode
@@ -29,6 +30,7 @@ protected:
 	virtual void mInit();
 private:
 	Angler::Nodes::SpriteNode *mSprite; 
+	Angler::Nodes::CollisionNode *mColl;
 	int mTile;
 };
 

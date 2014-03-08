@@ -59,7 +59,7 @@ void MapNode::mInit()
 	pts.push_back(sf::Vector2f(0, 0));
 	pts.push_back(sf::Vector2f(0, 1));
 	pts.push_back(sf::Vector2f(1, 1));
-	new Angler::Nodes::CollisionNode(getID() + 0x2000, this, pts, 1);
+	mColl = new Angler::Nodes::CollisionNode(getID() + 0x2000, this, pts, 1);
 }
 
 int MapNode::getTile()
@@ -71,6 +71,7 @@ void MapNode::setTile(int tileID)
 {
 	mTile = tileID;
 	mSprite->setCropSize(50/1500.0f, 50/1600.0f);
+	std::vector<sf::Vector2f> pts;
 	switch(mTile)
 	{
 	case 0:
@@ -79,59 +80,134 @@ void MapNode::setTile(int tileID)
 		break;
 	case 0x10:
 	case 0x20:
+		//Center
+		pts.push_back(sf::Vector2f(1.0f, 0.0f));
+		pts.push_back(sf::Vector2f(0.0f, 0.0f));
+		pts.push_back(sf::Vector2f(0.0f, 1.0f));
+		pts.push_back(sf::Vector2f(1.0f, 1.0f));
 		mSprite->setCropOrigin(500/1500.0f, 625/1600.0f);
 		break;
 	case 0x11:
 	case 0x21:
+		//Broken center
+		pts.push_back(sf::Vector2f(1.0f, 0.0f));
+		pts.push_back(sf::Vector2f(0.0f, 0.0f));
+		pts.push_back(sf::Vector2f(0.0f, 1.0f));
+		pts.push_back(sf::Vector2f(1.0f, 1.0f));
 		mSprite->setCropOrigin(450/1500.0f, 625/1600.0f);
 		break;
 	case 0x12:
 	case 0x22:
+		//Lower
+		pts.push_back(sf::Vector2f(1.0f, 0.0f));
+		pts.push_back(sf::Vector2f(0.0f, 0.0f));
+		pts.push_back(sf::Vector2f(0.0f, 0.5f));
+		pts.push_back(sf::Vector2f(1.0f, 0.5f));
 		mSprite->setCropOrigin(450/1500.0f, 675/1600.0f);
 		break;
 	case 0x13:
 	case 0x23:
+		//Top right
+		pts.push_back(sf::Vector2f(0.5f, 0.5f));
+		pts.push_back(sf::Vector2f(0.0f, 0.5f));
+		pts.push_back(sf::Vector2f(0.0f, 1.0f));
+		pts.push_back(sf::Vector2f(0.5f, 1.0f));
 		mSprite->setCropOrigin(600/1500.0f, 525/1600.0f);
 		break;
 	case 0x14:
 	case 0x24:
+		//Left
+		pts.push_back(sf::Vector2f(1.0f, 0.0f));
+		pts.push_back(sf::Vector2f(0.5f, 0.0f));
+		pts.push_back(sf::Vector2f(0.5f, 1.0f));
+		pts.push_back(sf::Vector2f(1.0f, 1.0f));
 		mSprite->setCropOrigin(400/1500.0f, 575/1600.0f);
 		break;
 	case 0x15:
 	case 0x25:
+		//Top left
+		pts.push_back(sf::Vector2f(1.0f, 0.5f));
+		pts.push_back(sf::Vector2f(0.5f, 0.5f));
+		pts.push_back(sf::Vector2f(0.5f, 1.0f));
+		pts.push_back(sf::Vector2f(1.0f, 1.0f));
 		mSprite->setCropOrigin(400/1500.0f, 525/1600.0f);
 		break;
 	case 0x16:
 	case 0x26:
+		//Top
+		pts.push_back(sf::Vector2f(1.0f, 0.5f));
+		pts.push_back(sf::Vector2f(0.0f, 0.5f));
+		pts.push_back(sf::Vector2f(0.0f, 1.0f));
+		pts.push_back(sf::Vector2f(1.0f, 1.0f));
 		mSprite->setCropOrigin(450/1500.0f, 525/1600.0f);
 		break;
 	case 0x17:
 	case 0x27:
+		//Lower Left
+		pts.push_back(sf::Vector2f(1.0f, 0.0f));
+		pts.push_back(sf::Vector2f(0.5f, 0.0f));
+		pts.push_back(sf::Vector2f(0.5f, 0.5f));
+		pts.push_back(sf::Vector2f(1.0f, 0.5f));
 		mSprite->setCropOrigin(400/1500.0f, 675/1600.0f);
 		break;
 	case 0x18:
 	case 0x28:
+		//Right
+		pts.push_back(sf::Vector2f(0.5f, 0.0f));
+		pts.push_back(sf::Vector2f(0.0f, 0.0f));
+		pts.push_back(sf::Vector2f(0.0f, 1.0f));
+		pts.push_back(sf::Vector2f(0.5f, 1.0f));
 		mSprite->setCropOrigin(600/1500.0f, 575/1600.0f);
 		break;
 	case 0x19:
 	case 0x29:
+		//Lower right
+		pts.push_back(sf::Vector2f(0.50f, 0.0f));
+		pts.push_back(sf::Vector2f(0.0f, 0.0f));
+		pts.push_back(sf::Vector2f(0.0f, 0.5f));
+		pts.push_back(sf::Vector2f(0.5f, 0.5f));
 		mSprite->setCropOrigin(600/1500.0f, 675/1600.0f);
 		break;
 	case 0x1A:
 	case 0x2A:
+		//Inner Lower Right
+		pts.push_back(sf::Vector2f(1.0f, 0.0f));
+		pts.push_back(sf::Vector2f(0.0f, 0.0f));
+		pts.push_back(sf::Vector2f(0.0f, 1.0f));
+		pts.push_back(sf::Vector2f(0.5f, 1.0f));
+		pts.push_back(sf::Vector2f(1.0f, 0.5f));
 		mSprite->setCropOrigin(700/1500.0f, 550/1600.0f);
 		break;
 	case 0x1B:
 	case 0x2B:
+		//Inner lower left
+		pts.push_back(sf::Vector2f(1.0f, 0.0f));
+		pts.push_back(sf::Vector2f(0.0f, 0.0f));
+		pts.push_back(sf::Vector2f(0.0f, 0.5f));
+		pts.push_back(sf::Vector2f(0.5f, 1.0f));
+		pts.push_back(sf::Vector2f(1.0f, 1.0f));
 		mSprite->setCropOrigin(650/1500.0f, 550/1600.0f);
 		break;
 	case 0x1C:
 	case 0x2C:
+		//Inner top left
+		pts.push_back(sf::Vector2f(1.0f, 0.0f));
+		pts.push_back(sf::Vector2f(0.5f, 0.0f));
+		pts.push_back(sf::Vector2f(0.0f, 0.5f));
+		pts.push_back(sf::Vector2f(0.0f, 1.0f));
+		pts.push_back(sf::Vector2f(1.0f, 1.0f));
 		mSprite->setCropOrigin(650/1500.0f, 500/1600.0f);
 		break;
 	case 0x1D:
 	case 0x2D:
+		//Inner top right
+		pts.push_back(sf::Vector2f(1.0f, 0.5f));
+		pts.push_back(sf::Vector2f(0.5f, 0.0f));
+		pts.push_back(sf::Vector2f(0.0f, 0.0f));
+		pts.push_back(sf::Vector2f(0.0f, 1.0f));
+		pts.push_back(sf::Vector2f(1.0f, 1.0f));
 		mSprite->setCropOrigin(700/1500.0f, 500/1600.0f);
 		break;
 	}
+	mColl->setCollision(pts);
 }

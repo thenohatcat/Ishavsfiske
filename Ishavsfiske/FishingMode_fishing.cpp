@@ -15,12 +15,12 @@ void FishingMode::fish(int i, School *school)
 {
 	((FishingBoat*)mShipFishing)->setFishing(i, school);
 
-//#ifndef _DEBUG
-//	if (i == 1)
-//		printf("Fishing Right\n");
-//	else if (i == 2)
-//		printf("Fishing Left\n");
-//#endif
+#ifndef _DEBUG
+	if (i == 1)
+		printf("Fishing Right\n");
+	else if (i == 2)
+		printf("Fishing Left\n");
+#endif
 }
 
 void FishingMode::repair(int dir)

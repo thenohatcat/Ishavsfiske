@@ -19,36 +19,44 @@ void FishingMode::collide(Node *nodeA, Node *nodeB)
 
 		if (nodeA->getID() == 0x00012201 || nodeB->getID() == 0x00012201)
 		{
-			if ((nodeA->getID() >= 0x200005000 && nodeA->getID() <= 0x20005FFF) || (nodeB->getID() >= 0x20005000 && nodeB->getID() <= 0x20005FFF))
+			if (!((FishingBoat*)mShipFishing)->getRepairing())
 			{
-				School *school = nullptr;
-				if (nodeA->getID() >= 0x20000000 && nodeA->getID() <= 0x2000FFFF)
-					school = (School*)(nodeA->getParent()->getParent()->getParent()->getParent());
-				else if (nodeB->getID() >= 0x20000000 && nodeB->getID() <= 0x2000FFFF)
-					school = (School*)(nodeB->getParent()->getParent()->getParent()->getParent());
-				mOwner->throwEvent(IshavsfiskeGame::Events::Fishing, 1, school);
-			}
-			else if (nodeA->getID() == 0x00022102 || nodeB->getID() == 0x00022102)
-			{
-				if (((IceBreaker*)mShipBreaker)->getHull() < 1)
-					mOwner->throwEvent(IshavsfiskeGame::Events::Repairing, 1);
+				if ((nodeA->getID() >= 0x200005000 && nodeA->getID() <= 0x20005FFF) || (nodeB->getID() >= 0x20005000 && nodeB->getID() <= 0x20005FFF))
+				{
+					School *school = nullptr;
+					if (nodeA->getID() >= 0x20000000 && nodeA->getID() <= 0x2000FFFF)
+						school = (School*)(nodeA->getParent()->getParent()->getParent()->getParent());
+					else if (nodeB->getID() >= 0x20000000 && nodeB->getID() <= 0x2000FFFF)
+						school = (School*)(nodeB->getParent()->getParent()->getParent()->getParent());
+					mOwner->throwEvent(IshavsfiskeGame::Events::Fishing, 1, school);
+				}
+				else if (nodeA->getID() == 0x00022102 || nodeB->getID() == 0x00022102)
+				{
+					if (mDoRepair)
+						if (((IceBreaker*)mShipBreaker)->getHull() < 1)
+							mOwner->throwEvent(IshavsfiskeGame::Events::Repairing, 1);
+				}
 			}
 		}
 		else if (nodeA->getID() == 0x00012202 || nodeB->getID() == 0x00012202)
 		{
-			if ((nodeA->getID() >= 0x200005000 && nodeA->getID() <= 0x20005FFF) || (nodeB->getID() >= 0x20005000 && nodeB->getID() <= 0x20005FFF))
+			if (!((FishingBoat*)mShipFishing)->getRepairing())
 			{
-				School *school = nullptr;
-				if (nodeA->getID() >= 0x20000000 && nodeA->getID() <= 0x2000FFFF)
-					school = (School*)(nodeA->getParent()->getParent()->getParent()->getParent());
-				else if (nodeB->getID() >= 0x20000000 && nodeB->getID() <= 0x2000FFFF)
-					school = (School*)(nodeB->getParent()->getParent()->getParent()->getParent());
-				mOwner->throwEvent(IshavsfiskeGame::Events::Fishing, 2, school);
-			}
-			else if (nodeA->getID() == 0x00022102 || nodeB->getID() == 0x00022102)
-			{
-				if (((IceBreaker*)mShipBreaker)->getHull() < 1)
-					mOwner->throwEvent(IshavsfiskeGame::Events::Repairing, 2);
+				if ((nodeA->getID() >= 0x200005000 && nodeA->getID() <= 0x20005FFF) || (nodeB->getID() >= 0x20005000 && nodeB->getID() <= 0x20005FFF))
+				{
+					School *school = nullptr;
+					if (nodeA->getID() >= 0x20000000 && nodeA->getID() <= 0x2000FFFF)
+						school = (School*)(nodeA->getParent()->getParent()->getParent()->getParent());
+					else if (nodeB->getID() >= 0x20000000 && nodeB->getID() <= 0x2000FFFF)
+						school = (School*)(nodeB->getParent()->getParent()->getParent()->getParent());
+					mOwner->throwEvent(IshavsfiskeGame::Events::Fishing, 2, school);
+				}
+				else if (nodeA->getID() == 0x00022102 || nodeB->getID() == 0x00022102)
+				{
+					if (mDoRepair)
+						if (((IceBreaker*)mShipBreaker)->getHull() < 1)
+							mOwner->throwEvent(IshavsfiskeGame::Events::Repairing, 2);
+				}
 			}
 		}
 
@@ -86,10 +94,16 @@ void FishingMode::collide(Node *nodeA, Node *nodeB)
 			if(nodeA->getID() == 0x00012102 || nodeB->getID() == 0x00012102)
 			{
 				int indx = nodeB->getID()& 0xFFF;
-				if(mMap->getTile(indx) >= 0x10 && mMap->getTile(indx) <= 0x2F)
+				if(mMap->getTile(indx) >= 0x10 && mMap->getTile(indx) <= 0x1F)
+				{
+					mShipFishing->block();
+					mMap->revert();
+					mOwner->getSound()->playSound(mCollFishingSound);
+				}
+				//Unbreakable ice
+				if(mMap->getTile(indx) >= 0x20 && mMap->getTile(indx) <= 0x2F)
 				{
 					mShipFishing->revert();
-//					mShipBreaker->revert();
 					mMap->revert();
 					mOwner->getSound()->playSound(mCollFishingSound);
 				}

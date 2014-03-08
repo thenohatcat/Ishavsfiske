@@ -41,6 +41,8 @@ namespace Ishavsfiske
 		sf::Vector2f getGlobalVelocity();
 
 		virtual void collide();
+
+		void block();
 	protected:
 		Angler::Game *mOwner;
 
@@ -49,6 +51,8 @@ namespace Ishavsfiske
 		float mStartX, mStartY;
 
 		Angler::Node *mShipRoot;
+
+		bool mBlocked;
 	private:
 		Angler::Nodes::Translation *mRootTranslation;
 		Angler::Nodes::Rotation *mRootRotation;
