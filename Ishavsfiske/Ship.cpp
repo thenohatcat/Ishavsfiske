@@ -48,11 +48,11 @@ void Ship::mInit()
 	mShipRoot = new Node(id + 0x0004, mRootRotation);
 }
 
-void Ship::move(float x, float y, bool global)
+void Ship::move(float x, float y, bool global, bool forced)
 {	
 	if (global)
 	{
-		if (!mBlocked)
+		if (!mBlocked || forced)
 		{
 			mRootTranslation->translate(x, y);
 			mChanged = true;
@@ -60,7 +60,7 @@ void Ship::move(float x, float y, bool global)
 	}
 	else
 	{
-		if (!mBlocked)
+		if (!mBlocked || forced)
 		{
 			Rotation r(0, mRootRotation->getRotation());
 			sf::Vector2f tv = r.transform(sf::Vector2f(5*x, 5*y));
@@ -182,4 +182,14 @@ void Ship::block()
 
 	mBlocked = true;
 	mVel = sf::Vector2f(0, 0);
+}
+
+void Ship::setPosition(sf::Vector2f pos)
+{
+	mRootTranslation->setTranslation(pos);
+}
+
+void Ship::setRotation(float r)
+{
+	mRootRotation->setRotation(r);
 }

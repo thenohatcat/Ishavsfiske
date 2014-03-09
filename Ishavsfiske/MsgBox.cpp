@@ -6,25 +6,25 @@
 #error Tutorial.cpp: Wrong version 0.1.4
 #endif
 
-#include "Tutorial.h"
+#include "MsgBox.h"
 
 #include "IshavsfiskeGame.h"
 
 using namespace Ishavsfiske;
 
-Tutorial::Tutorial(unsigned long id, Angler::Node *parent, IshavsfiskeGame *owner)
+MsgBox::MsgBox(unsigned long id, Angler::Node *parent, IshavsfiskeGame *owner)
 	: Node(id, parent), mText(""), mTime(0), mCurTime(0), mOwner(owner)
 {
 	
 }
 
-Tutorial::Tutorial(unsigned long id, IshavsfiskeGame *owner)
+MsgBox::MsgBox(unsigned long id, IshavsfiskeGame *owner)
 	: Node(id), mText(""), mTime(0), mCurTime(0), mOwner(owner)
 {
 	
 }
 
-void Tutorial::update(Angler::Game *context, float time, float deltaTime, bool changed)
+void MsgBox::update(Angler::Game *context, float time, float deltaTime, bool changed)
 {
 	if (!mPaused)
 	{
@@ -41,13 +41,13 @@ void Tutorial::update(Angler::Game *context, float time, float deltaTime, bool c
 	}
 }
 
-void Tutorial::draw(Angler::Game *context, Angler::Graphics::GraphicsEngine *graphics, float time, float deltaTime)
+void MsgBox::draw(Angler::Game *context, Angler::Graphics::GraphicsEngine *graphics, float time, float deltaTime)
 {
 	if (mVisible)
 	{
 		glPushMatrix();
 
-			glTranslatef(0.37f, 0.85f, 0);
+			glTranslatef(0.35f, 0.85f, 0);
 
 			glPushMatrix();
 				//First Row
@@ -56,7 +56,7 @@ void Tutorial::draw(Angler::Game *context, Angler::Graphics::GraphicsEngine *gra
 				glPushMatrix();
 					graphics->draw(6, sf::Vector2f(0, 0), sf::Vector2f(550/1500.0f, 0), sf::Vector2f(50/1500.0f, 50/1600.0f));
 					glTranslatef(1, 0, 0);
-					for (int i = 0; i < 15; i++)
+					for (int i = 0; i < 18; i++)
 					{
 						graphics->draw(6, sf::Vector2f(0, 0), sf::Vector2f(600/1500.0f, 0), sf::Vector2f(50/1500.0f, 50/1600.0f));
 						glTranslatef(1, 0, 0);
@@ -69,7 +69,7 @@ void Tutorial::draw(Angler::Game *context, Angler::Graphics::GraphicsEngine *gra
 					//Last row
 					graphics->draw(6, sf::Vector2f(0, 0), sf::Vector2f(550/1500.0f, 50/1600.0f), sf::Vector2f(50/1500.0f, 50/1600.0f));
 					glTranslatef(1, 0, 0);
-					for (int i = 0; i < 15; i++)
+					for (int i = 0; i < 18; i++)
 					{
 						graphics->draw(6, sf::Vector2f(0, 0), sf::Vector2f(600/1500.0f, 50/1600.0f), sf::Vector2f(50/1500.0f, 50/1600.0f));
 						glTranslatef(1, 0, 0);
@@ -82,7 +82,7 @@ void Tutorial::draw(Angler::Game *context, Angler::Graphics::GraphicsEngine *gra
 					//Last row
 					graphics->draw(6, sf::Vector2f(0, 0), sf::Vector2f(550/1500.0f, 100/1600.0f), sf::Vector2f(50/1500.0f, 50/1600.0f));
 					glTranslatef(1, 0, 0);
-					for (int i = 0; i < 15; i++)
+					for (int i = 0; i < 18; i++)
 					{
 						graphics->draw(6, sf::Vector2f(0, 0), sf::Vector2f(600/1500.0f, 100/1600.0f), sf::Vector2f(50/1500.0f, 50/1600.0f));
 						glTranslatef(1, 0, 0);
@@ -104,25 +104,25 @@ void Tutorial::draw(Angler::Game *context, Angler::Graphics::GraphicsEngine *gra
 				}
 				else
 				{
-					mFont->drawString(graphics, tmp, 7, 1);
+					mFont->drawString(graphics, tmp, 7, 0.8f);
 					glScalef(1/40.0f, 1/40.0f, 1);
-						glTranslatef(0, 1, 0);
+						glTranslatef(0, 0.8f, 0);
 					glScalef(40.0f, 40.0f, 1);
 					tmp.clear();
 				}
 			}
-			mFont->drawString(graphics, tmp, 7, 1);
+			mFont->drawString(graphics, tmp, 7, 0.8f);
 		glPopMatrix();
 	}
 }
 
-void Tutorial::loadContent()
+void MsgBox::loadContent()
 {
 	mBuffer->loadFromFile("Tutorial_Signalljud_2_Wav.wav");
 	mSound->setBuffer(*mBuffer);
 }
 
-void Tutorial::show(std::string text, float time)
+void MsgBox::show(std::string text, float time)
 {
 	mText = std::string(text);
 	mTime = time;
@@ -131,12 +131,12 @@ void Tutorial::show(std::string text, float time)
 	enable(true);
 }
 
-void Tutorial::hide()
+void MsgBox::hide()
 {
 	enable(false);
 }
 
-void Tutorial::init()
+void MsgBox::init()
 {
 	mFont = new Font();
 	mBuffer = new sf::SoundBuffer();

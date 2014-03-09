@@ -38,15 +38,29 @@ void FishingMode::input(float time, float deltaTime)
 		mShipFishing->rotate(90 * deltaTime);
 	}
 
-	if (mOwner->getKeyboardState().isKeyDown(sf::Keyboard::Return) && 
-		!mOwner->getKeyboardState().wasKeyDown(sf::Keyboard::Return))
-	{
-		mTutorial->show("A\nB\nC\nD\nE", 2);
-	}
 	if (mOwner->getKeyboardState().isKeyDown(sf::Keyboard::Space) && 
 		!mOwner->getKeyboardState().wasKeyDown(sf::Keyboard::Space))
 	{
-		mDoRepair = true;
+		if (mTutorialStage == 12)
+		{
+			mDoRepair = true;
+			//mDoFish = true;
+		}
+		if (mTutorialStage == 16)
+		{
+			//mDoRepair = true;
+			mDoFish = true;
+		}
+		if (mTutorialStage >= 18)
+		{
+			mDoRepair = true;
+			mDoFish = true;
+		}
+		else if (mTutorialStage == 2 || mTutorialStage == 5 || mTutorialStage == 9 || mTutorialStage == 11 || mTutorialStage == 15)
+		{
+			mTutorialStage++;
+			mTutorialStageTime = -1;
+		}
 	}
 
 	// Close game key

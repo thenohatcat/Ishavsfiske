@@ -16,13 +16,13 @@ using namespace Ishavsfiske;
 using namespace Angler::Nodes;
 
 School::School(unsigned long id, Angler::Node *parent, Ishavsfiske::IshavsfiskeGame *owner)
-	: Node(id, parent), mOwner(owner), mStartX(0.5f), mStartY(0.5f), mAmmount(16)
+	: Node(id, parent), mOwner(owner), mStartX(0.5f), mStartY(0.5f), mAmmount(8)
 {
 	mInit();
 }
 
 School::School(unsigned long id, Ishavsfiske::IshavsfiskeGame *owner)
-	: Node(id), mOwner(owner), mStartX(0.5f), mStartY(0.5f), mAmmount(16)
+	: Node(id), mOwner(owner), mStartX(0.5f), mStartY(0.5f), mAmmount(8)
 {
 	mInit();
 }

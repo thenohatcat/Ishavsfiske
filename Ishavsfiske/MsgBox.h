@@ -16,12 +16,12 @@ namespace Ishavsfiske
 {
 	class IshavsfiskeGame;
 
-	class Tutorial
+	class MsgBox
 		: public Angler::Node
 	{
 	public:
-		Tutorial(unsigned long id, Angler::Node *parent, IshavsfiskeGame *owner);
-		Tutorial(unsigned long id, IshavsfiskeGame *owner);
+		MsgBox(unsigned long id, Angler::Node *parent, IshavsfiskeGame *owner);
+		MsgBox(unsigned long id, IshavsfiskeGame *owner);
 
 		void update(Angler::Game *context, float time, float deltaTime, bool changed);
 		void draw(Angler::Game *context, Angler::Graphics::GraphicsEngine *graphics, float time, float deltaTime);

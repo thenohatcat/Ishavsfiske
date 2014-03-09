@@ -23,7 +23,7 @@ void Font::drawString(Angler::Graphics::GraphicsEngine* graphics, std::string st
 	{
 		graphics->draw(layer, sf::Vector2f(leftDistance[st[i]], 0), 
 			sf::Vector2f(((st[i]%16)*(1/16.0f)),((st[i]/16)*(1/16.0f))), sf::Vector2f((1/16.0f),(1/16.0f)));
-		glTranslated(rightDistance[st[i]], 0, 0);
+		glTranslatef(rightDistance[st[i]], 0, 0);
 	}
 	glPopMatrix();
 }

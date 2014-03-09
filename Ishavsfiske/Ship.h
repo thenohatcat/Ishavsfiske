@@ -25,7 +25,7 @@ namespace Ishavsfiske
 
 		virtual ~Ship();
 
-		void move(float x, float y, bool global = false);
+		void move(float x, float y, bool global = false, bool forced = false);
 		void rotate(float r);
 
 		void throttle(float vx, float vy);
@@ -33,6 +33,9 @@ namespace Ishavsfiske
 		void update(Angler::Game *context, float time, float deltaTime, bool changed);
 
 		void revert();
+
+		void setPosition(sf::Vector2f v);
+		void setRotation(float r);
 
 		sf::Vector2f getPosition();
 		float getRotation();

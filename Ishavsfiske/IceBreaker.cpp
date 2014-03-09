@@ -16,7 +16,7 @@ using namespace Ishavsfiske;
 
 IceBreaker::IceBreaker(unsigned long id, Angler::Node *parent,
 					   Ishavsfiske::IshavsfiskeGame *owner)
-					   : Ship(id, parent, owner), mHealth(1.0f), mHull(0.5f)
+					   : Ship(id, parent, owner), mHealth(1.0f), mHull(1.0f)
 {
 	mInit();
 }

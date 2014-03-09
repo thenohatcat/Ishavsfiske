@@ -16,7 +16,7 @@
 #include "Map.h"
 #include "School.h"
 
-#include "Tutorial.h"
+#include "MsgBox.h"
 
 namespace Ishavsfiske
 {
@@ -44,6 +44,8 @@ namespace Ishavsfiske
 
 		void repair(int dir);
 
+		void breakIce();
+
 	protected:
 		void mEnable(bool enabled);
 
@@ -52,6 +54,9 @@ namespace Ishavsfiske
 		sf::SoundBuffer *mCollFishingBuff, *mCollBreakerBuff, *mCollIceBuff, *mEngineBuff;
 
 		sf::Texture *mTXMap, *mTXUI, *mTXSchool, *mUIFont, *mTXGameOver;
+
+		sf::Sound *mRepair;
+		sf::SoundBuffer *mRepairBuff;
 
 		sf::Sound *mMusic;
 		sf::SoundBuffer *mMusicFishingBuff;
@@ -64,7 +69,7 @@ namespace Ishavsfiske
 
 		Angler::Nodes::Translation *mFishBase;
 
-		void mMoveFrame(float dx, float dy);
+		void mMoveFrame(float fishingDX, float fishingDY, float breakerDX, float breakerDY, bool fishingX, bool fishingY, bool moveMapX, bool moveMapY);
 
 		int mSchoolID;
 		std::vector<School*> mSchools;
@@ -76,8 +81,16 @@ namespace Ishavsfiske
 		Ishavsfiske::IshavsfiskeGame *mOwner;
 
 		bool mDoRepair;
+		bool mDoFish;
 
-		Tutorial *mTutorial;
+		MsgBox *mMsgBox;
+
+		Font *mFont;
+
+		int mTutorialStage;
+		float mTutorialStageTime;
+
+		float mTimer;
 	};
 }
 	

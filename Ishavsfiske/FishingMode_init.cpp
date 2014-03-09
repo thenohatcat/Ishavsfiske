@@ -43,17 +43,20 @@ void FishingMode::loadContent()
 	mCollIceBuff->loadFromFile("Ice_FirstCollision.wav");
 	mCollIceSound->setBuffer(*mCollIceBuff);
 
+	mRepairBuff->loadFromFile("Repareringsljud_WAV.wav");
+	mRepair->setBuffer(*mRepairBuff);
+
 	mEngineBuff->loadFromFile("Motor_Collage_Test.wav");
 	mEngineSound->setBuffer(*mEngineBuff);
 	
 	mSeaAmbientBuff->loadFromFile("Hav.wav");
 	mSeaAmbient->setBuffer(*mSeaAmbientBuff);
 
-	mTutorial->loadContent();
+	mMsgBox->loadContent();
 
-	mMusicFishingBuff->loadFromFile("Hav_Fiske.wav");
+	//mMusicFishingBuff->loadFromFile("Hav_Fiske.wav");
 
-	mMusic->setBuffer(*mMusicFishingBuff);
+	//mMusic->setBuffer(*mMusicFishingBuff);
 }
 
 void FishingMode::init()
@@ -67,6 +70,9 @@ void FishingMode::init()
 	mCollIceSound = new sf::Sound();
 	mCollIceBuff = new sf::SoundBuffer();
 
+	mRepair = new sf::Sound();
+	mRepairBuff = new sf::SoundBuffer();
+
 	mEngineSound = new sf::Sound();
 	mEngineBuff = new sf::SoundBuffer();
 
@@ -76,9 +82,9 @@ void FishingMode::init()
 	mTutorialSound = new sf::Sound();
 	mTutorialBuff = new sf::SoundBuffer();
 
-	mMusicFishingBuff = new sf::SoundBuffer();
+	//mMusicFishingBuff = new sf::SoundBuffer();
 
-	mMusic = new sf::Sound();
+	//mMusic = new sf::Sound();
 
 	mTXMap = new sf::Texture();
 	mTXSchool = new sf::Texture();
@@ -90,40 +96,42 @@ void FishingMode::init()
 	mShipBreaker = new IceBreaker(0x20000, this, mOwner);
 
 	mMap = new Map(0x80000000, this, mOwner);
-	//mMap->setPos(sf::Vector2i(12, 10));
-
-	mTutorial = new Tutorial(0, this, mOwner);
-	mTutorial->init();
+	mMap->setPos(sf::Vector2i(12, 10));
+	
+	mMsgBox = new MsgBox(0, this, mOwner);
+	mMsgBox->init();
 
 	mFishBase = new Angler::Nodes::Translation(0, this, 2/10.0f, 0);
 
-	//Map Collisions
-	std::vector<sf::Vector2f> leftBox;
-	leftBox.push_back(sf::Vector2f(2/10.0f, 0));
-	leftBox.push_back(sf::Vector2f(1/10.0f, 0));
-	leftBox.push_back(sf::Vector2f(1/10.0f, 1));
-	leftBox.push_back(sf::Vector2f(2/10.0f, 1));
-	new Angler::Nodes::CollisionNode(0x70000000, this, leftBox, 1);
+	mFont = new Font();
 
-	std::vector<sf::Vector2f> rightBox;
-	rightBox.push_back(sf::Vector2f(15/10.0f, 0));
-	rightBox.push_back(sf::Vector2f(14/10.0f, 0));
-	rightBox.push_back(sf::Vector2f(14/10.0f, 1));
-	rightBox.push_back(sf::Vector2f(15/10.0f, 1));
-	new Angler::Nodes::CollisionNode(0x70000001, this, rightBox, 1);
+	////Map Collisions
+	//std::vector<sf::Vector2f> leftBox;
+	//leftBox.push_back(sf::Vector2f(2/10.0f, 0));
+	//leftBox.push_back(sf::Vector2f(1/10.0f, 0));
+	//leftBox.push_back(sf::Vector2f(1/10.0f, 1));
+	//leftBox.push_back(sf::Vector2f(2/10.0f, 1));
+	//new Angler::Nodes::CollisionNode(0x70000000, this, leftBox, 1);
 
-	std::vector<sf::Vector2f> topBox;
-	topBox.push_back(sf::Vector2f(15/10.0f, -1/10.0f));
-	topBox.push_back(sf::Vector2f(1/10.0f, -1/10.0f));
-	topBox.push_back(sf::Vector2f(1/10.0f, 0));
-	topBox.push_back(sf::Vector2f(15/10.0f, 0));
-	new Angler::Nodes::CollisionNode(0x70000002, this, topBox, 1);
+	//std::vector<sf::Vector2f> rightBox;
+	//rightBox.push_back(sf::Vector2f(15/10.0f, 0));
+	//rightBox.push_back(sf::Vector2f(14/10.0f, 0));
+	//rightBox.push_back(sf::Vector2f(14/10.0f, 1));
+	//rightBox.push_back(sf::Vector2f(15/10.0f, 1));
+	//new Angler::Nodes::CollisionNode(0x70000001, this, rightBox, 1);
 
-	std::vector<sf::Vector2f> bottomBox;
-	bottomBox.push_back(sf::Vector2f(15/10.0f, 1));
-	bottomBox.push_back(sf::Vector2f(1/10.0f, 1));
-	bottomBox.push_back(sf::Vector2f(1/10.0f, 11/10.0f));
-	bottomBox.push_back(sf::Vector2f(15/10.0f, 11/10.0f));
-	new Angler::Nodes::CollisionNode(0x70000003, this, bottomBox, 1);
+	//std::vector<sf::Vector2f> topBox;
+	//topBox.push_back(sf::Vector2f(15/10.0f, -1/10.0f));
+	//topBox.push_back(sf::Vector2f(1/10.0f, -1/10.0f));
+	//topBox.push_back(sf::Vector2f(1/10.0f, 0));
+	//topBox.push_back(sf::Vector2f(15/10.0f, 0));
+	//new Angler::Nodes::CollisionNode(0x70000002, this, topBox, 1);
+
+	//std::vector<sf::Vector2f> bottomBox;
+	//bottomBox.push_back(sf::Vector2f(15/10.0f, 1));
+	//bottomBox.push_back(sf::Vector2f(1/10.0f, 1));
+	//bottomBox.push_back(sf::Vector2f(1/10.0f, 11/10.0f));
+	//bottomBox.push_back(sf::Vector2f(15/10.0f, 11/10.0f));
+	//new Angler::Nodes::CollisionNode(0x70000003, this, bottomBox, 1);
 }
 

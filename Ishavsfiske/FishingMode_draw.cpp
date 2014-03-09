@@ -41,7 +41,7 @@ void FishingMode::draw(Angler::Game* context, Angler::Graphics::GraphicsEngine* 
 			glPopMatrix();*/
 
 			// Upgrades
-			glPushMatrix();
+			/*glPushMatrix();
 				glScaled(3/40.0, 3/40.0, 1);
 				glScaled(1/3.0, 1/3.0, 1);
 					glTranslated(1, -1, 0);
@@ -54,7 +54,7 @@ void FishingMode::draw(Angler::Game* context, Angler::Graphics::GraphicsEngine* 
 					glScaled(3.0, 3.0, 1);
 					graphics->draw(5, sf::Vector2f(0, 0), sf::Vector2f(560/1500.0f, 150/1600.0f), sf::Vector2f(150/1500.0f, 75/1600.0f));
 				}
-			glPopMatrix();
+			glPopMatrix();*/
 
 			//Right UI
 			glPushMatrix();
@@ -182,6 +182,140 @@ void FishingMode::draw(Angler::Game* context, Angler::Graphics::GraphicsEngine* 
 				glScalef(75/1000.0f, 75/1000.0f, 1);
 				graphics->draw(5, sf::Vector2f(1, 1), sf::Vector2f(420/1500.0f, 150/1600.0f), sf::Vector2f(140/1500.0f, 75/1600.0f));
 			glPopMatrix();
+
+			if (mTutorialStage >= 16)
+			{
+				//Fish
+				glPushMatrix();
+					glScalef(1/40.0, 1/40.0f, 1);
+
+					glTranslatef(9.0f, 1.0f, 0);
+
+					glPushMatrix();
+						graphics->draw(6, sf::Vector2f(0, 0), sf::Vector2f(550/1500.0f, 0), sf::Vector2f(50/1500.0f, 50/1600.0f));
+						glTranslatef(1, 0, 0);
+						graphics->draw(6, sf::Vector2f(0, 0), sf::Vector2f(600/1500.0f, 0), sf::Vector2f(50/1500.0f, 50/1600.0f));
+						glTranslatef(1, 0, 0);
+						graphics->draw(6, sf::Vector2f(0, 0), sf::Vector2f(600/1500.0f, 0), sf::Vector2f(50/1500.0f, 50/1600.0f));
+						glTranslatef(1, 0, 0);
+						graphics->draw(6, sf::Vector2f(0, 0), sf::Vector2f(600/1500.0f, 0), sf::Vector2f(50/1500.0f, 50/1600.0f));
+						glTranslatef(1, 0, 0);
+						graphics->draw(6, sf::Vector2f(0, 0), sf::Vector2f(600/1500.0f, 0), sf::Vector2f(50/1500.0f, 50/1600.0f));
+						glTranslatef(1, 0, 0);
+						graphics->draw(6, sf::Vector2f(0, 0), sf::Vector2f(600/1500.0f, 0), sf::Vector2f(50/1500.0f, 50/1600.0f));
+						glTranslatef(1, 0, 0);
+						graphics->draw(6, sf::Vector2f(0, 0), sf::Vector2f(600/1500.0f, 0), sf::Vector2f(50/1500.0f, 50/1600.0f));
+						glTranslatef(1, 0, 0);
+						graphics->draw(6, sf::Vector2f(0, 0), sf::Vector2f(600/1500.0f, 0), sf::Vector2f(50/1500.0f, 50/1600.0f));
+						glTranslatef(1, 0, 0);
+						graphics->draw(6, sf::Vector2f(0, 0), sf::Vector2f(600/1500.0f, 0), sf::Vector2f(50/1500.0f, 50/1600.0f));
+						glTranslatef(1, 0, 0);
+						graphics->draw(6, sf::Vector2f(0, 0), sf::Vector2f(650/1500.0f, 0), sf::Vector2f(50/1500.0f, 50/1600.0f));
+					glPopMatrix();
+
+					glTranslatef(0, 1, 0);
+
+					glPushMatrix();
+						graphics->draw(6, sf::Vector2f(0, 0), sf::Vector2f(550/1500.0f, 100/1600.0f), sf::Vector2f(50/1500.0f, 50/1600.0f));
+						glTranslatef(1, 0, 0);
+						graphics->draw(6, sf::Vector2f(0, 0), sf::Vector2f(600/1500.0f, 100/1600.0f), sf::Vector2f(50/1500.0f, 50/1600.0f));
+						glTranslatef(1, 0, 0);
+						graphics->draw(6, sf::Vector2f(0, 0), sf::Vector2f(600/1500.0f, 100/1600.0f), sf::Vector2f(50/1500.0f, 50/1600.0f));
+						glTranslatef(1, 0, 0);
+						graphics->draw(6, sf::Vector2f(0, 0), sf::Vector2f(600/1500.0f, 100/1600.0f), sf::Vector2f(50/1500.0f, 50/1600.0f));
+						glTranslatef(1, 0, 0);
+						graphics->draw(6, sf::Vector2f(0, 0), sf::Vector2f(600/1500.0f, 100/1600.0f), sf::Vector2f(50/1500.0f, 50/1600.0f));
+						glTranslatef(1, 0, 0);
+						graphics->draw(6, sf::Vector2f(0, 0), sf::Vector2f(600/1500.0f, 100/1600.0f), sf::Vector2f(50/1500.0f, 50/1600.0f));
+						glTranslatef(1, 0, 0);
+						graphics->draw(6, sf::Vector2f(0, 0), sf::Vector2f(600/1500.0f, 100/1600.0f), sf::Vector2f(50/1500.0f, 50/1600.0f));
+						glTranslatef(1, 0, 0);
+						graphics->draw(6, sf::Vector2f(0, 0), sf::Vector2f(600/1500.0f, 100/1600.0f), sf::Vector2f(50/1500.0f, 50/1600.0f));
+						glTranslatef(1, 0, 0);
+						graphics->draw(6, sf::Vector2f(0, 0), sf::Vector2f(600/1500.0f, 100/1600.0f), sf::Vector2f(50/1500.0f, 50/1600.0f));
+						glTranslatef(1, 0, 0);
+						graphics->draw(6, sf::Vector2f(0, 0), sf::Vector2f(650/1500.0f, 100/1600.0f), sf::Vector2f(50/1500.0f, 50/1600.0f));
+					glPopMatrix();
+
+					glTranslatef(0.5, -0.5f, 0);
+					glScalef(40.0, 40.0f, 1);
+					char c[32];
+					sprintf_s(c, "Fish: %4u", ((FishingBoat*)mShipFishing)->getAmmount());
+					mFont->drawString(graphics, c, 7, 0.9f);
+
+				glPopMatrix();
+			}
+
+			if (mTutorialStage >= 18)
+			{
+				//Timer
+				glPushMatrix();
+					glScalef(1/40.0, 1/40.0f, 1);
+
+					glTranslatef(43.0f, 1.0f, 0);
+
+					glPushMatrix();
+						graphics->draw(6, sf::Vector2f(0, 0), sf::Vector2f(550/1500.0f, 0), sf::Vector2f(50/1500.0f, 50/1600.0f));
+						glTranslatef(1, 0, 0);
+						graphics->draw(6, sf::Vector2f(0, 0), sf::Vector2f(600/1500.0f, 0), sf::Vector2f(50/1500.0f, 50/1600.0f));
+						glTranslatef(1, 0, 0);
+						graphics->draw(6, sf::Vector2f(0, 0), sf::Vector2f(600/1500.0f, 0), sf::Vector2f(50/1500.0f, 50/1600.0f));
+						glTranslatef(1, 0, 0);
+						graphics->draw(6, sf::Vector2f(0, 0), sf::Vector2f(600/1500.0f, 0), sf::Vector2f(50/1500.0f, 50/1600.0f));
+						glTranslatef(1, 0, 0);
+						graphics->draw(6, sf::Vector2f(0, 0), sf::Vector2f(600/1500.0f, 0), sf::Vector2f(50/1500.0f, 50/1600.0f));
+						glTranslatef(1, 0, 0);
+						graphics->draw(6, sf::Vector2f(0, 0), sf::Vector2f(600/1500.0f, 0), sf::Vector2f(50/1500.0f, 50/1600.0f));
+						glTranslatef(1, 0, 0);
+						graphics->draw(6, sf::Vector2f(0, 0), sf::Vector2f(600/1500.0f, 0), sf::Vector2f(50/1500.0f, 50/1600.0f));
+						glTranslatef(1, 0, 0);
+						graphics->draw(6, sf::Vector2f(0, 0), sf::Vector2f(600/1500.0f, 0), sf::Vector2f(50/1500.0f, 50/1600.0f));
+						glTranslatef(1, 0, 0);
+						graphics->draw(6, sf::Vector2f(0, 0), sf::Vector2f(600/1500.0f, 0), sf::Vector2f(50/1500.0f, 50/1600.0f));
+						glTranslatef(1, 0, 0);
+						graphics->draw(6, sf::Vector2f(0, 0), sf::Vector2f(600/1500.0f, 0), sf::Vector2f(50/1500.0f, 50/1600.0f));
+						glTranslatef(1, 0, 0);
+						graphics->draw(6, sf::Vector2f(0, 0), sf::Vector2f(600/1500.0f, 0), sf::Vector2f(50/1500.0f, 50/1600.0f));
+						glTranslatef(1, 0, 0);
+						graphics->draw(6, sf::Vector2f(0, 0), sf::Vector2f(650/1500.0f, 0), sf::Vector2f(50/1500.0f, 50/1600.0f));
+					glPopMatrix();
+
+					glTranslatef(0, 1, 0);
+
+					glPushMatrix();
+						graphics->draw(6, sf::Vector2f(0, 0), sf::Vector2f(550/1500.0f, 100/1600.0f), sf::Vector2f(50/1500.0f, 50/1600.0f));
+						glTranslatef(1, 0, 0);
+						graphics->draw(6, sf::Vector2f(0, 0), sf::Vector2f(600/1500.0f, 100/1600.0f), sf::Vector2f(50/1500.0f, 50/1600.0f));
+						glTranslatef(1, 0, 0);
+						graphics->draw(6, sf::Vector2f(0, 0), sf::Vector2f(600/1500.0f, 100/1600.0f), sf::Vector2f(50/1500.0f, 50/1600.0f));
+						glTranslatef(1, 0, 0);
+						graphics->draw(6, sf::Vector2f(0, 0), sf::Vector2f(600/1500.0f, 100/1600.0f), sf::Vector2f(50/1500.0f, 50/1600.0f));
+						glTranslatef(1, 0, 0);
+						graphics->draw(6, sf::Vector2f(0, 0), sf::Vector2f(600/1500.0f, 100/1600.0f), sf::Vector2f(50/1500.0f, 50/1600.0f));
+						glTranslatef(1, 0, 0);
+						graphics->draw(6, sf::Vector2f(0, 0), sf::Vector2f(600/1500.0f, 100/1600.0f), sf::Vector2f(50/1500.0f, 50/1600.0f));
+						glTranslatef(1, 0, 0);
+						graphics->draw(6, sf::Vector2f(0, 0), sf::Vector2f(600/1500.0f, 100/1600.0f), sf::Vector2f(50/1500.0f, 50/1600.0f));
+						glTranslatef(1, 0, 0);
+						graphics->draw(6, sf::Vector2f(0, 0), sf::Vector2f(600/1500.0f, 100/1600.0f), sf::Vector2f(50/1500.0f, 50/1600.0f));
+						glTranslatef(1, 0, 0);
+						graphics->draw(6, sf::Vector2f(0, 0), sf::Vector2f(600/1500.0f, 100/1600.0f), sf::Vector2f(50/1500.0f, 50/1600.0f));
+						glTranslatef(1, 0, 0);
+						graphics->draw(6, sf::Vector2f(0, 0), sf::Vector2f(600/1500.0f, 100/1600.0f), sf::Vector2f(50/1500.0f, 50/1600.0f));
+						glTranslatef(1, 0, 0);
+						graphics->draw(6, sf::Vector2f(0, 0), sf::Vector2f(600/1500.0f, 100/1600.0f), sf::Vector2f(50/1500.0f, 50/1600.0f));
+						glTranslatef(1, 0, 0);
+						graphics->draw(6, sf::Vector2f(0, 0), sf::Vector2f(650/1500.0f, 100/1600.0f), sf::Vector2f(50/1500.0f, 50/1600.0f));
+					glPopMatrix();
+
+					glTranslatef(0.5, -0.5f, 0);
+					glScalef(40.0, 40.0f, 1);
+					char c[32];
+					sprintf_s(c, "Timer: %02u:%02u", (int)floor(mTimer/60), (int)floor(fmod(mTimer,60)));
+					mFont->drawString(graphics, c, 7, 0.9f);
+
+				glPopMatrix();
+			}
 		glPopMatrix();
 
 	

@@ -15,6 +15,12 @@ void FishingMode::fish(int i, School *school)
 {
 	((FishingBoat*)mShipFishing)->setFishing(i, school);
 
+	if (mTutorialStage == 16)
+	{
+		mTutorialStage = 17;
+		mTutorialStageTime = -1;
+	}
+
 #ifndef _DEBUG
 	if (i == 1)
 		printf("Fishing Right\n");
@@ -26,4 +32,23 @@ void FishingMode::fish(int i, School *school)
 void FishingMode::repair(int dir)
 {
 	((FishingBoat*)mShipFishing)->setRepair(dir);
+	
+	mOwner->getSound()->playSound(mRepair, false, -1, -1, false);
+
+	if (mTutorialStage == 12)
+	{
+		mTutorialStage = 13;
+		mTutorialStageTime = -1;
+	}
+}
+
+void FishingMode::breakIce()
+{
+	((IceBreaker*)mShipBreaker)->damage(0.1f);
+
+	if (mTutorialStage == 6)
+	{
+		mTutorialStage = 7;
+		mTutorialStageTime = -1;
+	}
 }

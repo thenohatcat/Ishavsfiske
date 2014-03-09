@@ -90,6 +90,9 @@ void IshavsfiskeGame::throwEvent(int type, ... )
 		rdir = va_arg(vl, int);
 		mFishingMode->repair(rdir);
 		break;
+	case Events::Breaking:
+		mFishingMode->breakIce();
+		break;
 	case Events::StartScreenShow:
 		mStartScreen->enable(true);
 		break;

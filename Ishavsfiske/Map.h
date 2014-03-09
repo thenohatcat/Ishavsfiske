@@ -30,7 +30,7 @@ namespace Ishavsfiske
 
 		void move(sf::Vector2f diff);
 
-		void genMap(int lvl, int v);
+		void genMap(int lvl);
 
 		void revert();
 

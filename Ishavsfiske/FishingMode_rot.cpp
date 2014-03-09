@@ -12,13 +12,13 @@
 using namespace Ishavsfiske;
 
 FishingMode::FishingMode(unsigned long id, Angler::Node *parent, Ishavsfiske::IshavsfiskeGame *owner)
-	: Node(id, parent), mOwner(owner), mSchoolID(0)
+	: Node(id, parent), mOwner(owner), mSchoolID(0), mTimer(122), mTutorialStage(0), mTutorialStageTime(-1)
 {
 
 }
 
 FishingMode::FishingMode(unsigned long id, Ishavsfiske::IshavsfiskeGame *owner)
-	: Node(id), mOwner(owner), mSchoolID(0)
+	: Node(id), mOwner(owner), mSchoolID(0), mTimer(122), mTutorialStage(0), mTutorialStageTime(-1)
 {
 
 }
@@ -44,7 +44,7 @@ void FishingMode::mEnable(bool enabled)
 		mOwner->getSound()->playSound(mSeaAmbient, false, -1, -1, true);
 		mOwner->getSound()->setVolume(mSeaAmbient, 10.0f);
 
-		mOwner->getSound()->playSound(mMusic, false, -1, -1, true);
+		//mOwner->getSound()->playSound(mMusic, false, -1, -1, true);
 
 		mOwner->getSound()->playSound(mEngineSound, false, 0, 1.46f, true);
 		mOwner->getSound()->setVolume(mEngineSound, 30.0f);
@@ -52,7 +52,7 @@ void FishingMode::mEnable(bool enabled)
 	else
 	{
 		mOwner->getSound()->stopSound(mSeaAmbient);
-		mOwner->getSound()->stopSound(mMusic);
+		//mOwner->getSound()->stopSound(mMusic);
 		mOwner->getSound()->stopSound(mEngineSound);
 
 		mOwner->clearGraphicsLayers();

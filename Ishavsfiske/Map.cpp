@@ -101,14 +101,14 @@ int randomValue(int number) {
 Map::Map(unsigned long id, Angler::Node *parent, Angler::Game *owner)
 	: Node(id, parent), mParent(owner), mPos(0, 0)
 {
-	genMap(1, 0);
+	genMap(1);
 	mInit();
 }
 
 Map::Map(unsigned long id, Angler::Node *parent, Angler::Game *owner, int lvl)
 	: Node(id, parent), mParent(owner), mPos(0, 0)
 {
-	genMap(lvl, 0);
+	genMap(lvl);
 	mInit();
 }
 
@@ -129,7 +129,7 @@ void Map::mInit()
 	mUpdateMap();
 }
 
-void Map::genMap(int lvl, int v)
+void Map::genMap(int lvl)
 {
 	switch(lvl)
 	{
@@ -138,48 +138,9 @@ void Map::genMap(int lvl, int v)
 		{
 			for(int x = 0; x < 48; x++)
 			{
-				//if (y == 0 || x == 0 || x == 23 || y == 19 || x == 47 || y == 39)
-				if (y == 0 || x == 0 || x == 47 || y == 39)
+				if ((x >= 11 && x <= 37 && y >= 9 && y <= 31) && !(x >= 13 && x <= 34 && y >= 11 && y <= 28))
 				{
 					mMap[x + y * 48] = 0x20;
-				}
-				
-				/*else if (x == 2 || x == 6 || x == 10 || x == 14 || x == 18)
-				{
-					mMap[x + y * 48] = 0x20;
-				}
-				
-				else if (y == 2 || y == 6)
-				{
-					mMap[x + y * 48] = 0x20;
-				}
-				else if (x >= 3 && y >= 3 && x < 6 && y < 6)
-				{
-					mMap[x + y * 48] = 
-						(((((v & 0xF) + 0x10 + ((v & 0xF0) << 1))) & (1 << ((x-3) + (y-3) * 3))) ? 0x10 : 0x00);
-				}
-				else if (x >= 7 && y >= 3 && x < 10 && y < 6)
-				{
-					mMap[x + y * 48] = 
-						((((((v+1) & 0xF) + 0x10 + (((v+1) & 0xF0) << 1))) & (1 << ((x-7) + (y-3) * 3))) ? 0x10 : 0x00);
-				}
-				else if (x >= 11 && y >= 3 && x < 14 && y < 6)
-				{
-					mMap[x + y * 48] = 
-						((((((v+2) & 0xF) + 0x10 + (((v+2) & 0xF0) << 1))) & (1 << ((x-11) + (y-3) * 3))) ? 0x10 : 0x00);
-				}
-				else if (x >= 15 && y >= 3 && x < 18 && y < 6)
-				{
-					mMap[x + y * 48] = 
-						((((((v+3) & 0xF) + 0x10 + (((v+3) & 0xF0) << 1))) & (1 << ((x-15) + (y-3) * 3))) ? 0x10 : 0x00);
-				}*/
-				else if (x >= 3 && x <= 7 && y >= 2 && y <= 6)
-				{
-					mMap[x + y * 48] = 0x10;
-				}
-				else if (x >= 2 && x <= 8 && y >= 3 && y <= 5)
-				{
-					mMap[x + y * 48] = 0x10;
 				}
 				else
 					mMap[x + y * 48] = 0;
@@ -201,23 +162,26 @@ void Map::genMap(int lvl, int v)
 		}
 		break;
 	case 3:
-		for(int y = 0; y < 20; y++)
-			for(int x = 0; x < 24; x++)
+		for(int y = 0; y < 40; y++)
+			for(int x = 0; x < 48; x++)
 			{
-				switch(randomValue(2))
+				if (!(x >= 14 && x <= 33 && y >= 12 && y <= 27))
 				{
-				case 0:
-					mMap[x + y * 48] = 0;
-					break;
-				case 1:
-					mMap[x + y * 48] = 0x10;
-					break;
-				/*if(mMap[x + y * 48] == 1)
-				{
-					mMap[x - 1 + y * 48] = 1;
-					mMap[x + y - 1 * 48] = 1;
-					mMap[x + 1 + y * 48] = 1;
-					mMap[x + y + 1 * 48] = 1;*/
+					switch(randomValue(2))
+					{
+					case 0:
+						mMap[x + y * 48] = 0;
+						break;
+					case 1:
+						mMap[x + y * 48] = 0x10;
+						break;
+					/*if(mMap[x + y * 48] == 1)
+					{
+						mMap[x - 1 + y * 48] = 1;
+						mMap[x + y - 1 * 48] = 1;
+						mMap[x + 1 + y * 48] = 1;
+						mMap[x + y + 1 * 48] = 1;*/
+					}
 				}
 			}
 		/*srand();*/

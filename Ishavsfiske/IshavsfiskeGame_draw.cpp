@@ -51,7 +51,7 @@ void IshavsfiskeGame::mDraw(float time, float deltaTime)
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
 		//Draw collision boxes
-		std::vector<Angler::Node*> nds = Angler::HelpFunctions::Nodes::getDescendants(mSceneRoot);
+		std::vector<Angler::Node*> nds = std::vector<Angler::Node*>(Angler::HelpFunctions::Nodes::getDescendants(mSceneRoot));
 		glPushMatrix();
 		for (int i = 0; i < nds.size(); i++)
 		{
@@ -62,6 +62,9 @@ void IshavsfiskeGame::mDraw(float time, float deltaTime)
 				std::vector<sf::Vector2f> ov = n->getTransformedPoints();
 
 				sf::Vector2f ul = n->getBoundingUL(), lr = n->getBoundingLR();
+
+				if (lr == ul)
+					break;
 
 				glLineWidth(3);
 
