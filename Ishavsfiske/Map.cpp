@@ -165,7 +165,11 @@ void Map::genMap(int lvl)
 		for(int y = 0; y < 40; y++)
 			for(int x = 0; x < 48; x++)
 			{
-				if (!(x >= 14 && x <= 33 && y >= 12 && y <= 27))
+				if (x == 0 || y == 0 || x == 47 || y == 39)
+				{
+					mMap[x + y * 48] = 0x20;
+				}
+				else if (!(x >= 14 && x <= 33 && y >= 12 && y <= 27))
 				{
 					switch(randomValue(2))
 					{
