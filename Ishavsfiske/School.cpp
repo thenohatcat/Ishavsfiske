@@ -11,6 +11,8 @@
 
 #include "IshavsfiskeGame.h"
 #include "School.h"
+#include "IceBreaker.h"
+#include "FishingBoat.h"
 
 using namespace Ishavsfiske;
 using namespace Angler::Nodes;
@@ -95,6 +97,14 @@ int School::fish(int ammount)
 	}
 }
 
+void School::scaredByBoat(sf::Vector2f shipPos, float deltaTime)
+{
+	sf::Vector2f delta = getPosition();
+	delta -= shipPos;
+
+	move(delta.x/2*deltaTime, delta.y/2*deltaTime);
+}
+
 void School::update(Angler::Game *context, float time, float deltaTime, bool changed)
 {
 	if (!mPaused)
@@ -102,5 +112,25 @@ void School::update(Angler::Game *context, float time, float deltaTime, bool cha
 		mChanged |= changed;
 		
 		mUpdateChildren(context, time, deltaTime);
+
+		if(scaredDistance(((IshavsfiskeGame*)context)->getIceBreaker()->getPosition()))
+			scaredByBoat(((IshavsfiskeGame*)context)->getIceBreaker()->getPosition(), deltaTime);
+		if(scaredDistance(((IshavsfiskeGame*)context)->getShipFishing()->getPosition()))
+			scaredByBoat(((IshavsfiskeGame*)context)->getShipFishing()->getPosition(), deltaTime);
+
+		mUpdateChildren(context, time, deltaTime);
 	}
+}
+
+bool School::scaredDistance(sf::Vector2f pos)
+{
+	sf::Vector2f schoolPos = getPosition();
+	float X0 = schoolPos.x;
+	float Y0 = schoolPos.y;
+	sf::Vector2f shipPos = pos;
+	float X1 = shipPos.x;
+	float Y1 = shipPos.y;
+	float DX = X0 - X1;
+	float DY = Y0 - Y1;
+	return DX * DX + DY * DY < 0.03;
 }

@@ -31,6 +31,8 @@ namespace Ishavsfiske
 
 		int getAmmount();
 
+		void scaredByBoat(sf::Vector2f shipPos, float deltaTime);
+
 		virtual void update(Angler::Game *context, float time, float deltaTime, bool changed);
 	protected:
 		Angler::Game *mOwner;
@@ -42,6 +44,8 @@ namespace Ishavsfiske
 		Angler::Node *mSchoolRoot;
 	private:
 		Angler::Nodes::Translation *mRootTranslation;
+
+		bool scaredDistance(sf::Vector2f pos);
 
 		int mAmmount;
 	};
