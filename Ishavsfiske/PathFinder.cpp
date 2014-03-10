@@ -7,7 +7,6 @@
 #endif
 
 #include "PathFinder.h"
-#include "Map.h"
 
 static const int moveCostWASD = 10;
 
@@ -60,9 +59,9 @@ void PathFinder::findPath1(PathNode *start, PathNode *goal)
 		genSuccessors(mCurrent);
 
 		openList open(mOpenList);
-		for(openList::size_type i = 0; i < open.size(); i++)
+		for(vector<PathNode*>::const_iterator i = mOpenList.begin(); i != mOpenList.end(); i++)
 		{
-			PathNode *node = mOpenList[i];
+			PathNode *node = *i;
 			if(node->getParent() == mCurrent)
 			{
 				if(!inClosed(node))
@@ -76,7 +75,7 @@ void PathFinder::findPath1(PathNode *start, PathNode *goal)
 					else
 					{
 						mClosedList.push_back(node);
-						mOpenList.erase(node);
+						mOpenList.erase(i);
 					}
 				}
 			}
