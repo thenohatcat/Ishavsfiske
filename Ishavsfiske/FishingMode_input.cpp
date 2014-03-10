@@ -41,21 +41,10 @@ void FishingMode::input(float time, float deltaTime)
 	if (mOwner->getKeyboardState().isKeyDown(sf::Keyboard::Space) && 
 		!mOwner->getKeyboardState().wasKeyDown(sf::Keyboard::Space))
 	{
-		if (mTutorialStage == 12)
-		{
+		if (mCanRepair)
 			mDoRepair = true;
-			//mDoFish = true;
-		}
-		if (mTutorialStage == 16)
-		{
-			//mDoRepair = true;
+		if (mCanFish)
 			mDoFish = true;
-		}
-		if (mTutorialStage >= 18)
-		{
-			mDoRepair = true;
-			mDoFish = true;
-		}
 		else if (mTutorialStage == 2 || mTutorialStage == 5 || mTutorialStage == 9 || mTutorialStage == 11 || mTutorialStage == 15)
 		{
 			mTutorialStage++;

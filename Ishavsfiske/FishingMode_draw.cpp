@@ -183,7 +183,7 @@ void FishingMode::draw(Angler::Game* context, Angler::Graphics::GraphicsEngine* 
 				graphics->draw(5, sf::Vector2f(1, 1), sf::Vector2f(420/1500.0f, 150/1600.0f), sf::Vector2f(140/1500.0f, 75/1600.0f));
 			glPopMatrix();
 
-			if (mTutorialStage >= 16)
+			if (mShowCounter)
 			{
 				//Fish
 				glPushMatrix();
@@ -246,7 +246,7 @@ void FishingMode::draw(Angler::Game* context, Angler::Graphics::GraphicsEngine* 
 				glPopMatrix();
 			}
 
-			if (mTutorialStage >= 18)
+			if (mShowTimer)
 			{
 				//Timer
 				glPushMatrix();

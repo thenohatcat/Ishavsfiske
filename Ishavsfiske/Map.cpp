@@ -135,34 +135,6 @@ void Map::genMap(int lvl)
 	{
 	case 1:
 		for(int y = 0; y < 40; y++)
-		{
-			for(int x = 0; x < 48; x++)
-			{
-				if ((x >= 11 && x <= 37 && y >= 9 && y <= 31) && !(x >= 13 && x <= 34 && y >= 11 && y <= 28))
-				{
-					mMap[x + y * 48] = 0x20;
-				}
-				else
-					mMap[x + y * 48] = 0;
-			}
-		}
-		break;
-	case 2:
-		for(int y = 0; y < 20; y++)
-		{
-			for(int x = 0; x < 24; x++)
-			{
-				if (x == y)
-				{
-					mMap[x + y * 48] = 0x10;
-				}
-				else
-					mMap[x + y * 48] = 0;
-			}
-		}
-		break;
-	case 3:
-		for(int y = 0; y < 40; y++)
 			for(int x = 0; x < 48; x++)
 			{
 				if (x == 0 || y == 0 || x == 47 || y == 39)
@@ -189,6 +161,34 @@ void Map::genMap(int lvl)
 				}
 			}
 		/*srand();*/
+		break;
+	case 2:
+		for(int y = 0; y < 20; y++)
+		{
+			for(int x = 0; x < 24; x++)
+			{
+				if (x == y)
+				{
+					mMap[x + y * 48] = 0x10;
+				}
+				else
+					mMap[x + y * 48] = 0;
+			}
+		}
+		break;
+	case 3:
+		for(int y = 0; y < 40; y++)
+		{
+			for(int x = 0; x < 48; x++)
+			{
+				if ((x >= 11 && x <= 37 && y >= 9 && y <= 31) && !(x >= 13 && x <= 34 && y >= 11 && y <= 28))
+				{
+					mMap[x + y * 48] = 0x20;
+				}
+				else
+					mMap[x + y * 48] = 0;
+			}
+		}
 		break;
 	}
 }
@@ -551,9 +551,4 @@ int Map::mIsIceDir(int x, int y)
 bool Map::mOutsideMap(int x, int y)
 {
 	return x < 0 || x >= 48 || y < 0 || y >= 40;
-}
-
-int Map::getMap()
-{
-	return mMap[48 * 40];
 }

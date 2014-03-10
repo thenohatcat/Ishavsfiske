@@ -80,6 +80,8 @@ namespace Ishavsfiske
 
 		Ishavsfiske::IshavsfiskeGame *mOwner;
 
+		void mUpdateTutorial(Angler::Game* context, float time, float deltaTime);
+
 		bool mDoRepair;
 		bool mDoFish;
 
@@ -90,6 +92,15 @@ namespace Ishavsfiske
 		int mTutorialStage;
 		float mTutorialStageTime;
 
+		bool mShowTimer;
+		bool mShowCounter;
+
+		bool mCanRepair;
+		bool mCanFish;
+		bool mMapFrozen;
+		bool mSpawnFish;
+
+		bool mRunTimer;
 		float mTimer;
 	};
 }

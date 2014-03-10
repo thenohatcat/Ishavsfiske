@@ -102,6 +102,7 @@ void FishingMode::init()
 	mMsgBox->init();
 
 	mFishBase = new Angler::Nodes::Translation(0, this, 2/10.0f, 0);
+	mFishBase->setTranslation(-12/20.0f, -10/20.0f);
 
 	mFont = new Font();
 
