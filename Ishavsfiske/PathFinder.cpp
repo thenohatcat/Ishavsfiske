@@ -7,7 +7,6 @@
 #endif
 
 #include "PathFinder.h"
-#include "Map.h"
 
 static const int moveCostWASD = 10;
 
@@ -40,11 +39,11 @@ PathFinder::~PathFinder()
 
 void PathFinder::findPath1(PathNode *start, PathNode *goal)
 {
-	PathNode *startNode = start;
-	PathNode *goalNode = goal;
-	mOpenList.push_back(startNode);
+	mStartNode = start;
+	mGoalNode = goal;
+	mOpenList.push_back(mStartNode);
 
-	while(!mOpenList.empty() && mCurrent != goalNode)
+	while(!mOpenList.empty() && mCurrent != mGoalNode)
 	{
 		mCurrent = lowFValueOpen();
 		
@@ -60,9 +59,9 @@ void PathFinder::findPath1(PathNode *start, PathNode *goal)
 		genSuccessors(mCurrent);
 
 		openList open(mOpenList);
-		for(openList::size_type i = 0; i < open.size(); i++)
+		for(vector<PathNode*>::const_iterator i = mOpenList.begin(); i != mOpenList.end(); i++)
 		{
-			PathNode *node = mOpenList[i];
+			PathNode *node = *i;
 			if(node->getParent() == mCurrent)
 			{
 				if(!inClosed(node))
@@ -76,7 +75,7 @@ void PathFinder::findPath1(PathNode *start, PathNode *goal)
 					else
 					{
 						mClosedList.push_back(node);
-						mOpenList.erase(node);
+						mOpenList.erase(i);
 					}
 				}
 			}
@@ -126,24 +125,26 @@ PathNode *PathFinder::lowFValueOpen()
 //	f_score = h_score + g_score;
 //}
 
-//// Calculates all H values in every node
-//void PathFinder::calcAllH(int x, int y)
-//{
-//	for(int yy = 0; yy < 40; yy++)
-//		for(int xx = 0; xx < 48; xx++)
-//			h_score[xx + yy * 48] = detHScore(xx, yy, x, y);
-//}
+// Calculates all H values in every node
+void PathFinder::calcAllH(int x, int y)
+{
+	/*for(int yy = 0; yy < 40; yy++)
+		for(int xx = 0; xx < 48; xx++)
+			h_score[xx + yy * 48] = detHScore(xx, yy, x, y);*/
 
-//// Determine the H value
-//int PathFinder::detHScore(int xx, int yy, int x, int y)
-//{
-//	int h_score = 0;
-//	for(yy; yy < y; yy++)
-//		h_score++;
-//	for(xx; xx < x; xx++)
-//		h_score++;
-//	return h_score;
-//}
+	for(int y = 0; y < 10; y++)
+		for(int x = 0; x < 10; x++)
+			detHVal(x, y);
+}
+
+// Determine the H value
+unsigned int PathFinder::detHVal(int x, int y)
+{
+	int hVal = 0;
+	hVal += mGoalNode->getPos().x - x;
+	hVal += mGoalNode->getPos().y - y;
+	return hVal;
+}
 
 //void PathFinder::recStructPath(int cameFrom, int goal)
 //{

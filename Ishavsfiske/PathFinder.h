@@ -31,18 +31,23 @@ public:
 	//// Arguments are goal position
 	//void startInit(int x, int y);
 
-	//// Arguments are goal position
-	//void calcAllH(int x, int y);
+	// Arguments are goal position
+	void calcAllH(int x, int y);
 protected:
 private:
+	PathNode *map[10 * 10];
+
 	int mStart;
 	int mGoal;
 
+	PathNode *mStartNode;
+	PathNode *mGoalNode;
+
 	PathNode *mCurrent;
 
-	//// Arguments are start position and goal position
-	//int detHScore(int xx, int yy, int x, int y);
-	//
+	// Arguments are start position and goal position
+	unsigned int detHVal(int x, int y);
+	
 	////void calcFVal();
 
 	// Determine the node with the lowest f value in openlist

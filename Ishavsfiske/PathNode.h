@@ -32,7 +32,6 @@ private:
 	PathNode *mParent;
 	PathNode *mChild;
 	unsigned long mID;
-	sf::Vector2i mPos;
 
 
 	void calcF();
