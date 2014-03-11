@@ -8,7 +8,7 @@
 
 #include "PathFinder.h"
 
-static const int moveCostWASD = 10;
+static const int moveCost2486 = 10;
 
 PathFinder::PathFinder()
 	: mOpenList(), mClosedList()
@@ -43,7 +43,7 @@ void PathFinder::findPath1(PathNode *start, PathNode *goal)
 	mGoalNode = goal;
 	mOpenList.push_back(mStartNode);
 
-	while(!mOpenList.empty() && mCurrent != mGoalNode)
+	while(!mOpenList.empty())
 	{
 		mCurrent = lowFValueOpen();
 		
@@ -55,50 +55,41 @@ void PathFinder::findPath1(PathNode *start, PathNode *goal)
 				break;
 			}
 		}
+
+		if(mCurrent == mGoalNode)
+		{
+			mGoalNode->setParent(mCurrent);
+			break;
+		}
 		
 		genSuccessors(mCurrent);
 
-		openList open(mOpenList);
 		for(vector<PathNode*>::const_iterator i = mOpenList.begin(); i != mOpenList.end(); i++)
 		{
 			PathNode *node = *i;
-			if(node->getParent() == mCurrent)
-			{
-				if(!inClosed(node))
+			node->setG(mCurrent->getG() + moveCost2486);
+			//if(!inClosed(node)) // Check to ignore if in closed list
+			//{
+				if(node->getParent() == mCurrent)
 				{
-					node->setG(mCurrent->getG() + moveCostWASD);
+					if(node->getF() < mCurrent->getF())
+					{
+						mCurrent = node;
+					}
+				}
+				/*else if(inClosed(node) && node->getParent() == mCurrent)
+				{
 					if(node->getF() < mCurrent->getF())
 					{
 						node->setParent(mCurrent);
 						mCurrent = node;
 					}
-					else
-					{
-						mClosedList.push_back(node);
-						mOpenList.erase(i);
-					}
-				}
-			}
-			else
-			{
-				if(node->getF() < mCurrent->getF())
-				{
-					node->setParent(mCurrent);
-					mCurrent = node;
-				}
-			}
-				
+				}*/
+				node->setParent(mCurrent);
 		}
 		mClosedList.push_back(mCurrent);
 	}
 }
-
-
-//void PathFinder::startInit(int x, int y)
-//{
-//	calcAllH(x, y);
-//}
-
 
 // Calculate the lowest F value in openlist
 PathNode *PathFinder::lowFValueOpen()
@@ -120,21 +111,12 @@ PathNode *PathFinder::lowFValueOpen()
 	return lowestF;
 }
 
-//void PathFinder::calcFVal()
-//{
-//	f_score = h_score + g_score;
-//}
-
 // Calculates all H values in every node
-void PathFinder::calcAllH(int x, int y)
+void PathFinder::calcAllH(PathNode *map[])
 {
-	/*for(int yy = 0; yy < 40; yy++)
-		for(int xx = 0; xx < 48; xx++)
-			h_score[xx + yy * 48] = detHScore(xx, yy, x, y);*/
-
 	for(int y = 0; y < 10; y++)
 		for(int x = 0; x < 10; x++)
-			detHVal(x, y);
+			map[x + y * 10]->setH(detHVal(x, y));
 }
 
 // Determine the H value
@@ -146,35 +128,32 @@ unsigned int PathFinder::detHVal(int x, int y)
 	return hVal;
 }
 
-//void PathFinder::recStructPath(int cameFrom, int goal)
-//{
-//	// if current node = came from
-//}
+void PathFinder::recStructPath()
+{
+	PathNode *p = mGoalNode;
+	while(p != 0)
+	{
+		mPathList.push_back(p);
+		p = p->getParent();
+	}
+}
 
-//// Remove current node from openlist
-//void PathFinder::rmCurrentOpen()
-//{
-//	// Calculate directiontile and pop it from openlist...
-//}
 
-//// Add current node to closed list
-//void PathFinder::addCurrentClosed()
-//{
-//	// Same as rmCurrentOpen
-//}
-
+// NOTE TO MYSELF!!
+// Make do not generate successors if successor already is in any list or if theres no PathNode in that position
 void PathFinder::genSuccessors(PathNode *currentNode)
 {
-	PathNode *left = new PathNode(0, currentNode, 0, sf::Vector2i(currentNode->getPos().x - 1, currentNode->getPos().y));
+	PathNode *left = new PathNode(0, currentNode, sf::Vector2i(currentNode->getPos().x - 1, currentNode->getPos().y));
 	mOpenList.push_back(left);
-	PathNode *right = new PathNode(0, currentNode, 0, sf::Vector2i(currentNode->getPos().x + 1, currentNode->getPos().y));
+	PathNode *right = new PathNode(0, currentNode, sf::Vector2i(currentNode->getPos().x + 1, currentNode->getPos().y));
 	mOpenList.push_back(right);
-	PathNode *top = new PathNode(0, currentNode, 0, sf::Vector2i(currentNode->getPos().x, currentNode->getPos().y));
+	PathNode *top = new PathNode(0, currentNode, sf::Vector2i(currentNode->getPos().x, currentNode->getPos().y));
 	mOpenList.push_back(top);
-	PathNode *bot = new PathNode(0, currentNode, 0, sf::Vector2i(currentNode->getPos().x - 1, currentNode->getPos().y));
+	PathNode *bot = new PathNode(0, currentNode, sf::Vector2i(currentNode->getPos().x - 1, currentNode->getPos().y));
 	mOpenList.push_back(bot);
 }
 
+// Check if the PathNode is in closed list
 bool PathFinder::inClosed(PathNode *node)
 {
 	for(closedList::size_type i = 0; i < mClosedList.size(); i++)

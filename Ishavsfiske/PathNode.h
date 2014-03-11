@@ -13,7 +13,7 @@ class PathNode
 {
 public:
 	PathNode();
-	PathNode(unsigned int id, PathNode *parent, PathNode *child, sf::Vector2i pos);
+	PathNode(unsigned int id, PathNode *parent, /*PathNode *child,*/ sf::Vector2i pos);
 
 	void setH(int h), setG(int g), setF(int f);
 	void setParent(PathNode *parent);
@@ -30,7 +30,7 @@ private:
 	int mDir;
 	sf::Vector2i mPos;
 	PathNode *mParent;
-	PathNode *mChild;
+	/*PathNode *mChild;*/
 	unsigned long mID;
 
 

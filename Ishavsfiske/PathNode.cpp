@@ -13,9 +13,10 @@ PathNode::PathNode()
 {
 }
 
-PathNode::PathNode(unsigned int id, PathNode *parent, PathNode *child, sf::Vector2i pos)
-	: mH(0), mG(0), mF(0), mParent(parent), mChild(child), mID(id), mPos(pos)
+PathNode::PathNode(unsigned int id, PathNode *parent, /*PathNode *child,*/ sf::Vector2i pos)
+	: mH(0), mG(0), mF(0), mParent(parent), /*mChild(child),*/ mID(id), mPos(pos)
 {
+	calcF();
 }
 
 void PathNode::setH(int h)
