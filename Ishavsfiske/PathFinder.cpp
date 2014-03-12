@@ -11,12 +11,13 @@
 static const int moveCost2486 = 10;
 
 PathFinder::PathFinder()
-	: mOpenList(), mClosedList()
+	: mOpenList(), mClosedList(), mPathList()
 {
 }
 
 PathFinder::~PathFinder()
 {
+	internalClear();
 }
 
 
@@ -37,8 +38,10 @@ PathFinder::~PathFinder()
 //	}
 //}
 
-void PathFinder::findPath1(PathNode *start, PathNode *goal)
+void PathFinder::findPath1(PathNode *start, PathNode *goal/*, PathNode *map[]*/)
 {
+	/*mMap[10 * 10] = map[10 * 10];*/
+
 	mStartNode = start;
 	mGoalNode = goal;
 	mOpenList.push_back(mStartNode);
@@ -112,11 +115,11 @@ PathNode *PathFinder::lowFValueOpen()
 }
 
 // Calculates all H values in every node
-void PathFinder::calcAllH(PathNode *map[])
+void PathFinder::calcAllH()
 {
 	for(int y = 0; y < 10; y++)
 		for(int x = 0; x < 10; x++)
-			map[x + y * 10]->setH(detHVal(x, y));
+			mMap[x + y * 10]->setH(detHVal(x, y));
 }
 
 // Determine the H value
@@ -128,6 +131,7 @@ unsigned int PathFinder::detHVal(int x, int y)
 	return hVal;
 }
 
+// Puts the PathNodes in PathList
 void PathFinder::recStructPath()
 {
 	PathNode *p = mGoalNode;
@@ -139,26 +143,89 @@ void PathFinder::recStructPath()
 }
 
 
-// NOTE TO MYSELF!!
-// Make do not generate successors if successor already is in any list or if theres no PathNode in that position
+// Generates the successors of current PathNode and ignore if any successors already is in any list
 void PathFinder::genSuccessors(PathNode *currentNode)
 {
-	PathNode *left = new PathNode(0, currentNode, sf::Vector2i(currentNode->getPos().x - 1, currentNode->getPos().y));
-	mOpenList.push_back(left);
-	PathNode *right = new PathNode(0, currentNode, sf::Vector2i(currentNode->getPos().x + 1, currentNode->getPos().y));
-	mOpenList.push_back(right);
-	PathNode *top = new PathNode(0, currentNode, sf::Vector2i(currentNode->getPos().x, currentNode->getPos().y));
-	mOpenList.push_back(top);
-	PathNode *bot = new PathNode(0, currentNode, sf::Vector2i(currentNode->getPos().x - 1, currentNode->getPos().y));
-	mOpenList.push_back(bot);
-}
-
-// Check if the PathNode is in closed list
-bool PathFinder::inClosed(PathNode *node)
-{
-	for(closedList::size_type i = 0; i < mClosedList.size(); i++)
+	if(currentNode->getPos().x != 0 && !inOpenClosed(sf::Vector2i(currentNode->getPos().x - 1, currentNode->getPos().y)))
 	{
-		return node == mClosedList[i];
+		PathNode *left = mMap[(currentNode->getPos().x - 1) + currentNode->getPos().y * 10]; /*new PathNode(0, currentNode, sf::Vector2i(currentNode->getPos().x - 1, currentNode->getPos().y));*/
+		mOpenList.push_back(left);
+	}
+	if(currentNode->getPos().x != 10 && !inOpenClosed(sf::Vector2i(currentNode->getPos().x + 1, currentNode->getPos().y)))
+	{
+		PathNode *right = mMap[(currentNode->getPos().x + 1) + currentNode->getPos().y * 10]; /*new PathNode(0, currentNode, sf::Vector2i(currentNode->getPos().x + 1, currentNode->getPos().y));*/
+		mOpenList.push_back(right);
+	}
+	if(currentNode->getPos().y != 0 && !inOpenClosed(sf::Vector2i(currentNode->getPos().x, currentNode->getPos().y - 1)))
+	{
+		PathNode *top = mMap[currentNode->getPos().x + (currentNode->getPos().y - 1) * 10]; /*new PathNode(0, currentNode, sf::Vector2i(currentNode->getPos().x, currentNode->getPos().y - 1));*/
+		mOpenList.push_back(top);
+	}
+	if(currentNode->getPos().y != 10 && !inOpenClosed(sf::Vector2i(currentNode->getPos().x, currentNode->getPos().y + 1)))
+	{
+		PathNode *bot = mMap[currentNode->getPos().x + (currentNode->getPos().y + 1) * 10]; /*new PathNode(0, currentNode, sf::Vector2i(currentNode->getPos().x, currentNode->getPos().y + 1));*/
+		mOpenList.push_back(bot);
 	}
 }
 
+// Check if the PathNode with the position is in the open list
+bool PathFinder::inOpen(sf::Vector2i pos)
+{
+	for(openList::const_iterator i = mOpenList.begin(); i != mOpenList.end(); i++)
+	{
+		return (*i)->getPos() == pos;
+	}
+}
+
+// Check if the PathNode is in the closed list
+bool PathFinder::inClosed(sf::Vector2i pos)
+{
+	for(closedList::const_iterator i = mClosedList.begin(); i != mClosedList.end(); i++)
+	{
+		return (*i)->getPos() == pos;
+	}
+}
+
+bool PathFinder::inOpenClosed(sf::Vector2i pos)
+{
+	return inOpen(pos) && inClosed(pos);
+}
+
+void PathFinder::clear()
+{
+	internalClear();
+}
+
+void PathFinder::internalClear()
+{
+	clearOpen();
+	clearClosed();
+	clearPath();
+}
+
+void PathFinder::clearOpen()
+{
+	while(!mOpenList.empty())
+	{
+		delete mOpenList.back();
+		mOpenList.pop_back();
+	}
+}
+
+void PathFinder::clearClosed()
+{
+	while(!mClosedList.empty())
+	{
+		delete mClosedList.back();
+		mClosedList.pop_back();
+	}
+}
+
+void PathFinder::clearPath()
+{
+	while(!mPathList.empty())
+	{
+		delete mPathList.back();
+		mPathList.pop_back();
+	}
+}

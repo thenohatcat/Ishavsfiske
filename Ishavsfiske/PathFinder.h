@@ -25,14 +25,15 @@ public:
 
 	//void findPath(int start, int goal);
 
-	void findPath1(PathNode *start, PathNode *goal);
-
+	void findPath1(PathNode *start, PathNode *goal/*, PathNode *map[]*/);
 
 	// Calculates all PathNodes H value
-	void calcAllH(PathNode *map[]);
+	void calcAllH();
 
 	// Puts the PathNodes to goal in the pathList
 	void recStructPath();
+
+	void clear();
 protected:
 private:
 	PathNode *mMap[10 * 10];
@@ -55,7 +56,11 @@ private:
 
 	void genSuccessors(PathNode *currentNode);
 
-	bool inClosed(PathNode *node);
+	bool inOpenClosed(sf::Vector2i pos);
+	bool inOpen(sf::Vector2i pos);
+	bool inClosed(sf::Vector2i pos);
+	void internalClear();
+	void clearOpen(), clearClosed(), clearPath();
 };
 
 
