@@ -50,7 +50,10 @@ void PathFinder::findPath1(PathNode *start, PathNode *goal/*, PathNode *map[]*/)
 
 	while(!mOpenList.empty())
 	{
-		mCurrent = lowFValueOpen();
+		if(mOpenList.size() > 1)
+			mCurrent = lowFValueOpen();
+		else
+			mCurrent = mOpenList.front();
 		
 		for (vector<PathNode*>::const_iterator i = mOpenList.begin(); i != mOpenList.end(); i++)
 		{
@@ -93,6 +96,7 @@ void PathFinder::findPath1(PathNode *start, PathNode *goal/*, PathNode *map[]*/)
 				node->setParent(mCurrent);
 		}
 		mClosedList.push_back(mCurrent);
+		clearOpen();
 	}
 }
 
