@@ -61,6 +61,8 @@ private:
 	bool inClosed(sf::Vector2i pos);
 	void internalClear();
 	void clearOpen(), clearClosed(), clearPath();
+
+	void genPathMap();
 };
 
 

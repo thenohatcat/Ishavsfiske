@@ -13,6 +13,7 @@ static const int moveCost2486 = 10;
 PathFinder::PathFinder()
 	: mOpenList(), mClosedList(), mPathList()
 {
+	genPathMap();
 }
 
 PathFinder::~PathFinder()
@@ -45,6 +46,7 @@ void PathFinder::findPath1(PathNode *start, PathNode *goal/*, PathNode *map[]*/)
 	mStartNode = start;
 	mGoalNode = goal;
 	mOpenList.push_back(mStartNode);
+	calcAllH();
 
 	while(!mOpenList.empty())
 	{
@@ -228,4 +230,11 @@ void PathFinder::clearPath()
 		delete mPathList.back();
 		mPathList.pop_back();
 	}
+}
+
+void PathFinder::genPathMap()
+{
+	for(int y = 0; y < 10; y++)
+		for(int x = 0; x < 10; x++)
+			mMap[x + y * 10] = new PathNode(0, 0, sf::Vector2i(x, y));
 }
