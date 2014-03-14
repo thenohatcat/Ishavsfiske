@@ -23,9 +23,8 @@ public:
 	typedef vector<PathNode*> closedList;
 	typedef vector<PathNode*> pathList;
 
-	//void findPath(int start, int goal);
-
-	void findPath1(PathNode *start, PathNode *goal/*, PathNode *map[]*/);
+	//void findPath1(PathNode *start, PathNode *goal/*, PathNode *map[]*/);
+	void findPath1(sf::Vector2i start, sf::Vector2i goal/*, PathNode *map[]*/);
 
 	// Calculates all PathNodes H value
 	void calcAllH();

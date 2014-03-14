@@ -8,6 +8,10 @@
 
 #include "PathFinder.h"
 
+#include <iostream>
+
+using namespace std;
+
 static const int moveCost2486 = 10;
 
 PathFinder::PathFinder()
@@ -21,30 +25,69 @@ PathFinder::~PathFinder()
 	internalClear();
 }
 
-
-//void PathFinder::findPath(int start, int goal)
+//void PathFinder::findPath1(PathNode *start, PathNode *goal/*, PathNode *map[]*/)
 //{
-//	/*mCurrent = start;*/
+//	mStartNode = start;
+//	mGoalNode = goal;
+//	mOpenList.push_back(mStartNode);
+//	calcAllH();
 //
 //	while(!mOpenList.empty())
 //	{
-//		mCurrent = lowFScoreOpen();
-//		if(mCurrent == goal)
-//		{
-//			/*return reconstructPath(cameFrom, goal)*/
-//		}
-//		rmCurrentOpen();
-//		addCurrentClosed();
+//		if(mOpenList.size() > 1)
+//			mCurrent = lowFValueOpen();
+//		else
+//			mCurrent = mOpenList.front();
 //		
+//		for (vector<PathNode*>::const_iterator i = mOpenList.begin(); i != mOpenList.end(); i++)
+//		{
+//			if ((*i) == mCurrent)
+//			{
+//				mOpenList.erase(i);
+//				break;
+//			}
+//		}
+//
+//		if(mCurrent == mGoalNode)
+//		{
+//			mGoalNode->setParent(mCurrent);
+//			break;
+//		}
+//		
+//		genSuccessors(mCurrent);
+//
+//		for(vector<PathNode*>::const_iterator i = mOpenList.begin(); i != mOpenList.end(); i++)
+//		{
+//			PathNode *node = *i;
+//			node->setG(mCurrent->getG() + moveCost2486);
+//			//if(!inClosed(node)) // Check to ignore if in closed list
+//			//{
+//				if(node->getParent() == mCurrent)
+//				{
+//					if(node->getF() < mCurrent->getF())
+//					{
+//						mCurrent = node;
+//					}
+//				}
+//				/*else if(inClosed(node) && node->getParent() == mCurrent)
+//				{
+//					if(node->getF() < mCurrent->getF())
+//					{
+//						node->setParent(mCurrent);
+//						mCurrent = node;
+//					}
+//				}*/
+//				node->setParent(mCurrent);
+//		}
+//		mClosedList.push_back(mCurrent);
+//		clearOpen();
 //	}
 //}
 
-void PathFinder::findPath1(PathNode *start, PathNode *goal/*, PathNode *map[]*/)
+void PathFinder::findPath1(sf::Vector2i start, sf::Vector2i goal/*, PathNode *map[]*/)
 {
-	/*mMap[10 * 10] = map[10 * 10];*/
-
-	mStartNode = start;
-	mGoalNode = goal;
+	mStartNode = mMap[start.x + start.y * 10];
+	mGoalNode = mMap[goal.x + goal.y * 10];
 	mOpenList.push_back(mStartNode);
 	calcAllH();
 
@@ -83,6 +126,7 @@ void PathFinder::findPath1(PathNode *start, PathNode *goal/*, PathNode *map[]*/)
 					if(node->getF() < mCurrent->getF())
 					{
 						mCurrent = node;
+						cout << "Found successor";
 					}
 				}
 				/*else if(inClosed(node) && node->getParent() == mCurrent)
@@ -93,10 +137,14 @@ void PathFinder::findPath1(PathNode *start, PathNode *goal/*, PathNode *map[]*/)
 						mCurrent = node;
 					}
 				}*/
-				node->setParent(mCurrent);
+				/*node->setParent(mCurrent);*/
+				else if(node->getF() < mCurrent->getF())
+				{
+					mCurrent = node;
+					cout << "Found successor";
+				}
 		}
 		mClosedList.push_back(mCurrent);
-		clearOpen();
 	}
 }
 
@@ -141,7 +189,7 @@ unsigned int PathFinder::detHVal(int x, int y)
 void PathFinder::recStructPath()
 {
 	PathNode *p = mGoalNode;
-	while(p != 0)
+	while(p != nullptr)
 	{
 		mPathList.push_back(p);
 		p = p->getParent();
@@ -155,21 +203,25 @@ void PathFinder::genSuccessors(PathNode *currentNode)
 	if(currentNode->getPos().x != 0 && !inOpenClosed(sf::Vector2i(currentNode->getPos().x - 1, currentNode->getPos().y)))
 	{
 		PathNode *left = mMap[(currentNode->getPos().x - 1) + currentNode->getPos().y * 10]; /*new PathNode(0, currentNode, sf::Vector2i(currentNode->getPos().x - 1, currentNode->getPos().y));*/
+		left->setParent(mCurrent);
 		mOpenList.push_back(left);
 	}
 	if(currentNode->getPos().x != 10 && !inOpenClosed(sf::Vector2i(currentNode->getPos().x + 1, currentNode->getPos().y)))
 	{
 		PathNode *right = mMap[(currentNode->getPos().x + 1) + currentNode->getPos().y * 10]; /*new PathNode(0, currentNode, sf::Vector2i(currentNode->getPos().x + 1, currentNode->getPos().y));*/
+		right->setParent(mCurrent);
 		mOpenList.push_back(right);
 	}
 	if(currentNode->getPos().y != 0 && !inOpenClosed(sf::Vector2i(currentNode->getPos().x, currentNode->getPos().y - 1)))
 	{
 		PathNode *top = mMap[currentNode->getPos().x + (currentNode->getPos().y - 1) * 10]; /*new PathNode(0, currentNode, sf::Vector2i(currentNode->getPos().x, currentNode->getPos().y - 1));*/
+		top->setParent(mCurrent);
 		mOpenList.push_back(top);
 	}
 	if(currentNode->getPos().y != 10 && !inOpenClosed(sf::Vector2i(currentNode->getPos().x, currentNode->getPos().y + 1)))
 	{
 		PathNode *bot = mMap[currentNode->getPos().x + (currentNode->getPos().y + 1) * 10]; /*new PathNode(0, currentNode, sf::Vector2i(currentNode->getPos().x, currentNode->getPos().y + 1));*/
+		bot->setParent(mCurrent);
 		mOpenList.push_back(bot);
 	}
 }
