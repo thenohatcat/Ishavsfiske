@@ -1,11 +1,11 @@
-//Version: 0.1.4
+//Version: 0.1.5
 //Author: Jakob Pipping
 //Contributors:
 
 #ifndef INC_SHIP_H
 #define INC_SHIP_H
 
-#ifdef ISHAV_0_1_4
+#ifdef ISHAV_0_1_5
 
 #include <Angler\Node.h>
 #include <Angler\Translation.h>
@@ -70,7 +70,7 @@ namespace Ishavsfiske
 }
 
 #else
-#error Ship.h: Wrong version 0.1.4
+#error Ship.h: Wrong version 0.1.5
 #endif
 
 #endif

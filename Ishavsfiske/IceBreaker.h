@@ -1,11 +1,11 @@
-//Version: 0.1.4
+//Version: 0.1.5
 //Author: Jakob Pipping
 //Contributors:
 
 #ifndef INC_ICEBREAKER_H
 #define INC_ICEBREAKER_H
 
-#ifdef ISHAV_0_1_4
+#ifdef ISHAV_0_1_5
 
 #include "Ship.h"
 
@@ -36,7 +36,7 @@ namespace Ishavsfiske
 }
 
 #else
-#error IceBreaker.h: Wrong version 0.1.4
+#error IceBreaker.h: Wrong version 0.1.5
 #endif
 
 #endif

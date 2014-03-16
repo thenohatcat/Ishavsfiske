@@ -1,11 +1,11 @@
-//Version: 0.1.4
+//Version: 0.1.5
 //Author: Marcus Persson
 //Contributors: 
 
 #ifndef INC_SCHOOL_H
 #define INC_SCHOOL_H
 
-#ifdef ISHAV_0_1_4
+#ifdef ISHAV_0_1_5
 
 #include <Angler/Node.h>
 #include <Angler/Translation.h>
@@ -52,7 +52,7 @@ namespace Ishavsfiske
 	};
 }
 #else
-#error School.h: Wrong version 0.1.4
+#error School.h: Wrong version 0.1.5
 #endif
 
 #endif
