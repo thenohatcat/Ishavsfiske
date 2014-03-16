@@ -23,8 +23,12 @@ namespace Ishavsfiske
 		Animal(unsigned long id, Angler::Node *parent, Angler::Game *owner);
 		Animal(unsigned long id, Angler::Game *owner);
 
-		virtual void move(float x, float y);
-	/*	virtual void attack();*/
+		virtual ~Animal();
+
+		void move(float x, float y);
+		void rotate(float r);
+
+		virtual void attack();
 
 		void update(Angler::Game *context, float time, float deltaTime, bool changed);
 	protected:
@@ -40,14 +44,14 @@ namespace Ishavsfiske
 
 		Angler::Nodes::Translation *mRootTranslation;
 		Angler::Nodes::Rotation *mRootRotation;
-	
-		float mLR, mOR;
-		sf::Vector2f mLT, mOT;
 
 		sf::Vector2f mVel, mDis;
 
-		sf::Vector2f mFishPos;
-		bool atShip();
+		sf::Vector2f mFishPos; // Fishingboat position
+		bool atShip(), lookAtShip();
+		float calcRotation(float angle);
+		float mRotToShip;
+
 		int direction(sf::Vector2f position);
 
 		void setSpeed(float vx, float vy);

@@ -10,7 +10,6 @@
 #include "Animal.h"
 #include "Ship.h"
 #include "FishingBoat.h"
-#include "IceBreaker.h"
 
 #include <Angler\DrawNode.h>
 #include <Angler\Scale.h>
@@ -29,6 +28,15 @@ Animal::Animal(unsigned long id, Angler::Game *owner)
 {
 }
 
+Animal::~Animal()
+{
+	delete mAnimalRoot;
+	delete mRootRotation;
+	delete mRootTranslation;
+
+	Node::~Node();
+}
+
 void Animal::mInit()
 {
 	unsigned id = getID();
@@ -40,14 +48,10 @@ void Animal::mInit()
 	/*mBearSprite = new SpriteNode(getID() + 0x1000, this, 1, sf::Vector2f(0, 0), sf::Vector2f(0, 0.25), sf::Vector2f(0.25, 0.25));*/
 }
 
+// Ska jag ha detta i seagull update istället?
 void Animal::update(Angler::Game *context, float time, float deltaTime, bool changed)
 {
 	mChanged |= changed;
-	
-	mOT = mLT;
-	mOR = mLR;
-	mLT = mRootTranslation->getTranslation();
-	mLR = mRootRotation->getRotation();
 
 	mFishPos = ((IshavsfiskeGame*) context)->getShipFishing()->getPosition();
 
@@ -56,46 +60,22 @@ void Animal::update(Angler::Game *context, float time, float deltaTime, bool cha
 
 	if (!atShip())
 	{
-		/*switch(direction(mFishPos))
+		if(!lookAtShip())
 		{
-		case 9:
-			setSpeed(0, -0.01);
-			break;
-		case 3:
-			setSpeed(0, 0.01);
-			break;
-		case 1:
-			setSpeed(-0.01, 0);
-			break;
-		case 7:
-			setSpeed(0.01, 0);
-			break;
-		}*/
-		switch(direction(mFishPos))
-		{
-		case 9:
-			move(mDis.x * deltaTime, mDis.y * deltaTime);
-			break;
-		case 3:
-			move(mDis.x * deltaTime, mDis.y * deltaTime);
-			break;
-		case 1:
-			move(mDis.x * deltaTime, mDis.y * deltaTime);
-			break;
-		case 7:
-			move(mDis.x * deltaTime, mDis.y * deltaTime);
-			break;
+			int LoR = mRootRotation->getRotation() - mRotToShip;
+			if(LoR < 0)
+				rotate(90 * deltaTime);
+			else
+				rotate(-90 * deltaTime);
 		}
-		/*move(mVel.x * deltaTime, mVel.y * deltaTime);*/
+		move(0, 1 * deltaTime);
 	}
 
-	if (atShip())
-	{
-		mVel.x = 0;
-		mVel.y = 0;
-	}
+}
 
-	mUpdateChildren(context, time, deltaTime);
+void Animal::rotate(float r)
+{
+	mRootRotation->rotate(r);
 }
 
 void Animal::move(float x, float y)
@@ -108,6 +88,37 @@ void Animal::move(float x, float y)
 bool Animal::atShip()
 {
 	return mRootTranslation->getTranslation() == mFishPos;
+}
+
+bool Animal::lookAtShip()
+{
+	unsigned int dx = mFishPos.x - mRootTranslation->getTranslationX();
+	unsigned int dy = mFishPos.y - mRootTranslation->getTranslationY();
+	unsigned int dis = sqrt(dx * dx + dy * dy);
+
+	float angle = atan(dy / dx);
+	float mRotToShip = calcRotation(angle);
+
+	return mRootRotation->getRotation() == mRotToShip;
+}
+
+float Animal::calcRotation(float angle)
+{
+	switch(direction(mFishPos))
+	{
+	case 9:
+		return angle;
+		break;
+	case 3:
+		return angle + 90;
+		break;
+	case 1:
+		return angle + 180;
+		break;
+	case 7:
+		return angle + 270;
+		break;
+	}
 }
 
 void Animal::setSpeed(float vx, float vy)
