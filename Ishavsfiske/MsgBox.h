@@ -1,11 +1,11 @@
-//Version: 0.1.4
+//Version: 0.1.5
 //Author: Jakob Pipping
 //Contributors:
 
 #ifndef INC_TUTORIAL_H
 #define INC_TUTORIAL_H
 
-#ifdef ISHAV_0_1_4
+#ifdef ISHAV_0_1_5
 
 #include <Angler\Node.h>
 #include <SFML\Audio.hpp>
@@ -46,7 +46,7 @@ namespace Ishavsfiske
 }
 
 #else
-#error IceBreaker.h: Wrong version 0.1.4
+#error IceBreaker.h: Wrong version 0.1.5
 #endif
 
 #endif

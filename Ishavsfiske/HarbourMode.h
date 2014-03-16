@@ -2,8 +2,8 @@
 //Author: Jakob Pipping
 //Contributors:
 
-#ifndef INC_STARTSCREEN_H
-#define INC_STARTSCREEN_H
+#ifndef INC_HARBOURMODE_H
+#define INC_HARBOURMODE_H
 
 #ifdef ISHAV_0_1_5
 
@@ -11,40 +11,37 @@
 #include <Angler\Node.h>
 #include <Angler\Translation.h>
 
+#include "MsgBox.h"
+
 namespace Ishavsfiske
 {
-	class IshavsfiskeGame;
-
-	class StartScreen
+	class HarbourMode
 		: public Angler::Node
 	{
 	public:
-		StartScreen(unsigned long id, Angler::Node *parent, Ishavsfiske::IshavsfiskeGame *owner);
-		StartScreen(unsigned long id, Ishavsfiske::IshavsfiskeGame *owner);
-
-		void input(float time, float deltaTime);
-
-		void loadContent();
-		void init();
+		HarbourMode(unsigned long id, Angler::Node *parent, Ishavsfiske::IshavsfiskeGame *owner);
+		HarbourMode(unsigned long id, Ishavsfiske::IshavsfiskeGame *owner);
 
 		void draw(Angler::Game* context, Angler::Graphics::GraphicsEngine* graphics, float time, float deltaTime);
 		void update(Angler::Game* context, float time, float deltaTime, bool changed = false);
+
+		void init();
+		void loadContent();
 
 	protected:
 		void mEnable(bool enabled);
 
 	private:
-		sf::Texture *mTextureBG, *mTexturePress;
+		void showRoom(int ind);
 
-		sf::Sound *mMusic;
-		sf::SoundBuffer *mMusicIntroBuff;
+		sf::Texture *mTXHarbour;
 
 		Ishavsfiske::IshavsfiskeGame *mOwner;
 	};
 }
 
 #else
-#error StartScreen.h: Wrong version 0.1.5
+#error HarbourMode.h: Wrong version 0.1.5
 #endif
 
 #endif

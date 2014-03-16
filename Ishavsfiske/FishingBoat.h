@@ -1,11 +1,11 @@
-//Version: 0.1.4
+//Version: 0.1.5
 //Author: Jakob Pipping
 //Contributors:
 
 #ifndef INC_FISHINGBOAT_H
 #define INC_FISHINGBOAT_H
 
-#ifdef ISHAV_0_1_4
+#ifdef ISHAV_0_1_5
 
 #include "Ship.h"
 #include "School.h"
@@ -49,7 +49,7 @@ namespace Ishavsfiske
 }
 
 #else
-#error FishingBoat.h: Wrong version 0.1.4
+#error FishingBoat.h: Wrong version 0.1.5
 #endif
 
 #endif

@@ -1,4 +1,4 @@
-//Version: 0.1.4
+//Version: 0.1.5
 //Author: Marcus Persson
 //Contributors: 
 
@@ -6,8 +6,8 @@
 
 #include <fstream>
 
-#ifndef ISHAV_0_1_4
-#error Font.cpp: Wrong version 0.1.4
+#ifndef ISHAV_0_1_5
+#error Font.cpp: Wrong version 0.1.5
 #endif
 
 Font::Font()
