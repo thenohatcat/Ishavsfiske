@@ -22,6 +22,8 @@ namespace Ishavsfiske
 		School(unsigned long id, Angler::Node *parent, Ishavsfiske::IshavsfiskeGame *owner);
 		School(unsigned long id, Ishavsfiske::IshavsfiskeGame *owner);
 
+		virtual ~School();
+
 		void move(float x, float y);
 
 		sf::Vector2f getPosition();
@@ -31,8 +33,6 @@ namespace Ishavsfiske
 
 		int getAmmount();
 
-		void scaredByBoat(sf::Vector2f shipPos, float deltaTime);
-
 		virtual void update(Angler::Game *context, float time, float deltaTime, bool changed);
 	protected:
 		Angler::Game *mOwner;
@@ -41,11 +41,12 @@ namespace Ishavsfiske
 
 		float mStartX, mStartY;
 
+		bool scaredDistance(sf::Vector2f pos);
+		void scaredByBoat(sf::Vector2f shipPos, float deltaTime, bool fast);
+
 		Angler::Node *mSchoolRoot;
 	private:
 		Angler::Nodes::Translation *mRootTranslation;
-
-		bool scaredDistance(sf::Vector2f pos);
 
 		int mAmmount;
 	};
