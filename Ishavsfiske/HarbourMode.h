@@ -1,11 +1,11 @@
-//Version: 0.1.4
+//Version: 0.1.5
 //Author: Jakob Pipping
 //Contributors:
 
 #ifndef INC_HARBOURMODE_H
 #define INC_HARBOURMODE_H
 
-#ifdef ISHAV_0_1_4
+#ifdef ISHAV_0_1_5
 
 #include <Angler\Game.h>
 #include <Angler\Node.h>
@@ -41,7 +41,7 @@ namespace Ishavsfiske
 }
 
 #else
-#error HarbourMode.h: Wrong version 0.1.4
+#error HarbourMode.h: Wrong version 0.1.5
 #endif
 
 #endif

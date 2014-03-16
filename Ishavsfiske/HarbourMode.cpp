@@ -1,9 +1,9 @@
-//Version: 0.1.4
+//Version: 0.1.5
 //Author: Jakob Pipping
 //Contributors: 
 
-#ifndef ISHAV_0_1_4
-#error HarbourMode_init.cpp: Wrong version 0.1.4
+#ifndef ISHAV_0_1_5
+#error HarbourMode_init.cpp: Wrong version 0.1.5
 #endif
 
 #include "IshavsfiskeGame.h"
