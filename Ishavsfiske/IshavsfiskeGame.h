@@ -21,6 +21,7 @@
 #include "FishingMode.h"
 #include "StartScreen.h"
 #include "GameOverScreen.h"
+#include "HarbourMode.h"
 
 class Font;
 
@@ -81,6 +82,7 @@ namespace Ishavsfiske
 		FishingMode *mFishingMode;
 		StartScreen *mStartScreen;
 		GameOverScreen *mGameOverScreen;
+		HarbourMode *mHarbourMode;
 		
 		Angler::Node *mUIRoot, *mObjectsRoot;
 

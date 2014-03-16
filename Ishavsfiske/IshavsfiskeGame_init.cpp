@@ -47,7 +47,10 @@ void Ishavsfiske::IshavsfiskeGame::mLoadContent()
 	mGameOverScreen->loadContent();
 	mGameOverScreen->enable(false);
 
-	mStartScreen->enable(true);
+	mStartScreen->enable(false);
+
+	mHarbourMode->loadContent();
+	mHarbourMode->enable(true);
 }
 
 void Ishavsfiske::IshavsfiskeGame::mInit()
@@ -63,6 +66,9 @@ void Ishavsfiske::IshavsfiskeGame::mInit()
 
 	mGameOverScreen = new GameOverScreen(0, mObjectsRoot, this);
 	mGameOverScreen->init();
+
+	mHarbourMode = new HarbourMode(0, mObjectsRoot, this);
+	mHarbourMode->init();
 
 	mFont = new Font();
 }
