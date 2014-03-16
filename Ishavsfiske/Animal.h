@@ -1,11 +1,11 @@
-//Version: 0.1.4
+//Version: 0.1.5
 //Author: Sihao Li
 //Contributors:
 
 #ifndef INC_ANIMAL_H
 #define INC_ANIMAL_H
 
-#ifdef ISHAV_0_1_4
+#ifdef ISHAV_0_1_5
 
 #include <Angler\Node.h>
 #include <Angler\Translation.h>
@@ -55,7 +55,7 @@ namespace Ishavsfiske
 }
 
 #else
-#error Animal.h: Wrong version 0.1.4
+#error Animal.h: Wrong version 0.1.5
 #endif
 
 #endif

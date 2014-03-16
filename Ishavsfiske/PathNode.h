@@ -1,11 +1,11 @@
-//Version: 0.1.4
+//Version: 0.1.5
 //Author: Sihao Li
 //Contributors:
 
 #ifndef INC_PATHNODE_H
 #define INC_PATHNODE_H
 
-#ifdef ISHAV_0_1_4
+#ifdef ISHAV_0_1_5
 
 #include <Angler\Graphics.h>
 
@@ -38,7 +38,7 @@ private:
 };
 
 #else
-#error PathNode.h: Wrong version 0.1.4
+#error PathNode.h: Wrong version 0.1.5
 #endif
 
 #endif

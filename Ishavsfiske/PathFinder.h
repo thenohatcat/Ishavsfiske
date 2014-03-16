@@ -1,11 +1,11 @@
-//Version: 0.1.4
+//Version: 0.1.5
 //Author: Sihao Li
 //Contributors:
 
 #ifndef INC_PATHFINDER_H
 #define INC_PATHFINDER_H
 
-#ifdef ISHAV_0_1_4
+#ifdef ISHAV_0_1_5
 
 #include "PathNode.h"
 
@@ -66,7 +66,7 @@ private:
 
 
 #else
-#error PathFinder.h: Wrong version 0.1.4
+#error PathFinder.h: Wrong version 0.1.5
 #endif
 
 #endif
