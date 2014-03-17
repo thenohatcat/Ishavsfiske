@@ -13,7 +13,7 @@
 
 #include <Angler\DrawNode.h>
 #include <Angler\Scale.h>
-
+#include <iostream>
 using namespace Ishavsfiske;
 using namespace Angler::Nodes;
 
@@ -60,17 +60,16 @@ void Animal::update(Angler::Game *context, float time, float deltaTime, bool cha
 
 	if (!atShip())
 	{
-	/*	if(!lookAtShip())
-		{*/
-			int LoR = mRootRotation->getRotation() - mRotToShip;
+		if(!lookAtShip())
+		{
+			float LoR = mRootRotation->getRotation() - mRotToShip;
 			if(LoR < 0)
 				rotate(90 * deltaTime);
 			else
 				rotate(-90 * deltaTime);
-		/*}*/
+		}
 		move(0, 1 * deltaTime);
 	}
-
 }
 
 void Animal::attack()
@@ -97,9 +96,9 @@ bool Animal::atShip()
 
 bool Animal::lookAtShip()
 {
-	unsigned int dx = mFishPos.x - mRootTranslation->getTranslationX();
-	unsigned int dy = mFishPos.y - mRootTranslation->getTranslationY();
-	unsigned int dis = sqrt(dx * dx + dy * dy);
+	float dx = mFishPos.x - mRootTranslation->getTranslationX();
+	float dy = mFishPos.y - mRootTranslation->getTranslationY();
+	/*float dis = sqrt(dx * dx + dy * dy);*/
 
 	float angle = atan(dy / dx);
 	float mRotToShip = calcRotation(angle);

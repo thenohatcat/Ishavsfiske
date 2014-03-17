@@ -21,7 +21,7 @@ namespace Ishavsfiske
 
 		virtual ~Seagull();
 
-		void update(Angler::Game* context, float time, float deltaTime, bool changed);
+		void update(Angler::Game *context, float time, float deltaTime, bool changed);
 
 		virtual void attack();
 	protected:
