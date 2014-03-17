@@ -23,6 +23,7 @@ namespace Ishavsfiske
 		HarbourMode(unsigned long id, Ishavsfiske::IshavsfiskeGame *owner);
 
 		void draw(Angler::Game* context, Angler::Graphics::GraphicsEngine* graphics, float time, float deltaTime);
+		void endDraw(Angler::Game* context, Angler::Graphics::GraphicsEngine* graphics, float time, float deltaTime);
 		void update(Angler::Game* context, float time, float deltaTime, bool changed = false);
 
 		void init();
@@ -34,7 +35,15 @@ namespace Ishavsfiske
 	private:
 		void showRoom(int ind);
 
+		sf::Texture *mTXBarHO, *mTXWorkshopHO, *mTXMarketHO, *mTXUI;
+		std::vector<sf::Vector2f> mBarMOS, mWorkshopMOS, mMarketMOS, mMenuButtonMOS;
+		bool mBarIsMO, mWorkshopIsMO, mMarketIsMO;
+		float mMenuButtonRot;
+
 		sf::Texture *mTXHarbour;
+
+		sf::Sound *mSSea, *mSBar, *mSWorkshop, *mSMarket;
+		sf::SoundBuffer *mSBSea, *mSBBar, *mSBWorkshop, *mSBMarket;
 
 		Ishavsfiske::IshavsfiskeGame *mOwner;
 	};
