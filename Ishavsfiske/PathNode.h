@@ -1,11 +1,11 @@
-//Version: 0.1.4
+//Version: 0.1.5
 //Author: Sihao Li
 //Contributors:
 
 #ifndef INC_PATHNODE_H
 #define INC_PATHNODE_H
 
-#ifdef ISHAV_0_1_4
+#ifdef ISHAV_0_1_5
 
 #include <Angler\Graphics.h>
 
@@ -13,7 +13,7 @@ class PathNode
 {
 public:
 	PathNode();
-	PathNode(unsigned int id, PathNode *parent, PathNode *child, sf::Vector2i pos);
+	PathNode(unsigned int id, PathNode *parent, /*PathNode *child,*/ sf::Vector2i pos);
 
 	void setH(int h), setG(int g), setF(int f);
 	void setParent(PathNode *parent);
@@ -30,16 +30,15 @@ private:
 	int mDir;
 	sf::Vector2i mPos;
 	PathNode *mParent;
-	PathNode *mChild;
+	/*PathNode *mChild;*/
 	unsigned long mID;
-	sf::Vector2i mPos;
 
 
 	void calcF();
 };
 
 #else
-#error PathNode.h: Wrong version 0.1.4
+#error PathNode.h: Wrong version 0.1.5
 #endif
 
 #endif

@@ -1,11 +1,11 @@
-//Version: 0.1.4
+//Version: 0.1.5
 //Author: Marcus Persson
 //Contributors: 
 
 #ifndef INC_FONT_H
 #define INC_FONT_H
 
-#ifdef ISHAV_0_1_4
+#ifdef ISHAV_0_1_5
 
 #include <Angler\Graphics.h>
 
@@ -26,7 +26,7 @@ private:
 };
 
 #else
-#error Font.h: Wrong version 0.1.4
+#error Font.h: Wrong version 0.1.5
 #endif
 
 #endif

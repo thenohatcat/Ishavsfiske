@@ -1,11 +1,11 @@
-//Version: 0.1.4
+//Version: 0.1.5
 //Author: Sihao Li
 //Contributors:
 
 #ifndef INC_POLARBEAR_H
 #define INC_POLARBEAR_H
 
-#ifdef ISHAV_0_1_4
+#ifdef ISHAV_0_1_5
 
 
 #include "Animal.h"
@@ -31,7 +31,7 @@ namespace Ishavsfiske
 }
 
 #else
-#error PolarBear.h: Wrong version 0.1.4
+#error PolarBear.h: Wrong version 0.1.5
 #endif
 
 #endif

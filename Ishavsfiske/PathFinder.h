@@ -1,11 +1,11 @@
-//Version: 0.1.4
+//Version: 0.1.5
 //Author: Sihao Li
 //Contributors:
 
 #ifndef INC_PATHFINDER_H
 #define INC_PATHFINDER_H
 
-#ifdef ISHAV_0_1_4
+#ifdef ISHAV_0_1_5
 
 #include "PathNode.h"
 
@@ -21,51 +21,52 @@ public:
 
 	typedef vector<PathNode*> openList;
 	typedef vector<PathNode*> closedList;
-	typedef vector<PathNode*> cameFrom;
+	typedef vector<PathNode*> pathList;
 
-	//void findPath(int start, int goal);
+	//void findPath1(PathNode *start, PathNode *goal/*, PathNode *map[]*/);
+	void findPath1(sf::Vector2i start, sf::Vector2i goal/*, PathNode *map[]*/);
 
-	void findPath1(PathNode *start, PathNode *goal);
+	// Calculates all PathNodes H value
+	void calcAllH();
 
+	// Puts the PathNodes to goal in the pathList
+	void recStructPath();
 
-	//// Arguments are goal position
-	//void startInit(int x, int y);
-
-	//// Arguments are goal position
-	//void calcAllH(int x, int y);
+	void clear();
 protected:
 private:
-	int mStart;
-	int mGoal;
+	PathNode *mMap[10 * 10];
+
+	PathNode *mStartNode;
+	PathNode *mGoalNode;
 
 	PathNode *mCurrent;
 
-	//// Arguments are start position and goal position
-	//int detHScore(int xx, int yy, int x, int y);
-	//
-	////void calcFVal();
+	// Calculates the H value
+	unsigned int detHVal(int x, int y);
 
 	// Determine the node with the lowest f value in openlist
 	PathNode *lowFValueOpen();
 
 
-
-
 	openList mOpenList;
 	closedList mClosedList;
+	pathList mPathList;
 
 	void genSuccessors(PathNode *currentNode);
 
-	bool inClosed(PathNode *node);
+	bool inOpenClosed(sf::Vector2i pos);
+	bool inOpen(sf::Vector2i pos);
+	bool inClosed(sf::Vector2i pos);
+	void internalClear();
+	void clearOpen(), clearClosed(), clearPath();
 
-	//void recStructPath(int cameFrom, int goal);
-	//void rmCurrentOpen();
-	//void addCurrentClosed();
+	void genPathMap();
 };
 
 
 #else
-#error PathFinder.h: Wrong version 0.1.4
+#error PathFinder.h: Wrong version 0.1.5
 #endif
 
 #endif

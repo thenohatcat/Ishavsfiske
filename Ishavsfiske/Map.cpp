@@ -1,9 +1,9 @@
-//Version: 0.1.4
+//Version: 0.1.5
 //Author: Sihao Li
 //Contributors: Jakob Pipping
 
-#ifndef ISHAV_0_1_4
-#error Map.cpp: Wrong version 0.1.4
+#ifndef ISHAV_0_1_5
+#error Map.cpp: Wrong version 0.1.5
 #endif
 
 #include "Map.h"

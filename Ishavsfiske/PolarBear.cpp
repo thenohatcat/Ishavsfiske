@@ -1,9 +1,9 @@
-//Version: 0.1.4
+//Version: 0.1.5
 //Author: Sihao Li
 //Contributors:
 
-#ifndef ISHAV_0_1_4
-#error PolarBear.cpp: Wrong version 0.1.4
+#ifndef ISHAV_0_1_5
+#error PolarBear.cpp: Wrong version 0.1.5
 #endif
 
 #include "PolarBear.h"

@@ -1,9 +1,9 @@
-//Version: 0.1.4
+//Version: 0.1.5
 //Author: Marcus Persson
 //Contributors: 
 
-#ifndef ISHAV_0_1_4
-#error School.cpp: Wrong version 0.1.4
+#ifndef ISHAV_0_1_5
+#error School.cpp: Wrong version 0.1.5
 #endif
 
 #include <Angler\Scale.h>
@@ -11,8 +11,6 @@
 
 #include "IshavsfiskeGame.h"
 #include "School.h"
-#include "IceBreaker.h"
-#include "FishingBoat.h"
 
 using namespace Ishavsfiske;
 using namespace Angler::Nodes;
@@ -27,6 +25,14 @@ School::School(unsigned long id, Ishavsfiske::IshavsfiskeGame *owner)
 	: Node(id), mOwner(owner), mStartX(0.5f), mStartY(0.5f), mAmmount(8)
 {
 	mInit();
+}
+
+School::~School()
+{
+	delete mSchoolRoot;
+	delete mRootTranslation;
+
+	Node::~Node();
 }
 
 void School::mInit()
@@ -97,12 +103,15 @@ int School::fish(int ammount)
 	}
 }
 
-void School::scaredByBoat(sf::Vector2f shipPos, float deltaTime)
+void School::scaredByBoat(sf::Vector2f shipPos, float deltaTime, bool fast)
 {
 	sf::Vector2f delta = getPosition();
 	delta -= shipPos;
 
-	move(delta.x/2*deltaTime, delta.y/2*deltaTime);
+	if(!fast)
+		move(delta.x/2.5*deltaTime, delta.y/2.5*deltaTime);
+	else if(fast)
+		move(delta.x/3*deltaTime, delta.y/3*deltaTime);
 }
 
 void School::update(Angler::Game *context, float time, float deltaTime, bool changed)
@@ -113,12 +122,12 @@ void School::update(Angler::Game *context, float time, float deltaTime, bool cha
 		
 		mUpdateChildren(context, time, deltaTime);
 
-		if(scaredDistance(((IshavsfiskeGame*)context)->getIceBreaker()->getPosition()))
+		/*if(scaredDistance(((IshavsfiskeGame*)context)->getIceBreaker()->getPosition()))
 			scaredByBoat(((IshavsfiskeGame*)context)->getIceBreaker()->getPosition(), deltaTime);
 		if(scaredDistance(((IshavsfiskeGame*)context)->getShipFishing()->getPosition()))
 			scaredByBoat(((IshavsfiskeGame*)context)->getShipFishing()->getPosition(), deltaTime);
 
-		mUpdateChildren(context, time, deltaTime);
+		mUpdateChildren(context, time, deltaTime);*/
 	}
 }
 
@@ -132,5 +141,5 @@ bool School::scaredDistance(sf::Vector2f pos)
 	float Y1 = shipPos.y;
 	float DX = X0 - X1;
 	float DY = Y0 - Y1;
-	return DX * DX + DY * DY < 0.03;
+	return DX * DX + DY * DY < 0.025;
 }

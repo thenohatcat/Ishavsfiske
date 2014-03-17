@@ -1,11 +1,11 @@
-//Version: 0.1.4
+//Version: 0.1.5
 //Author: Jakob Pipping
 //Contributors:
 
 #ifndef INC_ISHAVSFISKEGAME_H
 #define INC_ISHAVSFISKEGAME_H
 
-#ifdef ISHAV_0_1_4
+#ifdef ISHAV_0_1_5
 
 #include <SFML\Audio.hpp>
 
@@ -21,6 +21,7 @@
 #include "FishingMode.h"
 #include "StartScreen.h"
 #include "GameOverScreen.h"
+#include "HarbourMode.h"
 
 class Font;
 
@@ -81,6 +82,7 @@ namespace Ishavsfiske
 		FishingMode *mFishingMode;
 		StartScreen *mStartScreen;
 		GameOverScreen *mGameOverScreen;
+		HarbourMode *mHarbourMode;
 		
 		Angler::Node *mUIRoot, *mObjectsRoot;
 
@@ -89,7 +91,7 @@ namespace Ishavsfiske
 }
 
 #else
-#error IshavsfiskeGame.h: Wrong version 0.1.4
+#error IshavsfiskeGame.h: Wrong version 0.1.5
 #endif
 
 #endif

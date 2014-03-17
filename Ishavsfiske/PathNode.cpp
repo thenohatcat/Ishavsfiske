@@ -1,9 +1,9 @@
-//Version: 0.1.4
+//Version: 0.1.5
 //Author: Sihao Li
 //Contributors:
 
-#ifndef ISHAV_0_1_4
-#error PathNode.cpp: Wrong version 0.1.4
+#ifndef ISHAV_0_1_5
+#error PathNode.cpp: Wrong version 0.1.5
 #endif
 
 #include "PathNode.h"
@@ -13,9 +13,10 @@ PathNode::PathNode()
 {
 }
 
-PathNode::PathNode(unsigned int id, PathNode *parent, PathNode *child, sf::Vector2i pos)
-	: mH(0), mG(0), mF(0), mParent(parent), mChild(child), mID(id), mPos(pos)
+PathNode::PathNode(unsigned int id, PathNode *parent, /*PathNode *child,*/ sf::Vector2i pos)
+	: mH(0), mG(0), mF(0), mParent(parent), /*mChild(child),*/ mID(id), mPos(pos)
 {
+	calcF();
 }
 
 void PathNode::setH(int h)

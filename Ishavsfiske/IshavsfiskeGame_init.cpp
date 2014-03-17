@@ -1,9 +1,9 @@
-//Version: 0.1.4
+//Version: 0.1.5
 //Author: Jakob Pipping
 //Contributors: 
 
-#ifndef ISHAV_0_1_4
-#error IshavsfiskeGame_init.cpp: Wrong version 0.1.4
+#ifndef ISHAV_0_1_5
+#error IshavsfiskeGame_init.cpp: Wrong version 0.1.5
 #endif
 
 #include "IshavsfiskeGame.h"
@@ -47,7 +47,10 @@ void Ishavsfiske::IshavsfiskeGame::mLoadContent()
 	mGameOverScreen->loadContent();
 	mGameOverScreen->enable(false);
 
-	mStartScreen->enable(true);
+	mStartScreen->enable(false);
+
+	mHarbourMode->loadContent();
+	mHarbourMode->enable(true);
 }
 
 void Ishavsfiske::IshavsfiskeGame::mInit()
@@ -63,6 +66,9 @@ void Ishavsfiske::IshavsfiskeGame::mInit()
 
 	mGameOverScreen = new GameOverScreen(0, mObjectsRoot, this);
 	mGameOverScreen->init();
+
+	mHarbourMode = new HarbourMode(0, mObjectsRoot, this);
+	mHarbourMode->init();
 
 	mFont = new Font();
 }

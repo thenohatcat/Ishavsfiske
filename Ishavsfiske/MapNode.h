@@ -1,11 +1,11 @@
-//Version: 0.1.4
+//Version: 0.1.5
 //Author: Sihao Li
 //Contributors:
 
 #ifndef INC_MAPNODE_H
 #define INC_MAPNODE_H
 
-#ifdef ISHAV_0_1_4
+#ifdef ISHAV_0_1_5
 
 #include <Angler\Game.h>
 #include <Angler\Graphics.h>
@@ -35,7 +35,7 @@ private:
 };
 
 #else
-#error MapNode.h: Wrong version 0.1.4
+#error MapNode.h: Wrong version 0.1.5
 #endif
 
 #endif
