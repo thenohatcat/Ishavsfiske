@@ -13,6 +13,7 @@
 
 #include "IceBreaker.h"
 #include "FishingBoat.h"
+#include "Seagull.h"
 #include "Map.h"
 #include "School.h"
 
@@ -53,7 +54,7 @@ namespace Ishavsfiske
 		sf::Sound *mCollFishingSound, *mCollBreakerSound, *mCollIceSound, *mEngineSound;
 		sf::SoundBuffer *mCollFishingBuff, *mCollBreakerBuff, *mCollIceBuff, *mEngineBuff;
 
-		sf::Texture *mTXMap, *mTXUI, *mTXSchool, *mUIFont, *mTXGameOver;
+		sf::Texture *mTXMap, *mTXUI, *mTXSchool, *mUIFont, *mTXGameOver, *mTXSeagull;
 
 		sf::Sound *mRepair;
 		sf::SoundBuffer *mRepairBuff;
@@ -77,6 +78,8 @@ namespace Ishavsfiske
 		Map *mMap;
 		
 		Ship *mShipFishing, *mShipBreaker;
+
+		Animal *mSeagull;
 
 		Ishavsfiske::IshavsfiskeGame *mOwner;
 

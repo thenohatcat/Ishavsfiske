@@ -50,7 +50,9 @@ void Ishavsfiske::IshavsfiskeGame::mLoadContent()
 	mStartScreen->enable(false);
 
 	mHarbourMode->loadContent();
-	mHarbourMode->enable(true);
+	mHarbourMode->enable(false);
+
+	mStartScreen->enable(true);
 }
 
 void Ishavsfiske::IshavsfiskeGame::mInit()

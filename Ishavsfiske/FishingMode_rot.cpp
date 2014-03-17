@@ -48,6 +48,11 @@ void FishingMode::mEnable(bool enabled)
 
 		mOwner->getSound()->playSound(mEngineSound, false, 0, 1.46f, true);
 		mOwner->getSound()->setVolume(mEngineSound, 30.0f);
+
+		mMap->setPos(sf::Vector2i(12, 10));
+		mFishBase->setTranslation(-12/20.0f, -10/20.0f);
+
+		mMap->genMap(1);
 	}
 	else
 	{

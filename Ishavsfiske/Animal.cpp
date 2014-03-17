@@ -60,18 +60,23 @@ void Animal::update(Angler::Game *context, float time, float deltaTime, bool cha
 
 	if (!atShip())
 	{
-		if(!lookAtShip())
-		{
+	/*	if(!lookAtShip())
+		{*/
 			int LoR = mRootRotation->getRotation() - mRotToShip;
 			if(LoR < 0)
 				rotate(90 * deltaTime);
 			else
 				rotate(-90 * deltaTime);
-		}
+		/*}*/
 		move(0, 1 * deltaTime);
 	}
 
 }
+
+void Animal::attack()
+{
+}
+
 
 void Animal::rotate(float r)
 {

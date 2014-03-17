@@ -34,6 +34,8 @@ void FishingMode::loadContent()
 	mUIFont->loadFromFile("font_bitmap.png");
 	mTXGameOver->loadFromFile("game_over__.png");
 
+	mTXSeagull->loadFromFile("FlyGull_animation_spritesheet.png");
+
 	mCollFishingBuff->loadFromFile("Fiskebåt_Kollision_01.wav");
 	mCollFishingSound->setBuffer(*mCollFishingBuff);
 
@@ -91,9 +93,12 @@ void FishingMode::init()
 	mTXUI = new sf::Texture();
 	mUIFont = new sf::Texture();
 	mTXGameOver = new sf::Texture();
+	mTXSeagull = new sf::Texture();
 
 	mShipFishing = new FishingBoat(0x10000, this, mOwner);
 	mShipBreaker = new IceBreaker(0x20000, this, mOwner);
+
+	mSeagull = new Seagull(0x40000000, this, mOwner);
 
 	mMap = new Map(0x80000000, this, mOwner);
 	mMap->setPos(sf::Vector2i(12, 10));
