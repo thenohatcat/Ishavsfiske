@@ -55,7 +55,7 @@ void HarbourMode::draw(Angler::Game* context, Angler::Graphics::GraphicsEngine* 
 			glScalef(1/3.0f, 1/3.0f, 1.0f);
 				glTranslatef(1.5f, 18.5f, 0.0f);
 			glScalef(3.0f, 3.0f, 1.0f);
-			//glRotatef(time / 1.337f * 360.0f, 0, 0, 1);
+			glRotatef(35.0f * sin(mMenuButtonRot), 0, 0, 1);
 			graphics->draw(4, sf::Vector2f(10.0f/20.0f, 55.0f/108.0f), sf::Vector2f(400/1500.0f, 150/1600.0f), sf::Vector2f(20/1500.0f, 108/1600.0f));
 		glPopMatrix();
 
@@ -71,10 +71,11 @@ void HarbourMode::endDraw(Angler::Game* context, Angler::Graphics::GraphicsEngin
 	{
 		glDisable(GL_TEXTURE_2D);
 
-		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+		//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
 		glLineWidth(3);
 
+		/*
 		glColor3d(1, 0, 0);
 		glBegin(GL_POLYGON);
 			for (int i = 0; i < mBarMOS.size(); i++)
@@ -99,12 +100,20 @@ void HarbourMode::endDraw(Angler::Game* context, Angler::Graphics::GraphicsEngin
 			}
 		glEnd();
 
+		glColor3d(0, 0, 1);
+		glBegin(GL_POLYGON);
+			for (int i = 0; i < mMenuButtonMOS.size(); i++)
+			{
+				glVertex2f(mMenuButtonMOS.at(i).x, mMenuButtonMOS.at(i).y);
+			}
+		glEnd();*/
+
 		glColor3d(1, 1, 0);
 		glBegin(GL_POLYGON);
-			glVertex2f(mousePos.x + 0.005f, mousePos.y - 0.005f);
-			glVertex2f(mousePos.x - 0.005f, mousePos.y - 0.005f);
-			glVertex2f(mousePos.x - 0.005f, mousePos.y + 0.005f);
-			glVertex2f(mousePos.x + 0.005f, mousePos.y + 0.005f);
+			glVertex2f(mousePos.x + 0.01f, mousePos.y + 0.01f);
+			glVertex2f(mousePos.x, mousePos.y);
+			glVertex2f(mousePos.x, mousePos.y + 0.015f);
+			//glVertex2f(mousePos.x + 0.005f, mousePos.y + 0.005f);
 		glEnd();
 
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
@@ -126,6 +135,12 @@ void HarbourMode::update(Angler::Game* context, float time, float deltaTime, boo
 		mBarIsMO = Angler::HelpFunctions::Geometry::pointIsWithinPolygon(&mBarMOS, mousePos);
 		mMarketIsMO = Angler::HelpFunctions::Geometry::pointIsWithinPolygon(&mMarketMOS, mousePos);
 		mWorkshopIsMO = Angler::HelpFunctions::Geometry::pointIsWithinPolygon(&mWorkshopMOS, mousePos);
+		mMenuButtonIsMO = Angler::HelpFunctions::Geometry::pointIsWithinPolygon(&mMenuButtonMOS, mousePos);
+
+		if (mMenuButtonIsMO || fmod(abs(sin(mMenuButtonRot)), 1.0f) > 0.001f)
+			mMenuButtonRot += std::min(3.1415f-fmod(mMenuButtonRot, 3.1415f), 4 * deltaTime);
+
+		mMenuButtonRot = fmod(mMenuButtonRot, 2*3.1415f);
 
 		if (mBarIsMO)
 		{
@@ -216,6 +231,12 @@ void HarbourMode::loadContent()
 	mWorkshopMOS.push_back(sf::Vector2f(0.890f, 0.532f));
 	mWorkshopMOS.push_back(sf::Vector2f(1.050f, 0.510f));
 	mWorkshopMOS.push_back(sf::Vector2f(1.056f, 0.406f));
+
+	//Menu button
+	for (int i = 0; i < 32; i++)
+	{
+		mMenuButtonMOS.push_back(sf::Vector2f(3/40.0f + 3/40.0f * cos(-i/16.0f * 3.1415f), 37/40.0f + 3/40.0f * sin(-i/16.0f * 3.1415f)));
+	}
 }
 
 void HarbourMode::init()
@@ -248,6 +269,8 @@ void HarbourMode::mEnable(bool enabled)
 		sf::Texture* textures[5] = { mTXHarbour, mTXBarHO, mTXMarketHO, mTXWorkshopHO, mTXUI };
 		mOwner->setupGraphicsLayers(5, sizes, textures);
 
+		mOwner->setCursorVisible(false);
+
 		mSSea->setVolume(80.0f);
 		mOwner->getSound()->playSound(mSSea, false, 0, 47.0f, true);
 
@@ -262,6 +285,8 @@ void HarbourMode::mEnable(bool enabled)
 	}
 	else
 	{
+		mOwner->setCursorVisible(true);
+
 		mOwner->clearGraphicsLayers();
 	}
 }

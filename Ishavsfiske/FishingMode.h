@@ -53,6 +53,10 @@ namespace Ishavsfiske
 		sf::Sound *mCollFishingSound, *mCollBreakerSound, *mCollIceSound, *mEngineSound;
 		sf::SoundBuffer *mCollFishingBuff, *mCollBreakerBuff, *mCollIceBuff, *mEngineBuff;
 
+		std::vector<sf::Vector2f> mMenuButtonMOS;
+		bool mMenuButtonIsMO;
+		float mMenuButtonRot;
+
 		sf::Texture *mTXMap, *mTXUI, *mTXSchool, *mUIFont, *mTXGameOver;
 
 		sf::Sound *mRepair;

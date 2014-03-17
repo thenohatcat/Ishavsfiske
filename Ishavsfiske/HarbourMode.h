@@ -37,7 +37,7 @@ namespace Ishavsfiske
 
 		sf::Texture *mTXBarHO, *mTXWorkshopHO, *mTXMarketHO, *mTXUI;
 		std::vector<sf::Vector2f> mBarMOS, mWorkshopMOS, mMarketMOS, mMenuButtonMOS;
-		bool mBarIsMO, mWorkshopIsMO, mMarketIsMO;
+		bool mBarIsMO, mWorkshopIsMO, mMarketIsMO, mMenuButtonIsMO;
 		float mMenuButtonRot;
 
 		sf::Texture *mTXHarbour;

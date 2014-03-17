@@ -170,7 +170,7 @@ void FishingMode::draw(Angler::Game* context, Angler::Graphics::GraphicsEngine* 
 				glScalef(1/3.0f, 1/3.0f, 1.0f);
 					glTranslatef(5.5f, 18.5f, 0.0f);
 				glScalef(3.0f, 3.0f, 1.0f);
-				//glRotatef(time / 1.337f * 360.0f, 0, 0, 1);
+				glRotatef(35.0f * sin(mMenuButtonRot), 0, 0, 1);
 				graphics->draw(5, sf::Vector2f(10.0f/20.0f, 55.0f/108.0f), sf::Vector2f(400/1500.0f, 150/1600.0f), sf::Vector2f(20/1500.0f, 108/1600.0f));
 			glPopMatrix();
 

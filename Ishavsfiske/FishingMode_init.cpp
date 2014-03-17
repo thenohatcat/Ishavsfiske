@@ -57,6 +57,12 @@ void FishingMode::loadContent()
 	//mMusicFishingBuff->loadFromFile("Hav_Fiske.wav");
 
 	//mMusic->setBuffer(*mMusicFishingBuff);
+
+	//Menu button
+	for (int i = 0; i < 32; i++)
+	{
+		mMenuButtonMOS.push_back(sf::Vector2f(11/40.0f + 3/40.0f * cos(-i/16.0f * 3.1415f), 37/40.0f + 3/40.0f * sin(-i/16.0f * 3.1415f)));
+	}
 }
 
 void FishingMode::init()

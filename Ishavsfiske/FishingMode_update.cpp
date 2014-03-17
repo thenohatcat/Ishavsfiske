@@ -85,6 +85,17 @@ void FishingMode::update(Angler::Game* context, float time, float deltaTime, boo
 
 		mUpdateChildren(context, time, deltaTime);
 
+		sf::Vector2f mousePos = sf::Vector2f(context->getMouseState().getPos());
+		mousePos.x /= context->getHeight();
+		mousePos.y /= context->getHeight();
+
+		mMenuButtonIsMO = Angler::HelpFunctions::Geometry::pointIsWithinPolygon(&mMenuButtonMOS, mousePos);
+
+		if (mMenuButtonIsMO || fmod(abs(sin(mMenuButtonRot)), 1.0f) > 0.001f)
+			mMenuButtonRot += std::min(3.1415f-fmod(mMenuButtonRot, 3.1415f), 4 * deltaTime);
+
+		mMenuButtonRot = fmod(mMenuButtonRot, 2*3.1415f);
+
 		float fishingMVX = 0, fishingMVY = 0;
 		float breakerMVX = 0, breakerMVY = 0;
 
