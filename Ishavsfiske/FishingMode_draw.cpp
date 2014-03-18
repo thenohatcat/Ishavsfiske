@@ -174,15 +174,6 @@ void FishingMode::draw(Angler::Game* context, Angler::Graphics::GraphicsEngine* 
 				graphics->draw(5, sf::Vector2f(10.0f/20.0f, 55.0f/108.0f), sf::Vector2f(400/1500.0f, 150/1600.0f), sf::Vector2f(20/1500.0f, 108/1600.0f));
 			glPopMatrix();
 
-			//Radio
-			glPushMatrix();
-				glScalef(1/20.f, 1/20.f, 1);
-					glTranslatef(28, 20, 0);
-				glScalef(20.f, 20.f, 1);
-				glScalef(75/1000.0f, 75/1000.0f, 1);
-				graphics->draw(5, sf::Vector2f(1, 1), sf::Vector2f(420/1500.0f, 150/1600.0f), sf::Vector2f(140/1500.0f, 75/1600.0f));
-			glPopMatrix();
-
 			if (mShowCounter)
 			{
 				//Fish

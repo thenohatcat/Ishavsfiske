@@ -47,8 +47,6 @@ void Ishavsfiske::IshavsfiskeGame::mLoadContent()
 	mGameOverScreen->loadContent();
 	mGameOverScreen->enable(false);
 
-	mStartScreen->enable(false);
-
 	mHarbourMode->loadContent();
 	mHarbourMode->enable(true);
 }

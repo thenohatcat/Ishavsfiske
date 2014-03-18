@@ -35,12 +35,21 @@ namespace Ishavsfiske
 	private:
 		void showRoom(int ind);
 
-		sf::Texture *mTXBarHO, *mTXWorkshopHO, *mTXMarketHO, *mTXUI;
-		std::vector<sf::Vector2f> mBarMOS, mWorkshopMOS, mMarketMOS, mMenuButtonMOS;
-		bool mBarIsMO, mWorkshopIsMO, mMarketIsMO, mMenuButtonIsMO;
+		int mRadioCh;
+
+		sf::Texture *mTXBarHO, *mTXWorkshopHO, *mTXMarketHO, *mTXUI, *mTXBackButton, *mTXCursor;
+		std::vector<sf::Vector2f> mBarMOS, mWorkshopMOS, mMarketMOS, mMenuButtonMOS, mRadioMOS;
+		bool mBarIsMO, mWorkshopIsMO, mMarketIsMO, mMenuButtonIsMO, mRadioIsMO;
 		float mMenuButtonRot;
 
+		float mRadioTime;
+
 		sf::Texture *mTXHarbour;
+
+		sf::Sound *mRadioSound;
+		sf::SoundBuffer *mRadioBuffer;
+		sf::Sound *mMusic[4];
+		sf::SoundBuffer *mMusicBuffer[4];
 
 		sf::Sound *mSSea, *mSBar, *mSWorkshop, *mSMarket;
 		sf::SoundBuffer *mSBSea, *mSBBar, *mSBWorkshop, *mSBMarket;
