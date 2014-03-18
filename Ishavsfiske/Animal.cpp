@@ -18,7 +18,7 @@ using namespace Ishavsfiske;
 using namespace Angler::Nodes;
 
 Animal::Animal(unsigned long id, Angler::Node *parent, Angler::Game *owner)
-	: Node(id, parent), mOwner(owner), mStartX(0), mStartY(0)
+	: Node(id, parent), mOwner(owner), mStartX(0.5), mStartY(0.5)
 {
 	
 }
