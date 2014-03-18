@@ -103,7 +103,7 @@ bool Animal::lookAtShip()
 	float angle = atan(dy / dx);
 	float mRotToShip = calcRotation(angle);
 
-	return mRootRotation->getRotation() == mRotToShip;
+	return (mRotToShip - 10) < mRootRotation->getRotation() < (mRotToShip + 10);
 }
 
 float Animal::calcRotation(float angle)
