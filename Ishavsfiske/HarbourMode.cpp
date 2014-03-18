@@ -15,14 +15,14 @@ using namespace Ishavsfiske;
 
 HarbourMode::HarbourMode(unsigned long id, Angler::Node *parent, Ishavsfiske::IshavsfiskeGame *owner)
 	: Node(id, parent), mOwner(owner), mBarIsMO(false), mWorkshopIsMO(false), mMarketIsMO(false), mRadioIsMO(false), mMenuButtonIsMO(false), mMenuButtonRot(0.0f),
-	mRadioCh(1), mRadioTime(-1.0f), mRoom(-1)
+	mRadioCh(0), mRadioTime(-1.0f), mRoom(-1)
 {
 
 }
 
 HarbourMode::HarbourMode(unsigned long id, Ishavsfiske::IshavsfiskeGame *owner)
 	: Node(id), mOwner(owner), mBarIsMO(false), mWorkshopIsMO(false), mMarketIsMO(false), mRadioIsMO(false), mMenuButtonIsMO(false), mMenuButtonRot(0.0f),
-	mRadioCh(1), mRadioTime(-1.0f), mRoom(-1)
+	mRadioCh(0), mRadioTime(-1.0f), mRoom(-1)
 {
 
 }
@@ -83,7 +83,8 @@ void HarbourMode::draw(Angler::Game* context, Angler::Graphics::GraphicsEngine* 
 		glPushMatrix();
 			glTranslatef(1.6f, 1.0f, 1.0f);
 			glScalef(1/20.0f, 1/20.0f, 1.0f);
-			graphics->draw(5, sf::Vector2f(1.0f, 1.0f), sf::Vector2f(0.0f, (mBackButtonIsMO ? 1/3.0f : 0.0f)), sf::Vector2f(1.0f, 1/3.0f));
+			graphics->draw(5, sf::Vector2f(1.0f, 1.0f), 
+				sf::Vector2f(0.0f, (mBackButtonIsMO ? (context->getMouseState().isButtonDown(sf::Mouse::Left) ? 2/3.0f : 1/3.0f) : 0.0f)), sf::Vector2f(1.0f, 1/3.0f));
 		glPopMatrix();
 
 		//Cursor
@@ -306,17 +307,23 @@ void HarbourMode::update(Angler::Game* context, float time, float deltaTime, boo
 		}
 		else
 		{
+			if (mBackButtonIsMO && !context->getMouseState().isButtonDown(sf::Mouse::Button::Left)
+				&& context->getMouseState().wasButtonDown(sf::Mouse::Button::Left))
+			{
+				mOwner->throwEvent(IshavsfiskeGame::Events::HarbourModeHide);
+				mOwner->throwEvent(IshavsfiskeGame::Events::FishingModeShow);
+			}
 			if (mBarIsMO && !context->getMouseState().isButtonDown(sf::Mouse::Button::Left)
 				&& context->getMouseState().wasButtonDown(sf::Mouse::Button::Left))
 			{
 				mShowRoom(0);
 			}
-			if (mWorkshopIsMO && !context->getMouseState().isButtonDown(sf::Mouse::Button::Left)
+			else if (mWorkshopIsMO && !context->getMouseState().isButtonDown(sf::Mouse::Button::Left)
 				&& context->getMouseState().wasButtonDown(sf::Mouse::Button::Left))
 			{
 				mShowRoom(1);
 			}
-			if (mMarketIsMO && !context->getMouseState().isButtonDown(sf::Mouse::Button::Left)
+			else if (mMarketIsMO && !context->getMouseState().isButtonDown(sf::Mouse::Button::Left)
 				&& context->getMouseState().wasButtonDown(sf::Mouse::Button::Left))
 			{
 				mShowRoom(2);
@@ -521,11 +528,34 @@ void HarbourMode::mEnable(bool enabled)
 		mSMarket->setVolume(15.0f);
 		mOwner->getSound()->playSound(mSMarket, false, 0, 46.0f, true);
 
-		mShowRoom(0);
+		mBarIsMO = false;
+		mWorkshopIsMO = false;
+		mMarketIsMO = false; 
+		mRadioIsMO = false; 
+		mMenuButtonIsMO = false; 
+		mMenuButtonRot = 0.0f;
+		mRadioCh = -1; 
+		mRadioTime =  -1.0f;
+		mRoom = -1;
+
+		mShowRoom(-1);
 	}
 	else
 	{
 		mOwner->setCursorVisible(true);
+
+		mOwner->getSound()->stopSound(mMusic[0]);
+		mOwner->getSound()->stopSound(mMusic[1]);
+		mOwner->getSound()->stopSound(mMusic[2]);
+		mOwner->getSound()->stopSound(mMusic[3]);
+
+		mOwner->getSound()->stopSound(mSSea);
+
+		mOwner->getSound()->stopSound(mSBar);
+
+		mOwner->getSound()->stopSound(mSWorkshop);
+
+		mOwner->getSound()->stopSound(mSMarket);
 
 		mOwner->clearGraphicsLayers();
 	}

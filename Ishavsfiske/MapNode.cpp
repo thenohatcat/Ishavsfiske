@@ -208,6 +208,14 @@ void MapNode::setTile(int tileID)
 		pts.push_back(sf::Vector2f(1.0f, 1.0f));
 		mSprite->setCropOrigin(700/1500.0f, 500/1600.0f);
 		break;
+	case 0x1F:
+	case 0x2F:
+		pts.push_back(sf::Vector2f(1.0f, 0.0f));
+		pts.push_back(sf::Vector2f(0.0f, 0.0f));
+		pts.push_back(sf::Vector2f(0.0f, 1.0f));
+		pts.push_back(sf::Vector2f(1.0f, 1.0f));
+		mSprite->setCropOrigin(650/1500.0f, 600/1600.0f);
+		break;
 	}
 	mColl->setCollision(pts);
 }

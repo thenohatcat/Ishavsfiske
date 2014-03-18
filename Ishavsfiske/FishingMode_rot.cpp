@@ -37,9 +37,16 @@ void FishingMode::mEnable(bool enabled)
 {
 	if (enabled)
 	{
-		int sizes[9] = { 600, 600, 32, 64, 64, 64, 128, 512, 1 };
+		int sizes[9] = { 1200, 1200, 32, 64, 64, 64, 128, 512, 1 };
 		sf::Texture* textures[9] = { mTXUI, mTXUI, mTXSchool, mTXUI, mTXUI, mTXUI, mTXUI, mUIFont, mTXGameOver };
 		mOwner->setupGraphicsLayers(9, sizes, textures);
+
+		mSchoolID = 0;
+		mTimer = 122;
+		mTutorialStage = 0;
+		mTutorialStageTime = -1;
+
+		mSchools.clear();
 
 		mOwner->setCursorVisible(false);
 
