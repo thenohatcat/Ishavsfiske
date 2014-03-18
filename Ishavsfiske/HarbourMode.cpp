@@ -15,34 +15,50 @@ using namespace Ishavsfiske;
 
 HarbourMode::HarbourMode(unsigned long id, Angler::Node *parent, Ishavsfiske::IshavsfiskeGame *owner)
 	: Node(id, parent), mOwner(owner), mBarIsMO(false), mWorkshopIsMO(false), mMarketIsMO(false), mRadioIsMO(false), mMenuButtonIsMO(false), mMenuButtonRot(0.0f),
-	mRadioCh(1), mRadioTime(-1.0f)
+	mRadioCh(1), mRadioTime(-1.0f), mRoom(-1)
 {
 
 }
 
 HarbourMode::HarbourMode(unsigned long id, Ishavsfiske::IshavsfiskeGame *owner)
 	: Node(id), mOwner(owner), mBarIsMO(false), mWorkshopIsMO(false), mMarketIsMO(false), mRadioIsMO(false), mMenuButtonIsMO(false), mMenuButtonRot(0.0f),
-	mRadioCh(1), mRadioTime(-1.0f)
+	mRadioCh(1), mRadioTime(-1.0f), mRoom(-1)
 {
 
 }
 
 sf::Vector2f mousePos;
 
+void HarbourMode::mDrawHarbourRoom(Angler::Game* context, Angler::Graphics::GraphicsEngine* graphics, float time, float deltaTime)
+{
+	graphics->draw(0);
+
+	if (mBarIsMO)
+		graphics->draw(1);
+
+	if (mMarketIsMO)
+		graphics->draw(2);
+
+	if (mWorkshopIsMO)
+		graphics->draw(3);
+}
+
+void HarbourMode::mDrawRoom(Angler::Game* context, Angler::Graphics::GraphicsEngine* graphics, float time, float deltaTime)
+{
+	graphics->draw(0);
+
+	if (mInsideIsMO)
+		graphics->draw(1);
+}
+
 void HarbourMode::draw(Angler::Game* context, Angler::Graphics::GraphicsEngine* graphics, float time, float deltaTime)
 {
 	if (mVisible)
 	{
-		graphics->draw(0);
-
-		if (mBarIsMO)
-			graphics->draw(1);
-
-		if (mMarketIsMO)
-			graphics->draw(2);
-
-		if (mWorkshopIsMO)
-			graphics->draw(3);
+		if (mRoom == -1)
+			mDrawHarbourRoom(context, graphics, time, deltaTime);
+		else
+			mDrawRoom(context, graphics, time, deltaTime);
 
 		//Menu button
 		glPushMatrix();
@@ -63,6 +79,20 @@ void HarbourMode::draw(Angler::Game* context, Angler::Graphics::GraphicsEngine* 
 			graphics->draw(4, sf::Vector2f(10.0f/20.0f, 55.0f/108.0f), sf::Vector2f(400/1500.0f, 150/1600.0f), sf::Vector2f(20/1500.0f, 108/1600.0f));
 		glPopMatrix();
 
+		//Exit
+		glPushMatrix();
+			glTranslatef(1.6f, 1.0f, 1.0f);
+			glScalef(1/20.0f, 1/20.0f, 1.0f);
+			graphics->draw(5, sf::Vector2f(1.0f, 1.0f), sf::Vector2f(0.0f, (mBackButtonIsMO ? 1/3.0f : 0.0f)), sf::Vector2f(1.0f, 1/3.0f));
+		glPopMatrix();
+
+		//Cursor
+		glPushMatrix();
+			glTranslatef(mousePos.x, mousePos.y, 0);
+			glScalef(62/1000.0f, 62/1000.0f, 1.0f);
+			graphics->draw(6, sf::Vector2f(0.35f, 0), sf::Vector2f((context->getMouseState().isButtonDown(sf::Mouse::Button::Left) ? 0.5f : 0.0f), 0), sf::Vector2f(0.5f, 1));
+		glPopMatrix();
+
 		//Radio
 		glPushMatrix();
 			glScalef(1/20.f, 1/20.f, 1);
@@ -73,20 +103,6 @@ void HarbourMode::draw(Angler::Game* context, Angler::Graphics::GraphicsEngine* 
 				graphics->draw(4, sf::Vector2f(1, 1), sf::Vector2f(420/1500.0f, 150/1600.0f), sf::Vector2f(140/1500.0f, 75/1600.0f), 1, 0, 0, 1);
 			else
 				graphics->draw(4, sf::Vector2f(1, 1), sf::Vector2f(420/1500.0f, 150/1600.0f), sf::Vector2f(140/1500.0f, 75/1600.0f));
-		glPopMatrix();
-
-		//Exit
-		glPushMatrix();
-			glTranslatef(1.6f, 1.0f, 1.0f);
-			glScalef(1/20.0f, 1/20.0f, 1.0f);
-			graphics->draw(5, sf::Vector2f(1.0f, 1.0f), sf::Vector2f(0.0f, 0.0f), sf::Vector2f(1.0f, 1/3.0f));
-		glPopMatrix();
-
-		//Cursor
-		glPushMatrix();
-			glTranslatef(mousePos.x, mousePos.y, 0);
-			glScalef(62/1000.0f, 62/1000.0f, 1.0f);
-			graphics->draw(6, sf::Vector2f(0.35f, 0), sf::Vector2f((context->getMouseState().isButtonDown(sf::Mouse::Button::Left) ? 0.5f : 0.0f), 0), sf::Vector2f(0.5f, 1));
 		glPopMatrix();
 
 		mDrawChildren(context, graphics, time, deltaTime);
@@ -103,30 +119,32 @@ void HarbourMode::endDraw(Angler::Game* context, Angler::Graphics::GraphicsEngin
 
 		glLineWidth(3);
 
-		/*
-		glColor3d(1, 0, 0);
-		glBegin(GL_POLYGON);
-			for (int i = 0; i < mBarMOS.size(); i++)
-			{
-				glVertex2f(mBarMOS.at(i).x, mBarMOS.at(i).y);
-			}
-		glEnd();
+		if (mRoom == -1)
+		{
+			glColor3d(1, 0, 0);
+			glBegin(GL_POLYGON);
+				for (int i = 0; i < mBarMOS.size(); i++)
+				{
+					glVertex2f(mBarMOS.at(i).x, mBarMOS.at(i).y);
+				}
+			glEnd();
 
-		glColor3d(0, 1, 0);
-		glBegin(GL_POLYGON);
-			for (int i = 0; i < mWorkshopMOS.size(); i++)
-			{
-				glVertex2f(mWorkshopMOS.at(i).x, mWorkshopMOS.at(i).y);
-			}
-		glEnd();
+			glColor3d(0, 1, 0);
+			glBegin(GL_POLYGON);
+				for (int i = 0; i < mWorkshopMOS.size(); i++)
+				{
+					glVertex2f(mWorkshopMOS.at(i).x, mWorkshopMOS.at(i).y);
+				}
+			glEnd();
 
-		glColor3d(0, 0, 1);
-		glBegin(GL_POLYGON);
-			for (int i = 0; i < mMarketMOS.size(); i++)
-			{
-				glVertex2f(mMarketMOS.at(i).x, mMarketMOS.at(i).y);
-			}
-		glEnd();
+			glColor3d(0, 0, 1);
+			glBegin(GL_POLYGON);
+				for (int i = 0; i < mMarketMOS.size(); i++)
+				{
+					glVertex2f(mMarketMOS.at(i).x, mMarketMOS.at(i).y);
+				}
+			glEnd();
+		}
 
 		glColor3d(0, 0, 1);
 		glBegin(GL_POLYGON);
@@ -142,7 +160,26 @@ void HarbourMode::endDraw(Angler::Game* context, Angler::Graphics::GraphicsEngin
 			{
 				glVertex2f(mRadioMOS.at(i).x, mRadioMOS.at(i).y);
 			}
-		glEnd();*/
+		glEnd();
+
+		glColor3d(0, 0, 1);
+		glBegin(GL_POLYGON);
+			for (int i = 0; i < mBackButtonMOS.size(); i++)
+			{
+				glVertex2f(mBackButtonMOS.at(i).x, mBackButtonMOS.at(i).y);
+			}
+		glEnd();
+
+		if (mRoom != -1)
+		{
+			glColor3d(0, 0, 1);
+			glBegin(GL_POLYGON);
+				for (int i = 0; i < mInsideMOS.size(); i++)
+				{
+					glVertex2f(mInsideMOS.at(i).x, mInsideMOS.at(i).y);
+				}
+			glEnd();
+		}
 
 		//glColor3d(1, 1, 0);
 		//glBegin(GL_POLYGON);
@@ -158,6 +195,83 @@ void HarbourMode::endDraw(Angler::Game* context, Angler::Graphics::GraphicsEngin
 	}
 }
 
+void HarbourMode::mUpdateHarbourMode(Angler::Game* context, float time, float deltaTime)
+{
+	mBarIsMO = Angler::HelpFunctions::Geometry::pointIsWithinPolygon(&mBarMOS, mousePos);
+	mMarketIsMO = Angler::HelpFunctions::Geometry::pointIsWithinPolygon(&mMarketMOS, mousePos);
+	mWorkshopIsMO = Angler::HelpFunctions::Geometry::pointIsWithinPolygon(&mWorkshopMOS, mousePos);
+
+	if (mBarIsMO && mRadioCh == 0 &&  mRadioTime == -1.0f)
+	{
+		mSBar->setVolume(100.0f);
+	}
+	else
+	{
+		mSBar->setVolume(15.0f);
+	}
+
+	if (mMarketIsMO && mRadioCh == 0 &&  mRadioTime == -1.0f)
+	{
+		mSMarket->setVolume(100.0f);
+	}
+	else
+	{
+		mSMarket->setVolume(15.0f);
+	}
+
+	if (mWorkshopIsMO && mRadioCh == 0 &&  mRadioTime == -1.0f)
+	{
+		mSWorkshop->setVolume(100.0f);
+	}
+	else
+	{
+		mSWorkshop->setVolume(15.0f);
+	}
+
+	if (mBarIsMO || mMarketIsMO || mWorkshopIsMO || mRadioCh != 0 || mRadioTime >= 0.0f)
+	{
+		mSSea->setVolume(15.0f);
+	}
+	else
+	{
+		mSSea->setVolume(80.0f);
+	}
+}
+
+void HarbourMode::mUpdateRoom(Angler::Game* context, float time, float deltaTime)
+{
+	mInsideIsMO = Angler::HelpFunctions::Geometry::pointIsWithinPolygon(&mInsideMOS, mousePos);
+
+	mSSea->setVolume(0.0f);
+
+	if (mRoom == 0 && mRadioCh == 0 &&  mRadioTime == -1.0f)
+	{
+		mSBar->setVolume(100.0f);
+	}
+	else
+	{
+		mSBar->setVolume(0.0f);
+	}
+	
+	if (mRoom == 1 && mRadioCh == 0 &&  mRadioTime == -1.0f)
+	{
+		mSWorkshop->setVolume(100.0f);
+	}
+	else
+	{
+		mSWorkshop->setVolume(0.0f);
+	}
+
+	if (mRoom == 2 && mRadioCh == 0 &&  mRadioTime == -1.0f)
+	{
+		mSMarket->setVolume(100.0f);
+	}
+	else
+	{
+		mSMarket->setVolume(0.0f);
+	}
+}
+
 void HarbourMode::update(Angler::Game* context, float time, float deltaTime, bool changed)
 {
 	if (!mPaused)
@@ -168,51 +282,45 @@ void HarbourMode::update(Angler::Game* context, float time, float deltaTime, boo
 		mousePos.x /= context->getHeight();
 		mousePos.y /= context->getHeight();
 
-		mBarIsMO = Angler::HelpFunctions::Geometry::pointIsWithinPolygon(&mBarMOS, mousePos);
-		mMarketIsMO = Angler::HelpFunctions::Geometry::pointIsWithinPolygon(&mMarketMOS, mousePos);
-		mWorkshopIsMO = Angler::HelpFunctions::Geometry::pointIsWithinPolygon(&mWorkshopMOS, mousePos);
-		mMenuButtonIsMO = Angler::HelpFunctions::Geometry::pointIsWithinPolygon(&mMenuButtonMOS, mousePos);
 		mRadioIsMO = Angler::HelpFunctions::Geometry::pointIsWithinPolygon(&mRadioMOS, mousePos);
+		mMenuButtonIsMO = Angler::HelpFunctions::Geometry::pointIsWithinPolygon(&mMenuButtonMOS, mousePos);
+		mBackButtonIsMO = Angler::HelpFunctions::Geometry::pointIsWithinPolygon(&mBackButtonMOS, mousePos);
 
 		if (mMenuButtonIsMO || fmod(abs(sin(mMenuButtonRot)), 1.0f) > 0.001f)
 			mMenuButtonRot += std::min(3.1415f-fmod(mMenuButtonRot, 3.1415f), 4 * deltaTime);
 
 		mMenuButtonRot = fmod(mMenuButtonRot, 2*3.1415f);
 
-		if (mBarIsMO && mRadioCh == 0 &&  mRadioTime == -1.0f)
-		{
-			mSBar->setVolume(100.0f);
-		}
+		if (mRoom == -1)
+			mUpdateHarbourMode(context, time, deltaTime);
 		else
-		{
-			mSBar->setVolume(15.0f);
-		}
+			mUpdateRoom(context, time, deltaTime);
 
-		if (mMarketIsMO && mRadioCh == 0 &&  mRadioTime == -1.0f)
+		if (mRoom != -1)
 		{
-			mSMarket->setVolume(100.0f);
+			if (mBackButtonIsMO && !context->getMouseState().isButtonDown(sf::Mouse::Button::Left)
+				&& context->getMouseState().wasButtonDown(sf::Mouse::Button::Left))
+			{
+				mShowRoom(-1);
+			}
 		}
 		else
 		{
-			mSMarket->setVolume(15.0f);
-		}
-
-		if (mWorkshopIsMO && mRadioCh == 0 &&  mRadioTime == -1.0f)
-		{
-			mSWorkshop->setVolume(100.0f);
-		}
-		else
-		{
-			mSWorkshop->setVolume(15.0f);
-		}
-
-		if (mBarIsMO || mMarketIsMO || mWorkshopIsMO || mRadioCh != 0 || mRadioTime >= 0.0f)
-		{
-			mSSea->setVolume(15.0f);
-		}
-		else
-		{
-			mSSea->setVolume(80.0f);
+			if (mBarIsMO && !context->getMouseState().isButtonDown(sf::Mouse::Button::Left)
+				&& context->getMouseState().wasButtonDown(sf::Mouse::Button::Left))
+			{
+				mShowRoom(0);
+			}
+			if (mWorkshopIsMO && !context->getMouseState().isButtonDown(sf::Mouse::Button::Left)
+				&& context->getMouseState().wasButtonDown(sf::Mouse::Button::Left))
+			{
+				mShowRoom(1);
+			}
+			if (mMarketIsMO && !context->getMouseState().isButtonDown(sf::Mouse::Button::Left)
+				&& context->getMouseState().wasButtonDown(sf::Mouse::Button::Left))
+			{
+				mShowRoom(2);
+			}
 		}
 
 		for (int i = 0; i < 4; i++)
@@ -254,6 +362,15 @@ void HarbourMode::loadContent()
 	mTXUI->loadFromFile("Sheet_2.png");
 	mTXBackButton->loadFromFile("backknapp.png");
 	mTXCursor->loadFromFile("cursor_hand_sheet.png");
+
+	mTXBarInside->loadFromFile("bar_3_stolar.png");
+	mTXBarInsideHO->loadFromFile("bar_Olaf_hoverover.png");
+
+	mTXWorkshopInside->loadFromFile("verkstad_3.png");
+	mTXWorkshopInsideHO->loadFromFile("workshop_mira_hoverover.png");
+
+	mTXMarketInside->loadFromFile("marknad_3.png");
+	mTXMarketInsideHO->loadFromFile("marknad__ThordBirgitte_Hoverover.png");
 
 	mMusicBuffer[0]->loadFromFile("Hamn_Radio_Blues01.wav");
 	mMusicBuffer[1]->loadFromFile("Hamn_Radio_Jazz01.wav");
@@ -315,6 +432,13 @@ void HarbourMode::loadContent()
 		mMenuButtonMOS.push_back(sf::Vector2f(3/40.0f + 3/40.0f * cos(-i/16.0f * 3.1415f), 37/40.0f + 3/40.0f * sin(-i/16.0f * 3.1415f)));
 	}
 
+	//Back button
+	for (int i = 0; i < 32; i++)
+	{
+		mBackButtonMOS.push_back(sf::Vector2f(63/40.0f + 1/40.0f * cos(-i/16.0f * 3.1415f), 39/40.0f + 1/40.0f * sin(-i/16.0f * 3.1415f)));
+	}
+
+	//Radio
 	mRadioMOS.push_back(sf::Vector2f(1.55f, 0.950f));
 	mRadioMOS.push_back(sf::Vector2f(1.54f, 0.925f));
 
@@ -339,6 +463,14 @@ void HarbourMode::init()
 	mTXBackButton = new sf::Texture();
 	mTXCursor = new sf::Texture();
 
+	mTXBarInside = new sf::Texture();
+	mTXBarInsideHO = new sf::Texture();
+
+	mTXWorkshopInside = new sf::Texture();
+	mTXWorkshopInsideHO = new sf::Texture();
+
+	mTXMarketInside = new sf::Texture();
+	mTXMarketInsideHO = new sf::Texture();
 
 	mRadioSound = new sf::Sound();
 	mRadioBuffer = new sf::SoundBuffer();
@@ -365,10 +497,6 @@ void HarbourMode::mEnable(bool enabled)
 {
 	if (enabled)
 	{
-		int sizes[7] = { 1, 1, 1, 1, 5, 1, 1 };
-		sf::Texture* textures[7] = { mTXHarbour, mTXBarHO, mTXMarketHO, mTXWorkshopHO, mTXUI, mTXBackButton, mTXCursor };
-		mOwner->setupGraphicsLayers(7, sizes, textures);
-
 		mOwner->setCursorVisible(false);
 
 		for (int i = 0; i < 4; i++)
@@ -392,6 +520,8 @@ void HarbourMode::mEnable(bool enabled)
 
 		mSMarket->setVolume(15.0f);
 		mOwner->getSound()->playSound(mSMarket, false, 0, 46.0f, true);
+
+		mShowRoom(0);
 	}
 	else
 	{
@@ -401,7 +531,72 @@ void HarbourMode::mEnable(bool enabled)
 	}
 }
 
-void HarbourMode::showRoom(int ind)
+void HarbourMode::mShowRoom(int ind)
 {
+	mRoom = ind;
 
+	if (ind == -1)
+	{
+		int sizes[7] = { 1, 1, 1, 1, 5, 1, 1 };
+		sf::Texture* textures[7] = { mTXHarbour, mTXBarHO, mTXMarketHO, mTXWorkshopHO, mTXUI, mTXBackButton, mTXCursor };
+		mOwner->setupGraphicsLayers(7, sizes, textures);
+	}
+	else
+	{
+		int sizes[7] = { 1, 1, 0, 0, 5, 1, 1 };
+		sf::Texture* textures[7] = { mTXHarbour, mTXHarbour, mTXHarbour, mTXHarbour, mTXUI, mTXBackButton, mTXCursor };
+
+		mInsideMOS.clear();
+
+		if (ind == 0)
+		{
+			textures[0] = mTXBarInside;
+			textures[1] = mTXBarInsideHO;
+
+			mInsideMOS.push_back(sf::Vector2f(1.177f, 0.223f));
+			mInsideMOS.push_back(sf::Vector2f(1.149f, 0.228f));
+			mInsideMOS.push_back(sf::Vector2f(1.131f, 0.241f));
+			mInsideMOS.push_back(sf::Vector2f(1.119f, 0.267f));
+			mInsideMOS.push_back(sf::Vector2f(1.103f, 0.491f));
+			mInsideMOS.push_back(sf::Vector2f(1.342f, 0.491f));
+			mInsideMOS.push_back(sf::Vector2f(1.224f, 0.270f));
+			mInsideMOS.push_back(sf::Vector2f(1.197f, 0.228f));
+		}
+		else if (ind == 1)
+		{
+			textures[0] = mTXWorkshopInside;
+			textures[1] = mTXWorkshopInsideHO;
+
+			mInsideMOS.push_back(sf::Vector2f(0.648f, 0.293f));
+			mInsideMOS.push_back(sf::Vector2f(0.602f, 0.321f));
+			mInsideMOS.push_back(sf::Vector2f(0.575f, 0.371f));
+			mInsideMOS.push_back(sf::Vector2f(0.498f, 0.591f));
+			mInsideMOS.push_back(sf::Vector2f(0.451f, 0.826f));
+			mInsideMOS.push_back(sf::Vector2f(0.457f, 0.896f));
+			mInsideMOS.push_back(sf::Vector2f(0.505f, 1.000f));
+			mInsideMOS.push_back(sf::Vector2f(0.921f, 1.000f));
+			mInsideMOS.push_back(sf::Vector2f(0.930f, 0.862f));
+			mInsideMOS.push_back(sf::Vector2f(0.881f, 0.605f));
+			mInsideMOS.push_back(sf::Vector2f(0.734f, 0.313f));
+		}
+		else if (ind == 2)
+		{
+			textures[0] = mTXMarketInside;
+			textures[1] = mTXMarketInsideHO;
+
+			mInsideMOS.push_back(sf::Vector2f(0.928f, 0.194f));
+			mInsideMOS.push_back(sf::Vector2f(0.886f, 0.214f));
+			mInsideMOS.push_back(sf::Vector2f(0.805f, 0.380f));
+			mInsideMOS.push_back(sf::Vector2f(0.798f, 0.405f));
+			mInsideMOS.push_back(sf::Vector2f(0.808f, 0.465f));
+			mInsideMOS.push_back(sf::Vector2f(0.878f, 0.593f));
+			mInsideMOS.push_back(sf::Vector2f(0.936f, 0.603f));
+			mInsideMOS.push_back(sf::Vector2f(1.207f, 0.528f));
+			mInsideMOS.push_back(sf::Vector2f(1.206f, 0.429f));
+			mInsideMOS.push_back(sf::Vector2f(1.168f, 0.303f));
+			mInsideMOS.push_back(sf::Vector2f(1.147f, 0.279f));
+		}
+
+		mOwner->setupGraphicsLayers(7, sizes, textures);
+	}
 }

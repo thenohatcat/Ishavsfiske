@@ -33,18 +33,33 @@ namespace Ishavsfiske
 		void mEnable(bool enabled);
 
 	private:
-		void showRoom(int ind);
+		void mShowRoom(int ind);
+
+		void mUpdateHarbourMode(Angler::Game* context, float time, float deltaTime);
+		void mUpdateRoom(Angler::Game* context, float time, float deltaTime);
+
+		void mDrawHarbourRoom(Angler::Game* context, Angler::Graphics::GraphicsEngine* graphics, float time, float deltaTime);
+		void mDrawRoom(Angler::Game* context, Angler::Graphics::GraphicsEngine* graphics, float time, float deltaTime);
+
+		int mRoom;
 
 		int mRadioCh;
 
 		sf::Texture *mTXBarHO, *mTXWorkshopHO, *mTXMarketHO, *mTXUI, *mTXBackButton, *mTXCursor;
-		std::vector<sf::Vector2f> mBarMOS, mWorkshopMOS, mMarketMOS, mMenuButtonMOS, mRadioMOS;
-		bool mBarIsMO, mWorkshopIsMO, mMarketIsMO, mMenuButtonIsMO, mRadioIsMO;
+		std::vector<sf::Vector2f> mBarMOS, mWorkshopMOS, mMarketMOS, mMenuButtonMOS, mRadioMOS, mBackButtonMOS;
+		bool mBarIsMO, mWorkshopIsMO, mMarketIsMO, mMenuButtonIsMO, mRadioIsMO, mBackButtonIsMO;
 		float mMenuButtonRot;
 
 		float mRadioTime;
 
 		sf::Texture *mTXHarbour;
+		sf::Texture 
+			*mTXBarInside, *mTXBarInsideHO, 
+			*mTXWorkshopInside, *mTXWorkshopInsideHO,
+			*mTXMarketInside, *mTXMarketInsideHO;
+
+		std::vector<sf::Vector2f> mInsideMOS;
+		bool mInsideIsMO;
 
 		sf::Sound *mRadioSound;
 		sf::SoundBuffer *mRadioBuffer;
