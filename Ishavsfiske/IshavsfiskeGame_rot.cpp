@@ -107,6 +107,9 @@ void IshavsfiskeGame::throwEvent(int type, ... )
 		mGameOverScreen->enable(false);
 		break;
 	case Events::FishingModeShow:
+		int map;
+		map = va_arg(vl, int);
+		mFishingMode->getMap()->genMap(map);
 		mFishingMode->enable(true);
 		break;
 	case Events::FishingModeHide:

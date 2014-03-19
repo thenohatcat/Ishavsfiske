@@ -46,6 +46,8 @@ namespace Ishavsfiske
 
 		void breakIce();
 
+		Map *getMap();
+
 	protected:
 		void mEnable(bool enabled);
 

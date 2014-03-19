@@ -33,6 +33,11 @@ FishingBoat *FishingMode::getShipFishing()
 	return (FishingBoat*)mShipFishing;
 }
 
+Map *FishingMode::getMap()
+{
+	return mMap;
+}
+
 void FishingMode::mEnable(bool enabled)
 {
 	if (enabled)
@@ -57,6 +62,8 @@ void FishingMode::mEnable(bool enabled)
 
 		mOwner->getSound()->playSound(mEngineSound, false, 0, 1.46f, true);
 		mOwner->getSound()->setVolume(mEngineSound, 30.0f);
+
+		mMap->updateMap();
 	}
 	else
 	{

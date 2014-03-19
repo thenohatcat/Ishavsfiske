@@ -15,6 +15,7 @@
 #include <Angler\HelpFunctions.h>
 
 #include <iostream>
+#include <fstream>
 #include <cstdlib>
 
 using namespace Ishavsfiske;
@@ -186,11 +187,81 @@ void Map::genMap(int lvl)
 					mMap[x + y * 48] = 0x20;
 				}
 				else
+					switch(randomValue(2))
+					{
+					case 0:
+						mMap[x + y * 48] = 0;
+						break;
+					case 1:
+						mMap[x + y * 48] = 0x10;
+						break;
+					}
+			}
+		}
+		break;
+	case 0x10:
+	case 0x11:
+	case 0x12:
+	case 0x13:
+	case 0x14:
+	case 0x15:
+	case 0x16:
+	case 0x17:
+		for(int y = 0; y < 40; y++)
+		{
+			for(int x = 0; x < 48; x++)
+			{
+				if (lMap[lvl-0x10][x + y * 48] == 0)
+					mMap[x + y * 48] = 0;
+				if (lMap[lvl-0x10][x + y * 48] == 1)
+					mMap[x + y * 48] = 0x10;
+				if (lMap[lvl-0x10][x + y * 48] == 2)
+					mMap[x + y * 48] = 0x20;
+				if (lMap[lvl-0x10][x + y * 48] == 0xFF)
 					mMap[x + y * 48] = 0;
 			}
 		}
 		break;
 	}
+}
+
+void Map::load(int mind, std::string file)
+{
+	std::ifstream fileS;
+	fileS.open(file);
+
+	int ind = 0;
+	if (fileS.is_open())
+	{
+		while (!fileS.eof())
+		{
+			char cc;
+			fileS >> cc;
+
+			if (cc == 'W' || cc == '0')
+			{
+				lMap[mind][ind] = 0;
+				ind++;
+			}
+			else if (cc == 'I' || cc == '1')
+			{
+				lMap[mind][ind] = 1;
+				ind++;
+			}
+			if (cc == 'U' || cc == '2')
+			{
+				lMap[mind][ind] = 2;
+				ind++;
+			}
+			if (cc == 'R' || cc == '9')
+			{
+				lMap[mind][ind] = 0xFF;
+				ind++;
+			}
+		}
+	}
+
+	fileS.close();
 }
 
 int Map::getTile(int index)
@@ -270,6 +341,7 @@ void Map::setPos(sf::Vector2i position)
 	{
 		mPos = position;
 		mChanged = true;
+		mSetTranslation(0, 0);
 		mUpdateMap();
 	}
 }
@@ -546,6 +618,11 @@ int Map::mIsIceDir(int x, int y)
 	//}
 
 	return 0;
+}
+
+void Map::updateMap()
+{
+	mUpdateMap();
 }
 
 bool Map::mOutsideMap(int x, int y)

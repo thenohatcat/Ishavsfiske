@@ -49,6 +49,8 @@ void Ishavsfiske::IshavsfiskeGame::mLoadContent()
 
 	mHarbourMode->loadContent();
 	mHarbourMode->enable(true);
+
+	mFishingMode->getMap()->load(0, "map_test.txt");
 }
 
 void Ishavsfiske::IshavsfiskeGame::mInit()

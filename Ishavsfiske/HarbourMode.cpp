@@ -114,83 +114,83 @@ void HarbourMode::endDraw(Angler::Game* context, Angler::Graphics::GraphicsEngin
 {
 	if (mVisible)
 	{
-		glDisable(GL_TEXTURE_2D);
+		//glDisable(GL_TEXTURE_2D);
 
-		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+		//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
-		glLineWidth(3);
+		//glLineWidth(3);
 
-		if (mRoom == -1)
-		{
-			glColor3d(1, 0, 0);
-			glBegin(GL_POLYGON);
-				for (int i = 0; i < mBarMOS.size(); i++)
-				{
-					glVertex2f(mBarMOS.at(i).x, mBarMOS.at(i).y);
-				}
-			glEnd();
+		//if (mRoom == -1)
+		//{
+		//	glColor3d(1, 0, 0);
+		//	glBegin(GL_POLYGON);
+		//		for (int i = 0; i < mBarMOS.size(); i++)
+		//		{
+		//			glVertex2f(mBarMOS.at(i).x, mBarMOS.at(i).y);
+		//		}
+		//	glEnd();
 
-			glColor3d(0, 1, 0);
-			glBegin(GL_POLYGON);
-				for (int i = 0; i < mWorkshopMOS.size(); i++)
-				{
-					glVertex2f(mWorkshopMOS.at(i).x, mWorkshopMOS.at(i).y);
-				}
-			glEnd();
+		//	glColor3d(0, 1, 0);
+		//	glBegin(GL_POLYGON);
+		//		for (int i = 0; i < mWorkshopMOS.size(); i++)
+		//		{
+		//			glVertex2f(mWorkshopMOS.at(i).x, mWorkshopMOS.at(i).y);
+		//		}
+		//	glEnd();
 
-			glColor3d(0, 0, 1);
-			glBegin(GL_POLYGON);
-				for (int i = 0; i < mMarketMOS.size(); i++)
-				{
-					glVertex2f(mMarketMOS.at(i).x, mMarketMOS.at(i).y);
-				}
-			glEnd();
-		}
+		//	glColor3d(0, 0, 1);
+		//	glBegin(GL_POLYGON);
+		//		for (int i = 0; i < mMarketMOS.size(); i++)
+		//		{
+		//			glVertex2f(mMarketMOS.at(i).x, mMarketMOS.at(i).y);
+		//		}
+		//	glEnd();
+		//}
 
-		glColor3d(0, 0, 1);
-		glBegin(GL_POLYGON);
-			for (int i = 0; i < mMenuButtonMOS.size(); i++)
-			{
-				glVertex2f(mMenuButtonMOS.at(i).x, mMenuButtonMOS.at(i).y);
-			}
-		glEnd();
-
-		glColor3d(0, 0, 1);
-		glBegin(GL_POLYGON);
-			for (int i = 0; i < mRadioMOS.size(); i++)
-			{
-				glVertex2f(mRadioMOS.at(i).x, mRadioMOS.at(i).y);
-			}
-		glEnd();
-
-		glColor3d(0, 0, 1);
-		glBegin(GL_POLYGON);
-			for (int i = 0; i < mBackButtonMOS.size(); i++)
-			{
-				glVertex2f(mBackButtonMOS.at(i).x, mBackButtonMOS.at(i).y);
-			}
-		glEnd();
-
-		if (mRoom != -1)
-		{
-			glColor3d(0, 0, 1);
-			glBegin(GL_POLYGON);
-				for (int i = 0; i < mInsideMOS.size(); i++)
-				{
-					glVertex2f(mInsideMOS.at(i).x, mInsideMOS.at(i).y);
-				}
-			glEnd();
-		}
-
-		//glColor3d(1, 1, 0);
+		//glColor3d(0, 0, 1);
 		//glBegin(GL_POLYGON);
-		//	glVertex2f(mousePos.x + 0.01f, mousePos.y + 0.01f);
-		//	glVertex2f(mousePos.x, mousePos.y);
-		//	glVertex2f(mousePos.x, mousePos.y + 0.015f);
-		//	//glVertex2f(mousePos.x + 0.005f, mousePos.y + 0.005f);
+		//	for (int i = 0; i < mMenuButtonMOS.size(); i++)
+		//	{
+		//		glVertex2f(mMenuButtonMOS.at(i).x, mMenuButtonMOS.at(i).y);
+		//	}
 		//glEnd();
 
-		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+		//glColor3d(0, 0, 1);
+		//glBegin(GL_POLYGON);
+		//	for (int i = 0; i < mRadioMOS.size(); i++)
+		//	{
+		//		glVertex2f(mRadioMOS.at(i).x, mRadioMOS.at(i).y);
+		//	}
+		//glEnd();
+
+		//glColor3d(0, 0, 1);
+		//glBegin(GL_POLYGON);
+		//	for (int i = 0; i < mBackButtonMOS.size(); i++)
+		//	{
+		//		glVertex2f(mBackButtonMOS.at(i).x, mBackButtonMOS.at(i).y);
+		//	}
+		//glEnd();
+
+		//if (mRoom != -1)
+		//{
+		//	glColor3d(0, 0, 1);
+		//	glBegin(GL_POLYGON);
+		//		for (int i = 0; i < mInsideMOS.size(); i++)
+		//		{
+		//			glVertex2f(mInsideMOS.at(i).x, mInsideMOS.at(i).y);
+		//		}
+		//	glEnd();
+		//}
+
+		////glColor3d(1, 1, 0);
+		////glBegin(GL_POLYGON);
+		////	glVertex2f(mousePos.x + 0.01f, mousePos.y + 0.01f);
+		////	glVertex2f(mousePos.x, mousePos.y);
+		////	glVertex2f(mousePos.x, mousePos.y + 0.015f);
+		////	//glVertex2f(mousePos.x + 0.005f, mousePos.y + 0.005f);
+		////glEnd();
+
+		//glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
 		mEndDrawChildren(context, graphics, time, deltaTime);
 	}
@@ -311,7 +311,7 @@ void HarbourMode::update(Angler::Game* context, float time, float deltaTime, boo
 				&& context->getMouseState().wasButtonDown(sf::Mouse::Button::Left))
 			{
 				mOwner->throwEvent(IshavsfiskeGame::Events::HarbourModeHide);
-				mOwner->throwEvent(IshavsfiskeGame::Events::FishingModeShow);
+				mOwner->throwEvent(IshavsfiskeGame::Events::FishingModeShow, 0x10);
 			}
 			if (mBarIsMO && !context->getMouseState().isButtonDown(sf::Mouse::Button::Left)
 				&& context->getMouseState().wasButtonDown(sf::Mouse::Button::Left))
