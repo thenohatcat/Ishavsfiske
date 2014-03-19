@@ -21,7 +21,7 @@ using namespace Angler::Nodes;
 #define PI 3.14159265
 
 Animal::Animal(unsigned long id, Angler::Node *parent, Angler::Game *owner)
-	: Node(id, parent), mOwner(owner), mStartX(0), mStartY(0)
+	: Node(id, parent), mOwner(owner), mStartX(0.5), mStartY(0.5)
 {
 	
 }
@@ -109,7 +109,7 @@ bool Animal::mLookAtShip()
 	float angle = atan(dy / dx);
 	float mRotToShip = mCalcRotation(angle);
 
-	return mRootRotation->getRotation() == mRotToShip;
+	return (mRotToShip - 10) < mRootRotation->getRotation() < (mRotToShip + 10);
 }
 
 float Animal::mCalcRotation(float angle)

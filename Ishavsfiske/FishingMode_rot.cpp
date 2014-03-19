@@ -37,9 +37,9 @@ void FishingMode::mEnable(bool enabled)
 {
 	if (enabled)
 	{
-		int sizes[9] = { 600, 600, 32, 64, 64, 64, 128, 512, 1 };
-		sf::Texture* textures[9] = { mTXUI, mTXUI, mTXSchool, mTXUI, mTXUI, mTXUI, mTXUI, mUIFont, mTXGameOver };
-		mOwner->setupGraphicsLayers(9, sizes, textures);
+		int sizes[10] = { 600, 600, 32, 64, 64, 64, 128, 512, 1, 32};
+		sf::Texture* textures[10] = { mTXUI, mTXUI, mTXSchool, mTXUI, mTXUI, mTXUI, mTXUI, mUIFont, mTXGameOver, mTXSeagull};
+		mOwner->setupGraphicsLayers(10, sizes, textures);
 
 		mOwner->getSound()->playSound(mSeaAmbient, false, -1, -1, true);
 		mOwner->getSound()->setVolume(mSeaAmbient, 10.0f);

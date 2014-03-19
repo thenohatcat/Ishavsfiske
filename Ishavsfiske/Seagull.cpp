@@ -69,6 +69,6 @@ void Seagull::mInit()
 	anime.push_back(sf::Vector2f(2/5, 0));
 	anime.push_back(sf::Vector2f(3/5, 0));
 	anime.push_back(sf::Vector2f(4/5, 0));
-	new Angler::Nodes::AnimatedNode(getID() + 0x123, s, 6, anime, 1/5, 0, 0, 1/5, 1); // ID?
+	new Angler::Nodes::AnimatedNode(getID() + 0x123, s, 1, anime, 1/5, 0, 0, 1/5, 1); // ID?
 }
 
