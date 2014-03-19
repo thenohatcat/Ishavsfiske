@@ -42,8 +42,6 @@ namespace Ishavsfiske
 	
 		Angler::Node *mAnimalRoot;
 	private:
-		/*Angler::Nodes::SpriteNode *mBearSprite;*/
-
 		Angler::Nodes::Translation *mRootTranslation;
 		Angler::Nodes::Rotation *mRootRotation;
 

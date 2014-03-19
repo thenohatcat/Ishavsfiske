@@ -15,6 +15,9 @@
 #include <Angler\DrawNode.h>
 #include <Angler\Scale.h>
 #include <iostream>
+
+using namespace std;
+
 using namespace Ishavsfiske;
 using namespace Angler::Nodes;
 
@@ -54,27 +57,32 @@ void Animal::mInit()
 // Ska jag ha detta i seagull update istället?
 void Animal::update(Angler::Game *context, float time, float deltaTime, bool changed)
 {
-	mChanged |= changed;
-
-	mFishPos = ((IshavsfiskeGame*) context)->getShipFishing()->getPosition();
-
-	mShipFishDis.x = mFishPos.x - mRootTranslation->getTranslationX();
-	mShipFishDis.y = mFishPos.y - mRootTranslation->getTranslationY();
-
-	mIceBPos = ((IshavsfiskeGame*) context)->getIceBreaker()->getPosition();
-	mShipIceBDis = mIceBPos - mRootTranslation->getTranslation();
-
-	if (!mAtShip() && !mScared)
+	if(!mPaused)
 	{
-		if(!mLookAtShip())
+		mChanged |= changed;
+
+		mFishPos = ((IshavsfiskeGame*) context)->getShipFishing()->getPosition();
+
+		mShipFishDis.x = mFishPos.x - mRootTranslation->getTranslationX();
+		mShipFishDis.y = mFishPos.y - mRootTranslation->getTranslationY();
+
+		mIceBPos = ((IshavsfiskeGame*) context)->getIceBreaker()->getPosition();
+		mShipIceBDis = mIceBPos - mRootTranslation->getTranslation();
+
+		if (!mAtShip()/* && !mScared*/)
 		{
-			float LoR = mRootRotation->getRotation() - mRotToShip;
-			if(LoR < 0)
-				rotate(90 * deltaTime);
-			else
-				rotate(-90 * deltaTime);
+			if(!mLookAtShip())
+			{
+				/*cout << "rotate\n";
+				float LoR = mRootRotation->getRotation() - mRotToShip;
+				if(LoR < 0)
+					rotate(90 * deltaTime);
+				else*/
+					rotate(180 * deltaTime);
+			}
+			move(0, -0.03 * deltaTime);
 		}
-		move(0, 1 * deltaTime);
+		mUpdateChildren(context, time, deltaTime);
 	}
 }
 
@@ -106,10 +114,14 @@ bool Animal::mLookAtShip()
 	float dy = mFishPos.y - mRootTranslation->getTranslationY();
 	/*float dis = sqrt(dx * dx + dy * dy);*/
 
-	float angle = atan(dy / dx);
+	float angle = atan(dy / dx) * (180 / PI);
 	float mRotToShip = mCalcRotation(angle);
 
-	return (mRotToShip - 10) < mRootRotation->getRotation() < (mRotToShip + 10);
+	float rotation = abs(fmod(mRootRotation->getRotation(), 360.0f));
+
+	cout << mRotToShip << " " << rotation << endl;
+
+	return ((mRotToShip - 3) < rotation) &&  (rotation < (mRotToShip + 3));
 }
 
 float Animal::mCalcRotation(float angle)
@@ -123,10 +135,10 @@ float Animal::mCalcRotation(float angle)
 		return angle + 90;
 		break;
 	case 1:
-		return angle + 180;
+		return angle + 270;
 		break;
 	case 7:
-		return angle + 180;
+		return angle + 270;
 		break;
 	}
 }

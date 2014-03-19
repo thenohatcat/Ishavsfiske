@@ -12,6 +12,8 @@
 
 namespace Ishavsfiske
 {
+	class IshavsfiskeGame;
+
 	class Seagull
 		: public Animal
 	{
@@ -24,9 +26,23 @@ namespace Ishavsfiske
 		void update(Angler::Game *context, float time, float deltaTime, bool changed);
 
 		virtual void attack();
+
+		virtual void collide();
 	protected:
 		virtual void mInit();
 	private:
+		sf::Vector2f mVel, mShipFishDis;
+
+		sf::Vector2f mFishPos;
+		bool mAtShip(), mLookAtShip();
+		float mCalcRotation(float angle);
+		float mRotToShip;
+
+		int mDirection(sf::Vector2f position);
+
+		void mSetSpeed(float vx, float vy);
+
+		bool mScared;
 	};
 }
 

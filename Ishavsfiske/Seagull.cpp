@@ -6,6 +6,8 @@
 #error Seagull.cpp: Wrong version 0.1.5
 #endif
 
+#define PI 3.14159265
+
 #include "Seagull.h"
 
 #include <Angler\DrawNode.h>
@@ -15,6 +17,9 @@
 #include <Angler\Rotation.h>
 #include <Angler\CollisionNode.h>
 
+#include <iostream>
+
+using namespace std;
 using namespace Ishavsfiske;
 using namespace Angler::Nodes;
 
@@ -37,7 +42,30 @@ Seagull::~Seagull()
 
 void Seagull::update(Angler::Game* context, float time, float deltaTime, bool changed)
 {
-	Animal::update(context, time, deltaTime, changed);
+	if(!mPaused)
+	{
+		mChanged |= changed;
+
+		mFishPos = ((IshavsfiskeGame*) context)->getShipFishing()->getPosition();
+
+		mShipFishDis.x = mFishPos.x - mRootTranslation->getTranslationX();
+		mShipFishDis.y = mFishPos.y - mRootTranslation->getTranslationY();
+
+		if (!mAtShip()/* && !mScared*/)
+		{
+			if(!mLookAtShip())
+			{
+				/*cout << "rotate\n";
+				float LoR = mRootRotation->getRotation() - mRotToShip;
+				if(LoR < 0)
+					rotate(90 * deltaTime);
+				else*/
+					rotate(180 * deltaTime);
+			}
+			move(0, -0.03 * deltaTime);
+		}
+		mUpdateChildren(context, time, deltaTime);
+	}
 }
 
 void Seagull::attack()
@@ -53,7 +81,7 @@ void Seagull::mInit()
 	Animal::mInit();
 
 	// Seagull ID?
-	Angler::Nodes::Scale *s = new Angler::Nodes::Scale(getID() + 0x0123, mAnimalRoot, 1, 1);
+	Angler::Nodes::Scale *s = new Angler::Nodes::Scale(getID() + 0x0120, mAnimalRoot, 1/10.0f, 1/10.0f);
 
 	/*std::vector<sf::Vector2f> pts;
 	pts.push_back(sf::Vector2f(1, 0));
@@ -65,10 +93,73 @@ void Seagull::mInit()
 
 	std::vector<sf::Vector2f> anime;
 	anime.push_back(sf::Vector2f(0, 0));
-	anime.push_back(sf::Vector2f(1/5, 0));
-	anime.push_back(sf::Vector2f(2/5, 0));
-	anime.push_back(sf::Vector2f(3/5, 0));
-	anime.push_back(sf::Vector2f(4/5, 0));
-	new Angler::Nodes::AnimatedNode(getID() + 0x123, s, 1, anime, 1/5, 0, 0, 1/5, 1); // ID?
+	anime.push_back(sf::Vector2f(1/5.0f, 0));
+	anime.push_back(sf::Vector2f(2/5.0f, 0));
+	anime.push_back(sf::Vector2f(3/5.0f, 0));
+	anime.push_back(sf::Vector2f(4/5.0f, 0));
+	new Angler::Nodes::AnimatedNode(getID() + 0x123, s, 9, anime, 1/5.0f, 0.5f, 0.5f, 1/5.0f, 1); // ID?
 }
 
+bool Seagull::mAtShip()
+{
+	return mRootTranslation->getTranslation() == mFishPos;
+}
+
+bool Seagull::mLookAtShip()
+{
+	float dx = mFishPos.x - mRootTranslation->getTranslationX();
+	float dy = mFishPos.y - mRootTranslation->getTranslationY();
+	/*float dis = sqrt(dx * dx + dy * dy);*/
+
+	float angle = atan(dy / dx) * (180 / PI);
+	float mRotToShip = mCalcRotation(angle);
+
+	float rotation = abs(fmod(mRootRotation->getRotation(), 360.0f));
+
+	cout << mRotToShip << " " << rotation << endl;
+
+	return ((mRotToShip - 3) < rotation) &&  (rotation < (mRotToShip + 3));
+}
+
+float Seagull::mCalcRotation(float angle)
+{
+	switch(mDirection(mFishPos))
+	{
+	case 9:
+		return angle + 90;
+		break;
+	case 3:
+		return angle + 90;
+		break;
+	case 1:
+		return angle + 270;
+		break;
+	case 7:
+		return angle + 270;
+		break;
+	}
+}
+
+void Seagull::mSetSpeed(float vx, float vy)
+{
+	mVel.x = vx;
+	mVel.y = vy;
+}
+
+int Seagull::mDirection(sf::Vector2f position)
+{
+	sf::Vector2f dir = position - mRootTranslation->getTranslation();
+	if(dir.x > 0 && dir.y < 0)
+		return 9;
+	if(dir.x > 0 && dir.y > 0)
+		return 3;
+	if(dir.x < 0 && dir.y > 0)
+		return 1;
+	if(dir.x < 0 && dir.y < 0)
+		return 7;
+}
+
+void Seagull::collide()
+{
+
+}
