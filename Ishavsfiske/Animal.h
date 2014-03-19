@@ -31,6 +31,8 @@ namespace Ishavsfiske
 		virtual void attack();
 
 		void update(Angler::Game *context, float time, float deltaTime, bool changed);
+
+		virtual void collide();
 	protected:
 		Angler::Game *mOwner;
 
@@ -45,16 +47,18 @@ namespace Ishavsfiske
 		Angler::Nodes::Translation *mRootTranslation;
 		Angler::Nodes::Rotation *mRootRotation;
 
-		sf::Vector2f mVel, mDis;
+		sf::Vector2f mVel, mShipFishDis, mShipIceBDis;
 
-		sf::Vector2f mFishPos; // Fishingboat position
-		bool atShip(), lookAtShip();
-		float calcRotation(float angle);
+		sf::Vector2f mFishPos, mIceBPos; // Fishingboat and IceBreaker position
+		bool mAtShip(), mLookAtShip();
+		float mCalcRotation(float angle);
 		float mRotToShip;
 
-		int direction(sf::Vector2f position);
+		int mDirection(sf::Vector2f position);
 
-		void setSpeed(float vx, float vy);
+		void mSetSpeed(float vx, float vy);
+
+		bool mScared;
 	};
 }
 

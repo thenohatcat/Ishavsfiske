@@ -10,12 +10,15 @@
 #include "Animal.h"
 #include "Ship.h"
 #include "FishingBoat.h"
+#include "IceBreaker.h"
 
 #include <Angler\DrawNode.h>
 #include <Angler\Scale.h>
 #include <iostream>
 using namespace Ishavsfiske;
 using namespace Angler::Nodes;
+
+#define PI 3.14159265
 
 Animal::Animal(unsigned long id, Angler::Node *parent, Angler::Game *owner)
 	: Node(id, parent), mOwner(owner), mStartX(0), mStartY(0)
@@ -55,12 +58,15 @@ void Animal::update(Angler::Game *context, float time, float deltaTime, bool cha
 
 	mFishPos = ((IshavsfiskeGame*) context)->getShipFishing()->getPosition();
 
-	mDis.x = ((IshavsfiskeGame*) context)->getShipFishing()->getPosition().x - mRootTranslation->getTranslationX();
-	mDis.y = ((IshavsfiskeGame*) context)->getShipFishing()->getPosition().y - mRootTranslation->getTranslationY();
+	mShipFishDis.x = mFishPos.x - mRootTranslation->getTranslationX();
+	mShipFishDis.y = mFishPos.y - mRootTranslation->getTranslationY();
 
-	if (!atShip())
+	mIceBPos = ((IshavsfiskeGame*) context)->getIceBreaker()->getPosition();
+	mShipIceBDis = mIceBPos - mRootTranslation->getTranslation();
+
+	if (!mAtShip() && !mScared)
 	{
-		if(!lookAtShip())
+		if(!mLookAtShip())
 		{
 			float LoR = mRootRotation->getRotation() - mRotToShip;
 			if(LoR < 0)
@@ -89,29 +95,29 @@ void Animal::move(float x, float y)
 	mRootTranslation->translate(tv);
 }
 
-bool Animal::atShip()
+bool Animal::mAtShip()
 {
 	return mRootTranslation->getTranslation() == mFishPos;
 }
 
-bool Animal::lookAtShip()
+bool Animal::mLookAtShip()
 {
 	float dx = mFishPos.x - mRootTranslation->getTranslationX();
 	float dy = mFishPos.y - mRootTranslation->getTranslationY();
 	/*float dis = sqrt(dx * dx + dy * dy);*/
 
 	float angle = atan(dy / dx);
-	float mRotToShip = calcRotation(angle);
+	float mRotToShip = mCalcRotation(angle);
 
 	return mRootRotation->getRotation() == mRotToShip;
 }
 
-float Animal::calcRotation(float angle)
+float Animal::mCalcRotation(float angle)
 {
-	switch(direction(mFishPos))
+	switch(mDirection(mFishPos))
 	{
 	case 9:
-		return angle;
+		return angle + 90;
 		break;
 	case 3:
 		return angle + 90;
@@ -120,18 +126,18 @@ float Animal::calcRotation(float angle)
 		return angle + 180;
 		break;
 	case 7:
-		return angle + 270;
+		return angle + 180;
 		break;
 	}
 }
 
-void Animal::setSpeed(float vx, float vy)
+void Animal::mSetSpeed(float vx, float vy)
 {
 	mVel.x = vx;
 	mVel.y = vy;
 }
 
-int Animal::direction(sf::Vector2f position)
+int Animal::mDirection(sf::Vector2f position)
 {
 	sf::Vector2f dir = position - mRootTranslation->getTranslation();
 	if(dir.x > 0 && dir.y < 0)
@@ -142,4 +148,9 @@ int Animal::direction(sf::Vector2f position)
 		return 1;
 	if(dir.x < 0 && dir.y < 0)
 		return 7;
+}
+
+void Animal::collide()
+{
+
 }
