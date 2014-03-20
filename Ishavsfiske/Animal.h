@@ -41,13 +41,13 @@ namespace Ishavsfiske
 		float mStartX, mStartY;
 	
 		Angler::Node *mAnimalRoot;
-	private:
+
 		Angler::Nodes::Translation *mRootTranslation;
 		Angler::Nodes::Rotation *mRootRotation;
-
+	private:
 		sf::Vector2f mVel, mShipFishDis, mShipIceBDis;
 
-		sf::Vector2f mFishPos, mIceBPos; // Fishingboat and IceBreaker position
+		sf::Vector2f mFishPos, mIceBPos;
 		bool mAtShip(), mLookAtShip();
 		float mCalcRotation(float angle);
 		float mRotToShip;

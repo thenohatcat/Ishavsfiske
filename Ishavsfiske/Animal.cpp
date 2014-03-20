@@ -54,36 +54,36 @@ void Animal::mInit()
 	/*mBearSprite = new SpriteNode(getID() + 0x1000, this, 1, sf::Vector2f(0, 0), sf::Vector2f(0, 0.25), sf::Vector2f(0.25, 0.25));*/
 }
 
-// Ska jag ha detta i seagull update istället?
+
 void Animal::update(Angler::Game *context, float time, float deltaTime, bool changed)
 {
-	if(!mPaused)
-	{
-		mChanged |= changed;
+	//if(!mPaused)
+	//{
+	//	mChanged |= changed;
 
-		mFishPos = ((IshavsfiskeGame*) context)->getShipFishing()->getPosition();
+	//	mFishPos = ((IshavsfiskeGame*) context)->getShipFishing()->getPosition();
 
-		mShipFishDis.x = mFishPos.x - mRootTranslation->getTranslationX();
-		mShipFishDis.y = mFishPos.y - mRootTranslation->getTranslationY();
+	//	mShipFishDis.x = mFishPos.x - mRootTranslation->getTranslationX();
+	//	mShipFishDis.y = mFishPos.y - mRootTranslation->getTranslationY();
 
-		mIceBPos = ((IshavsfiskeGame*) context)->getIceBreaker()->getPosition();
-		mShipIceBDis = mIceBPos - mRootTranslation->getTranslation();
+	//	mIceBPos = ((IshavsfiskeGame*) context)->getIceBreaker()->getPosition();
+	//	mShipIceBDis = mIceBPos - mRootTranslation->getTranslation();
 
-		if (!mAtShip()/* && !mScared*/)
-		{
-			if(!mLookAtShip())
-			{
-				/*cout << "rotate\n";
-				float LoR = mRootRotation->getRotation() - mRotToShip;
-				if(LoR < 0)
-					rotate(90 * deltaTime);
-				else*/
-					rotate(180 * deltaTime);
-			}
-			move(0, -0.03 * deltaTime);
-		}
-		mUpdateChildren(context, time, deltaTime);
-	}
+	//	if (!mAtShip()/* && !mScared*/)
+	//	{
+	//		if(!mLookAtShip())
+	//		{
+	//			/*cout << "rotate\n";
+	//			float LoR = mRootRotation->getRotation() - mRotToShip;
+	//			if(LoR < 0)
+	//				rotate(90 * deltaTime);
+	//			else*/
+	//				rotate(180 * deltaTime);
+	//		}
+	//		move(0, -0.03 * deltaTime);
+	//	}
+	//	mUpdateChildren(context, time, deltaTime);
+	//}
 }
 
 void Animal::attack()
@@ -112,7 +112,6 @@ bool Animal::mLookAtShip()
 {
 	float dx = mFishPos.x - mRootTranslation->getTranslationX();
 	float dy = mFishPos.y - mRootTranslation->getTranslationY();
-	/*float dis = sqrt(dx * dx + dy * dy);*/
 
 	float angle = atan(dy / dx) * (180 / PI);
 	float mRotToShip = mCalcRotation(angle);

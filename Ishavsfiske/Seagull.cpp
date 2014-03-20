@@ -8,6 +8,7 @@
 
 #define PI 3.14159265
 
+#include "IshavsfiskeGame.h"
 #include "Seagull.h"
 
 #include <Angler\DrawNode.h>
@@ -55,10 +56,8 @@ void Seagull::update(Angler::Game* context, float time, float deltaTime, bool ch
 		{
 			if(!mLookAtShip())
 			{
-				/*cout << "rotate\n";
-				float LoR = mRootRotation->getRotation() - mRotToShip;
-				if(LoR < 0)
-					rotate(90 * deltaTime);
+				/*if(mRootRotation->getRotation() > mRotToShip)
+					rotate(-180 * deltaTime);
 				else*/
 					rotate(180 * deltaTime);
 			}
@@ -107,11 +106,7 @@ bool Seagull::mAtShip()
 
 bool Seagull::mLookAtShip()
 {
-	float dx = mFishPos.x - mRootTranslation->getTranslationX();
-	float dy = mFishPos.y - mRootTranslation->getTranslationY();
-	/*float dis = sqrt(dx * dx + dy * dy);*/
-
-	float angle = atan(dy / dx) * (180 / PI);
+	float angle = atan(mShipFishDis.y / mShipFishDis.x) * (180 / PI);
 	float mRotToShip = mCalcRotation(angle);
 
 	float rotation = abs(fmod(mRootRotation->getRotation(), 360.0f));
