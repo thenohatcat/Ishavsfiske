@@ -81,7 +81,7 @@ void FishingMode::mEnable(bool enabled)
 {
 	if (enabled)
 	{
-		int sizes[12] = { 1200, 1200, 32, 64, 64, 64, 128, 512, 1, 1, 32, 1 };
+		int sizes[12] = { 1200, 1200, 64, 64, 64, 64, 128, 512, 1, 1, 32, 1 };
 		sf::Texture* textures[12] = { mTXUI, mTXUI, mTXSchool, mTXUI, mTXUI, mTXUI, mTXUI, mUIFont, mTXBackButton, mTXCursor, mTXSeagull, mTXGameOver };
 		mOwner->setupGraphicsLayers(12, sizes, textures);
 

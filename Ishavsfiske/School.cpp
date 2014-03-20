@@ -29,10 +29,15 @@ School::School(unsigned long id, Ishavsfiske::IshavsfiskeGame *owner)
 
 School::~School()
 {
-	delete mSchoolRoot;
-	delete mRootTranslation;
+	//delete mSchoolRoot;
+	//delete mRootTranslation;
 
 	Node::~Node();
+}
+
+int School::getType()
+{
+	return mType;
 }
 
 void School::mInit()
@@ -49,23 +54,23 @@ void School::mInit()
 	new Angler::Nodes::CollisionNode(getID() + 0x5000, mSchoolRoot, pts, 1);
 
 	std::vector<sf::Vector2f> anim;
-	anim.push_back(sf::Vector2f(0, 0));
-	anim.push_back(sf::Vector2f(1/16.0f, 0));
-	anim.push_back(sf::Vector2f(2/16.0f, 0));
-	anim.push_back(sf::Vector2f(3/16.0f, 0));
-	anim.push_back(sf::Vector2f(4/16.0f, 0));
-	anim.push_back(sf::Vector2f(5/16.0f, 0));
-	anim.push_back(sf::Vector2f(6/16.0f, 0));
-	anim.push_back(sf::Vector2f(7/16.0f, 0));
-	anim.push_back(sf::Vector2f(8/16.0f, 0));
-	anim.push_back(sf::Vector2f(9/16.0f, 0));
-	anim.push_back(sf::Vector2f(10/16.0f, 0));
-	anim.push_back(sf::Vector2f(11/16.0f, 0));
-	anim.push_back(sf::Vector2f(12/16.0f, 0));
-	anim.push_back(sf::Vector2f(13/16.0f, 0));
-	anim.push_back(sf::Vector2f(14/16.0f, 0));
-	anim.push_back(sf::Vector2f(15/16.0f, 0));
-	new Angler::Nodes::AnimatedNode(getID() + 0x1000, mSchoolRoot, 2, anim, 1/8.0f, 0, 0, 1/16.0f, 1);
+	anim.push_back(sf::Vector2f(0, mType * 50/651.0f));
+	anim.push_back(sf::Vector2f(1/24.0f, mType * 50/651.0f));
+	anim.push_back(sf::Vector2f(2/24.0f, mType * 50/651.0f));
+	anim.push_back(sf::Vector2f(3/24.0f, mType * 50/651.0f));
+	anim.push_back(sf::Vector2f(4/24.0f, mType * 50/651.0f));
+	anim.push_back(sf::Vector2f(5/24.0f, mType * 50/651.0f));
+	anim.push_back(sf::Vector2f(6/24.0f, mType * 50/651.0f));
+	anim.push_back(sf::Vector2f(7/24.0f, mType * 50/651.0f));
+	anim.push_back(sf::Vector2f(8/24.0f, mType * 50/651.0f));
+	anim.push_back(sf::Vector2f(9/24.0f, mType * 50/651.0f));
+	anim.push_back(sf::Vector2f(10/24.0f, mType * 50/651.0f));
+	anim.push_back(sf::Vector2f(11/24.0f, mType * 50/651.0f));
+	anim.push_back(sf::Vector2f(12/24.0f, mType * 50/651.0f));
+	anim.push_back(sf::Vector2f(13/24.0f, mType * 50/651.0f));
+	anim.push_back(sf::Vector2f(14/24.0f, mType * 50/651.0f));
+	anim.push_back(sf::Vector2f(15/24.0f, mType * 50/651.0f));
+	new Angler::Nodes::AnimatedNode(getID() + 0x1000, mSchoolRoot, 2, anim, 1/8.0f, 0, 0, 1/24.0f, 50/651.0f);
 }
 
 void School::move(float x, float y)

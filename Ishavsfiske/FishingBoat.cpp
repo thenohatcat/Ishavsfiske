@@ -180,7 +180,7 @@ void FishingBoat::update(Angler::Game *context, float time, float deltaTime, boo
 
 			if (mSchool != nullptr && fmod(mFishTime, 0.25f) < deltaTime)
 			{
-				mAmmount[0] += mSchool->fish(1);
+				mAmmount[mSchool->getType()] += mSchool->fish(1);
 			}
 
 			mFishTime += deltaTime;

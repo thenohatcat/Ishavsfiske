@@ -29,7 +29,7 @@ using namespace Ishavsfiske;
 void FishingMode::loadContent()
 {
 	mTXMap->loadFromFile("env_sea1.png");
-	mTXSchool->loadFromFile("Swim_Capelin_spritesheet.png");
+	mTXSchool->loadFromFile("Sea_Layer.png");
 	mTXUI->loadFromFile("Sheet_1.png");
 	mUIFont->loadFromFile("font_bitmap.png");
 	mTXGameOver->loadFromFile("game_over__.png");	

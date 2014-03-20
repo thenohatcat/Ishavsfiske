@@ -17,6 +17,10 @@
 #include <Angler\Transformation.h>
 #include <Angler\HelpFunctions.h>
 
+#include "Pinksalmon.h"
+#include "Perch.h"
+#include "Capelin.h"
+
 #include "Font.h"
 
 using namespace Ishavsfiske;
@@ -211,7 +215,25 @@ void FishingMode::update(Angler::Game* context, float time, float deltaTime, boo
 			if (fmod(time, 1) < deltaTime)
 				if (mSchools.size() < 25)
 				{
-					School *s = new School(0x20000000 + mSchoolID++, mFishBase, mOwner);
+					
+					School *s = nullptr;
+
+					int rd = rand() % 3;
+
+					if (rd == 0)
+					{
+						s = new Perch(0x20000000 + mSchoolID++, mFishBase, mOwner);
+					}
+					else if (rd == 1)
+					{
+						s = new Pinksalmon(0x20000000 + mSchoolID++, mFishBase, mOwner);
+					}
+					else if (rd == 2)
+					{
+						s = new Capelin(0x20000000 + mSchoolID++, mFishBase, mOwner);
+					}
+					//= new School(0x20000000 + mSchoolID++, mFishBase, mOwner);
+
 					float x = (rand() % 1000)/1000.0f * 46/20.0f, y = (rand() % 1000)/1000.0f * 30/20.0f;
 					/*while ((
 						x >= mMap->getPos().x/20.0f && x <= mMap->getPos().x/20.0f + 24/20.0f && 

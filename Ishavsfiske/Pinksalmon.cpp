@@ -45,5 +45,6 @@ void Pinksalmon::update(Angler::Game *context, float time, float deltaTime, bool
 
 void Pinksalmon::mInit()
 {
+	mType = 2;
 	School::mInit();
 }

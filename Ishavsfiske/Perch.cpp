@@ -40,5 +40,6 @@ void Perch::update(Angler::Game *context, float time, float deltaTime, bool chan
 
 void Perch::mInit()
 {
+	mType = 1;
 	School::mInit();
 }

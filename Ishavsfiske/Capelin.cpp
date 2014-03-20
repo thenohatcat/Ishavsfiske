@@ -45,5 +45,6 @@ void Capelin::update(Angler::Game *context, float time, float deltaTime, bool ch
 
 void Capelin::mInit()
 {
+	mType = 0;
 	School::mInit();
 }
