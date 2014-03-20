@@ -107,12 +107,36 @@ void IshavsfiskeGame::throwEvent(int type, ... )
 		mGameOverScreen->enable(false);
 		break;
 	case Events::FishingModeShow:
+		int map;
+		map = va_arg(vl, int);
+		mFishingMode->getMap()->genMap(map);
 		mFishingMode->enable(true);
 		break;
 	case Events::FishingModeHide:
 		mFishingMode->enable(false);
 		break;
+	case Events::HarbourModeShow:
+		mHarbourMode->enable(true);
+		break;
+	case Events::HarbourModeHide:
+		mHarbourMode->enable(false);
+		break;
 	}
 
 	va_end(vl);
+}
+
+int *IshavsfiskeGame::getFishCount()
+{
+	return mFishCount;
+}
+
+int IshavsfiskeGame::getWallet()
+{
+	return mWallet;
+}
+
+void IshavsfiskeGame::addToWallet(int i)
+{
+	mWallet += i;
 }

@@ -57,6 +57,19 @@ void FishingMode::input(float time, float deltaTime)
 	{
 		mOwner->close();
 	}
+
+	// Pause game Key
+	if(mOwner->getKeyboardState().wasKeyDown(sf::Keyboard::P))
+	{
+		 
+	}
+
+	// Damage Hull Key (Debug purpose)
+	if(mOwner->getKeyboardState().wasKeyDown(sf::Keyboard::O))
+	{
+		((IceBreaker*)mShipBreaker)->damage(1/19.0f);
+		std::cout << "Icebreaker hull: " << ((IceBreaker*)mShipBreaker)->getHull() << std::endl;
+	}
 	// Icebreaker key inputs
 	if(mOwner->getKeyboardState().isKeyDown(sf::Keyboard::Up))
 	{

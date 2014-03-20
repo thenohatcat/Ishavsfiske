@@ -187,6 +187,7 @@ void Ship::block()
 void Ship::setPosition(sf::Vector2f pos)
 {
 	mRootTranslation->setTranslation(pos);
+	mVel = sf::Vector2f(0,0);
 }
 
 void Ship::setRotation(float r)

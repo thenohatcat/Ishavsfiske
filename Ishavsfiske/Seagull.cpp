@@ -92,7 +92,7 @@ void Seagull::mInit()
 	anime.push_back(sf::Vector2f(2/5.0f, 0));
 	anime.push_back(sf::Vector2f(3/5.0f, 0));
 	anime.push_back(sf::Vector2f(4/5.0f, 0));
-	new Angler::Nodes::AnimatedNode(getID() + 0x123, s, 9, anime, 1/5.0f, 0.5f, 0.5f, 1/5.0f, 1); // ID?
+	new Angler::Nodes::AnimatedNode(getID() + 0x123, s, 10, anime, 1/5.0f, 0.5f, 0.5f, 1/5.0f, 1); // ID?
 }
 
 bool Seagull::mAtShip()
