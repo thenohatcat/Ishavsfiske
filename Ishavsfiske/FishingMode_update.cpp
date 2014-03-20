@@ -90,6 +90,14 @@ void FishingMode::update(Angler::Game* context, float time, float deltaTime, boo
 		mousePos.y /= context->getHeight();
 
 		mMenuButtonIsMO = Angler::HelpFunctions::Geometry::pointIsWithinPolygon(&mMenuButtonMOS, mousePos);
+		mBackButtonIsMO = Angler::HelpFunctions::Geometry::pointIsWithinPolygon(&mBackButtonMOS, mousePos);
+
+		if (mBackButtonIsMO && !context->getMouseState().isButtonDown(sf::Mouse::Button::Left)
+				&& context->getMouseState().wasButtonDown(sf::Mouse::Button::Left))
+		{
+			mOwner->throwEvent(IshavsfiskeGame::Events::FishingModeHide);
+			mOwner->throwEvent(IshavsfiskeGame::Events::HarbourModeShow);
+		}
 
 		if (mMenuButtonIsMO || fmod(abs(sin(mMenuButtonRot)), 1.0f) > 0.001f)
 			mMenuButtonRot += std::min(3.1415f-fmod(mMenuButtonRot, 3.1415f), 4 * deltaTime);

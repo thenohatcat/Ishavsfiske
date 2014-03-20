@@ -174,6 +174,25 @@ void FishingMode::draw(Angler::Game* context, Angler::Graphics::GraphicsEngine* 
 				graphics->draw(5, sf::Vector2f(10.0f/20.0f, 55.0f/108.0f), sf::Vector2f(400/1500.0f, 150/1600.0f), sf::Vector2f(20/1500.0f, 108/1600.0f));
 			glPopMatrix();
 
+			//Back button
+			glPushMatrix();
+				glTranslatef(1.40f, 1.0f, 1.0f);
+				glScalef(1/20.0f, 1/20.0f, 1.0f);
+				graphics->draw(8, sf::Vector2f(1.0f, 1.0f), 
+					sf::Vector2f(0.0f, (mBackButtonIsMO ? (context->getMouseState().isButtonDown(sf::Mouse::Left) ? 2/3.0f : 1/3.0f) : 0.0f)), sf::Vector2f(1.0f, 1/3.0f));
+			glPopMatrix();
+
+			sf::Vector2f mousePos = sf::Vector2f(context->getMouseState().getPos());
+			mousePos.x /= context->getHeight();
+			mousePos.y /= context->getHeight();
+
+			//Cursor
+			glPushMatrix();
+				glTranslatef(mousePos.x, mousePos.y, 0);
+				glScalef(62/1000.0f, 62/1000.0f, 1.0f);
+				graphics->draw(9, sf::Vector2f(0.35f, 0), sf::Vector2f((context->getMouseState().isButtonDown(sf::Mouse::Button::Left) ? 0.5f : 0.0f), 0), sf::Vector2f(0.5f, 1));
+			glPopMatrix();
+
 			if (mShowCounter)
 			{
 				//Fish
@@ -231,7 +250,7 @@ void FishingMode::draw(Angler::Game* context, Angler::Graphics::GraphicsEngine* 
 					glTranslatef(0.5, -0.5f, 0);
 					glScalef(40.0, 40.0f, 1);
 					char c[32];
-					sprintf_s(c, "Fish: %4u", ((FishingBoat*)mShipFishing)->getAmmount());
+					sprintf_s(c, "Fish: %4u", ((FishingBoat*)mShipFishing)->getAmmount()[0] + ((FishingBoat*)mShipFishing)->getAmmount()[1] + ((FishingBoat*)mShipFishing)->getAmmount()[2] + ((FishingBoat*)mShipFishing)->getAmmount()[3]);
 					mFont->drawString(graphics, c, 7, 0.9f);
 
 				glPopMatrix();

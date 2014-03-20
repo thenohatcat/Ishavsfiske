@@ -43,12 +43,255 @@ void HarbourMode::mDrawHarbourRoom(Angler::Game* context, Angler::Graphics::Grap
 		graphics->draw(3);
 }
 
+void HarbourMode::mDrawTrade(Angler::Game* context, Angler::Graphics::GraphicsEngine* graphics, float time, float deltaTime)
+{
+	//Row 1
+	glPushMatrix();
+		glScalef(1/20.0f, 1/20.0f, 1.0f);
+		glTranslatef(8/2.0f, 10/2.0f, 0);
+		glPushMatrix();
+			graphics->draw(4, sf::Vector2f(0, 0), sf::Vector2f(550/1500.0f, 0.0f), sf::Vector2f(50/1500.0f, 50/1600.0f));
+
+			for (int i = 0; i < 5; i++)
+			{
+				glTranslatef(1.0f, 0, 0);
+				graphics->draw(4, sf::Vector2f(0, 0), sf::Vector2f(600/1500.0f, 0.0f), sf::Vector2f(50/1500.0f, 50/1600.0f));
+			}
+
+			glTranslatef(1.0f, 0, 0);
+			graphics->draw(4, sf::Vector2f(0, 0), sf::Vector2f(650/1500.0f, 0.0f), sf::Vector2f(50/1500.0f, 50/1600.0f));
+		glPopMatrix();
+		glTranslatef(0, 1, 0);
+
+		for (int i = 0; i < 4; i++)
+		{
+			//Row 2
+			glPushMatrix();
+				graphics->draw(4, sf::Vector2f(0, 0), sf::Vector2f(550/1500.0f, 50/1600.0f), sf::Vector2f(50/1500.0f, 50/1600.0f));
+
+				for (int i = 0; i < 5; i++)
+				{
+					glTranslatef(1.0f, 0, 0);
+					graphics->draw(4, sf::Vector2f(0, 0), sf::Vector2f(600/1500.0f, 50/1600.0f), sf::Vector2f(50/1500.0f, 50/1600.0f));
+				}
+
+				glTranslatef(1.0f, 0, 0);
+				graphics->draw(4, sf::Vector2f(0, 0), sf::Vector2f(650/1500.0f, 50/1600.0f), sf::Vector2f(50/1500.0f, 50/1600.0f));
+			glPopMatrix();
+			glTranslatef(0, 1, 0);
+		}
+
+		//Row 3
+		glPushMatrix();
+			graphics->draw(4, sf::Vector2f(0, 0), sf::Vector2f(550/1500.0f, 100/1600.0f), sf::Vector2f(50/1500.0f, 50/1600.0f));
+
+			for (int i = 0; i < 5; i++)
+			{
+				glTranslatef(1.0f, 0, 0);
+				graphics->draw(4, sf::Vector2f(0, 0), sf::Vector2f(600/1500.0f, 100/1600.0f), sf::Vector2f(50/1500.0f, 50/1600.0f));
+			}
+
+			glTranslatef(1.0f, 0, 0);
+			graphics->draw(4, sf::Vector2f(0, 0), sf::Vector2f(650/1500.0f, 100/1600.0f), sf::Vector2f(50/1500.0f, 50/1600.0f));
+		glPopMatrix();
+	glPopMatrix();
+
+	//Row 1
+	glPushMatrix();
+		glScalef(1/20.0f, 1/20.0f, 1.0f);
+		glTranslatef(24/2.0f, 10/2.0f, 0);
+		glPushMatrix();
+			graphics->draw(4, sf::Vector2f(0, 0), sf::Vector2f(550/1500.0f, 0.0f), sf::Vector2f(50/1500.0f, 50/1600.0f));
+
+			for (int i = 0; i < 5; i++)
+			{
+				glTranslatef(1.0f, 0, 0);
+				graphics->draw(4, sf::Vector2f(0, 0), sf::Vector2f(600/1500.0f, 0.0f), sf::Vector2f(50/1500.0f, 50/1600.0f));
+			}
+
+			glTranslatef(1.0f, 0, 0);
+			graphics->draw(4, sf::Vector2f(0, 0), sf::Vector2f(650/1500.0f, 0.0f), sf::Vector2f(50/1500.0f, 50/1600.0f));
+		glPopMatrix();
+		glTranslatef(0, 1, 0);
+
+		for (int i = 0; i < 4; i++)
+		{
+			//Row 2
+			glPushMatrix();
+				graphics->draw(4, sf::Vector2f(0, 0), sf::Vector2f(550/1500.0f, 50/1600.0f), sf::Vector2f(50/1500.0f, 50/1600.0f));
+
+				for (int i = 0; i < 5; i++)
+				{
+					glTranslatef(1.0f, 0, 0);
+					graphics->draw(4, sf::Vector2f(0, 0), sf::Vector2f(600/1500.0f, 50/1600.0f), sf::Vector2f(50/1500.0f, 50/1600.0f));
+				}
+
+				glTranslatef(1.0f, 0, 0);
+				graphics->draw(4, sf::Vector2f(0, 0), sf::Vector2f(650/1500.0f, 50/1600.0f), sf::Vector2f(50/1500.0f, 50/1600.0f));
+			glPopMatrix();
+			glTranslatef(0, 1, 0);
+		}
+
+		//Row 3
+		glPushMatrix();
+			graphics->draw(4, sf::Vector2f(0, 0), sf::Vector2f(550/1500.0f, 100/1600.0f), sf::Vector2f(50/1500.0f, 50/1600.0f));
+
+			for (int i = 0; i < 5; i++)
+			{
+				glTranslatef(1.0f, 0, 0);
+				graphics->draw(4, sf::Vector2f(0, 0), sf::Vector2f(600/1500.0f, 100/1600.0f), sf::Vector2f(50/1500.0f, 50/1600.0f));
+			}
+
+			glTranslatef(1.0f, 0, 0);
+			graphics->draw(4, sf::Vector2f(0, 0), sf::Vector2f(650/1500.0f, 100/1600.0f), sf::Vector2f(50/1500.0f, 50/1600.0f));
+		glPopMatrix();
+	glPopMatrix();
+
+	//Row 1
+	glPushMatrix();
+		glScalef(1/20.0f, 1/20.0f, 1.0f);
+
+		glTranslatef(8/2.0f, 27/2.0f, 0);
+		graphics->draw(4, sf::Vector2f(0, 0), sf::Vector2f(550/1500.0f, 0.0f), sf::Vector2f(50/1500.0f, 50/1600.0f));
+
+		for (int i = 0; i < 5; i++)
+		{
+			glTranslatef(1.0f, 0, 0);
+			graphics->draw(4, sf::Vector2f(0, 0), sf::Vector2f(600/1500.0f, 0.0f), sf::Vector2f(50/1500.0f, 50/1600.0f));
+		}
+
+		glTranslatef(1.0f, 0, 0);
+		graphics->draw(4, sf::Vector2f(0, 0), sf::Vector2f(650/1500.0f, 0.0f), sf::Vector2f(50/1500.0f, 50/1600.0f));
+	glPopMatrix();
+
+	//Row 2
+	glPushMatrix();
+		glScalef(1/20.0f, 1/20.0f, 1.0f);
+		glTranslatef(8/2.0f, 29/2.0f, 0);
+		graphics->draw(4, sf::Vector2f(0, 0), sf::Vector2f(550/1500.0f, 50/1600.0f), sf::Vector2f(50/1500.0f, 50/1600.0f));
+
+		for (int i = 0; i < 5; i++)
+		{
+			glTranslatef(1.0f, 0, 0);
+			graphics->draw(4, sf::Vector2f(0, 0), sf::Vector2f(600/1500.0f, 50/1600.0f), sf::Vector2f(50/1500.0f, 50/1600.0f));
+		}
+
+		glTranslatef(1.0f, 0, 0);
+		graphics->draw(4, sf::Vector2f(0, 0), sf::Vector2f(650/1500.0f, 50/1600.0f), sf::Vector2f(50/1500.0f, 50/1600.0f));
+	glPopMatrix();
+
+	//Row 3
+	glPushMatrix();
+		glScalef(1/20.0f, 1/20.0f, 1.0f);
+		glTranslatef(8/2.0f, 31/2.0f, 0);
+		graphics->draw(4, sf::Vector2f(0, 0), sf::Vector2f(550/1500.0f, 100/1600.0f), sf::Vector2f(50/1500.0f, 50/1600.0f));
+
+		for (int i = 0; i < 5; i++)
+		{
+			glTranslatef(1.0f, 0, 0);
+			graphics->draw(4, sf::Vector2f(0, 0), sf::Vector2f(600/1500.0f, 100/1600.0f), sf::Vector2f(50/1500.0f, 50/1600.0f));
+		}
+
+		glTranslatef(1.0f, 0, 0);
+		graphics->draw(4, sf::Vector2f(0, 0), sf::Vector2f(650/1500.0f, 100/1600.0f), sf::Vector2f(50/1500.0f, 50/1600.0f));
+	glPopMatrix();
+
+	//Row 1
+	glPushMatrix();
+		glScalef(1/20.0f, 1/20.0f, 1.0f);
+
+		glTranslatef(11/2.0f, 30/2.0f, 0);
+		if (mSellButtonIsMO)
+			graphics->draw(4, sf::Vector2f(0, 0), sf::Vector2f(550/1500.0f, 0.0f), sf::Vector2f(50/1500.0f, 50/1600.0f), 1, 0, 0, 1);
+		else
+			graphics->draw(4, sf::Vector2f(0, 0), sf::Vector2f(550/1500.0f, 0.0f), sf::Vector2f(50/1500.0f, 50/1600.0f));
+
+		for (int i = 0; i < 2; i++)
+		{
+			glTranslatef(1.0f, 0, 0);
+			if (mSellButtonIsMO)
+				graphics->draw(4, sf::Vector2f(0, 0), sf::Vector2f(600/1500.0f, 0.0f), sf::Vector2f(50/1500.0f, 50/1600.0f), 1, 0, 0, 1);
+			else
+				graphics->draw(4, sf::Vector2f(0, 0), sf::Vector2f(600/1500.0f, 0.0f), sf::Vector2f(50/1500.0f, 50/1600.0f));
+		}
+
+		glTranslatef(1.0f, 0, 0);
+		if (mSellButtonIsMO)
+			graphics->draw(4, sf::Vector2f(0, 0), sf::Vector2f(650/1500.0f, 0.0f), sf::Vector2f(50/1500.0f, 50/1600.0f), 1, 0, 0, 1);
+		else
+			graphics->draw(4, sf::Vector2f(0, 0), sf::Vector2f(650/1500.0f, 0.0f), sf::Vector2f(50/1500.0f, 50/1600.0f));
+	glPopMatrix();
+
+	//Row 3
+	glPushMatrix();
+		glScalef(1/20.0f, 1/20.0f, 1.0f);
+		glTranslatef(11/2.0f, 31/2.0f, 0);
+		if (mSellButtonIsMO)
+			graphics->draw(4, sf::Vector2f(0, 0), sf::Vector2f(550/1500.0f, 100/1600.0f), sf::Vector2f(50/1500.0f, 50/1600.0f), 1, 0, 0, 1);
+		else
+			graphics->draw(4, sf::Vector2f(0, 0), sf::Vector2f(550/1500.0f, 100/1600.0f), sf::Vector2f(50/1500.0f, 50/1600.0f));
+
+		for (int i = 0; i < 2; i++)
+		{
+			glTranslatef(1.0f, 0, 0);
+			if (mSellButtonIsMO)
+				graphics->draw(4, sf::Vector2f(0, 0), sf::Vector2f(600/1500.0f, 100/1600.0f), sf::Vector2f(50/1500.0f, 50/1600.0f), 1, 0, 0, 1);
+			else
+				graphics->draw(4, sf::Vector2f(0, 0), sf::Vector2f(600/1500.0f, 100/1600.0f), sf::Vector2f(50/1500.0f, 50/1600.0f));
+		}
+
+		glTranslatef(1.0f, 0, 0);
+		if (mSellButtonIsMO)
+			graphics->draw(4, sf::Vector2f(0, 0), sf::Vector2f(650/1500.0f, 100/1600.0f), sf::Vector2f(50/1500.0f, 50/1600.0f), 1, 0, 0, 1);
+		else
+			graphics->draw(4, sf::Vector2f(0, 0), sf::Vector2f(650/1500.0f, 100/1600.0f), sf::Vector2f(50/1500.0f, 50/1600.0f));
+	glPopMatrix();
+
+	
+	glPushMatrix();
+		glTranslatef(13/40.0f, 31/40.0f, 0);
+		mFont->drawString(graphics, "Sell", 7, 0.85f);
+	glPopMatrix();
+
+	char tmp[64];
+	int *fc = ((IshavsfiskeGame*)context)->getFishCount();
+
+	glPushMatrix();
+		glTranslatef(9/40.0f, 11/40.0f, 0);
+		for (int i = 0; i < 4; i++)
+		{
+			sprintf_s(tmp, "Fish %c x %u", 'A' + i, fc[i]);
+			mFont->drawString(graphics, std::string(tmp), 7, 0.85f);
+			glTranslatef(0, 1/20.0f, 0);
+		}
+	glPopMatrix();
+
+	glPushMatrix();
+		glTranslatef(25/40.0f, 11/40.0f, 0);
+		for (int i = 0; i < 4; i++)
+		{
+			sprintf_s(tmp, "Fish %c %3u NOK", 'A' + i, (i+1) * 10);
+			mFont->drawString(graphics, std::string(tmp), 7, 0.85f);
+			glTranslatef(0, 1/20.0f, 0);
+		}
+	glPopMatrix();
+
+	glPushMatrix();
+		sprintf_s(tmp, "%5u", fc[0] * 10 + fc[1] * 20 + fc[2] * 30 + fc[3] * 40);
+		glTranslatef(9/40.0f, 28/40.0f, 0);
+		mFont->drawString(graphics, "Sum: " + std::string(tmp) + " NOK", 7, 0.85f);
+	glPopMatrix();
+}
+
 void HarbourMode::mDrawRoom(Angler::Game* context, Angler::Graphics::GraphicsEngine* graphics, float time, float deltaTime)
 {
 	graphics->draw(0);
 
 	if (mInsideIsMO)
 		graphics->draw(1);
+
+	if (mTrading)
+		mDrawTrade(context, graphics, time, deltaTime);
 }
 
 void HarbourMode::draw(Angler::Game* context, Angler::Graphics::GraphicsEngine* graphics, float time, float deltaTime)
@@ -106,6 +349,46 @@ void HarbourMode::draw(Angler::Game* context, Angler::Graphics::GraphicsEngine* 
 				graphics->draw(4, sf::Vector2f(1, 1), sf::Vector2f(420/1500.0f, 150/1600.0f), sf::Vector2f(140/1500.0f, 75/1600.0f));
 		glPopMatrix();
 
+		//Row 1
+		glPushMatrix();
+			glScalef(1/20.0f, 1/20.0f, 1.0f);
+
+			glTranslatef(47/2.0f, 1/2.0f, 0);
+			graphics->draw(4, sf::Vector2f(0, 0), sf::Vector2f(550/1500.0f, 0.0f), sf::Vector2f(50/1500.0f, 50/1600.0f));
+
+			for (int i = 0; i < 6; i++)
+			{
+				glTranslatef(1.0f, 0, 0);
+				graphics->draw(4, sf::Vector2f(0, 0), sf::Vector2f(600/1500.0f, 0.0f), sf::Vector2f(50/1500.0f, 50/1600.0f));
+			}
+
+			glTranslatef(1.0f, 0, 0);
+			graphics->draw(4, sf::Vector2f(0, 0), sf::Vector2f(650/1500.0f, 0.0f), sf::Vector2f(50/1500.0f, 50/1600.0f));
+		glPopMatrix();
+
+		//Row 2
+		glPushMatrix();
+			glScalef(1/20.0f, 1/20.0f, 1.0f);
+			glTranslatef(47/2.0f, 2/2.0f, 0);
+			graphics->draw(4, sf::Vector2f(0, 0), sf::Vector2f(550/1500.0f, 100/1600.0f), sf::Vector2f(50/1500.0f, 50/1600.0f));
+
+			for (int i = 0; i < 6; i++)
+			{
+				glTranslatef(1.0f, 0, 0);
+				graphics->draw(4, sf::Vector2f(0, 0), sf::Vector2f(600/1500.0f, 100/1600.0f), sf::Vector2f(50/1500.0f, 50/1600.0f));
+			}
+
+			glTranslatef(1.0f, 0, 0);
+			graphics->draw(4, sf::Vector2f(0, 0), sf::Vector2f(650/1500.0f, 100/1600.0f), sf::Vector2f(50/1500.0f, 50/1600.0f));
+		glPopMatrix();
+
+		glPushMatrix();
+			char tmp[64];
+			sprintf_s(tmp, "%5u", ((IshavsfiskeGame*)context)->getWallet());
+			glTranslatef(48/40.0f, 2/40.0f, 0);
+			mFont->drawString(graphics, "Wallet: " + std::string(tmp) + " NOK", 7, 0.85f);
+		glPopMatrix();
+
 		mDrawChildren(context, graphics, time, deltaTime);
 	}
 }
@@ -114,11 +397,11 @@ void HarbourMode::endDraw(Angler::Game* context, Angler::Graphics::GraphicsEngin
 {
 	if (mVisible)
 	{
-		//glDisable(GL_TEXTURE_2D);
+		glDisable(GL_TEXTURE_2D);
 
-		//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
-		//glLineWidth(3);
+		glLineWidth(3);
 
 		//if (mRoom == -1)
 		//{
@@ -182,6 +465,17 @@ void HarbourMode::endDraw(Angler::Game* context, Angler::Graphics::GraphicsEngin
 		//	glEnd();
 		//}
 
+		//if (mRoom != -1)
+		//{
+		//	glColor3d(0, 0, 1);
+		//	glBegin(GL_POLYGON);
+		//		for (int i = 0; i < mSellButtonMOS.size(); i++)
+		//		{
+		//			glVertex2f(mSellButtonMOS.at(i).x, mSellButtonMOS.at(i).y);
+		//		}
+		//	glEnd();
+		//}
+
 		////glColor3d(1, 1, 0);
 		////glBegin(GL_POLYGON);
 		////	glVertex2f(mousePos.x + 0.01f, mousePos.y + 0.01f);
@@ -190,7 +484,7 @@ void HarbourMode::endDraw(Angler::Game* context, Angler::Graphics::GraphicsEngin
 		////	//glVertex2f(mousePos.x + 0.005f, mousePos.y + 0.005f);
 		////glEnd();
 
-		//glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
 		mEndDrawChildren(context, graphics, time, deltaTime);
 	}
@@ -242,6 +536,7 @@ void HarbourMode::mUpdateHarbourMode(Angler::Game* context, float time, float de
 void HarbourMode::mUpdateRoom(Angler::Game* context, float time, float deltaTime)
 {
 	mInsideIsMO = Angler::HelpFunctions::Geometry::pointIsWithinPolygon(&mInsideMOS, mousePos);
+	mSellButtonIsMO = Angler::HelpFunctions::Geometry::pointIsWithinPolygon(&mSellButtonMOS, mousePos);
 
 	mSSea->setVolume(0.0f);
 
@@ -299,10 +594,28 @@ void HarbourMode::update(Angler::Game* context, float time, float deltaTime, boo
 
 		if (mRoom != -1)
 		{
-			if (mBackButtonIsMO && !context->getMouseState().isButtonDown(sf::Mouse::Button::Left)
+			if (!mTrading && mBackButtonIsMO && !context->getMouseState().isButtonDown(sf::Mouse::Button::Left)
 				&& context->getMouseState().wasButtonDown(sf::Mouse::Button::Left))
 			{
 				mShowRoom(-1);
+			}
+			if (mTrading && mBackButtonIsMO && !context->getMouseState().isButtonDown(sf::Mouse::Button::Left)
+				&& context->getMouseState().wasButtonDown(sf::Mouse::Button::Left))
+			{
+				mTrading = false;
+			}
+			if (mTrading && mSellButtonIsMO && !context->getMouseState().isButtonDown(sf::Mouse::Button::Left)
+				&& context->getMouseState().wasButtonDown(sf::Mouse::Button::Left))
+			{
+				int *fc = ((IshavsfiskeGame*)context)->getFishCount();
+				int sum = fc[0] * 10 + fc[1] * 20 + fc[2] * 30 + fc[3] * 40;
+				fc[0] = fc[1] = fc[2] = fc[3] = 0;
+				((IshavsfiskeGame*)context)->addToWallet(sum);
+			}
+			if (!mTrading && mInsideIsMO && !context->getMouseState().isButtonDown(sf::Mouse::Button::Left)
+				&& context->getMouseState().wasButtonDown(sf::Mouse::Button::Left))
+			{
+				mTrading = true;
 			}
 		}
 		else
@@ -370,6 +683,8 @@ void HarbourMode::loadContent()
 	mTXBackButton->loadFromFile("backknapp.png");
 	mTXCursor->loadFromFile("cursor_hand_sheet.png");
 
+	mTXFont->loadFromFile("font_bitmap.png");
+
 	mTXBarInside->loadFromFile("bar_3_stolar.png");
 	mTXBarInsideHO->loadFromFile("bar_Olaf_hoverover.png");
 
@@ -433,6 +748,12 @@ void HarbourMode::loadContent()
 	mWorkshopMOS.push_back(sf::Vector2f(1.050f, 0.510f));
 	mWorkshopMOS.push_back(sf::Vector2f(1.056f, 0.406f));
 
+	//Sell button
+	mSellButtonMOS.push_back(sf::Vector2f(19/40.0f, 30/40.0f));
+	mSellButtonMOS.push_back(sf::Vector2f(11/40.0f, 30/40.0f));
+	mSellButtonMOS.push_back(sf::Vector2f(11/40.0f, 33/40.0f));
+	mSellButtonMOS.push_back(sf::Vector2f(19/40.0f, 33/40.0f));
+
 	//Menu button
 	for (int i = 0; i < 32; i++)
 	{
@@ -470,6 +791,8 @@ void HarbourMode::init()
 	mTXBackButton = new sf::Texture();
 	mTXCursor = new sf::Texture();
 
+	mTXFont = new sf::Texture();
+
 	mTXBarInside = new sf::Texture();
 	mTXBarInsideHO = new sf::Texture();
 
@@ -486,6 +809,8 @@ void HarbourMode::init()
 		mMusicBuffer[i] = new sf::SoundBuffer();
 		mMusic[i] = new sf::Sound();
 	}
+
+	mFont = new Font();
 
 	mSSea = new sf::Sound();
 	mSBSea = new sf::SoundBuffer();
@@ -565,17 +890,14 @@ void HarbourMode::mShowRoom(int ind)
 {
 	mRoom = ind;
 
+	int sizes[8] = { 1, 1, 1, 1, 256, 1, 1, 256 };
+	sf::Texture* textures[8] = { mTXHarbour, mTXBarHO, mTXMarketHO, mTXWorkshopHO, mTXUI, mTXBackButton, mTXCursor, mTXFont };
 	if (ind == -1)
 	{
-		int sizes[7] = { 1, 1, 1, 1, 5, 1, 1 };
-		sf::Texture* textures[7] = { mTXHarbour, mTXBarHO, mTXMarketHO, mTXWorkshopHO, mTXUI, mTXBackButton, mTXCursor };
-		mOwner->setupGraphicsLayers(7, sizes, textures);
+		mOwner->setupGraphicsLayers(8, sizes, textures);
 	}
 	else
 	{
-		int sizes[7] = { 1, 1, 0, 0, 5, 1, 1 };
-		sf::Texture* textures[7] = { mTXHarbour, mTXHarbour, mTXHarbour, mTXHarbour, mTXUI, mTXBackButton, mTXCursor };
-
 		mInsideMOS.clear();
 
 		if (ind == 0)
@@ -627,6 +949,6 @@ void HarbourMode::mShowRoom(int ind)
 			mInsideMOS.push_back(sf::Vector2f(1.147f, 0.279f));
 		}
 
-		mOwner->setupGraphicsLayers(7, sizes, textures);
+		mOwner->setupGraphicsLayers(8, sizes, textures);
 	}
 }

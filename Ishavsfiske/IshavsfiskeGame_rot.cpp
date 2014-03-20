@@ -125,3 +125,18 @@ void IshavsfiskeGame::throwEvent(int type, ... )
 
 	va_end(vl);
 }
+
+int *IshavsfiskeGame::getFishCount()
+{
+	return mFishCount;
+}
+
+int IshavsfiskeGame::getWallet()
+{
+	return mWallet;
+}
+
+void IshavsfiskeGame::addToWallet(int i)
+{
+	mWallet += i;
+}

@@ -41,13 +41,18 @@ namespace Ishavsfiske
 		void mDrawHarbourRoom(Angler::Game* context, Angler::Graphics::GraphicsEngine* graphics, float time, float deltaTime);
 		void mDrawRoom(Angler::Game* context, Angler::Graphics::GraphicsEngine* graphics, float time, float deltaTime);
 
+		void mDrawTrade(Angler::Game* context, Angler::Graphics::GraphicsEngine* graphics, float time, float deltaTime);
+
 		int mRoom;
 
 		int mRadioCh;
 
-		sf::Texture *mTXBarHO, *mTXWorkshopHO, *mTXMarketHO, *mTXUI, *mTXBackButton, *mTXCursor;
-		std::vector<sf::Vector2f> mBarMOS, mWorkshopMOS, mMarketMOS, mMenuButtonMOS, mRadioMOS, mBackButtonMOS;
-		bool mBarIsMO, mWorkshopIsMO, mMarketIsMO, mMenuButtonIsMO, mRadioIsMO, mBackButtonIsMO;
+		Font *mFont;
+
+		sf::Texture *mTXBarHO, *mTXWorkshopHO, *mTXMarketHO, *mTXUI, *mTXBackButton, *mTXCursor, *mTXFont;
+		std::vector<sf::Vector2f> mBarMOS, mWorkshopMOS, mMarketMOS, mMenuButtonMOS, mRadioMOS, mBackButtonMOS,
+			mSellButtonMOS;
+		bool mBarIsMO, mWorkshopIsMO, mMarketIsMO, mMenuButtonIsMO, mRadioIsMO, mBackButtonIsMO, mSellButtonIsMO;
 		float mMenuButtonRot;
 
 		float mRadioTime;
@@ -60,6 +65,8 @@ namespace Ishavsfiske
 
 		std::vector<sf::Vector2f> mInsideMOS;
 		bool mInsideIsMO;
+
+		bool mTrading;
 
 		sf::Sound *mRadioSound;
 		sf::SoundBuffer *mRadioBuffer;
