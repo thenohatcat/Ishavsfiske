@@ -34,6 +34,8 @@ void IshavsfiskeGame::mDraw(float time, float deltaTime)
 	mSceneRoot->draw(this, mGraphics, time, deltaTime);
 	mGraphics->end();
 
+	mSceneRoot->endDraw(this, mGraphics, time, deltaTime);
+
 #ifdef _DEBUG
 #ifdef _DEBUG_COLL
 	tm++;

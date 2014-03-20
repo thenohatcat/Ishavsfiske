@@ -32,7 +32,10 @@ void FishingMode::loadContent()
 	mTXSchool->loadFromFile("Swim_Capelin_spritesheet.png");
 	mTXUI->loadFromFile("Sheet_2.png");
 	mUIFont->loadFromFile("font_bitmap.png");
-	mTXGameOver->loadFromFile("game_over__.png");
+	mTXGameOver->loadFromFile("game_over__.png");	
+	mTXSeagull->loadFromFile("FlyGull_animation_spritesheet.png");
+	mTXBackButton->loadFromFile("backknapp.png");
+	mTXCursor->loadFromFile("cursor_hand_sheet.png");
 
 	mCollFishingBuff->loadFromFile("Fiskebåt_Kollision_01.wav");
 	mCollFishingSound->setBuffer(*mCollFishingBuff);
@@ -57,6 +60,12 @@ void FishingMode::loadContent()
 	//mMusicFishingBuff->loadFromFile("Hav_Fiske.wav");
 
 	//mMusic->setBuffer(*mMusicFishingBuff);
+
+	//Menu button
+	for (int i = 0; i < 32; i++)
+	{
+		mMenuButtonMOS.push_back(sf::Vector2f(11/40.0f + 3/40.0f * cos(-i/16.0f * 3.1415f), 37/40.0f + 3/40.0f * sin(-i/16.0f * 3.1415f)));
+	}
 }
 
 void FishingMode::init()
@@ -91,20 +100,29 @@ void FishingMode::init()
 	mTXUI = new sf::Texture();
 	mUIFont = new sf::Texture();
 	mTXGameOver = new sf::Texture();
+	mTXSeagull = new sf::Texture();
+	mTXBackButton = new sf::Texture();
+	mTXCursor = new sf::Texture();
 
 	mShipFishing = new FishingBoat(0x10000, this, mOwner);
 	mShipBreaker = new IceBreaker(0x20000, this, mOwner);
 
+	mSeagull = new Seagull(0x40000000, this, mOwner);
+
 	mMap = new Map(0x80000000, this, mOwner);
-	mMap->setPos(sf::Vector2i(12, 10));
 	
 	mMsgBox = new MsgBox(0, this, mOwner);
 	mMsgBox->init();
 
 	mFishBase = new Angler::Nodes::Translation(0, this, 2/10.0f, 0);
-	mFishBase->setTranslation(-12/20.0f, -10/20.0f);
 
 	mFont = new Font();
+
+	//Back button
+	for (int i = 0; i < 32; i++)
+	{
+		mBackButtonMOS.push_back(sf::Vector2f(55/40.0f + 1/40.0f * cos(-i/16.0f * 3.1415f), 39/40.0f + 1/40.0f * sin(-i/16.0f * 3.1415f)));
+	}
 
 	////Map Collisions
 	//std::vector<sf::Vector2f> leftBox;

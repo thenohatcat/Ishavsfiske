@@ -31,14 +31,14 @@ namespace Ishavsfiske
 
 		bool getRepairing();
 
-		int getAmmount();
+		int *getAmmount();
 
 	protected:
 		virtual void mInit();
 	private:
 		Angler::Nodes::Rotation *mCraneRotation, *mLampRotation;
 		School *mSchool;
-		int mAmmount;
+		int mAmmount[4];
 		bool mFishing;
 		float mFishTime;
 		bool mRepairing;
