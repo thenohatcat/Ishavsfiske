@@ -77,13 +77,14 @@ void Arne::attack()
 
 void Arne::mInit()
 {
-	mStartX = 0.5f;
+	mStartX = 0.8f;
 	mStartY = 0.5f;
 
 	Animal::mInit();
 
 	// Arne ID?
 	Angler::Nodes::Scale *s = new Angler::Nodes::Scale(getID() + 0x0120, mAnimalRoot, 1/10.0f, 1/10.0f);
+	Angler::Nodes::SpriteNode *arne = new Angler::Nodes::SpriteNode(getID() + 0x654, s, 12, sf::Vector2f(0.5f, 0.5f), sf::Vector2f(0, 4/13.0f), sf::Vector2f(1, 6/13.0f));
 
 	/*std::vector<sf::Vector2f> pts;
 	pts.push_back(sf::Vector2f(1, 0));
@@ -95,11 +96,14 @@ void Arne::mInit()
 
 	std::vector<sf::Vector2f> anime;
 	anime.push_back(sf::Vector2f(0, 0));
-	anime.push_back(sf::Vector2f(1/5.0f, 0));
-	anime.push_back(sf::Vector2f(2/5.0f, 0));
-	anime.push_back(sf::Vector2f(3/5.0f, 0));
-	anime.push_back(sf::Vector2f(4/5.0f, 0));
-	new Angler::Nodes::AnimatedNode(getID() + 0x123, s, 9, anime, 1/5.0f, 0.5f, 0.5f, 1/5.0f, 1); // ID?
+	anime.push_back(sf::Vector2f(1/8.0f, 0));
+	anime.push_back(sf::Vector2f(2/8.0f, 0));
+	anime.push_back(sf::Vector2f(3/8.0f, 0));
+	anime.push_back(sf::Vector2f(4/8.0f, 0));
+	anime.push_back(sf::Vector2f(5/8.0f, 0));
+	anime.push_back(sf::Vector2f(6/8.0f, 0));
+	anime.push_back(sf::Vector2f(7/8.0f, 0));
+	new Angler::Nodes::AnimatedNode(getID() + 0x678, arne, 12, anime, 1/8.0f, 0.5f, 0.5f, 1/8.0f, 1); // ID?
 }
 
 bool Arne::mAtShip()

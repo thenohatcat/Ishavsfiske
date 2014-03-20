@@ -14,6 +14,7 @@
 #include "IceBreaker.h"
 #include "FishingBoat.h"
 #include "Seagull.h"
+#include "Arne.h"
 #include "Map.h"
 #include "School.h"
 
@@ -60,7 +61,7 @@ namespace Ishavsfiske
 		bool mMenuButtonIsMO, mBackButtonIsMO;
 		float mMenuButtonRot;
 
-		sf::Texture *mTXMap, *mTXUI, *mTXSchool, *mUIFont, *mTXGameOver, *mTXBackButton, *mTXCursor, *mTXSeagull;
+		sf::Texture *mTXMap, *mTXUI, *mTXSchool, *mUIFont, *mTXGameOver, *mTXBackButton, *mTXCursor, *mTXSeagull, *mTXSeaLayer;
 		
 		sf::Sound *mRepair;
 		sf::SoundBuffer *mRepairBuff;
@@ -85,7 +86,7 @@ namespace Ishavsfiske
 		
 		Ship *mShipFishing, *mShipBreaker;
 
-		Animal *mSeagull;
+		Animal *mSeagull, *mArne;
 
 		Ishavsfiske::IshavsfiskeGame *mOwner;
 

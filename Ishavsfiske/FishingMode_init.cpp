@@ -36,6 +36,7 @@ void FishingMode::loadContent()
 	mTXSeagull->loadFromFile("FlyGull_animation_spritesheet.png");
 	mTXBackButton->loadFromFile("Utpåhavet_knapp.png");
 	mTXCursor->loadFromFile("cursor_hand_sheet.png");
+	mTXSeaLayer->loadFromFile("Sea_Layer.png");
 
 	mCollFishingBuff->loadFromFile("Fiskebåt_Kollision_01.wav");
 	mCollFishingSound->setBuffer(*mCollFishingBuff);
@@ -103,11 +104,13 @@ void FishingMode::init()
 	mTXSeagull = new sf::Texture();
 	mTXBackButton = new sf::Texture();
 	mTXCursor = new sf::Texture();
+	mTXSeaLayer = new sf::Texture();
 
 	mShipFishing = new FishingBoat(0x10000, this, mOwner);
 	mShipBreaker = new IceBreaker(0x20000, this, mOwner);
 
 	mSeagull = new Seagull(0x40000000, this, mOwner);
+	mArne = new Arne(0x60000000, this, mOwner);
 
 	mMap = new Map(0x80000000, this, mOwner);
 	
