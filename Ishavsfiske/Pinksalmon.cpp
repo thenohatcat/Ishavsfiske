@@ -38,7 +38,7 @@ void Pinksalmon::update(Angler::Game *context, float time, float deltaTime, bool
 
 		if(School::scaredDistance(((IshavsfiskeGame*)context)->getIceBreaker()->getPosition()))
 			School::scaredByBoat(((IshavsfiskeGame*)context)->getIceBreaker()->getPosition(), deltaTime, false);
-		else if(School::scaredDistance(((IshavsfiskeGame*)context)->getShipFishing()->getPosition()))
+		if(School::scaredDistance(((IshavsfiskeGame*)context)->getShipFishing()->getPosition()))
 			School::scaredByBoat(((IshavsfiskeGame*)context)->getShipFishing()->getPosition(), deltaTime, false);
 	}
 }
