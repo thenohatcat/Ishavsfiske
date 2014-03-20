@@ -47,12 +47,17 @@ void Ishavsfiske::IshavsfiskeGame::mLoadContent()
 	mGameOverScreen->loadContent();
 	mGameOverScreen->enable(false);
 
-	mStartScreen->enable(false);
-
 	mHarbourMode->loadContent();
-	mHarbourMode->enable(false);
+	mHarbourMode->enable(true);
 
-	mStartScreen->enable(true);
+	mFishingMode->getMap()->load(0, "map_test.txt");
+
+	mFishCount[0] = 1;
+	mFishCount[1] = 2;
+	mFishCount[2] = 3;
+	mFishCount[3] = 4;
+
+	mWallet = 0;
 }
 
 void Ishavsfiske::IshavsfiskeGame::mInit()

@@ -47,6 +47,8 @@ namespace Ishavsfiske
 
 		void breakIce();
 
+		Map *getMap();
+
 	protected:
 		void mEnable(bool enabled);
 
@@ -54,8 +56,12 @@ namespace Ishavsfiske
 		sf::Sound *mCollFishingSound, *mCollBreakerSound, *mCollIceSound, *mEngineSound;
 		sf::SoundBuffer *mCollFishingBuff, *mCollBreakerBuff, *mCollIceBuff, *mEngineBuff;
 
-		sf::Texture *mTXMap, *mTXUI, *mTXSchool, *mUIFont, *mTXGameOver, *mTXSeagull;
+		std::vector<sf::Vector2f> mMenuButtonMOS, mBackButtonMOS;
+		bool mMenuButtonIsMO, mBackButtonIsMO;
+		float mMenuButtonRot;
 
+		sf::Texture *mTXMap, *mTXUI, *mTXSchool, *mUIFont, *mTXGameOver, *mTXBackButton, *mTXCursor, *mTXSeagull;
+		
 		sf::Sound *mRepair;
 		sf::SoundBuffer *mRepairBuff;
 
@@ -84,6 +90,10 @@ namespace Ishavsfiske
 		Ishavsfiske::IshavsfiskeGame *mOwner;
 
 		void mUpdateTutorial(Angler::Game* context, float time, float deltaTime);
+
+		void mReset();
+
+		void mSchoolsClear();
 
 		bool mDoRepair;
 		bool mDoFish;

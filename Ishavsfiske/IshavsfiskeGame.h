@@ -55,6 +55,12 @@ namespace Ishavsfiske
 
 		void setupGraphicsLayers(int numLayers, int layerSizes[], sf::Texture *layerTextures[]);
 
+		int *getFishCount();
+
+		int getWallet();
+
+		void addToWallet(int i);
+
 		typedef enum
 		{
 			Collide = Game::Events::Collide,
@@ -64,7 +70,9 @@ namespace Ishavsfiske
 			GameOverScreenShow,
 			GameOverScreenHide,
 			FishingModeShow,
-			FishingModeHide
+			FishingModeHide,
+			HarbourModeShow,
+			HarbourModeHide
 		} Events;
 
 	protected:
@@ -78,6 +86,10 @@ namespace Ishavsfiske
 		void mInput(float time, float deltaTime);
 
 		void mDrawUI(float time, float deltaTime);
+
+		int mFishCount[4];
+
+		int mWallet;
 
 		FishingMode *mFishingMode;
 		StartScreen *mStartScreen;
