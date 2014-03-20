@@ -103,43 +103,10 @@ void Animal::move(float x, float y)
 	mRootTranslation->translate(tv);
 }
 
-bool Animal::mAtShip()
+void Animal::throttle(float vx, float vy)
 {
-	return mRootTranslation->getTranslation() == mFishPos;
-}
-
-bool Animal::mLookAtShip()
-{
-	float dx = mFishPos.x - mRootTranslation->getTranslationX();
-	float dy = mFishPos.y - mRootTranslation->getTranslationY();
-
-	float angle = atan(dy / dx) * (180 / PI);
-	float mRotToShip = mCalcRotation(angle);
-
-	float rotation = abs(fmod(mRootRotation->getRotation(), 360.0f));
-
-	cout << mRotToShip << " " << rotation << endl;
-
-	return ((mRotToShip - 3) < rotation) &&  (rotation < (mRotToShip + 3));
-}
-
-float Animal::mCalcRotation(float angle)
-{
-	switch(mDirection(mFishPos))
-	{
-	case 9:
-		return angle + 90;
-		break;
-	case 3:
-		return angle + 90;
-		break;
-	case 1:
-		return angle + 270;
-		break;
-	case 7:
-		return angle + 270;
-		break;
-	}
+		mVel.x += vx;
+		mVel.y += vy;
 }
 
 void Animal::mSetSpeed(float vx, float vy)

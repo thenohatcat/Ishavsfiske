@@ -3,13 +3,13 @@
 //Contributors:
 
 #ifndef ISHAV_0_1_5
-#error Seagull.cpp: Wrong version 0.1.5
+#error Arne.cpp: Wrong version 0.1.5
 #endif
 
 #define PI 3.14159265
 
 #include "IshavsfiskeGame.h"
-#include "Seagull.h"
+#include "Arne.h"
 
 #include <Angler\AnimatedNode.h>
 #include <Angler\Scale.h>
@@ -23,59 +23,68 @@ using namespace std;
 using namespace Ishavsfiske;
 using namespace Angler::Nodes;
 
-Seagull::Seagull(unsigned long id, Angler::Node *parent, Angler::Game *owner)
-	: Animal(id, parent, owner)
+Arne::Arne(unsigned long id, Angler::Node *parent, Angler::Game *owner)
+	: Animal(id, parent, owner), mVel(0, 0)
 {
 	mInit();
 }
 
-Seagull::Seagull(unsigned long id, Angler::Game *owner)
+Arne::Arne(unsigned long id, Angler::Game *owner)
 	: Animal(id, owner)
 {
 	mInit();
 }
 
-Seagull::~Seagull()
+Arne::~Arne()
 {
 	Animal::~Animal();
 }
 
-void Seagull::update(Angler::Game* context, float time, float deltaTime, bool changed)
+void Arne::update(Angler::Game* context, float time, float deltaTime, bool changed)
 {
 	if(!mPaused)
 	{
 		mChanged |= changed;
 
-		mFishPos = ((IshavsfiskeGame*) context)->getShipFishing()->getPosition();
+		mIceBPos = ((IshavsfiskeGame*) context)->getIceBreaker()->getPosition();
 
-		mShipFishDis.x = mFishPos.x - mRootTranslation->getTranslationX();
-		mShipFishDis.y = mFishPos.y - mRootTranslation->getTranslationY();
+		mShipIceBDis = mIceBPos - mRootTranslation->getTranslation();
 
 		if (!mAtShip()/* && !mScared*/)
 		{
 			if(!mLookAtShip())
 			{
+				if (abs(mVel.y) > 0.001f)
+					mVel.y -= (mVel.y / abs(mVel.y)) * (400*mVel.y*mVel.y) * deltaTime;
+				else
+					mVel.y = 0;
 				rotate(180 * deltaTime);
 			}
-			move(0, -0.03f * deltaTime);
+			mVel.y += 0.0001f;
+			if(mVel.y > 0)
+				move(0, mVel.y * deltaTime);
+
+			if(mVel.y > 0.05f)
+				mSetSpeed(0, 0.05f);
+
 		}
 		mUpdateChildren(context, time, deltaTime);
 	}
 }
 
-void Seagull::attack()
+void Arne::attack()
 {
 
 }
 
-void Seagull::mInit()
+void Arne::mInit()
 {
 	mStartX = 0.5f;
 	mStartY = 0.5f;
 
 	Animal::mInit();
 
-	// Seagull ID?
+	// Arne ID?
 	Angler::Nodes::Scale *s = new Angler::Nodes::Scale(getID() + 0x0120, mAnimalRoot, 1/10.0f, 1/10.0f);
 
 	/*std::vector<sf::Vector2f> pts;
@@ -95,14 +104,14 @@ void Seagull::mInit()
 	new Angler::Nodes::AnimatedNode(getID() + 0x123, s, 9, anime, 1/5.0f, 0.5f, 0.5f, 1/5.0f, 1); // ID?
 }
 
-bool Seagull::mAtShip()
+bool Arne::mAtShip()
 {
-	return mRootTranslation->getTranslation() == mFishPos;
+	return mRootTranslation->getTranslation() == mIceBPos;
 }
 
-bool Seagull::mLookAtShip()
+bool Arne::mLookAtShip()
 {
-	float angle = atan(mShipFishDis.y / mShipFishDis.x) * (180 / PI);
+	float angle = atan(mShipIceBDis.y / mShipIceBDis.x) * (180 / PI);
 	float mRotToShip = mCalcRotation(angle);
 
 	float rotation = abs(fmod(mRootRotation->getRotation(), 360.0f));
@@ -112,9 +121,9 @@ bool Seagull::mLookAtShip()
 	return ((mRotToShip - 3) < rotation) &&  (rotation < (mRotToShip + 3));
 }
 
-float Seagull::mCalcRotation(float angle)
+float Arne::mCalcRotation(float angle)
 {
-	switch(mDirection(mFishPos))
+	switch(mDirection(mIceBPos))
 	{
 	case 9:
 		return angle + 90;
@@ -131,7 +140,7 @@ float Seagull::mCalcRotation(float angle)
 	}
 }
 
-void Seagull::collide()
+void Arne::collide()
 {
 
 }
