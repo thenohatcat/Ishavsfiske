@@ -77,6 +77,9 @@ void IceBreaker::damage(float v)
 		mHull -= v;
 	else
 		mHealth -= v;
+
+	mHull = fmod(mHull, 1.1f);
+	mHealth = fmod(mHealth, 1.1f);
 }
 
 void IceBreaker::repair(float v)

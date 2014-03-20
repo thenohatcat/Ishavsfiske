@@ -63,6 +63,6 @@ void GameOverScreen::draw(Angler::Game* context, Angler::Graphics::GraphicsEngin
 {
 	if (mVisible)
 	{
-		graphics->draw(10);
+		graphics->draw(11);
 	}
 }

@@ -95,6 +95,9 @@ namespace Ishavsfiske
 
 		void mSchoolsClear();
 
+		float mGetFish();
+		int mFishMaximum;
+
 		bool mDoRepair;
 		bool mDoFish;
 

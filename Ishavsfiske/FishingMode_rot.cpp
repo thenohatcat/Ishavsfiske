@@ -12,13 +12,15 @@
 using namespace Ishavsfiske;
 
 FishingMode::FishingMode(unsigned long id, Angler::Node *parent, Ishavsfiske::IshavsfiskeGame *owner)
-	: Node(id, parent), mOwner(owner), mSchoolID(0), mTimer(122), mTutorialStage(0), mTutorialStageTime(-1)
+	: Node(id, parent), mOwner(owner), mSchoolID(0), mTimer(122), mTutorialStage(0), mTutorialStageTime(-1),
+	mFishMaximum(150)
 {
 
 }
 
 FishingMode::FishingMode(unsigned long id, Ishavsfiske::IshavsfiskeGame *owner)
-	: Node(id), mOwner(owner), mSchoolID(0), mTimer(122), mTutorialStage(0), mTutorialStageTime(-1)
+	: Node(id), mOwner(owner), mSchoolID(0), mTimer(122), mTutorialStage(0), mTutorialStageTime(-1),
+	mFishMaximum(150)
 {
 
 }
@@ -46,6 +48,12 @@ void FishingMode::mSchoolsClear()
 		i = mSchools.erase(i);
 		delete n;
 	}
+}
+
+float FishingMode::mGetFish()
+{
+	float ft = ((FishingBoat*)mShipFishing)->getAmmount()[0] + ((FishingBoat*)mShipFishing)->getAmmount()[1] + ((FishingBoat*)mShipFishing)->getAmmount()[2] + ((FishingBoat*)mShipFishing)->getAmmount()[3];
+	return ft / (float)mFishMaximum;
 }
 
 void FishingMode::mReset()

@@ -679,8 +679,8 @@ void HarbourMode::loadContent()
 	mTXBarHO->loadFromFile("bar_Hoverover.png");
 	mTXMarketHO->loadFromFile("Market_Hoverover.png");
 	mTXWorkshopHO->loadFromFile("Workshop_Hoverover.png");
-	mTXUI->loadFromFile("Sheet_2.png");
-	mTXBackButton->loadFromFile("backknapp.png");
+	mTXUI->loadFromFile("Sheet_1.png");
+	mTXBackButton->loadFromFile("Utpåhavet_knapp.png");
 	mTXCursor->loadFromFile("cursor_hand_sheet.png");
 
 	mTXFont->loadFromFile("font_bitmap.png");
