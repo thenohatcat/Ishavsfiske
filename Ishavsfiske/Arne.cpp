@@ -60,12 +60,10 @@ void Arne::update(Angler::Game* context, float time, float deltaTime, bool chang
 					mVel.y = 0;
 				rotate(180 * deltaTime);
 			}
-			mVel.y += 0.0001f;
+			if(mVel.y < 0.05f)
+				throttle(0, 0.001f);
 			if(mVel.y > 0)
 				move(0, mVel.y * deltaTime);
-
-			if(mVel.y > 0.05f)
-				mSetSpeed(0, 0.05f);
 
 		}
 		mUpdateChildren(context, time, deltaTime);
