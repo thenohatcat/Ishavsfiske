@@ -36,12 +36,19 @@ namespace Ishavsfiske
 
 		void update(Angler::Game* context, float time, float deltaTime, bool changed);
 
+		void updateMap();
+
+		void load(int num, std::string file);
+
 	protected:
 		virtual void mInit();
 	private:
 		void mSetTranslation(float x, float y);
 
 		int mMap [48 * 40];
+
+		int lMap [8][48 * 40];
+
 		Angler::Game *mParent;
 		sf::Vector2i mPos;
 		sf::Vector2i mOldPos, mLPos;

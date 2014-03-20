@@ -15,13 +15,13 @@
 using namespace Ishavsfiske;
 
 FishingBoat::FishingBoat(unsigned long id, Angler::Node *parent, Ishavsfiske::IshavsfiskeGame *owner)
-	: Ship(id, parent, owner), mAmmount(0), mSchool(nullptr), mRepairing(false), mFishing(false)
+	: Ship(id, parent, owner), mSchool(nullptr), mRepairing(false), mFishing(false)
 {
 	mInit();
 }
 
 FishingBoat::FishingBoat(unsigned long id, Ishavsfiske::IshavsfiskeGame *owner)
-	: Ship(id, owner), mAmmount(0), mSchool(nullptr), mRepairing(false), mFishing(false)
+	: Ship(id, owner), mSchool(nullptr), mRepairing(false), mFishing(false)
 {
 	mInit();
 }
@@ -70,7 +70,7 @@ void FishingBoat::setFishing(int mode, School *school)
 	}
 }
 
-int FishingBoat::getAmmount()
+int *FishingBoat::getAmmount()
 {
 	return mAmmount;
 }
@@ -79,6 +79,8 @@ void FishingBoat::mInit()
 {
 	mStartX = 0.6;
 	mStartY = 0.5;
+
+	mAmmount[0] = mAmmount[1] = mAmmount[2] = mAmmount[3] = 0;
 
 	Ship::mInit();
 
@@ -178,7 +180,7 @@ void FishingBoat::update(Angler::Game *context, float time, float deltaTime, boo
 
 			if (mSchool != nullptr && fmod(mFishTime, 0.25f) < deltaTime)
 			{
-				mAmmount += mSchool->fish(1);
+				mAmmount[0] += mSchool->fish(1);
 			}
 
 			mFishTime += deltaTime;

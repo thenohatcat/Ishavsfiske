@@ -33,27 +33,77 @@ FishingBoat *FishingMode::getShipFishing()
 	return (FishingBoat*)mShipFishing;
 }
 
+Map *FishingMode::getMap()
+{
+	return mMap;
+}
+
+void FishingMode::mSchoolsClear()
+{
+	for (std::vector<School*>::const_iterator i = mSchools.begin(); i != mSchools.end(); )
+	{
+		Angler::Node *n = *i;
+		i = mSchools.erase(i);
+		delete n;
+	}
+}
+
+void FishingMode::mReset()
+{
+	mSchoolID = 0;
+	mTimer = 122;
+	mTutorialStage = 0;
+	mTutorialStageTime = -1;
+
+	mMap->setPos(sf::Vector2i(12, 10));
+	mFishBase->setTranslation(-12/20.0f, -10/20.0f);
+
+	mShipFishing->setPosition(sf::Vector2f(0.4f, 0.5f));
+	mShipFishing->setRotation(0);
+
+	mShipBreaker->setPosition(sf::Vector2f(0.6f, 0.5f));
+	mShipBreaker->setRotation(0);
+
+	mSchoolsClear();
+}
+
 void FishingMode::mEnable(bool enabled)
 {
 	if (enabled)
 	{
-		int sizes[9] = { 600, 600, 32, 64, 64, 64, 128, 512, 1 };
-		sf::Texture* textures[9] = { mTXUI, mTXUI, mTXSchool, mTXUI, mTXUI, mTXUI, mTXUI, mUIFont, mTXGameOver };
-		mOwner->setupGraphicsLayers(9, sizes, textures);
+		int sizes[11] = { 1200, 1200, 32, 64, 64, 64, 128, 512, 1, 1, 1 };
+		sf::Texture* textures[11] = { mTXUI, mTXUI, mTXSchool, mTXUI, mTXUI, mTXUI, mTXUI, mUIFont, mTXBackButton, mTXCursor, mTXGameOver };
+		mOwner->setupGraphicsLayers(11, sizes, textures);
 
-		mOwner->getSound()->playSound(mSeaAmbient, false, -1, -1, true);
+		mReset();
+
+		mOwner->setCursorVisible(false);
+
+		mOwner->getSound()->playSound(mSeaAmbient, false, 0, 6*60.0f + 6.0f, true);
 		mOwner->getSound()->setVolume(mSeaAmbient, 10.0f);
 
 		//mOwner->getSound()->playSound(mMusic, false, -1, -1, true);
 
 		mOwner->getSound()->playSound(mEngineSound, false, 0, 1.46f, true);
 		mOwner->getSound()->setVolume(mEngineSound, 30.0f);
+
+		mMap->updateMap();
 	}
 	else
 	{
 		mOwner->getSound()->stopSound(mSeaAmbient);
 		//mOwner->getSound()->stopSound(mMusic);
 		mOwner->getSound()->stopSound(mEngineSound);
+
+		int *fc = mOwner->getFishCount();
+		int *fcs = ((FishingBoat*)mShipFishing)->getAmmount();
+		for (int i = 0; i < 4; i++)
+		{
+			fc[i] += fcs[i];
+			fcs[i] = 0;
+		}
+
+		mOwner->setCursorVisible(true);
 
 		mOwner->clearGraphicsLayers();
 	}

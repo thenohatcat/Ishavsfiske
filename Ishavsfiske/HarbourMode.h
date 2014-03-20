@@ -23,6 +23,7 @@ namespace Ishavsfiske
 		HarbourMode(unsigned long id, Ishavsfiske::IshavsfiskeGame *owner);
 
 		void draw(Angler::Game* context, Angler::Graphics::GraphicsEngine* graphics, float time, float deltaTime);
+		void endDraw(Angler::Game* context, Angler::Graphics::GraphicsEngine* graphics, float time, float deltaTime);
 		void update(Angler::Game* context, float time, float deltaTime, bool changed = false);
 
 		void init();
@@ -32,9 +33,48 @@ namespace Ishavsfiske
 		void mEnable(bool enabled);
 
 	private:
-		void showRoom(int ind);
+		void mShowRoom(int ind);
+
+		void mUpdateHarbourMode(Angler::Game* context, float time, float deltaTime);
+		void mUpdateRoom(Angler::Game* context, float time, float deltaTime);
+
+		void mDrawHarbourRoom(Angler::Game* context, Angler::Graphics::GraphicsEngine* graphics, float time, float deltaTime);
+		void mDrawRoom(Angler::Game* context, Angler::Graphics::GraphicsEngine* graphics, float time, float deltaTime);
+
+		void mDrawTrade(Angler::Game* context, Angler::Graphics::GraphicsEngine* graphics, float time, float deltaTime);
+
+		int mRoom;
+
+		int mRadioCh;
+
+		Font *mFont;
+
+		sf::Texture *mTXBarHO, *mTXWorkshopHO, *mTXMarketHO, *mTXUI, *mTXBackButton, *mTXCursor, *mTXFont;
+		std::vector<sf::Vector2f> mBarMOS, mWorkshopMOS, mMarketMOS, mMenuButtonMOS, mRadioMOS, mBackButtonMOS,
+			mSellButtonMOS;
+		bool mBarIsMO, mWorkshopIsMO, mMarketIsMO, mMenuButtonIsMO, mRadioIsMO, mBackButtonIsMO, mSellButtonIsMO;
+		float mMenuButtonRot;
+
+		float mRadioTime;
 
 		sf::Texture *mTXHarbour;
+		sf::Texture 
+			*mTXBarInside, *mTXBarInsideHO, 
+			*mTXWorkshopInside, *mTXWorkshopInsideHO,
+			*mTXMarketInside, *mTXMarketInsideHO;
+
+		std::vector<sf::Vector2f> mInsideMOS;
+		bool mInsideIsMO;
+
+		bool mTrading;
+
+		sf::Sound *mRadioSound;
+		sf::SoundBuffer *mRadioBuffer;
+		sf::Sound *mMusic[4];
+		sf::SoundBuffer *mMusicBuffer[4];
+
+		sf::Sound *mSSea, *mSBar, *mSWorkshop, *mSMarket;
+		sf::SoundBuffer *mSBSea, *mSBBar, *mSBWorkshop, *mSBMarket;
 
 		Ishavsfiske::IshavsfiskeGame *mOwner;
 	};
