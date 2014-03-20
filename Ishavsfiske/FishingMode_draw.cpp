@@ -30,6 +30,106 @@ void FishingMode::draw(Angler::Game* context, Angler::Graphics::GraphicsEngine* 
 			glPushMatrix();
 				graphics->draw(5, sf::Vector2f(0, 0), sf::Vector2f(0, 0), sf::Vector2f(200/1500.0f, 1000/1600.0f));
 			glPopMatrix();
+			// Fisher UI
+			glPushMatrix();
+				glScalef(1/40.0f, 1/40.0f, 1);
+					glTranslatef(1, 24, 0);
+				glScalef(40.0f, 40.0f, 1);
+				// Base
+				glPushMatrix();
+				glScalef(375/1000.0f, 375/1000.0f, 1);
+				graphics->draw(5, sf::Vector2f(0, 0), sf::Vector2f(160/1500.0f, 1000/1600.0f), sf::Vector2f(150/1500.0f, 375/1600.0f));
+				glPopMatrix();
+
+				// Fisher Mood Portrait
+				glPushMatrix();
+				glScalef(10/75.0f, 10/75.0f, 1);
+				glTranslatef(0.1f, 0.52f, 1);
+				// Villkor
+				//graphics->draw(5, sf::Vector2f(0, 0), sf::Vector2f(1378/1500.0f, 0.0f), sf::Vector2f(122/1500.0f, 133/1600.0f));
+				// Villkor!
+				//graphics->draw(5, sf::Vector2f(0, 0), sf::Vector2f(1378/1500.0f, 133/1600.0f), sf::Vector2f(122/1500.0f, 133/1600.0f));
+				// VILLKOR!
+				graphics->draw(5, sf::Vector2f(0, 0), sf::Vector2f(1378/1500.0f, 266/1600.0f), sf::Vector2f(122/1500.0f, 133/1600.0f));
+				glPopMatrix();
+
+				// Fish 1
+				/*
+				if((((FishingBoat*)mShipFishing)->getAmmount() >= ((((FishingBoat*)mShipFishing)->getMaxAmount() * 1/8))) && (((FishingBoat*)mShipFishing)->getAmmount() < ((((FishingBoat*)mShipFishing)->getMaxAmount() * 2/8))))
+				{
+				glPushMatrix();
+					glScalef(1/70.0f, 1/70.0f, 1);
+					glTranslatef(1.5f, 22.2f, 0);
+					graphics->draw(5, sf::Vector2f(0, 0), sf::Vector2f(310/1500.0f, 1000/1600.0f), sf::Vector2f(72/1500.0f, 10/1600.0f));
+				glPopMatrix();			
+				}
+				*/
+				// Fish 2
+				/*
+				glPushMatrix();
+					glScalef(1/47.0f, 1/47.0f, 1);
+					glTranslatef(1, 14.5f, 0);
+					graphics->draw(5, sf::Vector2f(0, 0), sf::Vector2f(310/1500.0f, 1010/1600.0f), sf::Vector2f(107/1500.0f, 20/1600.0f));
+				glPopMatrix();
+				*/
+				// Fish 3
+				/*
+				glPushMatrix();
+					glScalef(1/27.5f, 1/27.5f, 1);
+					glTranslatef(0.5f, 8.2f, 0);
+					graphics->draw(5, sf::Vector2f(0, 0), sf::Vector2f(310/1500.0f, 1030/1600.0f), sf::Vector2f(107/1500.0f, 33/1600.0f));
+				glPopMatrix();
+				*/
+				// Fish 4
+				/*
+				glPushMatrix();
+					glScalef(1/27.5f, 1/24.5f, 0);
+					glTranslatef(0.5f, 7.1f, 0);
+					graphics->draw(5, sf::Vector2f(0, 0), sf::Vector2f(310/1500.0f, 1063/1600.0f), sf::Vector2f(107/1500.0f, 33/1600.0f));
+				glPopMatrix();
+				*/
+
+				// Fish 5
+				/*
+				glPushMatrix();
+					glScalef(1/11.5f, 1/13.0f, 1);
+					glTranslatef(0.2f, 3.3f, 0);
+					graphics->draw(5, sf::Vector2f(0, 0), sf::Vector2f(310/1500.0f, 1108/1600.0f), sf::Vector2f(107/1500.0f, 78/1600.0f));
+				glPopMatrix();
+				*/
+
+				//Fish 6
+				/*
+				glPushMatrix();
+					glScalef(1/9.5f, 1/11.5f, 1);
+					glTranslatef(0.15f,2.83f,0);
+					graphics->draw(5, sf::Vector2f(0, 0), sf::Vector2f(310/1500.0f, 1186/1600.0f), sf::Vector2f(107/1500.0f, 92/1600.0f));
+				glPopMatrix();
+				*/
+
+				/*
+				glPushMatrix();
+					glScalef(1/8.0f, 1/10.0f, 1);
+					glTranslatef(1/9.75f, 2.32f, 0);
+					graphics->draw(5, sf::Vector2f(0, 0), sf::Vector2f(310/1500.0f, 1278/1600.0f), sf::Vector2f(107/1500.0f, 107/1600.0f));
+				glPopMatrix();
+				*/
+
+				//Fish 8
+				///*
+				glPushMatrix();
+					glScalef(1/7.5f, 1/8.4f, 1);
+					glTranslatef(0.13f, 1.78f, 0);
+					graphics->draw(5, sf::Vector2f(0, 0), sf::Vector2f(310/1500.0f, 1385/1600.0f), sf::Vector2f(107/1500.0f, 120/1600.0f));
+				glPopMatrix();
+				//*/
+				// Fish Frame
+				glPushMatrix();
+					glScalef(1/6.5f, 1/6.5f, 1);
+					glTranslatef(1/13.25f, 1.325f, 0);
+					graphics->draw(5, sf::Vector2f(0, 0), sf::Vector2f(24/1500.0f, 1391/1600.0f), sf::Vector2f(120/1500.0f, 146/1600.0f));
+				glPopMatrix();
+			glPopMatrix();
 
 			// Status Left
 			/*glPushMatrix();
@@ -64,6 +164,7 @@ void FishingMode::draw(Angler::Game* context, Angler::Graphics::GraphicsEngine* 
 
 			//Breaker UI
 			glPushMatrix();
+				glTranslated(14/10.0f, 0, 0);
 				glScalef(1/40.0f, 1/40.0f, 1);
 					glTranslatef(1, 24, 0);
 				glScalef(40.0f, 40.0f, 1);
@@ -77,11 +178,12 @@ void FishingMode::draw(Angler::Game* context, Angler::Graphics::GraphicsEngine* 
 					*/
 
 					//BG
+					/*
 					glPushMatrix();
 						glScalef(98/1000.0f, 98/1000.0f, 1);
 						graphics->draw(5, sf::Vector2f(0.5f, 1.0f), sf::Vector2f(150/1500.0f, 1190.0f/1600.0f), sf::Vector2f(22/1500.0f, 98/1600.0f));
 					glPopMatrix();
-
+					*/
 					//Liquid
 					/*
 					glPushMatrix();
@@ -106,6 +208,17 @@ void FishingMode::draw(Angler::Game* context, Angler::Graphics::GraphicsEngine* 
 				glPushMatrix();
 					glScalef(375/1000.0f, 375/1000.0f, 1);
 					graphics->draw(5, sf::Vector2f(0, 0), sf::Vector2f(0, 1000.0f/1600.0f), sf::Vector2f(150/1500.0f, 375/1600.0f));
+				glPopMatrix();
+				
+				glPushMatrix();
+				glScalef(10/75.0f, 10/75.0f, 1);
+				glTranslatef(0.1f, 0.52f, 1);
+				// Villkor
+				//graphics->draw(5, sf::Vector2f(0, 0), sf::Vector2f(1378/1500.0f, 399.0f), sf::Vector2f(122/1500.0f, 133/1600.0f));
+				// Villkor!
+				//graphics->draw(5, sf::Vector2f(0, 0), sf::Vector2f(1378/1500.0f, 532/1600.0f), sf::Vector2f(122/1500.0f, 133/1600.0f));
+				// VILLKOR!
+				graphics->draw(5, sf::Vector2f(0, 0), sf::Vector2f(1378/1500.0f, 665/1600.0f), sf::Vector2f(122/1500.0f, 133/1600.0f));
 				glPopMatrix();
 
 				//Speedometer
@@ -155,13 +268,14 @@ void FishingMode::draw(Angler::Game* context, Angler::Graphics::GraphicsEngine* 
 					
 
 					//Glass
+					/*
 					glPushMatrix();
 						glScalef(93/1000.0f, 93/1000.0f, 1);
 						graphics->draw(5, sf::Vector2f(0.5f, 0.5f), sf::Vector2f(161/1500.0f, 1000.0f/1600.0f), sf::Vector2f(95/1500.0f, 93/1600.0f));
 					glPopMatrix();
+					*/
 
 					//Hull Armor
-					//Left Half
 					glPushMatrix();
 						glScalef(15/1000.0f, 15/1000.0f, 1);
 						glTranslated(-5, -1, 1);
@@ -260,7 +374,7 @@ void FishingMode::draw(Angler::Game* context, Angler::Graphics::GraphicsEngine* 
 						//Piece 15
 						graphics->draw(5, sf::Vector2f(0, 0), sf::Vector2f(223/1500.0f, 1375/1600.0f), sf::Vector2f(15/1500.0f, 16/1600.0f));
 						glTranslatef(0.45f, 0.55f, 1);
-						}else if(((IceBreaker*)mShipBreaker)->getHull() >= 16/19.0f)
+						}if(((IceBreaker*)mShipBreaker)->getHull() >= 16/19.0f)
 						{
 						//Piece 16
 						graphics->draw(5, sf::Vector2f(0, 0), sf::Vector2f(239/1500.0f, 1375/1600.0f), sf::Vector2f(13/1500.0f, 13/1600.0f));
@@ -287,7 +401,6 @@ void FishingMode::draw(Angler::Game* context, Angler::Graphics::GraphicsEngine* 
 						graphics->draw(5, sf::Vector2f(0, 0), sf::Vector2f(283/1500.0f, 1375/1600.0f), sf::Vector2f(11/1500.0f, 13/1600.0f));
 						}
 					glPopMatrix();
-					//Right Half
 				glPopMatrix();
 			glPopMatrix();
 
