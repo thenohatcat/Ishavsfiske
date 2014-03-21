@@ -107,7 +107,7 @@ bool Seagull::mLookAtShip()
 
 	float rotation = abs(fmod(mRootRotation->getRotation(), 360.0f));
 
-	cout << mRotToShip << " " << rotation << endl;
+	//cout << mRotToShip << " " << rotation << endl;
 
 	return ((mRotToShip - 3) < rotation) &&  (rotation < (mRotToShip + 3));
 }

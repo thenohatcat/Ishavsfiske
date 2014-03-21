@@ -103,18 +103,6 @@ void Animal::move(float x, float y)
 	mRootTranslation->translate(tv);
 }
 
-void Animal::throttle(float vx, float vy)
-{
-		mVel.x += vx;
-		mVel.y += vy;
-}
-
-void Animal::mSetSpeed(float vx, float vy)
-{
-	mVel.x = vx;
-	mVel.y = vy;
-}
-
 int Animal::mDirection(sf::Vector2f position)
 {
 	sf::Vector2f dir = position - mRootTranslation->getTranslation();

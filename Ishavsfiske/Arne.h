@@ -31,6 +31,7 @@ namespace Ishavsfiske
 	protected:
 		virtual void mInit();
 	private:
+		void throttle(float vx, float vy);
 		sf::Vector2f mVel, mShipIceBDis;
 
 		sf::Vector2f mIceBPos;

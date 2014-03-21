@@ -60,9 +60,10 @@ void Arne::update(Angler::Game* context, float time, float deltaTime, bool chang
 					mVel.y = 0;
 				rotate(180 * deltaTime);
 			}
-			if(mVel.y < 0.05f)
-				throttle(0, 0.001f);
-			if(mVel.y > 0)
+			cout << abs(mVel.y) << endl;
+			if(abs(mVel.y) < 10)
+				throttle(0, -1 * deltaTime);
+			if(abs(mVel.y) > 0)
 				move(0, mVel.y * deltaTime);
 
 		}
@@ -84,7 +85,6 @@ void Arne::mInit()
 
 	// Arne ID?
 	Angler::Nodes::Scale *s = new Angler::Nodes::Scale(getID() + 0x0120, mAnimalRoot, 1/10.0f, 1/10.0f);
-	Angler::Nodes::SpriteNode *arne = new Angler::Nodes::SpriteNode(getID() + 0x654, s, 12, sf::Vector2f(0.5f, 0.5f), sf::Vector2f(0, 4/13.0f), sf::Vector2f(1, 6/13.0f));
 
 	/*std::vector<sf::Vector2f> pts;
 	pts.push_back(sf::Vector2f(1, 0));
@@ -103,7 +103,7 @@ void Arne::mInit()
 	anime.push_back(sf::Vector2f(5/8.0f, 0));
 	anime.push_back(sf::Vector2f(6/8.0f, 0));
 	anime.push_back(sf::Vector2f(7/8.0f, 0));
-	new Angler::Nodes::AnimatedNode(getID() + 0x678, arne, 12, anime, 1/8.0f, 0.5f, 0.5f, 1/8.0f, 1); // ID?
+	new Angler::Nodes::AnimatedNode(getID() + 0x678, s, 12, anime, 1/8.0f, 0.5f, 0.5f, 1/8.0f, 1); // ID?
 }
 
 bool Arne::mAtShip()
@@ -118,7 +118,7 @@ bool Arne::mLookAtShip()
 
 	float rotation = abs(fmod(mRootRotation->getRotation(), 360.0f));
 
-	cout << mRotToShip << " " << rotation << endl;
+	/*cout << mRotToShip << " " << rotation << endl;*/
 
 	return ((mRotToShip - 3) < rotation) &&  (rotation < (mRotToShip + 3));
 }
@@ -145,4 +145,10 @@ float Arne::mCalcRotation(float angle)
 void Arne::collide()
 {
 
+}
+
+void Arne::throttle(float vx, float vy)
+{
+	mVel.x += vx;
+	mVel.y += vy;
 }
