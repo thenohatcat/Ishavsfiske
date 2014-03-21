@@ -711,10 +711,12 @@ void HarbourMode::update(Angler::Game* context, float time, float deltaTime, boo
 				}
 			}
 
-			for (int i = 0; i < 4; i++)
+			for (int i = 0; i < 5; i++)
 			{
 				mOwner->getSound()->updateState(mMusic[i], 0x12000L + i + mRadioCh * 0x10);
+				printf("%03.0f ", mMusic[i]->getVolume());
 			}
+			printf("\n");
 		}
 		else if (mRadioTime >= 0)	
 		{
@@ -725,7 +727,9 @@ void HarbourMode::update(Angler::Game* context, float time, float deltaTime, boo
 			&& !context->getMouseState().wasButtonDown(sf::Mouse::Button::Left))
 		{
 			mRadioTime = 0;
-			mRadioCh = (mRadioCh + 1) % 5;
+			mRadioCh = (mRadioCh + 1) % 6;
+
+			printf("%u\n", mRadioCh);
 
 			context->getSound()->playSound(mRadioSound, false, 0, 1.0f, false);
 			mOwner->getSound()->updateState(mRadioSound, 0x13000L);
@@ -748,10 +752,12 @@ void HarbourMode::update(Angler::Game* context, float time, float deltaTime, boo
 				}
 			}
 
-			for (int i = 0; i < 4; i++)
+			for (int i = 0; i < 5; i++)
 			{
 				mOwner->getSound()->updateState(mMusic[i], 0x12000L + i);
+				printf("%03.0f ", mMusic[i]->getVolume());
 			}
+			printf("\n");
 		}
 
 		mUpdateChildren(context, time, deltaTime);
@@ -786,15 +792,16 @@ void HarbourMode::loadContent()
 	mTXMarketInside->loadFromFile("marknad_3.png");
 	mTXMarketInsideHO->loadFromFile("marknad__ThordBirgitte_Hoverover.png");
 
-	mMusicBuffer[0]->loadFromFile("Hamn_Radio_Blues01.wav");
-	mMusicBuffer[1]->loadFromFile("Hamn_Radio_Jazz01.wav");
-	mMusicBuffer[2]->loadFromFile("Hamn_Radio_Jazz02.wav");
-	mMusicBuffer[3]->loadFromFile("Hamn_Radio_Jazz03.wav");
+	mMusicBuffer[0]->loadFromFile("Harbor_Radio_Blues01.ogg");
+	mMusicBuffer[1]->loadFromFile("Harbor_Radio_Blues02.ogg");
+	mMusicBuffer[2]->loadFromFile("Harbor_Radio_Jazz01.ogg");
+	mMusicBuffer[3]->loadFromFile("Harbor_Radio_Jazz02.ogg");
+	mMusicBuffer[4]->loadFromFile("Harbor_Radio_Jazz03.ogg");
 
 	mRadioBuffer->loadFromFile("radio_1.wav");
 	mRadioSound->setBuffer(*mRadioBuffer);
 
-	for (int i = 0; i < 4; i++)
+	for (int i = 0; i < 5; i++)
 	{
 		mMusic[i]->setBuffer(*mMusicBuffer[i]);
 	}
@@ -896,7 +903,7 @@ void HarbourMode::init()
 
 	mRadioSound = new sf::Sound();
 	mRadioBuffer = new sf::SoundBuffer();
-	for (int i = 0; i < 4; i++)
+	for (int i = 0; i < 5; i++)
 	{
 		mMusicBuffer[i] = new sf::SoundBuffer();
 		mMusic[i] = new sf::Sound();
@@ -915,89 +922,6 @@ void HarbourMode::init()
 
 	mSMarket = new sf::Sound();
 	mSBMarket = new sf::SoundBuffer();
-
-	Angler::Sound::SoundEngine *s = mOwner->getSound();
-	s->addSoundState(0x11000, 15.0f, 0, 47.0f); //Sea ambient, harbour, music
-	s->addSoundState(0x11001, 15.0f, 0, 49.0f); //Bar ambient, harbour, music
-	s->addSoundState(0x11002, 15.0f, 0, 49.0f); //Workshop ambient, harbour, music
-	s->addSoundState(0x11003, 15.0f, 0, 46.0f); //Market ambient, harbour, music
-
-	s->addSoundState(0x10000, 80.0f, 0, 47.0f); //Sea ambient, harbour, no mo, no music
-	s->addSoundState(0x10001, 15.0f, 0, 49.0f); //Bar ambient, harbour, no mo, no music
-	s->addSoundState(0x10002, 15.0f, 0, 49.0f); //Workshop ambient, harbour, no mo, no music
-	s->addSoundState(0x10003, 15.0f, 0, 46.0f); //Market ambient, harbour, no mo, no music
-
-	s->addSoundState(0x10010, 15.0f, 0, 47.0f); //Sea ambient, harbour, bar mo, no music
-	s->addSoundState(0x10011, 80.0f, 0, 49.0f); //Bar ambient, harbour, bar mo, no music
-	s->addSoundState(0x10012, 15.0f, 0, 49.0f); //Workshop ambient, harbour, bar mo, no music
-	s->addSoundState(0x10013, 15.0f, 0, 46.0f); //Market ambient, harbour, bar mo, no music
-
-	s->addSoundState(0x10020, 15.0f, 0, 47.0f); //Sea ambient, harbour, workshop mo, no music
-	s->addSoundState(0x10021, 15.0f, 0, 49.0f); //Bar ambient, harbour, workshop mo, no music
-	s->addSoundState(0x10022, 80.0f, 0, 49.0f); //Workshop ambient, harbour, workshop mo, no music
-	s->addSoundState(0x10023, 15.0f, 0, 46.0f); //Market ambient, harbour, workshop mo, no music
-
-	s->addSoundState(0x10030, 15.0f, 0, 47.0f); //Sea ambient, harbour, market mo, no music
-	s->addSoundState(0x10031, 15.0f, 0, 49.0f); //Bar ambient, harbour, market mo, no music
-	s->addSoundState(0x10032, 15.0f, 0, 49.0f); //Workshop ambient, harbour, market mo, no music
-	s->addSoundState(0x10033, 80.0f, 0, 46.0f); //Market ambient, harbour, market mo, no music
-
-	s->addSoundState(0x10100, 0.0f, 0, 47.0f); //Sea ambient, bar, no music
-	s->addSoundState(0x10101, 80.0f, 0, 49.0f); //Bar ambient, bar, no music
-	s->addSoundState(0x10102, 0.0f, 0, 49.0f); //Workshop ambient, bar, no music
-	s->addSoundState(0x10103, 0.0f, 0, 46.0f); //Market ambient, bar, no music
-
-	s->addSoundState(0x10100, 0.0f, 0, 47.0f); //Sea ambient, bar, music
-	s->addSoundState(0x10101, 15.0f, 0, 49.0f); //Bar ambient, bar, music
-	s->addSoundState(0x10102, 0.0f, 0, 49.0f); //Workshop ambient, bar, music
-	s->addSoundState(0x10103, 0.0f, 0, 46.0f); //Market ambient, bar, music
-
-	s->addSoundState(0x10200, 0.0f, 0, 47.0f); //Sea ambient, workshop, no music
-	s->addSoundState(0x10201, 0.0f, 0, 49.0f); //Bar ambient, worksop, no music
-	s->addSoundState(0x10202, 80.0f, 0, 49.0f); //Workshop ambient, workshop, no music
-	s->addSoundState(0x10203, 0.0f, 0, 46.0f); //Market ambient, workshop, no music
-
-	s->addSoundState(0x11200, 0.0f, 0, 47.0f); //Sea ambient, workshop, music
-	s->addSoundState(0x11201, 0.0f, 0, 49.0f); //Bar ambient, worksop, music
-	s->addSoundState(0x11202, 15.0f, 0, 49.0f); //Workshop ambient, workshop, music
-	s->addSoundState(0x11203, 0.0f, 0, 46.0f); //Market ambient, workshop, music
-
-	s->addSoundState(0x10300, 0.0f, 0, 47.0f); //Sea ambient, market, no music
-	s->addSoundState(0x10301, 0.0f, 0, 49.0f); //Bar ambient, market, no music
-	s->addSoundState(0x10302, 0.0f, 0, 49.0f); //Workshop ambient, market, no music
-	s->addSoundState(0x10303, 80.0f, 0, 46.0f); //Market ambient, market, no music
-
-	s->addSoundState(0x11300, 0.0f, 0, 47.0f); //Sea ambient, market, music
-	s->addSoundState(0x11301, 0.0f, 0, 49.0f); //Bar ambient, market, music
-	s->addSoundState(0x11302, 0.0f, 0, 49.0f); //Workshop ambient, market, music
-	s->addSoundState(0x11303, 15.0f, 0, 46.0f); //Market ambient, market, music
-
-	s->addSoundState(0x12000, 0, 0, 1*60.0f + 43.0f);	//No music, song 1
-	s->addSoundState(0x12001, 0, 0, 1*60.0f + 52.0f);	//No music, song 2
-	s->addSoundState(0x12002, 0, 0, 30.0f);				//No music, song 3
-	s->addSoundState(0x12003, 0, 0, 1*60.0f + 9.0f);	//No music, song 4
-
-	s->addSoundState(0x12010, 100.0, 0, 1*60.0f + 43.0f);	//song 1 on, song 1
-	s->addSoundState(0x12011, 0, 0, 1*60.0f + 52.0f);		//song 1 on, song 2
-	s->addSoundState(0x12012, 0, 0, 30.0f);					//song 1 on, song 3
-	s->addSoundState(0x12013, 0, 0, 1*60.0f + 9.0f);		//song 1 on, song 4
-
-	s->addSoundState(0x12020, 0, 0, 1*60.0f + 43.0f);		//song 2 on, song 1
-	s->addSoundState(0x12021, 100.0, 0, 1*60.0f + 52.0f);	//song 2 on, song 2
-	s->addSoundState(0x12022, 0, 0, 30.0f);					//song 2 on, song 3
-	s->addSoundState(0x12023, 0, 0, 1*60.0f + 9.0f);		//song 2 on, song 4
-
-	s->addSoundState(0x12030, 0, 0, 1*60.0f + 43.0f);	//song 3 on, song 1
-	s->addSoundState(0x12031, 0, 0, 1*60.0f + 52.0f);	//song 3 on, song 2
-	s->addSoundState(0x12032, 100.0, 0, 30.0f);			//song 3 on, song 3
-	s->addSoundState(0x12033, 0, 0, 1*60.0f + 9.0f);	//song 3 on, song 4
-
-	s->addSoundState(0x12040, 0, 0, 1*60.0f + 43.0f);		//song 4 on, song 1
-	s->addSoundState(0x12041, 0, 0, 1*60.0f + 52.0f);		//song 4 on, song 2
-	s->addSoundState(0x12042, 0, 0, 30.0f);					//song 4 on, song 3
-	s->addSoundState(0x12043, 100.0, 0, 1*60.0f + 9.0f);	//song 4 on, song 4
-
-	s->addSoundState(0x13000, 100.0, 0, 1.0f);		//song 4 on, song 1
 }
 
 void HarbourMode::mEnable(bool enabled)
@@ -1006,15 +930,16 @@ void HarbourMode::mEnable(bool enabled)
 	{
 		mOwner->setCursorVisible(false);
 
-		for (int i = 0; i < 4; i++)
+		for (int i = 0; i < 5; i++)
 		{
 			mMusic[i]->setVolume(0.0f);
 		}
 
 		mOwner->getSound()->playSound(mMusic[0], false, 0, 1*60.0f + 43.0f, true);
-		mOwner->getSound()->playSound(mMusic[1], false, 0, 1*60.0f + 52.0f, true);
-		mOwner->getSound()->playSound(mMusic[2], false, 0, 30.0f, true);
-		mOwner->getSound()->playSound(mMusic[3], false, 0, 1*60.0f + 9.0f, true);
+		mOwner->getSound()->playSound(mMusic[1], false, 0, 1*60.0f + 25.0f, true);
+		mOwner->getSound()->playSound(mMusic[2], false, 0, 1*60.0f + 52.0f, true);
+		mOwner->getSound()->playSound(mMusic[3], false, 0, 30.0f, true);
+		mOwner->getSound()->playSound(mMusic[4], false, 0, 1*60.0f + 9.0f, true);
 
 		//mSSea->setVolume(80.0f);
 		mOwner->getSound()->playSound(mSSea, false, 0, 47.0f, true);
@@ -1065,7 +990,7 @@ void HarbourMode::mShowRoom(int ind)
 {
 	mRoom = ind;
 
-	for (int i = 0; i < 4; i++)
+	for (int i = 0; i < 5; i++)
 	{
 		mOwner->getSound()->updateState(mMusic[i], 0x12000L + i + mRadioCh * 0x10);
 	}

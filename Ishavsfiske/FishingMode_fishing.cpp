@@ -33,7 +33,7 @@ void FishingMode::repair(int dir)
 {
 	((FishingBoat*)mShipFishing)->setRepair(dir);
 	
-	mOwner->getSound()->playSound(mRepair, false, -1, -1, false);
+	mOwner->getSound()->playSound(mRepair, false, 0, 1.0f, false);
 
 	if (mTutorialStage == 12)
 	{

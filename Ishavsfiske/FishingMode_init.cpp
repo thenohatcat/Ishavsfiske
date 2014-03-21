@@ -46,7 +46,7 @@ void FishingMode::loadContent()
 	mCollIceBuff->loadFromFile("Ice_FirstCollision.wav");
 	mCollIceSound->setBuffer(*mCollIceBuff);
 
-	mRepairBuff->loadFromFile("Repareringsljud_WAV.wav");
+	mRepairBuff->loadFromFile("Repair.ogg");
 	mRepair->setBuffer(*mRepairBuff);
 
 	mEngineBuff->loadFromFile("Motor_Collage_Test.wav");
@@ -57,9 +57,9 @@ void FishingMode::loadContent()
 
 	mMsgBox->loadContent();
 
-	//mMusicFishingBuff->loadFromFile("Hav_Fiske.wav");
+	mMusicFishingBuff->loadFromFile("Sea_theme.ogg");
 
-	//mMusic->setBuffer(*mMusicFishingBuff);
+	mMusic->setBuffer(*mMusicFishingBuff);
 
 	//Menu button
 	for (int i = 0; i < 32; i++)
@@ -91,9 +91,9 @@ void FishingMode::init()
 	mTutorialSound = new sf::Sound();
 	mTutorialBuff = new sf::SoundBuffer();
 
-	//mMusicFishingBuff = new sf::SoundBuffer();
+	mMusicFishingBuff = new sf::SoundBuffer();
 
-	//mMusic = new sf::Sound();
+	mMusic = new sf::Sound();
 
 	mTXMap = new sf::Texture();
 	mTXSchool = new sf::Texture();

@@ -71,8 +71,8 @@ namespace Ishavsfiske
 
 		sf::Sound *mRadioSound;
 		sf::SoundBuffer *mRadioBuffer;
-		sf::Sound *mMusic[4];
-		sf::SoundBuffer *mMusicBuffer[4];
+		sf::Sound *mMusic[5];
+		sf::SoundBuffer *mMusicBuffer[5];
 
 		sf::Sound *mSSea, *mSBar, *mSWorkshop, *mSMarket;
 		sf::SoundBuffer *mSBSea, *mSBBar, *mSBWorkshop, *mSBMarket;

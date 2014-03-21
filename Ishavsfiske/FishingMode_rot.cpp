@@ -92,7 +92,7 @@ void FishingMode::mEnable(bool enabled)
 		mOwner->getSound()->playSound(mSeaAmbient, false, 0, 6*60.0f + 6.0f, true);
 		mOwner->getSound()->setVolume(mSeaAmbient, 10.0f);
 
-		//mOwner->getSound()->playSound(mMusic, false, -1, -1, true);
+		mOwner->getSound()->playSound(mMusic, false, 0, 1*60.0f + 6.0f, true);
 
 		mOwner->getSound()->playSound(mEngineSound, false, 0, 1.46f, true);
 		mOwner->getSound()->setVolume(mEngineSound, 30.0f);
