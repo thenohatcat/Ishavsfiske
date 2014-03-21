@@ -53,6 +53,7 @@ namespace Ishavsfiske
 		std::vector<sf::Vector2f> mBarMOS, mWorkshopMOS, mMarketMOS, mMenuButtonMOS, mRadioMOS, mBackButtonMOS,
 			mSellButtonMOS;
 		bool mBarIsMO, mWorkshopIsMO, mMarketIsMO, mMenuButtonIsMO, mRadioIsMO, mBackButtonIsMO, mSellButtonIsMO;
+		bool mOldBarIsMO, mOldWorkshopIsMO, mOldMarketIsMO, mOldMenuButtonIsMO, mOldRadioIsMO, mOldBackButtonIsMO, mOldSellButtonIsMO;
 		float mMenuButtonRot;
 
 		float mRadioTime;

@@ -52,6 +52,9 @@ void Ishavsfiske::IshavsfiskeGame::mLoadContent()
 
 	mFishingMode->getMap()->load(0, "map_test.txt");
 
+	mSound->loadStates("sound_meta.txt");
+	mSound->loadStates("music_meta.txt");
+
 	mFishCount[0] = 1;
 	mFishCount[1] = 2;
 	mFishCount[2] = 3;
