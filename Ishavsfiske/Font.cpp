@@ -30,7 +30,8 @@ void Font::drawString(Angler::Graphics::GraphicsEngine* graphics, std::string st
 
 void Font::loadDistance()
 {
-	for(int i = 0; i < 256; i++)
+	//Placeholder for charaterdistance
+	/*for(int i = 0; i < 256; i++)
 	{
 		if(i == 'i')
 			leftDistance[i] = 0.2f;
@@ -43,9 +44,10 @@ void Font::loadDistance()
 			rightDistance[k] = 0.7f;
 		else
 			rightDistance[k] = 1;
-	}
+	}*/
 
-	/*std::ifstream file("asciiDistance.txt");
+	//Loading characterdistance from file
+	std::ifstream file("asciiDistance.txt");
 	if(file.is_open())
 	{
 		for(int i = 0; i < 512; i++)
@@ -60,7 +62,7 @@ void Font::loadDistance()
 			}
 		}
 		file.close();
-	}*/
+	}
 }
 
 float Font::getWidth(char c)
