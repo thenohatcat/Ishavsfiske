@@ -140,7 +140,7 @@ float Seagull::mCalcRotation(float angle)
 
 void Seagull::collide()
 {
-
+	revert();
 }
 
 void Seagull::setPosition(float x, float y)

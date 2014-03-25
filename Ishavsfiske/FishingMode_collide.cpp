@@ -9,6 +9,9 @@
 #include "IshavsfiskeGame.h"
 #include "FishingMode.h"
 
+#include <Angler\HelpFunctions.h>
+#include <iostream>
+
 using namespace Angler;
 using namespace Ishavsfiske;
 
@@ -157,8 +160,12 @@ void FishingMode::collide(Node *nodeA, Node *nodeB)
 
 		if((nodeA->getID() & 0xF000FFFF == 0x40002000) && (nodeB->getID() & 0xF000FFFF == 0x40002000))
 		{
-			((Seagull*)nodeA)->revert();
-			((Seagull*)nodeB)->revert();
+			Seagull *seagullA, *seagullB;
+			seagullA = (Seagull*)Angler::HelpFunctions::Nodes::getNode(nodeA->getID() & 0xFFFF0000, this);
+			seagullB = (Seagull*)Angler::HelpFunctions::Nodes::getNode(nodeB->getID() & 0xFFFF0000, this);
+			seagullA->revert();
+			seagullB->revert();
+			std::cout << "collided" << std::endl;
 		}
 	}
 }
