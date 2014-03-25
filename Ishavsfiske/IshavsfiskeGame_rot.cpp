@@ -140,3 +140,9 @@ void IshavsfiskeGame::addToWallet(int i)
 {
 	mWallet += i;
 }
+
+// Getting Arne
+Arne *IshavsfiskeGame::getArne()
+{
+	return mFishingMode->getArne();
+}

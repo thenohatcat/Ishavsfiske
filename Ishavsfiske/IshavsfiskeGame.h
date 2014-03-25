@@ -31,6 +31,7 @@ namespace Ishavsfiske
 
 	class IceBreaker;
 	class FishingBoat;
+	class Arne;
 
 	class IshavsfiskeGame
 		: public Angler::Game
@@ -48,6 +49,7 @@ namespace Ishavsfiske
 
 		IceBreaker *getIceBreaker();
 		FishingBoat *getShipFishing();
+		Arne *getArne(); // Getting Arne
 
 		FishingMode *getFishingMode();
 

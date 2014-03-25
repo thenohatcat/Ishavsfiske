@@ -38,6 +38,7 @@ namespace Ishavsfiske
 
 		IceBreaker *getIceBreaker();
 		FishingBoat *getShipFishing();
+		Arne *getArne(); // Get Arne
 
 		void draw(Angler::Game* context, Angler::Graphics::GraphicsEngine* graphics, float time, float deltaTime);
 		void update(Angler::Game* context, float time, float deltaTime, bool changed = false);

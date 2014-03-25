@@ -35,6 +35,12 @@ FishingBoat *FishingMode::getShipFishing()
 	return (FishingBoat*)mShipFishing;
 }
 
+// Get Arne
+Arne *FishingMode::getArne()
+{
+	return (Arne*)mArne;
+}
+
 Map *FishingMode::getMap()
 {
 	return mMap;

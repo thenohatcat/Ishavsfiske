@@ -28,6 +28,10 @@ namespace Ishavsfiske
 		virtual void attack();
 
 		virtual void collide();
+
+		sf::Vector2f getVel();
+
+		void block();
 	protected:
 		virtual void mInit();
 	private:
@@ -40,6 +44,11 @@ namespace Ishavsfiske
 		float mRotToShip;
 
 		bool mScared;
+
+		void revert();
+		float mTimeDiff;
+		std::vector<float> mOldRotations;
+		std::vector<sf::Vector2f> mOldTranslations;
 	};
 }
 

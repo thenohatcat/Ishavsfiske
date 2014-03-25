@@ -130,5 +130,7 @@ void FishingMode::collide(Node *nodeA, Node *nodeB)
 	#endif
 			}
 		}
+		// if mArne collides
+		if(nodeA->getID() == )
 	}
 }

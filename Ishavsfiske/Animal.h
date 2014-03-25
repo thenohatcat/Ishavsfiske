@@ -46,6 +46,8 @@ namespace Ishavsfiske
 		Angler::Nodes::Rotation *mRootRotation;
 
 		int mDirection(sf::Vector2f position);
+
+		bool mBlocked;
 	private:
 		bool mScared;
 	};
