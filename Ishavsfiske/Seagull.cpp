@@ -24,13 +24,13 @@ using namespace Ishavsfiske;
 using namespace Angler::Nodes;
 
 Seagull::Seagull(unsigned long id, Angler::Node *parent, Angler::Game *owner)
-	: Animal(id, parent, owner), mVel(0, -0.03f), rotSpeed(135)
+	: Animal(id, parent, owner), mVel(0, (rand() % 10 + 1) / 100.0f), mScared(false), recoverTime(0)
 {
 	mInit();
 }
 
 Seagull::Seagull(unsigned long id, Angler::Game *owner)
-	: Animal(id, owner), mVel(0, -0.03f), rotSpeed(135)
+	: Animal(id, owner), mVel(0, (rand() % 10 + 1) / 100.0f), mScared(false), recoverTime(0)
 {
 	mInit();
 }
@@ -51,13 +51,25 @@ void Seagull::update(Angler::Game* context, float time, float deltaTime, bool ch
 		mShipFishDis.x = mFishPos.x - mRootTranslation->getTranslationX();
 		mShipFishDis.y = mFishPos.y - mRootTranslation->getTranslationY();
 
-		if (!mAtShip()/* && !mScared*/)
+		if (!mAtShip() && !mScared)
 		{
 			if(!mLookAtShip())
 			{
-				rotate(rotSpeed * deltaTime);
+				rotate(180 * deltaTime);
 			}
-			move(0, mVel.y * deltaTime);
+			move(0, -mVel.y * deltaTime);
+		}
+
+		if(mScared)
+		{
+			recoverTime += deltaTime;
+			if(recoverTime < 5)
+				move(0, -mVel.y * deltaTime);
+			else
+			{
+				recoverTime = 0;
+				mScared = false;
+			}
 		}
 		mUpdateChildren(context, time, deltaTime);
 	}
@@ -73,12 +85,12 @@ void Seagull::mInit()
 	// Seagull ID?
 	Angler::Nodes::Scale *s = new Angler::Nodes::Scale(getID() + 0x0120, mAnimalRoot, 1/10.0f, 1/10.0f);
 
-	/*std::vector<sf::Vector2f> pts;
+	std::vector<sf::Vector2f> pts;
 	pts.push_back(sf::Vector2f(1, 0));
 	pts.push_back(sf::Vector2f(0, 0));
 	pts.push_back(sf::Vector2f(0, 1));
 	pts.push_back(sf::Vector2f(1, 1));
-	new Angler::Nodes::CollisionNode(getID(), s, pts, 0);*/
+	new Angler::Nodes::CollisionNode(getID() + 0x2000, s, pts, 0);
 
 
 	std::vector<sf::Vector2f> anime;
@@ -143,6 +155,7 @@ void Seagull::getPush()
 
 void Seagull::revert()
 {
+	cout << "reverted" << endl;
 	if(!mBlocked)
 	{
 		mRootRotation->setRotation(mOldRotations.back());
@@ -154,9 +167,4 @@ void Seagull::revert()
 		mVel.x = mVel.y = 0;
 		mChanged = true;
 	}
-}
-
-void Seagull::addRotSpeed(float x)
-{
-	rotSpeed += x;
 }

@@ -29,8 +29,6 @@ namespace Ishavsfiske
 
 		void setPosition(float x, float y);
 
-		void addRotSpeed(float x);
-
 		void revert();
 		void getPush();
 	protected:
@@ -43,8 +41,8 @@ namespace Ishavsfiske
 		float mCalcRotation(float angle);
 		float mRotToShip;
 		bool mScared;
-
-		float rotSpeed;
+		float recoverTime;
+		int LR;
 	};
 }
 

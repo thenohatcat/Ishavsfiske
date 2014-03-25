@@ -139,23 +139,26 @@ void FishingMode::collide(Node *nodeA, Node *nodeB)
 		//	}
 		//}
 
-		// if mSeagull collides
-		if((nodeA->getID() >= 0x40000000 && nodeA->getID() <= 0x49000000) || (nodeB->getID() >= 0x40000000 && nodeA->getID() <= 0x49000000))
+		//// if mSeagull collides
+		//if((nodeA->getID() && 0xF000FFFF == 0x40002000) && (nodeB->getID() && 0xF000FFFF == 0x40002000))
+		//{
+		//	Seagull *seagull = nullptr;
+		//	if (nodeB->getID() && 0xF000FFFF == 0x40002000)/* && nodeB->getID() && 0xF000FFFF == 0x40002000)*/
+		//	{
+		//		seagull = (Seagull*)(nodeA);
+		//		seagull->revert();
+		//	}
+		//	else if(nodeB->getID() && 0xF000FFFF == 0x40002000)/* && nodeB->getID() <= 0x4FFFFFFF)*/
+		//	{
+		//		seagull = (Seagull*)(nodeB);
+		//		seagull->revert();
+		//	}
+		//}
+
+		if((nodeA->getID() & 0xF000FFFF == 0x40002000) && (nodeB->getID() & 0xF000FFFF == 0x40002000))
 		{
-			if ((nodeB->getID() >= 0x40000000 && nodeB->getID() <= 0x49000000) || (nodeB->getID() >= 0x40000000 && nodeB->getID() <= 0x49000000))
-			{
-				Seagull *seagull = nullptr;
-				if (nodeA->getID() >= 0x40000000 && nodeA->getID() <= 0x4FFFFFFF)
-				{
-					seagull = (Seagull*)(nodeA);
-					seagull->revert();
-				}
-				else if(nodeB->getID() >= 0x40000000 && nodeB->getID() <= 0x4FFFFFFF)
-				{
-					seagull = (Seagull*)(nodeB);
-					seagull->revert();
-				}
-			}
+			((Seagull*)nodeA)->revert();
+			((Seagull*)nodeB)->revert();
 		}
 	}
 }

@@ -65,6 +65,7 @@ float FishingMode::mGetFish()
 void FishingMode::mReset()
 {
 	mSchoolID = 0;
+	mSeagullID = 0; // Modified by v0.1.5.a22
 	mTimer = 122;
 	mTutorialStage = 0;
 	mTutorialStageTime = -1;
