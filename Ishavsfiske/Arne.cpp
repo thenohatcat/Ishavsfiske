@@ -112,7 +112,7 @@ void Arne::mInit()
 	pts.push_back(sf::Vector2f(0, 0));
 	pts.push_back(sf::Vector2f(0, 1));
 	pts.push_back(sf::Vector2f(1, 1));
-	new Angler::Nodes::CollisionNode(getID() + 0x000111, s, pts, 0);
+	//new Angler::Nodes::CollisionNode(getID() + 0x000111, s, pts, 0);
 
 
 	std::vector<sf::Vector2f> anime;

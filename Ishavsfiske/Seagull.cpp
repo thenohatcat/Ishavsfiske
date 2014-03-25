@@ -71,6 +71,7 @@ void Seagull::update(Angler::Game* context, float time, float deltaTime, bool ch
 				mScared = false;
 			}
 		}
+
 		mUpdateChildren(context, time, deltaTime);
 	}
 }
@@ -90,7 +91,7 @@ void Seagull::mInit()
 	pts.push_back(sf::Vector2f(0, 0));
 	pts.push_back(sf::Vector2f(0, 1));
 	pts.push_back(sf::Vector2f(1, 1));
-	new Angler::Nodes::CollisionNode(getID() + 0x2000, s, pts, 0);
+	new Angler::Nodes::CollisionNode(getID() + 0x2000, s, pts, 2);
 
 
 	std::vector<sf::Vector2f> anime;

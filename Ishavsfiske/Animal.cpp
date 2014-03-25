@@ -80,6 +80,8 @@ void Animal::attack()
 void Animal::rotate(float r)
 {
 	mRootRotation->rotate(r);
+
+	mChanged = true;
 }
 
 void Animal::move(float x, float y)
@@ -87,6 +89,8 @@ void Animal::move(float x, float y)
 	Rotation r(0, mRootRotation->getRotation());
 	sf::Vector2f tv = r.transform(sf::Vector2f(5*x, 5*y));
 	mRootTranslation->translate(tv);
+
+	mChanged = true;
 }
 
 int Animal::mDirection(sf::Vector2f position)

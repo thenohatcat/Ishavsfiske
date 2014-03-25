@@ -77,6 +77,11 @@ void IshavsfiskeGame::throwEvent(int type, ... )
 		nodeA = va_arg(vl, Node*);
 		nodeB = va_arg(vl, Node*);
 		collide(nodeA, nodeB);
+		if (
+			((nodeA->getID() >= 0x40000000) && (nodeA->getID() < 0x50000000)) || 
+			((nodeB->getID() >= 0x40000000) && (nodeB->getID() < 0x50000000))
+			)
+			printf("%08X, %08X\n", nodeA->getID(), nodeB->getID());
 		break;
 	case Events::Fishing:
 		int dir;

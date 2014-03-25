@@ -19,7 +19,6 @@ void FishingMode::collide(Node *nodeA, Node *nodeB)
 {
 	if (!mPaused)
 	{
-
 		if (nodeA->getID() == 0x00012201 || nodeB->getID() == 0x00012201)
 		{
 			if (!((FishingBoat*)mShipFishing)->getRepairing())
@@ -158,7 +157,7 @@ void FishingMode::collide(Node *nodeA, Node *nodeB)
 		//	}
 		//}
 
-		if((nodeA->getID() & 0xF000FFFF == 0x40002000) && (nodeB->getID() & 0xF000FFFF == 0x40002000))
+		if(((nodeA->getID() & 0xF000FFFF) == 0x40002000) && ((nodeB->getID() & 0xF000FFFF) == 0x40002000))
 		{
 			Seagull *seagullA, *seagullB;
 			seagullA = (Seagull*)Angler::HelpFunctions::Nodes::getNode(nodeA->getID() & 0xFFFF0000, this);

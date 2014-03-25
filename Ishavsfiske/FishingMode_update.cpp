@@ -245,7 +245,6 @@ void FishingMode::update(Angler::Game* context, float time, float deltaTime, boo
 				{
 					Seagull *sg = new Seagull(0x40000000 + 0x10000 * mSeagullID++, mSeagullBase, mOwner);
 					float x = (rand() % 1000)/1000.0f * 46/20.0f, y = (rand() % 1000)/1000.0f * 30/20.0f;
-
 					
 					sg->setPosition(x + 1/10.0f, y + 1/10.0f);
 					mSeagulls.push_back(sg);
