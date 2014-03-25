@@ -69,13 +69,16 @@ namespace Ishavsfiske
 
 		bool mTrading;
 
+		sf::Sound *mClick;
+		sf::SoundBuffer *mClickBuffer;
+
 		sf::Sound *mRadioSound;
 		sf::SoundBuffer *mRadioBuffer;
 		sf::Sound *mMusic[5];
 		sf::SoundBuffer *mMusicBuffer[5];
 
-		sf::Sound *mSSea, *mSBar, *mSWorkshop, *mSMarket;
-		sf::SoundBuffer *mSBSea, *mSBBar, *mSBWorkshop, *mSBMarket;
+		sf::Sound *mSHarbour, *mSBar, *mSBarO, *mSWorkshop, *mSWorkshopO, *mSMarket, *mSMarketO;
+		sf::SoundBuffer *mSBHarbour, *mSBBar, *mSBBarO, *mSBWorkshop, *mSBWorkshopO, *mSBMarket, *mSBMarketO;
 
 		Ishavsfiske::IshavsfiskeGame *mOwner;
 	};

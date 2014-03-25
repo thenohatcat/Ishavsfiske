@@ -38,6 +38,9 @@ void Ishavsfiske::IshavsfiskeGame::setupGraphicsLayers(int numLayers, int layerS
 
 void Ishavsfiske::IshavsfiskeGame::mLoadContent()
 {
+	mSound->loadStates("sound_meta.txt");
+	mSound->loadStates("music_meta.txt");
+
 	mFishingMode->loadContent();
 	mFishingMode->enable(false);
 
@@ -47,13 +50,10 @@ void Ishavsfiske::IshavsfiskeGame::mLoadContent()
 	mGameOverScreen->loadContent();
 	mGameOverScreen->enable(false);
 
-	mHarbourMode->loadContent();
-	mHarbourMode->enable(true);
-
 	mFishingMode->getMap()->load(0, "map_test.txt");
 
-	mSound->loadStates("sound_meta.txt");
-	mSound->loadStates("music_meta.txt");
+	mHarbourMode->loadContent();
+	mHarbourMode->enable(true);
 
 	mFishCount[0] = 1;
 	mFishCount[1] = 2;

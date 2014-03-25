@@ -15,14 +15,14 @@ using namespace Ishavsfiske;
 
 HarbourMode::HarbourMode(unsigned long id, Angler::Node *parent, Ishavsfiske::IshavsfiskeGame *owner)
 	: Node(id, parent), mOwner(owner), mBarIsMO(false), mWorkshopIsMO(false), mMarketIsMO(false), mRadioIsMO(false), mMenuButtonIsMO(false), mMenuButtonRot(0.0f),
-	mRadioCh(0), mRadioTime(-1.0f), mRoom(-1)
+	mRadioCh(0), mRadioTime(-1.0f), mRoom(0)
 {
 
 }
 
 HarbourMode::HarbourMode(unsigned long id, Ishavsfiske::IshavsfiskeGame *owner)
 	: Node(id), mOwner(owner), mBarIsMO(false), mWorkshopIsMO(false), mMarketIsMO(false), mRadioIsMO(false), mMenuButtonIsMO(false), mMenuButtonRot(0.0f),
-	mRadioCh(0), mRadioTime(-1.0f), mRoom(-1)
+	mRadioCh(0), mRadioTime(-1.0f), mRoom(0)
 {
 
 }
@@ -298,7 +298,7 @@ void HarbourMode::draw(Angler::Game* context, Angler::Graphics::GraphicsEngine* 
 {
 	if (mVisible)
 	{
-		if (mRoom == -1)
+		if (mRoom == 0)
 			mDrawHarbourRoom(context, graphics, time, deltaTime);
 		else
 			mDrawRoom(context, graphics, time, deltaTime);
@@ -406,7 +406,7 @@ void HarbourMode::endDraw(Angler::Game* context, Angler::Graphics::GraphicsEngin
 
 		glLineWidth(3);
 
-		//if (mRoom == -1)
+		//if (mRoom == 0)
 		//{
 		//	glColor3d(1, 0, 0);
 		//	glBegin(GL_POLYGON);
@@ -457,7 +457,7 @@ void HarbourMode::endDraw(Angler::Game* context, Angler::Graphics::GraphicsEngin
 		//	}
 		//glEnd();
 
-		//if (mRoom != -1)
+		//if (mRoom != 0)
 		//{
 		//	glColor3d(0, 0, 1);
 		//	glBegin(GL_POLYGON);
@@ -468,7 +468,7 @@ void HarbourMode::endDraw(Angler::Game* context, Angler::Graphics::GraphicsEngin
 		//	glEnd();
 		//}
 
-		//if (mRoom != -1)
+		//if (mRoom != 0)
 		//{
 		//	glColor3d(0, 0, 1);
 		//	glBegin(GL_POLYGON);
@@ -499,111 +499,43 @@ void HarbourMode::mUpdateHarbourMode(Angler::Game* context, float time, float de
 	mMarketIsMO = Angler::HelpFunctions::Geometry::pointIsWithinPolygon(&mMarketMOS, mousePos);
 	mWorkshopIsMO = Angler::HelpFunctions::Geometry::pointIsWithinPolygon(&mWorkshopMOS, mousePos);
 
-	if (mRadioCh == 0)
+	if (mBarIsMO && !mOldBarIsMO)
 	{
-		if (mBarIsMO && !mOldBarIsMO)
-		{
-			mOwner->getSound()->updateState(mSSea,			0x10010L);
-			mOwner->getSound()->updateState(mSBar,			0x10011L);
-			mOwner->getSound()->updateState(mSWorkshop,		0x10012L);
-			mOwner->getSound()->updateState(mSMarket,		0x10013L);
-		}
-
-		if (mWorkshopIsMO && !mOldWorkshopIsMO)
-		{
-			mOwner->getSound()->updateState(mSSea,			0x10020L);
-			mOwner->getSound()->updateState(mSBar,			0x10021L);
-			mOwner->getSound()->updateState(mSWorkshop,		0x10022L);
-			mOwner->getSound()->updateState(mSMarket,		0x10023L);
-		}
-
-		if (mMarketIsMO && !mOldMarketIsMO)
-		{
-			mOwner->getSound()->updateState(mSSea,			0x10030L);
-			mOwner->getSound()->updateState(mSBar,			0x10031L);
-			mOwner->getSound()->updateState(mSWorkshop,		0x10032L);
-			mOwner->getSound()->updateState(mSMarket,		0x10033L);
-		}
-
-		if ((!mBarIsMO && mOldBarIsMO) || (!mWorkshopIsMO && mOldWorkshopIsMO) || (!mMarketIsMO && mOldMarketIsMO))
-		{
-			mOwner->getSound()->updateState(mSSea,			0x10000L);
-			mOwner->getSound()->updateState(mSBar,			0x10001L);
-			mOwner->getSound()->updateState(mSWorkshop,		0x10002L);
-			mOwner->getSound()->updateState(mSMarket,		0x10003L);
-		}
+		mOwner->getSound()->updateState(mSHarbour,		0x11010L + (mRadioCh > 0 ? 0x1000 : 0));
+		mOwner->getSound()->updateState(mSBarO,			0x11011L + (mRadioCh > 0 ? 0x1000 : 0));
+		mOwner->getSound()->updateState(mSWorkshopO,	0x11012L + (mRadioCh > 0 ? 0x1000 : 0));
+		mOwner->getSound()->updateState(mSMarketO,		0x11013L + (mRadioCh > 0 ? 0x1000 : 0));
 	}
 
-	/*if (mBarIsMO && mRadioCh == 0 &&  mRadioTime == -1.0f)
+	if (mWorkshopIsMO && !mOldWorkshopIsMO)
 	{
-		mSBar->setVolume(100.0f);
-	}
-	else
-	{
-		mSBar->setVolume(15.0f);
-	}
-
-	if (mMarketIsMO && mRadioCh == 0 &&  mRadioTime == -1.0f)
-	{
-		mSMarket->setVolume(100.0f);
-	}
-	else
-	{
-		mSMarket->setVolume(15.0f);
+		mOwner->getSound()->updateState(mSHarbour,		0x11020L + (mRadioCh > 0 ? 0x1000 : 0));
+		mOwner->getSound()->updateState(mSBarO,			0x11021L + (mRadioCh > 0 ? 0x1000 : 0));
+		mOwner->getSound()->updateState(mSWorkshopO,	0x11022L + (mRadioCh > 0 ? 0x1000 : 0));
+		mOwner->getSound()->updateState(mSMarketO,		0x11023L + (mRadioCh > 0 ? 0x1000 : 0));
 	}
 
-	if (mWorkshopIsMO && mRadioCh == 0 &&  mRadioTime == -1.0f)
+	if (mMarketIsMO && !mOldMarketIsMO)
 	{
-		mSWorkshop->setVolume(100.0f);
-	}
-	else
-	{
-		mSWorkshop->setVolume(15.0f);
+		mOwner->getSound()->updateState(mSHarbour,		0x11030L + (mRadioCh > 0 ? 0x1000 : 0));
+		mOwner->getSound()->updateState(mSBarO,			0x11031L + (mRadioCh > 0 ? 0x1000 : 0));
+		mOwner->getSound()->updateState(mSWorkshopO,	0x11032L + (mRadioCh > 0 ? 0x1000 : 0));
+		mOwner->getSound()->updateState(mSMarketO,		0x11033L + (mRadioCh > 0 ? 0x1000 : 0));
 	}
 
-	if (mBarIsMO || mMarketIsMO || mWorkshopIsMO || mRadioCh != 0 || mRadioTime >= 0.0f)
+	if ((!mBarIsMO && mOldBarIsMO) || (!mWorkshopIsMO && mOldWorkshopIsMO) || (!mMarketIsMO && mOldMarketIsMO))
 	{
-		mSSea->setVolume(15.0f);
+		mOwner->getSound()->updateState(mSHarbour,		0x11000L + (mRadioCh > 0 ? 0x1000 : 0));
+		mOwner->getSound()->updateState(mSBarO,			0x11001L + (mRadioCh > 0 ? 0x1000 : 0));
+		mOwner->getSound()->updateState(mSWorkshopO,	0x11002L + (mRadioCh > 0 ? 0x1000 : 0));
+		mOwner->getSound()->updateState(mSMarketO,		0x11003L + (mRadioCh > 0 ? 0x1000 : 0));
 	}
-	else
-	{
-		mSSea->setVolume(80.0f);
-	}*/
 }
 
 void HarbourMode::mUpdateRoom(Angler::Game* context, float time, float deltaTime)
 {
 	mInsideIsMO = Angler::HelpFunctions::Geometry::pointIsWithinPolygon(&mInsideMOS, mousePos);
 	mSellButtonIsMO = Angler::HelpFunctions::Geometry::pointIsWithinPolygon(&mSellButtonMOS, mousePos);
-
-	/*mSSea->setVolume(0.0f);
-
-	if (mRoom == 0 && mRadioCh == 0 &&  mRadioTime == -1.0f)
-	{
-		mSBar->setVolume(100.0f);
-	}
-	else
-	{
-		mSBar->setVolume(0.0f);
-	}
-	
-	if (mRoom == 1 && mRadioCh == 0 &&  mRadioTime == -1.0f)
-	{
-		mSWorkshop->setVolume(100.0f);
-	}
-	else
-	{
-		mSWorkshop->setVolume(0.0f);
-	}
-
-	if (mRoom == 2 && mRadioCh == 0 &&  mRadioTime == -1.0f)
-	{
-		mSMarket->setVolume(100.0f);
-	}
-	else
-	{
-		mSMarket->setVolume(0.0f);
-	}*/
 }
 
 void HarbourMode::update(Angler::Game* context, float time, float deltaTime, bool changed)
@@ -623,19 +555,23 @@ void HarbourMode::update(Angler::Game* context, float time, float deltaTime, boo
 		if (mMenuButtonIsMO || fmod(abs(sin(mMenuButtonRot)), 1.0f) > 0.001f)
 			mMenuButtonRot += std::min(3.1415f-fmod(mMenuButtonRot, 3.1415f), 4 * deltaTime);
 
+		if (context->getMouseState().isButtonDown(sf::Mouse::Button::Left)
+				&& !context->getMouseState().wasButtonDown(sf::Mouse::Button::Left))
+				context->getSound()->playSound(mClick, false, 0x13000L, false);
+
 		mMenuButtonRot = fmod(mMenuButtonRot, 2*3.1415f);
 
-		if (mRoom == -1)
+		if (mRoom == 0)
 			mUpdateHarbourMode(context, time, deltaTime);
 		else
 			mUpdateRoom(context, time, deltaTime);
 
-		if (mRoom != -1)
+		if (mRoom != 0)
 		{
 			if (!mTrading && mBackButtonIsMO && !context->getMouseState().isButtonDown(sf::Mouse::Button::Left)
 				&& context->getMouseState().wasButtonDown(sf::Mouse::Button::Left))
 			{
-				mShowRoom(-1);
+				mShowRoom(0);
 			}
 			if (mTrading && mBackButtonIsMO && !context->getMouseState().isButtonDown(sf::Mouse::Button::Left)
 				&& context->getMouseState().wasButtonDown(sf::Mouse::Button::Left))
@@ -667,17 +603,17 @@ void HarbourMode::update(Angler::Game* context, float time, float deltaTime, boo
 			if (mBarIsMO && !context->getMouseState().isButtonDown(sf::Mouse::Button::Left)
 				&& context->getMouseState().wasButtonDown(sf::Mouse::Button::Left))
 			{
-				mShowRoom(0);
+				mShowRoom(1);
 			}
 			else if (mWorkshopIsMO && !context->getMouseState().isButtonDown(sf::Mouse::Button::Left)
 				&& context->getMouseState().wasButtonDown(sf::Mouse::Button::Left))
 			{
-				mShowRoom(1);
+				mShowRoom(2);
 			}
 			else if (mMarketIsMO && !context->getMouseState().isButtonDown(sf::Mouse::Button::Left)
 				&& context->getMouseState().wasButtonDown(sf::Mouse::Button::Left))
 			{
-				mShowRoom(2);
+				mShowRoom(3);
 			}
 		}
 
@@ -695,25 +631,24 @@ void HarbourMode::update(Angler::Game* context, float time, float deltaTime, boo
 
 			if (mRadioCh == 0)
 			{
-				if (mRoom == -1)
+				if (mRoom == 0)
 				{
-					mOwner->getSound()->updateState(mSSea,			0x10000L);
-					mOwner->getSound()->updateState(mSBar,			0x10001L);
-					mOwner->getSound()->updateState(mSWorkshop,		0x10002L);
-					mOwner->getSound()->updateState(mSMarket,		0x10003L);
+					mOwner->getSound()->updateState(mSHarbour,		0x11000L);
+					mOwner->getSound()->updateState(mSBarO,			0x11001L);
+					mOwner->getSound()->updateState(mSWorkshopO,	0x11002L);
+					mOwner->getSound()->updateState(mSMarketO,		0x11003L);
 				}
 				else
 				{
-					mOwner->getSound()->updateState(mSSea,			0x10000L + 0x100 * (mRoom + 1));
-					mOwner->getSound()->updateState(mSBar,			0x10001L + 0x100 * (mRoom + 1));
-					mOwner->getSound()->updateState(mSWorkshop,		0x10002L + 0x100 * (mRoom + 1));
-					mOwner->getSound()->updateState(mSMarket,		0x10003L + 0x100 * (mRoom + 1));
+					mOwner->getSound()->updateState(mSBar,			(mRoom == 1 ? 0x11110 : 0x11111));
+					mOwner->getSound()->updateState(mSWorkshop,		(mRoom == 2 ? 0x11120 : 0x11121));
+					mOwner->getSound()->updateState(mSMarket,		(mRoom == 3 ? 0x11130 : 0x11131));
 				}
 			}
 
 			for (int i = 0; i < 5; i++)
 			{
-				mOwner->getSound()->updateState(mMusic[i], 0x12000L + i + mRadioCh * 0x10);
+				mOwner->getSound()->updateState(mMusic[i], 0x14000L + i + mRadioCh * 0x10);
 				printf("%03.0f ", mMusic[i]->getVolume());
 			}
 			printf("\n");
@@ -731,29 +666,28 @@ void HarbourMode::update(Angler::Game* context, float time, float deltaTime, boo
 
 			printf("%u\n", mRadioCh);
 
-			context->getSound()->playSound(mRadioSound, false, 0x13000L, false);
+			context->getSound()->playSound(mRadioSound, false, 0x13001L, false);
 
 			if (mRadioCh > 0)
 			{
-				if (mRoom == -1)
+				if (mRoom == 0)
 				{
-					mOwner->getSound()->updateState(mSSea,			0x11000L);
-					mOwner->getSound()->updateState(mSBar,			0x11001L);
-					mOwner->getSound()->updateState(mSWorkshop,		0x11002L);
-					mOwner->getSound()->updateState(mSMarket,		0x11003L);
+					mOwner->getSound()->updateState(mSHarbour,		0x12000L);
+					mOwner->getSound()->updateState(mSBarO,			0x12001L);
+					mOwner->getSound()->updateState(mSWorkshopO,	0x12002L);
+					mOwner->getSound()->updateState(mSMarketO,		0x12003L);
 				}
 				else
 				{
-					mOwner->getSound()->updateState(mSSea,			0x11000L + 0x100 * (mRoom + 1));
-					mOwner->getSound()->updateState(mSBar,			0x11001L + 0x100 * (mRoom + 1));
-					mOwner->getSound()->updateState(mSWorkshop,		0x11002L + 0x100 * (mRoom + 1));
-					mOwner->getSound()->updateState(mSMarket,		0x11003L + 0x100 * (mRoom + 1));
+					mOwner->getSound()->updateState(mSBar,			(mRoom == 1 ? 0x12110 : 0x12111));
+					mOwner->getSound()->updateState(mSWorkshop,		(mRoom == 2 ? 0x12120 : 0x12121));
+					mOwner->getSound()->updateState(mSMarket,		(mRoom == 3 ? 0x12130 : 0x12131));
 				}
 			}
 
 			for (int i = 0; i < 5; i++)
 			{
-				mOwner->getSound()->updateState(mMusic[i], 0x12000L + i);
+				mOwner->getSound()->updateState(mMusic[i], 0x14000L + i);
 			}
 			printf("\n");
 		}
@@ -804,17 +738,29 @@ void HarbourMode::loadContent()
 		mMusic[i]->setBuffer(*mMusicBuffer[i]);
 	}
 
-	mSBSea->loadFromFile("Hav.wav");
-	mSSea->setBuffer(*mSBSea);
+	mClickBuffer->loadFromFile("Klick.ogg");
+	mClick->setBuffer(*mClickBuffer);
 
-	mSBBar->loadFromFile("Taverna.wav");
+	mSBHarbour->loadFromFile("Hamn.ogg");
+	mSHarbour->setBuffer(*mSBHarbour);
+
+	mSBBar->loadFromFile("Taverna.ogg");
 	mSBar->setBuffer(*mSBBar);
 
-	mSBWorkshop->loadFromFile("Verkstad.wav");
+	mSBBarO->loadFromFile("Taverna_Dov.ogg");
+	mSBarO->setBuffer(*mSBBarO);
+
+	mSBWorkshop->loadFromFile("Verkstad.ogg");
 	mSWorkshop->setBuffer(*mSBWorkshop);
 
-	mSBMarket->loadFromFile("Fiskmarknad.wav");
+	mSBWorkshopO->loadFromFile("Verkstad_Dov.ogg");
+	mSWorkshopO->setBuffer(*mSBWorkshopO);
+
+	mSBMarket->loadFromFile("Fiskmarknad.ogg");
 	mSMarket->setBuffer(*mSBMarket);
+
+	mSBMarketO->loadFromFile("Fiskmarknad_Dov.ogg");
+	mSMarketO->setBuffer(*mSBMarketO);
 
 	//Mouse over
 	//Bar
@@ -909,17 +855,29 @@ void HarbourMode::init()
 
 	mFont = new Font();
 
-	mSSea = new sf::Sound();
-	mSBSea = new sf::SoundBuffer();
+	mClick = new sf::Sound();
+	mClickBuffer = new sf::SoundBuffer();
+
+	mSHarbour = new sf::Sound();
+	mSBHarbour = new sf::SoundBuffer();
 
 	mSBar = new sf::Sound();
 	mSBBar = new sf::SoundBuffer();
 
+	mSBarO = new sf::Sound();
+	mSBBarO = new sf::SoundBuffer();
+
 	mSWorkshop = new sf::Sound();
 	mSBWorkshop = new sf::SoundBuffer();
 
+	mSWorkshopO = new sf::Sound();
+	mSBWorkshopO = new sf::SoundBuffer();
+
 	mSMarket = new sf::Sound();
 	mSBMarket = new sf::SoundBuffer();
+
+	mSMarketO = new sf::Sound();
+	mSBMarketO = new sf::SoundBuffer();
 }
 
 void HarbourMode::mEnable(bool enabled)
@@ -928,28 +886,22 @@ void HarbourMode::mEnable(bool enabled)
 	{
 		mOwner->setCursorVisible(false);
 
-		for (int i = 0; i < 5; i++)
-		{
-			mMusic[i]->setVolume(0.0f);
-		}
+		mOwner->getSound()->playSound(mMusic[0], false, 0x14000, true);
+		mOwner->getSound()->playSound(mMusic[1], false, 0x14001, true);
+		mOwner->getSound()->playSound(mMusic[2], false, 0x14002, true);
+		mOwner->getSound()->playSound(mMusic[3], false, 0x14003, true);
+		mOwner->getSound()->playSound(mMusic[4], false, 0x14004, true);
 
-		mOwner->getSound()->playSound(mMusic[0], false, 0, 1*60.0f + 43.0f, true);
-		mOwner->getSound()->playSound(mMusic[1], false, 0, 1*60.0f + 25.0f, true);
-		mOwner->getSound()->playSound(mMusic[2], false, 0, 1*60.0f + 52.0f, true);
-		mOwner->getSound()->playSound(mMusic[3], false, 0, 30.0f, true);
-		mOwner->getSound()->playSound(mMusic[4], false, 0, 1*60.0f + 9.0f, true);
+		mOwner->getSound()->playSound(mSHarbour, false, 0x11000, true);
 
-		//mSSea->setVolume(80.0f);
-		mOwner->getSound()->playSound(mSSea, false, 0, 47.0f, true);
+		mOwner->getSound()->playSound(mSBar, false, 0x10001, true);
+		mOwner->getSound()->playSound(mSBarO, false, 0x11001, true);
 
-		//mSBar->setVolume(15.0f);
-		mOwner->getSound()->playSound(mSBar, false, 0, 49.0f, true);
+		mOwner->getSound()->playSound(mSWorkshop, false, 0x10002, true);
+		mOwner->getSound()->playSound(mSWorkshopO, false, 0x11002, true);
 
-		//mSWorkshop->setVolume(15.0f);
-		mOwner->getSound()->playSound(mSWorkshop, false, 0, 49.0f, true);
-
-		//mSMarket->setVolume(15.0f);
-		mOwner->getSound()->playSound(mSMarket, false, 0, 46.0f, true);
+		mOwner->getSound()->playSound(mSMarket, false, 0x10003, true);
+		mOwner->getSound()->playSound(mSMarketO, false, 0x11003, true);
 
 		mBarIsMO = false;
 		mWorkshopIsMO = false;
@@ -959,9 +911,9 @@ void HarbourMode::mEnable(bool enabled)
 		mMenuButtonRot = 0.0f;
 		mRadioCh = 0; 
 		mRadioTime =  -1.0f;
-		mRoom = -1;
+		mRoom = 0;
 
-		mShowRoom(-1);
+		mShowRoom(0);
 	}
 	else
 	{
@@ -972,13 +924,16 @@ void HarbourMode::mEnable(bool enabled)
 		mOwner->getSound()->stopSound(mMusic[2]);
 		mOwner->getSound()->stopSound(mMusic[3]);
 
-		mOwner->getSound()->stopSound(mSSea);
+		mOwner->getSound()->stopSound(mSHarbour);
 
 		mOwner->getSound()->stopSound(mSBar);
+		mOwner->getSound()->stopSound(mSBarO);
 
 		mOwner->getSound()->stopSound(mSWorkshop);
+		mOwner->getSound()->stopSound(mSWorkshopO);
 
 		mOwner->getSound()->stopSound(mSMarket);
+		mOwner->getSound()->stopSound(mSMarketO);
 
 		mOwner->clearGraphicsLayers();
 	}
@@ -990,28 +945,28 @@ void HarbourMode::mShowRoom(int ind)
 
 	for (int i = 0; i < 5; i++)
 	{
-		mOwner->getSound()->updateState(mMusic[i], 0x12000L + i + mRadioCh * 0x10);
+		mOwner->getSound()->updateState(mMusic[i], 0x14000L + i + mRadioCh * 0x10);
 	}
 
 	int sizes[8] = { 1, 1, 1, 1, 256, 1, 1, 256 };
 	sf::Texture* textures[8] = { mTXHarbour, mTXBarHO, mTXMarketHO, mTXWorkshopHO, mTXUI, mTXBackButton, mTXCursor, mTXFont };
-	if (ind == -1)
+	if (ind == 0)
 	{
 		mOwner->setupGraphicsLayers(8, sizes, textures);
 
 		if (mRadioCh > 0)
 		{
-			mOwner->getSound()->updateState(mSSea,			0x11000L);
-			mOwner->getSound()->updateState(mSBar,			0x11001L);
-			mOwner->getSound()->updateState(mSWorkshop,		0x11002L);
-			mOwner->getSound()->updateState(mSMarket,		0x11003L);
+			mOwner->getSound()->updateState(mSHarbour,		0x12000L);
+			mOwner->getSound()->updateState(mSBarO,			0x12001L);
+			mOwner->getSound()->updateState(mSWorkshopO,	0x12002L);
+			mOwner->getSound()->updateState(mSMarketO,		0x12003L);
 		}
 		else
 		{
-			mOwner->getSound()->updateState(mSSea,			0x10000L);
-			mOwner->getSound()->updateState(mSBar,			0x10001L);
-			mOwner->getSound()->updateState(mSWorkshop,		0x10002L);
-			mOwner->getSound()->updateState(mSMarket,		0x10003L);
+			mOwner->getSound()->updateState(mSHarbour,		0x11000L);
+			mOwner->getSound()->updateState(mSBarO,			0x11001L);
+			mOwner->getSound()->updateState(mSWorkshopO,	0x11002L);
+			mOwner->getSound()->updateState(mSMarketO,		0x11003L);
 		}
 	}
 	else
@@ -1020,20 +975,28 @@ void HarbourMode::mShowRoom(int ind)
 
 		if (mRadioCh > 0)
 		{
-			mOwner->getSound()->updateState(mSSea,			0x11000L + 0x100 * (ind+1));
-			mOwner->getSound()->updateState(mSBar,			0x11001L + 0x100 * (ind+1));
-			mOwner->getSound()->updateState(mSWorkshop,		0x11002L + 0x100 * (ind+1));
-			mOwner->getSound()->updateState(mSMarket,		0x11003L + 0x100 * (ind+1));
+			mOwner->getSound()->updateState(mSHarbour,		0x11100L);
+			mOwner->getSound()->updateState(mSBarO,			0x11101L);
+			mOwner->getSound()->updateState(mSWorkshopO,	0x11102L);
+			mOwner->getSound()->updateState(mSMarketO,		0x11103L);
+
+			mOwner->getSound()->updateState(mSBar,			(ind == 1 ? 0x11110 : 0x11111));
+			mOwner->getSound()->updateState(mSWorkshop,		(ind == 2 ? 0x11120 : 0x11121));
+			mOwner->getSound()->updateState(mSMarket,		(ind == 3 ? 0x11130 : 0x11131));
 		}
 		else
 		{
-			mOwner->getSound()->updateState(mSSea,			0x10000L + 0x100 * (ind+1));
-			mOwner->getSound()->updateState(mSBar,			0x10001L + 0x100 * (ind+1));
-			mOwner->getSound()->updateState(mSWorkshop,		0x10002L + 0x100 * (ind+1));
-			mOwner->getSound()->updateState(mSMarket,		0x10003L + 0x100 * (ind+1));
+			mOwner->getSound()->updateState(mSHarbour,		0x11100L);
+			mOwner->getSound()->updateState(mSBarO,			0x11101L);
+			mOwner->getSound()->updateState(mSWorkshopO,	0x11102L);
+			mOwner->getSound()->updateState(mSMarketO,		0x11103L);
+
+			mOwner->getSound()->updateState(mSBar,			(ind == 1 ? 0x12110 : 0x12111));
+			mOwner->getSound()->updateState(mSWorkshop,		(ind == 2 ? 0x12120 : 0x12121));
+			mOwner->getSound()->updateState(mSMarket,		(ind == 3 ? 0x12130 : 0x12131));
 		}
 
-		if (ind == 0)
+		if (ind == 1)
 		{
 			textures[0] = mTXBarInside;
 			textures[1] = mTXBarInsideHO;
@@ -1047,7 +1010,7 @@ void HarbourMode::mShowRoom(int ind)
 			mInsideMOS.push_back(sf::Vector2f(1.224f, 0.270f));
 			mInsideMOS.push_back(sf::Vector2f(1.197f, 0.228f));
 		}
-		else if (ind == 1)
+		else if (ind == 2)
 		{
 			textures[0] = mTXWorkshopInside;
 			textures[1] = mTXWorkshopInsideHO;
@@ -1064,7 +1027,7 @@ void HarbourMode::mShowRoom(int ind)
 			mInsideMOS.push_back(sf::Vector2f(0.881f, 0.605f));
 			mInsideMOS.push_back(sf::Vector2f(0.734f, 0.313f));
 		}
-		else if (ind == 2)
+		else if (ind == 3)
 		{
 			textures[0] = mTXMarketInside;
 			textures[1] = mTXMarketInsideHO;
