@@ -89,18 +89,16 @@ void FishingMode::mEnable(bool enabled)
 
 		mOwner->setCursorVisible(false);
 
-		mOwner->getSound()->playSound(mSeaAmbient, false, 0, 6*60.0f + 6.0f, true);
-		mOwner->getSound()->setVolume(mSeaAmbient, 10.0f);
+		mOwner->getSound()->playSound(mSeaAmbient, false,  0x20000L, true);
 
-		mOwner->getSound()->playSound(mMusic, false, 0, 1*60.0f + 6.0f, true);
+		mOwner->getSound()->playSound(mMusic, false, 0, 0x21000L, true);
 
-		mOwner->getSound()->playSound(mEngineSound, false, 0, 1.46f, true);
-		mOwner->getSound()->setVolume(mEngineSound, 30.0f);
+		mOwner->getSound()->playSound(mEngineSound, false, 0x20001L, true);
 	}
 	else
 	{
 		mOwner->getSound()->stopSound(mSeaAmbient);
-		//mOwner->getSound()->stopSound(mMusic);
+		mOwner->getSound()->stopSound(mMusic);
 		mOwner->getSound()->stopSound(mEngineSound);
 
 		int *fc = mOwner->getFishCount();

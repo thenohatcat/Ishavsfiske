@@ -71,9 +71,6 @@ namespace Ishavsfiske
 		sf::Sound *mSeaAmbient;
 		sf::SoundBuffer *mSeaAmbientBuff;
 
-		sf::Sound *mTutorialSound;
-		sf::SoundBuffer *mTutorialBuff;
-
 		Angler::Nodes::Translation *mFishBase;
 
 		void mMoveFrame(float fishingDX, float fishingDY, float breakerDX, float breakerDY, bool fishingX, bool fishingY, bool moveMapX, bool moveMapY);

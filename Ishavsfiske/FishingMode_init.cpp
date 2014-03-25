@@ -88,9 +88,6 @@ void FishingMode::init()
 	mSeaAmbient = new sf::Sound();
 	mSeaAmbientBuff = new sf::SoundBuffer();
 
-	mTutorialSound = new sf::Sound();
-	mTutorialBuff = new sf::SoundBuffer();
-
 	mMusicFishingBuff = new sf::SoundBuffer();
 
 	mMusic = new sf::Sound();

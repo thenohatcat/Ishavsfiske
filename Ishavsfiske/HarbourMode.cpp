@@ -731,8 +731,7 @@ void HarbourMode::update(Angler::Game* context, float time, float deltaTime, boo
 
 			printf("%u\n", mRadioCh);
 
-			context->getSound()->playSound(mRadioSound, false, 0, 1.0f, false);
-			mOwner->getSound()->updateState(mRadioSound, 0x13000L);
+			context->getSound()->playSound(mRadioSound, false, 0x13000L, false);
 
 			if (mRadioCh > 0)
 			{
@@ -755,7 +754,6 @@ void HarbourMode::update(Angler::Game* context, float time, float deltaTime, boo
 			for (int i = 0; i < 5; i++)
 			{
 				mOwner->getSound()->updateState(mMusic[i], 0x12000L + i);
-				printf("%03.0f ", mMusic[i]->getVolume());
 			}
 			printf("\n");
 		}
