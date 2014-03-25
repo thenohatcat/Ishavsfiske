@@ -24,13 +24,13 @@ using namespace Ishavsfiske;
 using namespace Angler::Nodes;
 
 Seagull::Seagull(unsigned long id, Angler::Node *parent, Angler::Game *owner)
-	: Animal(id, parent, owner)
+	: Animal(id, parent, owner), mVel(0, -0.03f), rotSpeed(135)
 {
 	mInit();
 }
 
 Seagull::Seagull(unsigned long id, Angler::Game *owner)
-	: Animal(id, owner)
+	: Animal(id, owner), mVel(0, -0.03f), rotSpeed(135)
 {
 	mInit();
 }
@@ -55,17 +55,12 @@ void Seagull::update(Angler::Game* context, float time, float deltaTime, bool ch
 		{
 			if(!mLookAtShip())
 			{
-				rotate(180 * deltaTime);
+				rotate(rotSpeed * deltaTime);
 			}
-			move(0, -0.03f * deltaTime);
+			move(0, mVel.y * deltaTime);
 		}
 		mUpdateChildren(context, time, deltaTime);
 	}
-}
-
-void Seagull::attack()
-{
-
 }
 
 void Seagull::mInit()
@@ -109,7 +104,7 @@ bool Seagull::mLookAtShip()
 
 	//cout << mRotToShip << " " << rotation << endl;
 
-	return ((mRotToShip - 3) < rotation) &&  (rotation < (mRotToShip + 3));
+	return ((mRotToShip - 10) < rotation) &&  (rotation < (mRotToShip + 10));
 }
 
 float Seagull::mCalcRotation(float angle)
@@ -134,4 +129,34 @@ float Seagull::mCalcRotation(float angle)
 void Seagull::collide()
 {
 
+}
+
+void Seagull::setPosition(float x, float y)
+{
+	mRootTranslation->setTranslation(x, y);
+}
+
+void Seagull::getPush()
+{
+	revert();
+}
+
+void Seagull::revert()
+{
+	if(!mBlocked)
+	{
+		mRootRotation->setRotation(mOldRotations.back());
+		mRootTranslation->setTranslation(mOldTranslations.back());
+
+		mOldRotations.pop_back();
+		mOldTranslations.pop_back();
+
+		mVel.x = mVel.y = 0;
+		mChanged = true;
+	}
+}
+
+void Seagull::addRotSpeed(float x)
+{
+	rotSpeed += x;
 }

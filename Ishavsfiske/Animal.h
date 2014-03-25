@@ -48,8 +48,11 @@ namespace Ishavsfiske
 		int mDirection(sf::Vector2f position);
 
 		bool mBlocked;
+
+		std::vector<float> mOldRotations;
+		std::vector<sf::Vector2f> mOldTranslations;
+		float mTimeDiff;
 	private:
-		bool mScared;
 	};
 }
 

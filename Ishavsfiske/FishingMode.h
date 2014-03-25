@@ -77,6 +77,7 @@ namespace Ishavsfiske
 		sf::SoundBuffer *mTutorialBuff;
 
 		Angler::Nodes::Translation *mFishBase;
+		Angler::Nodes::Translation *mSeagullBase; // Seagullbase
 
 		void mMoveFrame(float fishingDX, float fishingDY, float breakerDX, float breakerDY, bool fishingX, bool fishingY, bool moveMapX, bool moveMapY);
 
@@ -87,7 +88,12 @@ namespace Ishavsfiske
 		
 		Ship *mShipFishing, *mShipBreaker;
 
-		Animal *mSeagull, *mArne;
+		Seagull *mSeagull;
+		Arne *mArne;
+
+		// Seagull
+		int mSeagullID;
+		std::vector<Seagull*> mSeagulls;
 
 		Ishavsfiske::IshavsfiskeGame *mOwner;
 
@@ -116,7 +122,7 @@ namespace Ishavsfiske
 		bool mCanRepair;
 		bool mCanFish;
 		bool mMapFrozen;
-		bool mSpawnFish;
+		bool mSpawnFish, mSpawnSeagull; // added spawnseagull
 
 		bool mRunTimer;
 		float mTimer;

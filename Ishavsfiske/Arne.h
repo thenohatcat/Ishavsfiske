@@ -32,6 +32,8 @@ namespace Ishavsfiske
 		sf::Vector2f getVel();
 
 		void block();
+
+		void setPosition(float x, float y);
 	protected:
 		virtual void mInit();
 	private:

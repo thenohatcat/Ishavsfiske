@@ -208,3 +208,8 @@ void Arne::block()
 	mBlocked = true;
 	mVel = sf::Vector2f(0, 0);
 }
+
+void Arne::setPosition(float x, float y)
+{
+	mRootTranslation->setTranslation(x, y);
+}

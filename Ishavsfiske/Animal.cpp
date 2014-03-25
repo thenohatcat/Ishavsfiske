@@ -57,33 +57,19 @@ void Animal::mInit()
 
 void Animal::update(Angler::Game *context, float time, float deltaTime, bool changed)
 {
-	//if(!mPaused)
-	//{
-	//	mChanged |= changed;
+	if (mTimeDiff > 0.005f && !mBlocked)
+	{
+		mOldRotations.push_back(mRootRotation->getRotation());
+		mOldTranslations.push_back(mRootTranslation->getTranslation());
 
-	//	mFishPos = ((IshavsfiskeGame*) context)->getShipFishing()->getPosition();
+		if (mOldRotations.size() > 128)
+		{
+			mOldRotations.erase(mOldRotations.begin());
+			mOldTranslations.erase(mOldTranslations.begin());
+		}
 
-	//	mShipFishDis.x = mFishPos.x - mRootTranslation->getTranslationX();
-	//	mShipFishDis.y = mFishPos.y - mRootTranslation->getTranslationY();
-
-	//	mIceBPos = ((IshavsfiskeGame*) context)->getIceBreaker()->getPosition();
-	//	mShipIceBDis = mIceBPos - mRootTranslation->getTranslation();
-
-	//	if (!mAtShip()/* && !mScared*/)
-	//	{
-	//		if(!mLookAtShip())
-	//		{
-	//			/*cout << "rotate\n";
-	//			float LoR = mRootRotation->getRotation() - mRotToShip;
-	//			if(LoR < 0)
-	//				rotate(90 * deltaTime);
-	//			else*/
-	//				rotate(180 * deltaTime);
-	//		}
-	//		move(0, -0.03 * deltaTime);
-	//	}
-	//	mUpdateChildren(context, time, deltaTime);
-	//}
+		mTimeDiff = 0;
+	}
 }
 
 void Animal::attack()

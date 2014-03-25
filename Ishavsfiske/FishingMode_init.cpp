@@ -109,7 +109,7 @@ void FishingMode::init()
 	mShipFishing = new FishingBoat(0x10000, this, mOwner);
 	mShipBreaker = new IceBreaker(0x20000, this, mOwner);
 
-	mSeagull = new Seagull(0x40000000, this, mOwner);
+	/*mSeagull = new Seagull(0x40000000, this, mOwner);*/
 	mArne = new Arne(0x60000000, this, mOwner);
 
 	mMap = new Map(0x80000000, this, mOwner);
@@ -118,6 +118,7 @@ void FishingMode::init()
 	mMsgBox->init();
 
 	mFishBase = new Angler::Nodes::Translation(0, this, 2/10.0f, 0);
+	mSeagullBase = new Angler::Nodes::Translation(0, this, 0, 0);
 
 	mFont = new Font();
 

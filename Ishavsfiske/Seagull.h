@@ -25,9 +25,14 @@ namespace Ishavsfiske
 
 		void update(Angler::Game *context, float time, float deltaTime, bool changed);
 
-		virtual void attack();
-
 		virtual void collide();
+
+		void setPosition(float x, float y);
+
+		void addRotSpeed(float x);
+
+		void revert();
+		void getPush();
 	protected:
 		virtual void mInit();
 	private:
@@ -38,6 +43,8 @@ namespace Ishavsfiske
 		float mCalcRotation(float angle);
 		float mRotToShip;
 		bool mScared;
+
+		float rotSpeed;
 	};
 }
 

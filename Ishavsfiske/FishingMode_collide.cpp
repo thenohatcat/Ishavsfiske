@@ -130,7 +130,32 @@ void FishingMode::collide(Node *nodeA, Node *nodeB)
 	#endif
 			}
 		}
-		// if mArne collides
-		if(nodeA->getID() == )
+		//// if mArne collides
+		//if((nodeA->getID() >= 0x60000000 && nodeA->getID() <= 0x69000000) || (nodeA->getID() >= 0x60000000 && nodeA->getID() <= 0x69000000))
+		//{
+		//	if (nodeB->getID() == 0x00022102 || nodeB->getID() == 0x00022102)
+		//	{
+		//		mShipBreaker
+		//	}
+		//}
+
+		// if mSeagull collides
+		if((nodeA->getID() >= 0x40000000 && nodeA->getID() <= 0x49000000) || (nodeB->getID() >= 0x40000000 && nodeA->getID() <= 0x49000000))
+		{
+			if ((nodeB->getID() >= 0x40000000 && nodeB->getID() <= 0x49000000) || (nodeB->getID() >= 0x40000000 && nodeB->getID() <= 0x49000000))
+			{
+				Seagull *seagull = nullptr;
+				if (nodeA->getID() >= 0x40000000 && nodeA->getID() <= 0x4FFFFFFF)
+				{
+					seagull = (Seagull*)(nodeA);
+					seagull->revert();
+				}
+				else if(nodeB->getID() >= 0x40000000 && nodeB->getID() <= 0x4FFFFFFF)
+				{
+					seagull = (Seagull*)(nodeB);
+					seagull->revert();
+				}
+			}
+		}
 	}
 }
