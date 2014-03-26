@@ -102,6 +102,7 @@ void FishingMode::collide(Node *nodeA, Node *nodeB)
 					{
 						mOwner->getSound()->playSound(mCollFishingSound, false, 0x20004L, false);
 						mOwner->getSound()->playSound(mCollIceSound, false, 0x20005L, false);
+						mOwner->getMSGBox()->show(0x20010 + rand() % 2, 6, 7);
 					}
 					mShipFishing->block();
 					mMap->revert();

@@ -48,6 +48,9 @@ void FishingMode::breakIce()
 {
 	((IceBreaker*)mShipBreaker)->damage(0.1f);
 
+	if (((IceBreaker*)mShipBreaker)->getHull() < 1/3.0f)
+		mOwner->getMSGBox()->show(0x20020 + rand() % 3, 6, 7);
+
 	if (mTutorialStage == 6)
 	{
 		mTutorialStage = 7;
