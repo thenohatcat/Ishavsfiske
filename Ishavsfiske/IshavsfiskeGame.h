@@ -61,6 +61,8 @@ namespace Ishavsfiske
 
 		void addToWallet(int i);
 
+		MsgBox *getMSGBox();
+
 		typedef enum
 		{
 			Collide = Game::Events::Collide,
@@ -97,6 +99,8 @@ namespace Ishavsfiske
 		HarbourMode *mHarbourMode;
 		
 		Angler::Node *mUIRoot, *mObjectsRoot;
+
+		MsgBox *mMSGBox;
 
 		Font *mFont;
 	};

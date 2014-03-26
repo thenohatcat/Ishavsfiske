@@ -126,6 +126,9 @@ void FishingMode::collide(Node *nodeA, Node *nodeB)
 				mOwner->getSound()->playSound(mCollFishingSound, false, 0x20005L, false);
 				mShipBreaker->revert();
 				mOwner->getSound()->playSound(mCollBreakerSound, false, 0x20003L, false);
+
+				mOwner->getMSGBox()->show(0x20000 + rand() % 2, 6, 7);
+
 	#ifdef _DEBUG
 				printf("Fishingboat and Icebreaker collided\n");
 	#endif

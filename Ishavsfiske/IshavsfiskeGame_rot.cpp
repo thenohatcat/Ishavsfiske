@@ -63,6 +63,11 @@ bool IshavsfiskeGame::getPaused()
 	return mObjectsRoot->getPaused();
 }
 
+MsgBox *IshavsfiskeGame::getMSGBox()
+{
+	return mMSGBox;
+}
+
 void IshavsfiskeGame::throwEvent(int type, ... )
 {
 	va_list vl;

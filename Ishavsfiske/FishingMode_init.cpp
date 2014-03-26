@@ -58,8 +58,6 @@ void FishingMode::loadContent()
 	mSeaAmbientBuff->loadFromFile("Hav.wav");
 	mSeaAmbient->setBuffer(*mSeaAmbientBuff);
 
-	mMsgBox->loadContent();
-
 	mMusicFishingBuff->loadFromFile("Sea_theme.ogg");
 
 	mMusic->setBuffer(*mMusicFishingBuff);
@@ -113,9 +111,6 @@ void FishingMode::init()
 	mSeagull = new Seagull(0x40000000, this, mOwner);
 
 	mMap = new Map(0x80000000, this, mOwner);
-	
-	mMsgBox = new MsgBox(0, this, mOwner);
-	mMsgBox->init();
 
 	mFishBase = new Angler::Nodes::Translation(0, this, 2/10.0f, 0);
 

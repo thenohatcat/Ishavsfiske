@@ -99,8 +99,6 @@ namespace Ishavsfiske
 		bool mDoRepair;
 		bool mDoFish;
 
-		MsgBox *mMsgBox;
-
 		Font *mFont;
 
 		int mTutorialStage;

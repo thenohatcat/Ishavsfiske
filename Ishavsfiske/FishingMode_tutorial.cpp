@@ -58,11 +58,11 @@ void FishingMode::mUpdateTutorial(Angler::Game* context, float time, float delta
 
 		if (mTutorialStageTime <= 0)
 		{
-			mMsgBox->show(
+			((IshavsfiskeGame*)context)->getMSGBox()->show(
 				"Lars: I take it you know how to turn the boat at \nleast?\n"
 				"Elias: Of course I do, watch this!\n"
 				" (Use WASD to steer the Fishing Boat)\n\n"
-				"                              (Space to continue)", 3600.0f);
+				"                              (Space to continue)", 6, 7, 3600.0f);
 			mTutorialStageTime = 0;
 		}
 		else if (mTutorialStageTime >= 0.5f)
@@ -85,7 +85,7 @@ void FishingMode::mUpdateTutorial(Angler::Game* context, float time, float delta
 
 		if (mTutorialStageTime <= 0)
 		{
-			mMsgBox->hide();
+			((IshavsfiskeGame*)context)->getMSGBox()->hide();
 			mTutorialStageTime = 0;
 		}
 		else if (mTutorialStageTime >= 5.0f)
@@ -108,10 +108,10 @@ void FishingMode::mUpdateTutorial(Angler::Game* context, float time, float delta
 			mShipBreaker->setPosition(sf::Vector2f(0.8f, 0.5f));
 			mShipBreaker->setRotation(0);
 
-			mMsgBox->show(
+			((IshavsfiskeGame*)context)->getMSGBox()->show(
 				"Lars: Check this out, I´ll aim for the ice!?\n"
 				" (Use the arrow keys to steer the Ice Breaker)\n\n\n\n"
-				"                              (Space to continue)", 3600.0f);
+				"                              (Space to continue)", 6, 7, 3600.0f);
 
 			mMap->setTile(12 + (24+2)*5 + 1, 0x10);
 
@@ -137,7 +137,7 @@ void FishingMode::mUpdateTutorial(Angler::Game* context, float time, float delta
 
 		if (mTutorialStageTime <= 0)
 		{
-			mMsgBox->hide();
+			((IshavsfiskeGame*)context)->getMSGBox()->hide();
 			mTutorialStageTime = 0;
 		}
 
@@ -176,13 +176,13 @@ void FishingMode::mUpdateTutorial(Angler::Game* context, float time, float delta
 			mShipBreaker->setPosition(sf::Vector2f(0.9f, 0.5f));
 			mShipBreaker->setRotation(0);
 
-			mMsgBox->show(
+			((IshavsfiskeGame*)context)->getMSGBox()->show(
 				"Lars: &#¤%!!!\n"
 				"Elias: What is it?\n"
 				"Lars: I think I overdid it, something broke..\n"
 				"Elias: Should we turn back?\n"
 				"Lars: Turn back?! It´s just a minor setback.\n"
-				"                              (Space to continue)", 3600.0f);
+				"                              (Space to continue)", 6, 7, 3600.0f);
 
 			mTutorialStageTime = 0;
 		}
@@ -210,10 +210,10 @@ void FishingMode::mUpdateTutorial(Angler::Game* context, float time, float delta
 
 		if (mTutorialStageTime <= 0)
 		{
-			mMsgBox->show(
+			((IshavsfiskeGame*)context)->getMSGBox()->show(
 				"The tool box is on your boat, come over here and \nfix me up!\n"
 				" (Press SPACE next to the Breaker to repair)\n\n\n"
-				"                              (Space to continue)", 3600.0f);
+				"                              (Space to continue)", 6, 7, 3600.0f);
 
 			mTutorialStageTime = 0;
 		}
@@ -237,7 +237,7 @@ void FishingMode::mUpdateTutorial(Angler::Game* context, float time, float delta
 
 		if (mTutorialStageTime <= 0)
 		{
-			mMsgBox->hide();
+			((IshavsfiskeGame*)context)->getMSGBox()->hide();
 			mTutorialStageTime = 0;
 		}
 
@@ -275,10 +275,10 @@ void FishingMode::mUpdateTutorial(Angler::Game* context, float time, float delta
 			s->setPosition(0.8f, 0.3f);
 			mSchools.push_back(s);
 
-			mMsgBox->show(
+			((IshavsfiskeGame*)context)->getMSGBox()->show(
 				"Lars: Time to earn some money! Don´t just sit \nthere, get fishing!\n"
 				" (Press SPACE next to some fish)\n\n\n"
-				"                              (Space to continue)", 3600.0f);
+				"                              (Space to continue)", 6, 7, 3600.0f);
 
 			mTutorialStageTime = 0;
 		}
@@ -302,7 +302,7 @@ void FishingMode::mUpdateTutorial(Angler::Game* context, float time, float delta
 
 		if (mTutorialStageTime <= 0)
 		{
-			mMsgBox->hide();
+			((IshavsfiskeGame*)context)->getMSGBox()->hide();
 			mTutorialStageTime = 0;
 		}
 

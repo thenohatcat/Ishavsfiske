@@ -16,6 +16,22 @@ namespace Ishavsfiske
 {
 	class IshavsfiskeGame;
 
+	class MsgBox;
+
+	class MsgBoxMessage
+	{
+		friend class MsgBox;
+	public:
+		MsgBoxMessage(unsigned long id, std::string msg, float time)
+			: mID(id), mMSG(msg), mTime(time)
+		{ }
+
+	private:
+		unsigned long mID;
+		std::string mMSG;
+		float mTime;
+	};
+
 	class MsgBox
 		: public Angler::Node
 	{
@@ -26,10 +42,15 @@ namespace Ishavsfiske
 		void update(Angler::Game *context, float time, float deltaTime, bool changed);
 		void draw(Angler::Game *context, Angler::Graphics::GraphicsEngine *graphics, float time, float deltaTime);
 
-		void show(std::string text, float time = 5.0f);
+		void show(std::string text, int bgLayer, int textLayer, float time = 5.0f);
+		void show(unsigned long id, int bgLayer, int textLayer);
 		void hide();
 
 		void loadContent();
+
+		void addState(unsigned long id, std::string msg, float time);
+
+		void loadStates(std::string file);
 
 		void init();
 	private:
@@ -40,6 +61,11 @@ namespace Ishavsfiske
 		sf::SoundBuffer *mBuffer;
 
 		IshavsfiskeGame *mOwner;
+
+		int mBGLayer, mTXTLayer;
+
+		std::vector<MsgBoxMessage*> mMessages;
+		std::vector<MsgBoxMessage*>::iterator mGetState(unsigned long id);
 
 		Font *mFont;
 	};

@@ -41,6 +41,8 @@ void Ishavsfiske::IshavsfiskeGame::mLoadContent()
 	mSound->loadStates("sound_meta.txt");
 	mSound->loadStates("music_meta.txt");
 
+	mMSGBox->loadStates("dialog_meta.txt");
+
 	mFishingMode->loadContent();
 	mFishingMode->enable(false);
 
@@ -54,6 +56,8 @@ void Ishavsfiske::IshavsfiskeGame::mLoadContent()
 
 	mHarbourMode->loadContent();
 	mHarbourMode->enable(true);
+
+	mMSGBox->loadContent();
 
 	mFishCount[0] = 1;
 	mFishCount[1] = 2;
@@ -79,6 +83,9 @@ void Ishavsfiske::IshavsfiskeGame::mInit()
 
 	mHarbourMode = new HarbourMode(0, mObjectsRoot, this);
 	mHarbourMode->init();
+
+	mMSGBox = new MsgBox(0, mSceneRoot, this);
+	mMSGBox->init();
 
 	mFont = new Font();
 }
