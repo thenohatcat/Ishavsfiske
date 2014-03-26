@@ -157,14 +157,17 @@ void FishingMode::collide(Node *nodeA, Node *nodeB)
 		//	}
 		//}
 
-		/*if(((nodeA->getID() & 0xF000FFFF) == 0x40002000) && ((nodeB->getID() & 0xF000FFFF) == 0x40002000))
-		{
-			Seagull *seagullA, *seagullB;
-			seagullA = (Seagull*)Angler::HelpFunctions::Nodes::getNode(nodeA->getID() & 0xFFFF0000, this);
-			seagullB = (Seagull*)Angler::HelpFunctions::Nodes::getNode(nodeB->getID() & 0xFFFF0000, this);
-			seagullA->revert();
-			seagullB->revert();
-			std::cout << "collided" << std::endl;
-		}*/
+		//if((((nodeA->getID() & 0xF000FFFF) == 0x40002000) && ((nodeB->getID() & 0xF000FFFF) == 0x40002000)))
+		//{
+		//	Seagull *seagullA, *seagullB;
+		//	seagullA = (Seagull*)Angler::HelpFunctions::Nodes::getNode(nodeA->getID() & 0xFFFF0000, this);
+		//	seagullB = (Seagull*)Angler::HelpFunctions::Nodes::getNode(nodeB->getID() & 0xFFFF0000, this);
+		//	if(seagullA->isClose() || seagullB->isClose())
+		//	{
+		//		seagullA->revert();
+		//		seagullB->revert();
+		//		/*std::cout << std::endl;*/
+		//	}
+		//}
 	}
 }

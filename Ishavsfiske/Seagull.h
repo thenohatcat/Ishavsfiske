@@ -31,6 +31,9 @@ namespace Ishavsfiske
 
 		void revert();
 		void getPush();
+		bool collided();
+		bool isClose();
+		void startColTimer();
 	protected:
 		virtual void mInit();
 	private:
@@ -48,6 +51,8 @@ namespace Ishavsfiske
 		std::vector<sf::Vector2f> mOldTranslations;
 
 		float mTimeDiff;
+		float mColTimeRec;
+		float mDTime;
 	};
 }
 

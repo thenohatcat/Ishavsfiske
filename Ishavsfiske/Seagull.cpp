@@ -24,13 +24,13 @@ using namespace Ishavsfiske;
 using namespace Angler::Nodes;
 
 Seagull::Seagull(unsigned long id, Angler::Node *parent, Angler::Game *owner)
-	: Animal(id, parent, owner), mVel(0, 0.03f), mScared(false), recoverTime(0)
+	: Animal(id, parent, owner), mVel(0, 0.03f), mScared(false), recoverTime(0), mColTimeRec(6)
 {
 	mInit();
 }
 
 Seagull::Seagull(unsigned long id, Angler::Game *owner)
-	: Animal(id, owner), mVel(0, 0.03f), mScared(false), recoverTime(0)
+	: Animal(id, owner), mVel(0, 0.03f), mScared(false), recoverTime(0),  mColTimeRec(0)
 {
 	mInit();
 }
@@ -48,14 +48,13 @@ void Seagull::update(Angler::Game* context, float time, float deltaTime, bool ch
 
 		mFishPos = ((IshavsfiskeGame*) context)->getShipFishing()->getPosition();
 
-		mShipFishDis.x = mFishPos.x - mRootTranslation->getTranslationX();
-		mShipFishDis.y = mFishPos.y - mRootTranslation->getTranslationY();
+		mShipFishDis = mFishPos - mRootTranslation->getTranslation();
 
 		if (mTimeDiff > 0.005f && !mBlocked)
 		{
 			mOldRotations.push_back(mRootRotation->getRotation());
 			mOldTranslations.push_back(mRootTranslation->getTranslation());
-			cout << "pushed\n";
+			/*cout << "pushed\n";*/
 			if (mOldRotations.size() > 128)
 			{
 				mOldRotations.erase(mOldRotations.begin());
@@ -65,7 +64,7 @@ void Seagull::update(Angler::Game* context, float time, float deltaTime, bool ch
 			mTimeDiff = 0;
 		}
 
-		if (!mAtShip() && !mScared)
+		if (!mScared && !isClose())
 		{
 			if(!mLookAtShip())
 			{
@@ -85,29 +84,52 @@ void Seagull::update(Angler::Game* context, float time, float deltaTime, bool ch
 				mScared = false;
 			}
 		}
+		else if(isClose())
+		{
+			int r = rand() % 2;
+			switch(r)
+			{
+			case 0:
+				rotate(-180 * deltaTime);
+				move(0, -mVel.y * deltaTime);
+				break;
+			case 1:
+				rotate(180 * deltaTime);
+				move(0, -mVel.y * deltaTime);
+				break;
+			}
+		}
+
+		if(mColTimeRec < 5)
+			mColTimeRec += deltaTime;
+
 		mUpdateChildren(context, time, deltaTime);
 
 		mTimeDiff += deltaTime;
 
 		mBlocked = false;
+
+		mDTime = deltaTime;
 	}
 }
 
 void Seagull::mInit()
 {
-	mStartX = 0.5f;
-	mStartY = 0.5f;
-
 	Animal::mInit();
 
 	// Seagull ID?
 	Angler::Nodes::Scale *s = new Angler::Nodes::Scale(getID() + 0x0120, mAnimalRoot, 1/10.0f, 1/10.0f);
 
 	std::vector<sf::Vector2f> pts;
-	pts.push_back(sf::Vector2f(1, 0));
-	pts.push_back(sf::Vector2f(0, 0));
-	pts.push_back(sf::Vector2f(0, 1));
-	pts.push_back(sf::Vector2f(1, 1));
+	pts.push_back(sf::Vector2f(1/2.0f, 20/100.0f));
+	pts.push_back(sf::Vector2f(40/100.0f, 35/100.0f));
+	pts.push_back(sf::Vector2f(15/100.0f, 40/100.0f));
+	pts.push_back(sf::Vector2f(45/100.0f, 50/100.0f));
+	pts.push_back(sf::Vector2f(45/100.0f, 60/100.0f));
+	pts.push_back(sf::Vector2f(60/100.0f, 60/100.0f));
+	pts.push_back(sf::Vector2f(60/100.0f, 50/100.0f));
+	pts.push_back(sf::Vector2f(85/100.0f, 40/100.0f));
+	pts.push_back(sf::Vector2f(60/100.0f, 35/100.0f));
 	new Angler::Nodes::CollisionNode(getID() + 0x2000, s, pts, 2);
 
 
@@ -158,7 +180,7 @@ float Seagull::mCalcRotation(float angle)
 
 void Seagull::collide()
 {
-	revert();
+	
 }
 
 void Seagull::setPosition(float x, float y)
@@ -168,20 +190,38 @@ void Seagull::setPosition(float x, float y)
 
 void Seagull::getPush()
 {
-	revert();
+	
 }
 
-void Seagull::revert()
+//void Seagull::revert()
+//{
+//	if(!mBlocked)
+//	{
+//		/*cout << "here\n";*/
+//		mRootRotation->setRotation(mOldRotations.back());
+//		mRootTranslation->setTranslation(mOldTranslations.back());
+//
+//		mOldRotations.pop_back();
+//		mOldTranslations.pop_back();
+//
+//		mVel.x = mVel.y = 0;
+//		mChanged = true;
+//	}
+//}
+
+bool Seagull::isClose()
 {
-	if(!mBlocked)
-	{
-		mRootRotation->setRotation(mOldRotations.back());
-		mRootTranslation->setTranslation(mOldTranslations.back());
-
-		mOldRotations.pop_back();
-		mOldTranslations.pop_back();
-
-		mVel.x = mVel.y = 0;
-		mChanged = true;
-	}
+	float dis = sqrt((mShipFishDis.x * mShipFishDis.x) + (mShipFishDis.y * mShipFishDis.y));
+	/*cout << dis << endl;*/
+	return abs(dis) < 0.1f;
 }
+
+//bool Seagull::collided()
+//{
+//	return mColTimeRec > 5;
+//}
+//
+//void Seagull::startColTimer()
+//{
+//	mColTimeRec = 0;
+//}

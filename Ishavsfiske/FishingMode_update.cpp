@@ -241,7 +241,7 @@ void FishingMode::update(Angler::Game* context, float time, float deltaTime, boo
 		if(mSpawnSeagull)
 		{
 			if(fmod(time, 1) < deltaTime)
-				if(mSeagulls.size() < 20)
+				if(mSeagulls.size() < 15)
 				{
 					Seagull *sg = new Seagull(0x40000000 + 0x10000 * mSeagullID++, mSeagullBase, mOwner);
 					float x = (rand() % 1000)/1000.0f * 46/20.0f, y = (rand() % 1000)/1000.0f * 30/20.0f;
