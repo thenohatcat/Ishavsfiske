@@ -39,6 +39,7 @@ namespace Ishavsfiske
 		FishingBoat *getShipFishing();
 
 		void draw(Angler::Game* context, Angler::Graphics::GraphicsEngine* graphics, float time, float deltaTime);
+		void endDraw(Angler::Game* context, Angler::Graphics::GraphicsEngine* graphics, float time, float deltaTime);
 		void update(Angler::Game* context, float time, float deltaTime, bool changed = false);
 
 		void fish(int dir, School* school);
@@ -62,8 +63,8 @@ namespace Ishavsfiske
 
 		sf::Texture *mTXMap, *mTXUI, *mTXSchool, *mUIFont, *mTXGameOver, *mTXBackButton, *mTXCursor, *mTXSeagull;
 		
-		sf::Sound *mRepair;
-		sf::SoundBuffer *mRepairBuff;
+		sf::Sound *mRepair, *mFishing;
+		sf::SoundBuffer *mRepairBuff, *mFishingBuff;
 
 		sf::Sound *mMusic;
 		sf::SoundBuffer *mMusicFishingBuff;

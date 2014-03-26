@@ -73,7 +73,7 @@ void FishingMode::collide(Node *nodeA, Node *nodeB)
 					printf("%u\n", mMap->getTile(indx));
 					//mShipBreaker->revert();
 					mOwner->throwEvent(IshavsfiskeGame::Events::Breaking);
-					mOwner->getSound()->playSound(mCollIceSound, false, 0x20004L, false);
+					mOwner->getSound()->playSound(mCollIceSound, false, 0x20005L, false);
 					mMap->setTile(indx, 0);
 	#ifdef _DEBUG
 					printf("Icebreaker collide with ice\n");
@@ -84,9 +84,9 @@ void FishingMode::collide(Node *nodeA, Node *nodeB)
 				{
 					printf("%u\n", mMap->getTile(indx));
 					//mShipBreaker->revert();
-					mOwner->getSound()->playSound(mCollIceSound, false, 0x20004L, false);
+					mOwner->getSound()->playSound(mCollIceSound, false, 0x20005L, false);
 					mShipBreaker->revert();
-					mOwner->getSound()->playSound(mCollBreakerSound, false, 0x20002L, false);
+					mOwner->getSound()->playSound(mCollBreakerSound, false, 0x20003L, false);
 	#ifdef _DEBUG
 					printf("Icebreaker collide with unbreakable ice\n");
 	#endif
@@ -100,8 +100,8 @@ void FishingMode::collide(Node *nodeA, Node *nodeB)
 				{
 					if (mShipFishing->getVelocity().y != 0)
 					{
-						mOwner->getSound()->playSound(mCollFishingSound, false, 0x20003L, false);
-						mOwner->getSound()->playSound(mCollIceSound, false, 0x20004L, false);
+						mOwner->getSound()->playSound(mCollFishingSound, false, 0x20004L, false);
+						mOwner->getSound()->playSound(mCollIceSound, false, 0x20005L, false);
 					}
 					mShipFishing->block();
 					mMap->revert();
@@ -111,8 +111,8 @@ void FishingMode::collide(Node *nodeA, Node *nodeB)
 				{
 					mShipFishing->revert();
 					mMap->revert();
-					mOwner->getSound()->playSound(mCollFishingSound, false, 0x20003L, false);
-					mOwner->getSound()->playSound(mCollIceSound, false, 0x20004L, false);
+					mOwner->getSound()->playSound(mCollFishingSound, false, 0x20005L, false);
+					mOwner->getSound()->playSound(mCollIceSound, false, 0x20006L, false);
 				}
 			}	
 		}
@@ -123,9 +123,9 @@ void FishingMode::collide(Node *nodeA, Node *nodeB)
 			if (nodeB->getID() == 0x00022102 || nodeB->getID() == 0x00022102)
 			{
 				mShipFishing->revert();
-				mOwner->getSound()->playSound(mCollFishingSound, false, 0x20003L, false);
+				mOwner->getSound()->playSound(mCollFishingSound, false, 0x20005L, false);
 				mShipBreaker->revert();
-				mOwner->getSound()->playSound(mCollBreakerSound, false, 0x20002L, false);
+				mOwner->getSound()->playSound(mCollBreakerSound, false, 0x20003L, false);
 	#ifdef _DEBUG
 				printf("Fishingboat and Icebreaker collided\n");
 	#endif

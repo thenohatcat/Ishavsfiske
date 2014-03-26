@@ -135,9 +135,17 @@ void FishingBoat::mInit()
 	animPts.push_back(sf::Vector2f(766/1500.0f, 50/1600.0f));
 	animPts.push_back(sf::Vector2f(832/1500.0f, 50/1600.0f));
 	animPts.push_back(sf::Vector2f(898/1500.0f, 50/1600.0f));
+
+	animPts.push_back(sf::Vector2f(898/1500.0f, 50/1600.0f));
+	animPts.push_back(sf::Vector2f(832/1500.0f, 50/1600.0f));
+	animPts.push_back(sf::Vector2f(766/1500.0f, 50/1600.0f));
+	animPts.push_back(sf::Vector2f(700/1500.0f, 50/1600.0f));
+
 	Angler::Nodes::Scale *leftNetS = new Angler::Nodes::Scale(getID() + 0x3107, leftFishT, (66/125.0f), (75/125.0f));
-	mLeftNet = new Angler::Nodes::AnimatedNode(getID() + 0x1108, leftNetS, 4, animPts, 0.5f, 0.5f, 0.5f, 66/1500.0f, 75/1600.0f);
+	mLeftNet = new Angler::Nodes::AnimatedNode(getID() + 0x1108, leftNetS, 4, animPts, 0.46875f, 0.5f, 0.5f, 66/1500.0f, 75/1600.0f);
 	mLeftNet->show(false);
+
+	//3.750
 
 	Angler::Nodes::Scale *rightNetS = new Angler::Nodes::Scale(getID() + 0x3107, rightFishT, (66/125.0f), (75/125.0f));
 	mRightNet = new Angler::Nodes::AnimatedNode(getID() + 0x1108, rightNetS, 4, animPts, 0.5f, 0.5f, 0.5f, 66/1500.0f, 75/1600.0f);
@@ -168,7 +176,7 @@ void FishingBoat::update(Angler::Game *context, float time, float deltaTime, boo
 		{
 			mBlocked = true;
 
-			if (mFishTime >= 2.0f)
+			if (mFishTime >= 3.750f)
 			{
 				setFishing(0, nullptr);
 			}

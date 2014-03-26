@@ -15,6 +15,8 @@ void FishingMode::fish(int i, School *school)
 {
 	((FishingBoat*)mShipFishing)->setFishing(i, school);
 
+	mOwner->getSound()->playSound(mFishing, false, 0x20007L, false);
+
 	if (mTutorialStage == 16)
 	{
 		mTutorialStage = 17;
@@ -33,7 +35,7 @@ void FishingMode::repair(int dir)
 {
 	((FishingBoat*)mShipFishing)->setRepair(dir);
 	
-	mOwner->getSound()->playSound(mRepair, false, 0x20005L, false);
+	mOwner->getSound()->playSound(mRepair, false, 0x20006L, false);
 
 	if (mTutorialStage == 12)
 	{

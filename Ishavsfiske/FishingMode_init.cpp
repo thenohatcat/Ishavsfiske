@@ -46,6 +46,9 @@ void FishingMode::loadContent()
 	mCollIceBuff->loadFromFile("Ice_FirstCollision.wav");
 	mCollIceSound->setBuffer(*mCollIceBuff);
 
+	mFishingBuff->loadFromFile("Fishingboat_fishing.ogg");
+	mFishing->setBuffer(*mFishingBuff);
+
 	mRepairBuff->loadFromFile("Repair.ogg");
 	mRepair->setBuffer(*mRepairBuff);
 
@@ -78,6 +81,9 @@ void FishingMode::init()
 
 	mCollIceSound = new sf::Sound();
 	mCollIceBuff = new sf::SoundBuffer();
+
+	mFishing = new sf::Sound();
+	mFishingBuff = new sf::SoundBuffer();
 
 	mRepair = new sf::Sound();
 	mRepairBuff = new sf::SoundBuffer();
