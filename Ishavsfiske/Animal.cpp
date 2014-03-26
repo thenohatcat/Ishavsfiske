@@ -57,19 +57,7 @@ void Animal::mInit()
 
 void Animal::update(Angler::Game *context, float time, float deltaTime, bool changed)
 {
-	if (mTimeDiff > 0.005f && !mBlocked)
-	{
-		mOldRotations.push_back(mRootRotation->getRotation());
-		mOldTranslations.push_back(mRootTranslation->getTranslation());
-
-		if (mOldRotations.size() > 128)
-		{
-			mOldRotations.erase(mOldRotations.begin());
-			mOldTranslations.erase(mOldTranslations.begin());
-		}
-
-		mTimeDiff = 0;
-	}
+	
 }
 
 void Animal::attack()

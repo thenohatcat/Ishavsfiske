@@ -43,6 +43,11 @@ namespace Ishavsfiske
 		bool mScared;
 		float recoverTime;
 		int LR;
+
+		std::vector<float> mOldRotations;
+		std::vector<sf::Vector2f> mOldTranslations;
+
+		float mTimeDiff;
 	};
 }
 

@@ -24,13 +24,13 @@ using namespace Ishavsfiske;
 using namespace Angler::Nodes;
 
 Seagull::Seagull(unsigned long id, Angler::Node *parent, Angler::Game *owner)
-	: Animal(id, parent, owner), mVel(0, (rand() % 10 + 1) / 100.0f), mScared(false), recoverTime(0)
+	: Animal(id, parent, owner), mVel(0, 0.03f), mScared(false), recoverTime(0)
 {
 	mInit();
 }
 
 Seagull::Seagull(unsigned long id, Angler::Game *owner)
-	: Animal(id, owner), mVel(0, (rand() % 10 + 1) / 100.0f), mScared(false), recoverTime(0)
+	: Animal(id, owner), mVel(0, 0.03f), mScared(false), recoverTime(0)
 {
 	mInit();
 }
@@ -50,6 +50,20 @@ void Seagull::update(Angler::Game* context, float time, float deltaTime, bool ch
 
 		mShipFishDis.x = mFishPos.x - mRootTranslation->getTranslationX();
 		mShipFishDis.y = mFishPos.y - mRootTranslation->getTranslationY();
+
+		if (mTimeDiff > 0.005f && !mBlocked)
+		{
+			mOldRotations.push_back(mRootRotation->getRotation());
+			mOldTranslations.push_back(mRootTranslation->getTranslation());
+			cout << "pushed\n";
+			if (mOldRotations.size() > 128)
+			{
+				mOldRotations.erase(mOldRotations.begin());
+				mOldTranslations.erase(mOldTranslations.begin());
+			}
+
+			mTimeDiff = 0;
+		}
 
 		if (!mAtShip() && !mScared)
 		{
@@ -71,8 +85,11 @@ void Seagull::update(Angler::Game* context, float time, float deltaTime, bool ch
 				mScared = false;
 			}
 		}
-
 		mUpdateChildren(context, time, deltaTime);
+
+		mTimeDiff += deltaTime;
+
+		mBlocked = false;
 	}
 }
 
@@ -156,7 +173,6 @@ void Seagull::getPush()
 
 void Seagull::revert()
 {
-	cout << "reverted" << endl;
 	if(!mBlocked)
 	{
 		mRootRotation->setRotation(mOldRotations.back());
