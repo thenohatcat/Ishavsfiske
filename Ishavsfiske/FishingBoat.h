@@ -33,6 +33,8 @@ namespace Ishavsfiske
 
 		int *getAmmount();
 
+		sf::Vector2f getLampPos();
+
 	protected:
 		virtual void mInit();
 	private:

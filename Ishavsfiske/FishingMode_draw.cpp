@@ -588,9 +588,9 @@ void FishingMode::endDraw(Angler::Game* context, Angler::Graphics::GraphicsEngin
 		sf::Vector2f mousePos = sf::Vector2f(context->getMouseState().getPos());
 		mousePos /= (float)context->getHeight();
 
-		sf::Vector2f fishingPos = mShipFishing->getPosition();
+		sf::Vector2f fishingPos = ((FishingBoat*)mShipFishing)->getLampPos();
 
-		sf::Vector2f delta = sf::Vector2f(mousePos.x - fishingPos.x, mousePos.y - fishingPos.y);
+		sf::Vector2f delta = mousePos - fishingPos;
 		delta /= std::sqrt(delta.x * delta.x + delta.y * delta.y);
 
 		sf::Vector2f targetPosA = sf::Vector2f(mousePos.x - delta.y * 1/20.0f, mousePos.y + delta.x * 1/20.0f);

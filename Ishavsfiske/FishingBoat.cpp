@@ -152,13 +152,25 @@ void FishingBoat::mInit()
 	mRightNet->show(false);
 }
 
+sf::Vector2f FishingBoat::getLampPos()
+{
+	return mRootRotation->transform(sf::Vector2f(2.5f/20.0f * 1.5f/2.5f * (-0.5f+0.586f), 2.5f/20.0f * (-0.5f+0.304f)));
+}
+
 void FishingBoat::update(Angler::Game *context, float time, float deltaTime, bool changed)
 {
 	if (!mPaused)
 	{
 		Ship::update(context, time, deltaTime, changed);
 
-		mLampRotation->setRotation(90*sin(time));
+		//mLampRotation->setRotation(90*sin(time));
+
+		sf::Vector2f mousePos = sf::Vector2f(context->getMouseState().getPos()) / (float)context->getHeight();
+
+		sf::Vector2f delta = mousePos - getLampPos();//sf::Vector2f(mousePos.x - fishingPos.x, mousePos.y - fishingPos.y);
+		delta /= std::sqrt(delta.x * delta.x + delta.y * delta.y);
+
+		mLampRotation->setRotation(atan2(delta.y, delta.x) * 180/3.1415f + 90.0f - mRootRotation->getRotation());
 
 		if (mRepairing)
 		{

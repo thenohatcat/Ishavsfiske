@@ -55,10 +55,11 @@ namespace Ishavsfiske
 
 		Angler::Node *mShipRoot;
 
-		bool mBlocked;
-	private:
 		Angler::Nodes::Translation *mRootTranslation;
 		Angler::Nodes::Rotation *mRootRotation;
+
+		bool mBlocked;
+	private:
 
 		sf::Vector2f mVel;
 
