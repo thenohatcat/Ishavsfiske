@@ -48,8 +48,8 @@ void Animal::mInit()
 	unsigned id = getID();
 
 	mRootTranslation = new Translation(id + 0x0001, this, mStartX, mStartY);
-	mRootRotation = new Rotation(id + 0x0003, mRootTranslation, 0);
-	mAnimalRoot = new Node(id + 0x0004, mRootRotation);
+	mRootRotation = new Rotation(id + 0x0002, mRootTranslation, 0);
+	mAnimalRoot = new Node(id + 0x0003, mRootRotation);
 
 	/*mBearSprite = new SpriteNode(getID() + 0x1000, this, 1, sf::Vector2f(0, 0), sf::Vector2f(0, 0.25), sf::Vector2f(0.25, 0.25));*/
 }

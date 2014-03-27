@@ -29,7 +29,6 @@ namespace Ishavsfiske
 
 		void setPosition(float x, float y);
 
-		void revert();
 		void getPush();
 		bool collided();
 		void startColTimer();
@@ -44,13 +43,7 @@ namespace Ishavsfiske
 		float mRotToShip;
 		bool mScared;
 		float recoverTime;
-		int LR;
 
-		std::vector<float> mOldRotations;
-		std::vector<sf::Vector2f> mOldTranslations;
-
-		float mTimeDiff;
-		float mColTimeRec;
 		float mDTime;
 
 		bool mIsClose();

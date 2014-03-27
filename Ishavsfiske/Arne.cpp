@@ -24,13 +24,13 @@ using namespace Ishavsfiske;
 using namespace Angler::Nodes;
 
 Arne::Arne(unsigned long id, Angler::Node *parent, Angler::Game *owner)
-	: Animal(id, parent, owner), mVel(0, -0.05), mTimeDiff(0), mScared(false)/*, mAttack(false), mAttacked(false), mSwim(false)*/
+	: Animal(id, parent, owner), mVel(0, -0.05), mTimeDiff(0), mScared(false)
 {
 	mInit();
 }
 
 Arne::Arne(unsigned long id, Angler::Game *owner)
-	: Animal(id, owner), mVel(0, -0.05), mTimeDiff(0), mScared(false)/*, mAttack(false), mAttacked(false), mSwim(false)*/
+	: Animal(id, owner), mVel(0, -0.05), mTimeDiff(0), mScared(false)
 {
 	mInit();
 }
@@ -72,14 +72,14 @@ void Arne::update(Angler::Game* context, float time, float deltaTime, bool chang
 			}
 			/*cout << abs(mVel.y) << endl;*/
 			move(0, mVel.y * deltaTime);
-			/*mAttack = false;
-			mAttacked = false;
-			if(mSwim)
-			{
-				mInit();
-				mSwim = false;
-			}*/
+			mAniSwim->show(true);
+			mAniAttack->show(false);
 		}
+
+		if(mAniSwim->getVisible())
+			if(abs(mVel.y < 0.05f))
+				mVel.y = -0.05f;
+
 		mUpdateChildren(context, time, deltaTime);
 
 		mTimeDiff += deltaTime;
@@ -90,17 +90,9 @@ void Arne::update(Angler::Game* context, float time, float deltaTime, bool chang
 
 void Arne::attack()
 {
-	/*mAttack = true;
-	if(!mAttacked)
-	{
-		mInit();
-		setPosition(mIceBPos.x, mIceBPos.y);
-		mAttacked = true;
-		mSwim = true;
-	}*/
-
 	mAniAttack->show(true);
 	mAniSwim->show(false);
+	mVel.y = 0;
 }
 
 void Arne::mInit()
@@ -111,7 +103,9 @@ void Arne::mInit()
 	Animal::mInit();
 
 	// Arne ID?
-	Angler::Nodes::Scale *s = new Angler::Nodes::Scale(getID() + 0x0120, mAnimalRoot, 1/10.0f, 1/10.0f);
+	Angler::Nodes::Scale *s = new Angler::Nodes::Scale(getID() + 0x0123, mAnimalRoot, 1/5.0f, 1/5.0f);
+	Angler::Nodes::Translation *t = new Translation(getID() + 0x0234, s, 0, -0.1f);
+	Angler::Nodes::Rotation *r = new Angler::Nodes::Rotation(getID() + 0x0235, t, 180);
 
 	std::vector<sf::Vector2f> pts;
 	pts.push_back(sf::Vector2f(1, 0));
@@ -129,22 +123,21 @@ void Arne::mInit()
 	anime.push_back(sf::Vector2f(5/8.0f, 4/13.0f));
 	anime.push_back(sf::Vector2f(6/8.0f, 4/13.0f));
 	anime.push_back(sf::Vector2f(7/8.0f, 4/13.0f));
-	mAniSwim = new Angler::Nodes::AnimatedNode(getID() + 0x678, s, 12, anime, 1/8.0f, 0.5f, 0.5f, 1/8.0f, 6/13.0f); // ID?
+	mAniSwim = new Angler::Nodes::AnimatedNode(getID() + 0x600, s, 12, anime, 1/8.0f, 0.5f, 0.5f, 1/8.0f, 6/13.0f); // ID?
 
-
-	std::vector<sf::Vector2f> pts1;
-	pts.push_back(sf::Vector2f(1, 0));
-	pts.push_back(sf::Vector2f(0, 0));
-	pts.push_back(sf::Vector2f(0, 1));
-	pts.push_back(sf::Vector2f(1, 1));
-	new Angler::Nodes::CollisionNode(getID() + 0x3000, s, pts1, 0);
+	/*std::vector<sf::Vector2f> pts1;
+	pts1.push_back(sf::Vector2f(1, 0));
+	pts1.push_back(sf::Vector2f(0, 0));
+	pts1.push_back(sf::Vector2f(0, 1));
+	pts1.push_back(sf::Vector2f(1, 1));
+	new Angler::Nodes::CollisionNode(getID() + 0x3001, s, pts1, 0);*/
 
 	std::vector<sf::Vector2f> anime1;
-	anime.push_back(sf::Vector2f(0, 500/650.0f));
-	anime.push_back(sf::Vector2f(75/1200.0f, 500/650.0f));
-	anime.push_back(sf::Vector2f(150/1200.0f, 500/650.0f));
-	anime.push_back(sf::Vector2f(225/1200.0f, 500/650.0f));
-	mAniAttack = new Angler::Nodes::AnimatedNode(getID() + 0x678, s, 12, anime1, 1/4.0f, 0.5f, 0.5f, 75/1200.0f, 125/650.0f); // ID?
+	anime1.push_back(sf::Vector2f(0, 500/650.0f));
+	anime1.push_back(sf::Vector2f(75/1200.0f, 500/650.0f));
+	anime1.push_back(sf::Vector2f(150/1200.0f, 500/650.0f));
+	anime1.push_back(sf::Vector2f(225/1200.0f, 500/650.0f));
+	mAniAttack = new Angler::Nodes::AnimatedNode(getID() + 0x601, r, 12, anime1, 1/4.0f, 0.5f, 0.5f, 75/1200.0f, 125/650.0f); // ID?
 	mAniAttack->show(false);
 }
 
@@ -238,5 +231,5 @@ void Arne::setPosition(float x, float y)
 bool Arne::mIsClose()
 {
 	float dis = sqrt((mShipIceBDis.x * mShipIceBDis.x) + (mShipIceBDis.y * mShipIceBDis.y));
-	return abs(dis) < 0.05f;
+	return abs(dis) < 0.03f;
 }

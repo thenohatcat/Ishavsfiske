@@ -24,13 +24,13 @@ using namespace Ishavsfiske;
 using namespace Angler::Nodes;
 
 Seagull::Seagull(unsigned long id, Angler::Node *parent, Angler::Game *owner)
-	: Animal(id, parent, owner), mVel(0, 0.03f), mScared(false), recoverTime(0), mColTimeRec(6)
+	: Animal(id, parent, owner), mVel(0, 0.03f), mScared(false), recoverTime(0)
 {
 	mInit();
 }
 
 Seagull::Seagull(unsigned long id, Angler::Game *owner)
-	: Animal(id, owner), mVel(0, 0.03f), mScared(false), recoverTime(0),  mColTimeRec(0)
+	: Animal(id, owner), mVel(0, 0.03f), mScared(false), recoverTime(0)
 {
 	mInit();
 }
@@ -49,20 +49,6 @@ void Seagull::update(Angler::Game* context, float time, float deltaTime, bool ch
 		mFishPos = ((IshavsfiskeGame*) context)->getShipFishing()->getPosition();
 
 		mShipFishDis = mFishPos - mRootTranslation->getTranslation();
-
-		if (mTimeDiff > 0.005f && !mBlocked)
-		{
-			mOldRotations.push_back(mRootRotation->getRotation());
-			mOldTranslations.push_back(mRootTranslation->getTranslation());
-			/*cout << "pushed\n";*/
-			if (mOldRotations.size() > 128)
-			{
-				mOldRotations.erase(mOldRotations.begin());
-				mOldTranslations.erase(mOldTranslations.begin());
-			}
-
-			mTimeDiff = 0;
-		}
 
 		if (!mScared && !mIsClose())
 		{
@@ -100,12 +86,7 @@ void Seagull::update(Angler::Game* context, float time, float deltaTime, bool ch
 			}
 		}
 
-		if(mColTimeRec < 5)
-			mColTimeRec += deltaTime;
-
 		mUpdateChildren(context, time, deltaTime);
-
-		mTimeDiff += deltaTime;
 
 		mBlocked = false;
 
@@ -120,7 +101,7 @@ void Seagull::mInit()
 	// Seagull ID?
 	Angler::Nodes::Scale *s = new Angler::Nodes::Scale(getID() + 0x0120, mAnimalRoot, 1/10.0f, 1/10.0f);
 
-	std::vector<sf::Vector2f> pts;
+	/*std::vector<sf::Vector2f> pts;
 	pts.push_back(sf::Vector2f(1/2.0f, 20/100.0f));
 	pts.push_back(sf::Vector2f(40/100.0f, 35/100.0f));
 	pts.push_back(sf::Vector2f(15/100.0f, 40/100.0f));
@@ -130,7 +111,7 @@ void Seagull::mInit()
 	pts.push_back(sf::Vector2f(60/100.0f, 50/100.0f));
 	pts.push_back(sf::Vector2f(85/100.0f, 40/100.0f));
 	pts.push_back(sf::Vector2f(60/100.0f, 35/100.0f));
-	new Angler::Nodes::CollisionNode(getID() + 0x2000, s, pts, 2);
+	new Angler::Nodes::CollisionNode(getID() + 0x2000, s, pts, 2);*/
 
 
 	std::vector<sf::Vector2f> anime;
@@ -193,35 +174,9 @@ void Seagull::getPush()
 	
 }
 
-//void Seagull::revert()
-//{
-//	if(!mBlocked)
-//	{
-//		/*cout << "here\n";*/
-//		mRootRotation->setRotation(mOldRotations.back());
-//		mRootTranslation->setTranslation(mOldTranslations.back());
-//
-//		mOldRotations.pop_back();
-//		mOldTranslations.pop_back();
-//
-//		mVel.x = mVel.y = 0;
-//		mChanged = true;
-//	}
-//}
-
 bool Seagull::mIsClose()
 {
 	float dis = sqrt((mShipFishDis.x * mShipFishDis.x) + (mShipFishDis.y * mShipFishDis.y));
 	/*cout << dis << endl;*/
 	return abs(dis) < 0.05f;
 }
-
-//bool Seagull::collided()
-//{
-//	return mColTimeRec > 5;
-//}
-//
-//void Seagull::startColTimer()
-//{
-//	mColTimeRec = 0;
-//}
