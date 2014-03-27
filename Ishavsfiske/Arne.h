@@ -10,6 +10,8 @@
 
 #include "Animal.h"
 
+#include <Angler\AnimatedNode.h>
+
 namespace Ishavsfiske
 {
 	class IshavsfiskeGame;
@@ -45,12 +47,14 @@ namespace Ishavsfiske
 		float mCalcRotation(float angle);
 		float mRotToShip;
 
-		bool mScared;
+		bool mScared, mAttack;
 
 		void revert();
 		float mTimeDiff;
 		std::vector<float> mOldRotations;
 		std::vector<sf::Vector2f> mOldTranslations;
+
+		Angler::Nodes::AnimatedNode *mArne;
 	};
 }
 
