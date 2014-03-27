@@ -1,6 +1,6 @@
 //Version: 0.1.5
 //Author: Jakob Pipping
-//Contributors: 
+//Contributors: Oskar Engblad
 
 #ifndef ISHAV_0_1_5
 #error IceBreaker.cpp: Wrong version 0.1.5
@@ -36,6 +36,9 @@ void IceBreaker::mInit()
 {
 	mStartX = 0.8f;
 	mStartY = 0.5f;
+
+	mHealth = 1;
+	mHull = 1;
 
 	Ship::mInit();
 
