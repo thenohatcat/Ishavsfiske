@@ -722,7 +722,7 @@ void HarbourMode::loadContent()
 	mTXBackButton->loadFromFile("knappsheet.png");
 	mTXCursor->loadFromFile("cursor_hand_sheet.png");
 
-	mTXFont->loadFromFile("font_bitmap.png");
+	mTXFont->loadFromFile("font.png");
 
 	mTXBarInside->loadFromFile("bar_3_stolar.png");
 	mTXBarInsideHO->loadFromFile("bar_Olaf_hoverover.png");

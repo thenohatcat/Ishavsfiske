@@ -31,7 +31,7 @@ void FishingMode::loadContent()
 	mTXMap->loadFromFile("env_sea1.png");
 	mTXSchool->loadFromFile("Sea_Layer.png");
 	mTXUI->loadFromFile("Sheet_1.png");
-	mUIFont->loadFromFile("font_bitmap.png");
+	mUIFont->loadFromFile("font.png");
 	mTXGameOver->loadFromFile("game_over__.png");	
 	mTXSeagull->loadFromFile("FlyGull_animation_spritesheet.png");
 	mTXBackButton->loadFromFile("knappsheet.png");
