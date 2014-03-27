@@ -21,6 +21,7 @@ private:
 	void loadDistance();
 	float rightDistance[256];
 	float leftDistance[256];
+	float topDistance[256];
 	float getWidth(char c);
 	float getWidth(std::string s);
 };

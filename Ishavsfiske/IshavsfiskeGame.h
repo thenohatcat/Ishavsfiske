@@ -73,8 +73,12 @@ namespace Ishavsfiske
 			GameOverScreenHide,
 			FishingModeShow,
 			FishingModeHide,
+			FishingModeDisable,
+			FishingModeEnable,
 			HarbourModeShow,
-			HarbourModeHide
+			HarbourModeHide,
+			HarbourModeDisable,
+			HarbourModeEnable
 		} Events;
 
 	protected:

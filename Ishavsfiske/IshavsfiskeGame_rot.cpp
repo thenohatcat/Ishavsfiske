@@ -120,11 +120,27 @@ void IshavsfiskeGame::throwEvent(int type, ... )
 	case Events::FishingModeHide:
 		mFishingMode->enable(false);
 		break;
+	case Events::FishingModeEnable:
+		mFishingMode->pause(false);
+		mFishingMode->show(true);
+		break;
+	case Events::FishingModeDisable:
+		mFishingMode->pause(true);
+		mFishingMode->show(false);
+		break;
 	case Events::HarbourModeShow:
 		mHarbourMode->enable(true);
 		break;
 	case Events::HarbourModeHide:
 		mHarbourMode->enable(false);
+		break;
+	case Events::HarbourModeEnable:
+		mHarbourMode->pause(false);
+		mHarbourMode->show(true);
+		break;
+	case Events::HarbourModeDisable:
+		mHarbourMode->pause(true);
+		mHarbourMode->show(false);
 		break;
 	}
 

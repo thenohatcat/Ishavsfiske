@@ -1,6 +1,6 @@
 //Version: 0.1.5
 //Author: Marcus Persson
-//Contributors: 
+//Contributors: Jakob Pipping
 
 #include "Font.h"
 
@@ -23,8 +23,7 @@ void Font::drawString(Angler::Graphics::GraphicsEngine* graphics, std::string st
 	{
 		if (st[i] >= 32 && st[i] <= 128)
 		{
-			graphics->draw(layer, sf::Vector2f(leftDistance[st[i]], 0), 
-			//graphics->draw(layer, sf::Vector2f(0, 0), 
+			graphics->draw(layer, sf::Vector2f(leftDistance[st[i]], topDistance[st[i]]), 
 				sf::Vector2f(
 					(((st[i]-32)%16)*(1/16.0f)),
 					(((st[i]-32)/16)*(1/6.0f))
@@ -65,6 +64,7 @@ void Font::loadDistance()
 		{
 			if(i < 256)
 			{
+				topDistance[i] = 0;
 				file >> leftDistance[i];
 			}
 			else if(i > 255 && i < 512)
