@@ -30,7 +30,7 @@ void FishingMode::loadContent()
 {
 	mTXMap->loadFromFile("env_sea1.png");
 	mTXSchool->loadFromFile("Swim_Capelin_spritesheet.png");
-	mTXUI->loadFromFile("Sheet_1.png");
+	mTXUI->loadFromFile("Sheet_2.png");
 	mUIFont->loadFromFile("font_bitmap.png");
 	mTXGameOver->loadFromFile("game_over__.png");	
 	mTXSeagull->loadFromFile("FlyGull_animation_spritesheet.png");
