@@ -10,8 +10,6 @@
 
 #include "Animal.h"
 
-#include <Angler\AnimatedNode.h>
-
 namespace Ishavsfiske
 {
 	class IshavsfiskeGame;
@@ -53,8 +51,11 @@ namespace Ishavsfiske
 		float mTimeDiff;
 		std::vector<float> mOldRotations;
 		std::vector<sf::Vector2f> mOldTranslations;
+		std::vector<sf::Vector2f> mAnime;
 
-		Angler::Nodes::AnimatedNode *mArne;
+		float mCropWidth, mCropHeight;
+		void mClearAnime(), mAddAnime();
+		int x;
 	};
 }
 

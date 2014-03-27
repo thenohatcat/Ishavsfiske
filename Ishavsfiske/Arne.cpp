@@ -24,13 +24,15 @@ using namespace Ishavsfiske;
 using namespace Angler::Nodes;
 
 Arne::Arne(unsigned long id, Angler::Node *parent, Angler::Game *owner)
-	: Animal(id, parent, owner), mVel(0, -0.05), mTimeDiff(0), mScared(false), mAttack(false)
+	: Animal(id, parent, owner), mVel(0, -0.05), mTimeDiff(0), mScared(false), mAttack(false),
+	mCropWidth(1/8.0f), mCropHeight(6/13.0f), x(0)
 {
 	mInit();
 }
 
 Arne::Arne(unsigned long id, Angler::Game *owner)
-	: Animal(id, owner), mVel(0, -0.05), mTimeDiff(0), mScared(false), mAttack(false)
+	: Animal(id, owner), mVel(0, -0.05), mTimeDiff(0), mScared(false), mAttack(false),
+	mCropWidth(1/8.0f), mCropHeight(6/13.0f), x(0)
 {
 	mInit();
 }
@@ -84,7 +86,17 @@ void Arne::update(Angler::Game* context, float time, float deltaTime, bool chang
 
 void Arne::attack()
 {
-	mAttack = true;
+	mClearAnime();
+	mAddAnime();
+	mCropWidth = 75/1200.0f;
+	mCropHeight = 125/650.0f;
+	setPosition(mIceBPos.x, mIceBPos.y);
+	if(x == 0)
+	{
+		mInit();
+		x = 1;
+	}
+	cout << "attack!!!\n";
 }
 
 void Arne::mInit()
@@ -97,43 +109,30 @@ void Arne::mInit()
 	// Arne ID?
 	Angler::Nodes::Scale *s = new Angler::Nodes::Scale(getID() + 0x0120, mAnimalRoot, 1/10.0f, 1/10.0f);
 
+	std::vector<sf::Vector2f> pts;
+	pts.push_back(sf::Vector2f(1, 0));
+	pts.push_back(sf::Vector2f(0, 0));
+	pts.push_back(sf::Vector2f(0, 70/200.0f));
+	pts.push_back(sf::Vector2f(1, 70/200.0f));
+	new Angler::Nodes::CollisionNode(getID() + 0x3000, s, pts, 0);
 
-	if(!mAttack)
-	{
-		std::vector<sf::Vector2f> pts;
-		pts.push_back(sf::Vector2f(1, 0));
-		pts.push_back(sf::Vector2f(0, 0));
-		pts.push_back(sf::Vector2f(0, 70/200.0f));
-		pts.push_back(sf::Vector2f(1, 70/200.0f));
-		new Angler::Nodes::CollisionNode(getID() + 0x3000, s, pts, 0);
+	mAnime.push_back(sf::Vector2f(0, 4/13.0f));
+	mAnime.push_back(sf::Vector2f(1/8.0f, 4/13.0f));
+	mAnime.push_back(sf::Vector2f(2/8.0f, 4/13.0f));
+	mAnime.push_back(sf::Vector2f(3/8.0f, 4/13.0f));
+	mAnime.push_back(sf::Vector2f(4/8.0f, 4/13.0f));
+	mAnime.push_back(sf::Vector2f(5/8.0f, 4/13.0f));
+	mAnime.push_back(sf::Vector2f(6/8.0f, 4/13.0f));
+	mAnime.push_back(sf::Vector2f(7/8.0f, 4/13.0f));
 
-		std::vector<sf::Vector2f> anime;
-		anime.push_back(sf::Vector2f(0, 4/13.0f));
-		anime.push_back(sf::Vector2f(1/8.0f, 4/13.0f));
-		anime.push_back(sf::Vector2f(2/8.0f, 4/13.0f));
-		anime.push_back(sf::Vector2f(3/8.0f, 4/13.0f));
-		anime.push_back(sf::Vector2f(4/8.0f, 4/13.0f));
-		anime.push_back(sf::Vector2f(5/8.0f, 4/13.0f));
-		anime.push_back(sf::Vector2f(6/8.0f, 4/13.0f));
-		anime.push_back(sf::Vector2f(7/8.0f, 4/13.0f));
-		new Angler::Nodes::AnimatedNode(getID() + 0x678, s, 12, anime, 1/8.0f, 0.5f, 0.5f, 1/8.0f, 6/13.0f); // ID?
-	}
-	else if(mAttack)
-	{
-		std::vector<sf::Vector2f> pts;
-		pts.push_back(sf::Vector2f(1, 0));
-		pts.push_back(sf::Vector2f(0, 0));
-		pts.push_back(sf::Vector2f(0, 1));
-		pts.push_back(sf::Vector2f(1, 1));
-		new Angler::Nodes::CollisionNode(getID() + 0x3000, s, pts, 0);
+	new Angler::Nodes::AnimatedNode(getID() + 0x678, s, 12, mAnime, 1/8.0f, 0.5f, 0.5f, mCropWidth, mCropHeight); // ID?
 
-		std::vector<sf::Vector2f> anime;
-		anime.push_back(sf::Vector2f(0, 500/650.0f));
-		anime.push_back(sf::Vector2f(75/1200.0f, 500/650.0f));
-		anime.push_back(sf::Vector2f(150/1200.0f, 500/650.0f));
-		anime.push_back(sf::Vector2f(225/1200.0f, 500/650.0f));
-		new Angler::Nodes::AnimatedNode(getID() + 0x678, s, 12, anime, 1/4.0f, 0.5f, 0.5f, 75/1200.0f, 125/650.0f); // ID?
-	}
+	//std::vector<sf::Vector2f> anime;
+	//anime.push_back(sf::Vector2f(0, 500/650.0f));
+	//anime.push_back(sf::Vector2f(75/1200.0f, 500/650.0f));
+	//anime.push_back(sf::Vector2f(150/1200.0f, 500/650.0f));
+	//anime.push_back(sf::Vector2f(225/1200.0f, 500/650.0f));
+	//new Angler::Nodes::AnimatedNode(getID() + 0x678, s, 12, anime, 1/4.0f, 0.5f, 0.5f, 75/1200.0f, 125/650.0f); // ID?
 }
 
 bool Arne::mAtShip()
@@ -221,4 +220,18 @@ void Arne::block()
 void Arne::setPosition(float x, float y)
 {
 	mRootTranslation->setTranslation(x, y);
+}
+
+void Arne::mClearAnime()
+{
+	while(!mAnime.empty())
+		mAnime.pop_back();
+}
+
+void Arne::mAddAnime()
+{
+	mAnime.push_back(sf::Vector2f(0, 500/650.0f));
+	mAnime.push_back(sf::Vector2f(75/1200.0f, 500/650.0f));
+	mAnime.push_back(sf::Vector2f(150/1200.0f, 500/650.0f));
+	mAnime.push_back(sf::Vector2f(225/1200.0f, 500/650.0f));
 }

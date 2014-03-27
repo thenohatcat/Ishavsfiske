@@ -213,7 +213,7 @@ bool Seagull::isClose()
 {
 	float dis = sqrt((mShipFishDis.x * mShipFishDis.x) + (mShipFishDis.y * mShipFishDis.y));
 	/*cout << dis << endl;*/
-	return abs(dis) < 0.1f;
+	return abs(dis) < 0.05f;
 }
 
 //bool Seagull::collided()

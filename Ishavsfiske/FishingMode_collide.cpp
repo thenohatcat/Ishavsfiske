@@ -172,7 +172,7 @@ void FishingMode::collide(Node *nodeA, Node *nodeB)
 
 		if (nodeA->getID() == 0x60003000 || nodeB->getID() == 0x60003000)
 		{
-			if (nodeB->getID() == 0x00022102 || nodeB->getID() == 0x00022102)
+			if (nodeA->getID() == 0x00022102 || nodeB->getID() == 0x00022102)
 			{
 				mArne->attack();
 			}
