@@ -267,7 +267,7 @@ void FishingMode::draw(Angler::Game* context, Angler::Graphics::GraphicsEngine* 
 					//Cover
 					glPushMatrix();
 						glScalef(1/40.0f, 1/40.0f, 1);
-							glTranslatef(0, 0.45, 0);
+							glTranslatef(0, 0.45f, 0);
 						glScalef(40.0f, 40.0f, 1);
 
 						glScalef(4/1000.0f, 4/1000.0f, 1);
@@ -420,7 +420,7 @@ void FishingMode::draw(Angler::Game* context, Angler::Graphics::GraphicsEngine* 
 						{
 						//Piece 18
 						graphics->draw(5, sf::Vector2f(0, 0), sf::Vector2f(268/1500.0f, 1375/1600.0f), sf::Vector2f(14/1500.0f, 9/1600.0f));
-						glTranslatef(0.3, 1, 1);
+						glTranslatef(0.3f, 1, 1);
 						glScalef(1.4f, 1.2f, 1);
 						}
 						if(((IceBreaker*)mShipBreaker)->getHull() == 1)
@@ -536,7 +536,7 @@ void FishingMode::draw(Angler::Game* context, Angler::Graphics::GraphicsEngine* 
 			{
 				//Timer
 				glPushMatrix();
-					glScalef(1/40.0, 1/40.0f, 1);
+					glScalef(1/40.0f, 1/40.0f, 1);
 
 					glTranslatef(43.0f, 1.0f, 0);
 

@@ -72,8 +72,6 @@ void FishingMode::mMoveFrame(float fishingDX, float fishingDY, float breakerDX, 
 	}
 
 	mChanged = true;
-
-	//printf("Vel: {%03f, %03f}\n", mx, my);
 }
 
 void FishingMode::update(Angler::Game* context, float time, float deltaTime, bool changed)
@@ -122,7 +120,7 @@ void FishingMode::update(Angler::Game* context, float time, float deltaTime, boo
 		float base;
 		if ((breakerX > 18.0f) && breakerVX > 0)
 		{
-			base = ((breakerX - 18.0f) / 1.732);
+			base = ((breakerX - 18.0f) / 1.732f);
 			breakerMVX = breakerVX / 0.0458f * std::max(std::min(base*base/12.0f, 1.0f), 0.0f);
 		}
 		else if ((breakerX < 6.0f) && breakerVX < 0)
@@ -142,9 +140,9 @@ void FishingMode::update(Angler::Game* context, float time, float deltaTime, boo
 			breakerMVY = breakerVY / 0.0458f * std::max(std::min(base*base/10.0f, 1.0f), 0.0f);
 		}
 
-		if ((fishingX > 18.0f /*&& breakerX > 6.0f*/) && fishingVX > 0)
+		if ((fishingX > 18.0f) && fishingVX > 0)
 		{
-			base = ((fishingX - 18.0f) / 1.732);
+			base = ((fishingX - 18.0f) / 1.732f);
 			fishingMVX = fishingVX / 0.0458f * std::max(std::min(base*base/12.0f, 1.0f), 0.0f);
 		}
 		else if ((fishingX < 6.0f) && fishingVX < 0)
@@ -277,7 +275,7 @@ void FishingMode::update(Angler::Game* context, float time, float deltaTime, boo
 
 		if (((FishingBoat*)mShipFishing)->getRepairing() && ((IceBreaker*)mShipBreaker)->getHull() < 1)
 		{
-			((IceBreaker*)mShipBreaker)->repair(0.25 * deltaTime);
+			((IceBreaker*)mShipBreaker)->repair(0.25f * deltaTime);
 			((IceBreaker*)mShipBreaker)->block();
 		}
 	}

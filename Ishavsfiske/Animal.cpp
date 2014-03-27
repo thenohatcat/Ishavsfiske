@@ -21,7 +21,7 @@ using namespace std;
 using namespace Ishavsfiske;
 using namespace Angler::Nodes;
 
-#define PI 3.14159265
+#define PI 3.14159265f
 
 Animal::Animal(unsigned long id, Angler::Node *parent, Angler::Game *owner)
 	: Node(id, parent), mOwner(owner), mStartX(0.5), mStartY(0.5)
@@ -113,7 +113,7 @@ bool Animal::mLookAtShip()
 	float dx = mFishPos.x - mRootTranslation->getTranslationX();
 	float dy = mFishPos.y - mRootTranslation->getTranslationY();
 
-	float angle = atan(dy / dx) * (180 / PI);
+	float angle = atan(dy / dx) * (180.0f / PI);
 	float mRotToShip = mCalcRotation(angle);
 
 	float rotation = abs(fmod(mRootRotation->getRotation(), 360.0f));

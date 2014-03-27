@@ -352,7 +352,7 @@ void FishingMode::mUpdateTutorial(Angler::Game* context, float time, float delta
 
 	if (((FishingBoat*)mShipFishing)->getRepairing() && ((IceBreaker*)mShipBreaker)->getHull() < 1)
 	{
-		((IceBreaker*)mShipBreaker)->repair(0.25 * deltaTime);
+		((IceBreaker*)mShipBreaker)->repair(0.25f * deltaTime);
 		((IceBreaker*)mShipBreaker)->block();
 	}
 }

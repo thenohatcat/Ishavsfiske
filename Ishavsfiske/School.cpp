@@ -114,7 +114,7 @@ void School::scaredByBoat(sf::Vector2f shipPos, float deltaTime, bool fast)
 	delta -= shipPos;
 
 	if(!fast)
-		move(delta.x/2.5*deltaTime, delta.y/2.5*deltaTime);
+		move(delta.x/2.5f*deltaTime, delta.y/2.5f*deltaTime);
 	else if(fast)
 		move(delta.x/3*deltaTime, delta.y/3*deltaTime);
 }
@@ -146,5 +146,5 @@ bool School::scaredDistance(sf::Vector2f pos)
 	float Y1 = shipPos.y;
 	float DX = X0 - X1;
 	float DY = Y0 - Y1;
-	return DX * DX + DY * DY < 0.025;
+	return DX * DX + DY * DY < 0.025f;
 }

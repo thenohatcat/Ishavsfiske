@@ -77,8 +77,8 @@ int *FishingBoat::getAmmount()
 
 void FishingBoat::mInit()
 {
-	mStartX = 0.6;
-	mStartY = 0.5;
+	mStartX = 0.6f;
+	mStartY = 0.5f;
 
 	mAmmount[0] = mAmmount[1] = mAmmount[2] = mAmmount[3] = 0;
 

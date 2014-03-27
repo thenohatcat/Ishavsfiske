@@ -52,7 +52,7 @@ void FishingMode::mSchoolsClear()
 
 float FishingMode::mGetFish()
 {
-	float ft = ((FishingBoat*)mShipFishing)->getAmmount()[0] + ((FishingBoat*)mShipFishing)->getAmmount()[1] + ((FishingBoat*)mShipFishing)->getAmmount()[2] + ((FishingBoat*)mShipFishing)->getAmmount()[3];
+	float ft = (float)(((FishingBoat*)mShipFishing)->getAmmount()[0] + ((FishingBoat*)mShipFishing)->getAmmount()[1] + ((FishingBoat*)mShipFishing)->getAmmount()[2] + ((FishingBoat*)mShipFishing)->getAmmount()[3]);
 	return ft / (float)mFishMaximum;
 }
 
@@ -93,13 +93,13 @@ void FishingMode::mEnable(bool enabled)
 
 		mOwner->getSound()->playSound(mMusic, false, 0, 0x21000L, true);
 
-		mOwner->getSound()->playSound(mEngineSound, false, 0x20001L, true);
+		mOwner->getSound()->playSound(mBreakerEngineSound, false, 0x20001L, true);
 	}
 	else
 	{
 		mOwner->getSound()->stopSound(mSeaAmbient);
 		mOwner->getSound()->stopSound(mMusic);
-		mOwner->getSound()->stopSound(mEngineSound);
+		mOwner->getSound()->stopSound(mBreakerEngineSound);
 
 		int *fc = mOwner->getFishCount();
 		int *fcs = ((FishingBoat*)mShipFishing)->getAmmount();

@@ -54,8 +54,8 @@ namespace Ishavsfiske
 		void mEnable(bool enabled);
 
 	private:
-		sf::Sound *mCollFishingSound, *mCollBreakerSound, *mCollIceSound, *mEngineSound;
-		sf::SoundBuffer *mCollFishingBuff, *mCollBreakerBuff, *mCollIceBuff, *mEngineBuff;
+		sf::Sound *mCollFishingSound, *mCollBreakerSound, *mCollIceSound, *mBreakerEngineSound, *mFishingEngineSound;
+		sf::SoundBuffer *mCollFishingBuff, *mCollBreakerBuff, *mCollIceBuff, *mBreakerEngineBuff, *mFishingEngineBuff;
 
 		std::vector<sf::Vector2f> mMenuButtonMOS, mBackButtonMOS;
 		bool mMenuButtonIsMO, mBackButtonIsMO;

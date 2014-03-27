@@ -54,7 +54,7 @@ void MsgBox::draw(Angler::Game *context, Angler::Graphics::GraphicsEngine *graph
 
 			glPushMatrix();
 				//First Row
-				glScalef(1/20.0, 1/20.0f, 1);
+				glScalef(1/20.0f, 1/20.0f, 1);
 
 				glPushMatrix();
 					graphics->draw(mBGLayer, sf::Vector2f(0, 0), sf::Vector2f(550/1500.0f, 0), sf::Vector2f(50/1500.0f, 50/1600.0f));
@@ -94,12 +94,12 @@ void MsgBox::draw(Angler::Game *context, Angler::Graphics::GraphicsEngine *graph
 				glPopMatrix();
 			glPopMatrix();
 
-			glScalef(1/20.0, 1/20.0f, 1);
+			glScalef(1/20.0f, 1/20.0f, 1);
 				glTranslatef(0.25f, 0.25f, 0);
 			glScalef(20.0, 20.0f, 1);
 
 			std::string tmp = "";
-			for (int i = 0; i < mText.size(); i++)
+			for (unsigned int i = 0; i < mText.size(); i++)
 			{
 				if (mText.at(i) != '\n')
 				{
@@ -222,7 +222,7 @@ void MsgBox::loadStates(std::string file)
 			}
 		}
 
-		int pos = 0;
+		unsigned int pos = 0;
 		while (pos < msg.length() && pos != std::string::npos)
 		{
 			pos = msg.find("\\\\n", pos);

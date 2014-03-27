@@ -6,7 +6,7 @@
 #error Seagull.cpp: Wrong version 0.1.5
 #endif
 
-#define PI 3.14159265
+#define PI 3.14159265f
 
 #include "IshavsfiskeGame.h"
 #include "Seagull.h"
@@ -61,7 +61,7 @@ void Seagull::update(Angler::Game* context, float time, float deltaTime, bool ch
 				else*/
 					rotate(180 * deltaTime);
 			}
-			move(0, -0.03 * deltaTime);
+			move(0, -0.03f * deltaTime);
 		}
 		mUpdateChildren(context, time, deltaTime);
 	}
@@ -111,7 +111,7 @@ bool Seagull::mLookAtShip()
 
 	float rotation = abs(fmod(mRootRotation->getRotation(), 360.0f));
 
-	cout << mRotToShip << " " << rotation << endl;
+	//cout << mRotToShip << " " << rotation << endl;
 
 	return ((mRotToShip - 3) < rotation) &&  (rotation < (mRotToShip + 3));
 }

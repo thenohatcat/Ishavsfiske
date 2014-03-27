@@ -43,19 +43,22 @@ void Ishavsfiske::IshavsfiskeGame::mLoadContent()
 
 	mMSGBox->loadStates("dialog_meta.txt");
 
-	mFishingMode->loadContent();
 	mFishingMode->enable(false);
+	mGameOverScreen->enable(false);
+	mHarbourMode->enable(false);
 
 	mStartScreen->loadContent();
-	mStartScreen->enable(false);
+	mStartScreen->enable(true);
 
-	mGameOverScreen->loadContent();
-	mGameOverScreen->enable(false);
+	mDraw(0, 0);
+	mGraphics->display();
 
+	mFishingMode->loadContent();
 	mFishingMode->getMap()->load(0, "map_test.txt");
 
+	mGameOverScreen->loadContent();
+
 	mHarbourMode->loadContent();
-	mHarbourMode->enable(true);
 
 	mMSGBox->loadContent();
 

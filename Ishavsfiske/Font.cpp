@@ -18,11 +18,20 @@ Font::Font()
 void Font::drawString(Angler::Graphics::GraphicsEngine* graphics, std::string st, int layer, float size)
 {
 	glPushMatrix();
-	glScalef(size*(1/40.0f), size*(1/40.0f), 1);
+	glScalef(size*(16/1000.0f), size*(16/1000.0f), 1);
 	for(std::string::size_type i = 0; i < st.length(); i++)
 	{
-		graphics->draw(layer, sf::Vector2f(leftDistance[st[i]], 0), 
-			sf::Vector2f(((st[i]%16)*(1/16.0f)),((st[i]/16)*(1/16.0f))), sf::Vector2f((1/16.0f),(1/16.0f)));
+		if (st[i] >= 32 && st[i] <= 128)
+		{
+			graphics->draw(layer, sf::Vector2f(leftDistance[st[i]], 0), 
+				sf::Vector2f(
+					(((st[i]-32)%16)*(1/16.0f)),
+					(((st[i]-32)/16)*(1/6.0f))
+				), sf::Vector2f(
+					(1/16.0f),
+					(1/6.0f))
+				);
+		}
 		glTranslatef(rightDistance[st[i]], 0, 0);
 	}
 	glPopMatrix();

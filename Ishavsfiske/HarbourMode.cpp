@@ -259,7 +259,7 @@ void HarbourMode::mDrawTrade(Angler::Game* context, Angler::Graphics::GraphicsEn
 	
 	glPushMatrix();
 		glTranslatef(13/40.0f, 31/40.0f, 0);
-		mFont->drawString(graphics, "Sell", 7, 0.85f);
+		mFont->drawString(graphics, "Sell", 6, 0.85f);
 	glPopMatrix();
 
 	char tmp[64];
@@ -270,7 +270,7 @@ void HarbourMode::mDrawTrade(Angler::Game* context, Angler::Graphics::GraphicsEn
 		for (int i = 0; i < 4; i++)
 		{
 			sprintf_s(tmp, "Fish %c x %u", 'A' + i, fc[i]);
-			mFont->drawString(graphics, std::string(tmp), 7, 0.85f);
+			mFont->drawString(graphics, std::string(tmp), 6, 0.85f);
 			glTranslatef(0, 1/20.0f, 0);
 		}
 	glPopMatrix();
@@ -280,7 +280,7 @@ void HarbourMode::mDrawTrade(Angler::Game* context, Angler::Graphics::GraphicsEn
 		for (int i = 0; i < 4; i++)
 		{
 			sprintf_s(tmp, "Fish %c %3u NOK", 'A' + i, (i+1) * 10);
-			mFont->drawString(graphics, std::string(tmp), 7, 0.85f);
+			mFont->drawString(graphics, std::string(tmp), 6, 0.85f);
 			glTranslatef(0, 1/20.0f, 0);
 		}
 	glPopMatrix();
@@ -288,7 +288,7 @@ void HarbourMode::mDrawTrade(Angler::Game* context, Angler::Graphics::GraphicsEn
 	glPushMatrix();
 		sprintf_s(tmp, "%5u", fc[0] * 10 + fc[1] * 20 + fc[2] * 30 + fc[3] * 40);
 		glTranslatef(9/40.0f, 28/40.0f, 0);
-		mFont->drawString(graphics, "Sum: " + std::string(tmp) + " NOK", 7, 0.85f);
+		mFont->drawString(graphics, "Sum: " + std::string(tmp) + " NOK", 6, 0.85f);
 	glPopMatrix();
 }
 
@@ -343,7 +343,7 @@ void HarbourMode::draw(Angler::Game* context, Angler::Graphics::GraphicsEngine* 
 		glPushMatrix();
 			glTranslatef(mousePos.x, mousePos.y, 0);
 			glScalef(62/1000.0f, 62/1000.0f, 1.0f);
-			graphics->draw(6, sf::Vector2f(0.35f, 0), sf::Vector2f((context->getMouseState().isButtonDown(sf::Mouse::Button::Left) ? 0.5f : 0.0f), 0), sf::Vector2f(0.5f, 1));
+			graphics->draw(7, sf::Vector2f(0.35f, 0), sf::Vector2f((context->getMouseState().isButtonDown(sf::Mouse::Button::Left) ? 0.5f : 0.0f), 0), sf::Vector2f(0.5f, 1));
 		glPopMatrix();
 
 		//Radio
@@ -398,7 +398,7 @@ void HarbourMode::draw(Angler::Game* context, Angler::Graphics::GraphicsEngine* 
 			char tmp[64];
 			sprintf_s(tmp, "%5u", ((IshavsfiskeGame*)context)->getWallet());
 			glTranslatef(48/40.0f, 2/40.0f, 0);
-			mFont->drawString(graphics, "Wallet: " + std::string(tmp) + " NOK", 7, 0.85f);
+			mFont->drawString(graphics, "Wallet: " + std::string(tmp) + " NOK", 6, 0.85f);
 		glPopMatrix();
 
 		mDrawChildren(context, graphics, time, deltaTime);
@@ -658,9 +658,9 @@ void HarbourMode::update(Angler::Game* context, float time, float deltaTime, boo
 			for (int i = 0; i < 5; i++)
 			{
 				mOwner->getSound()->updateState(mMusic[i], 0x14000L + i + mRadioCh * 0x10);
-				printf("%03.0f ", mMusic[i]->getVolume());
+				//printf("%03.0f ", mMusic[i]->getVolume());
 			}
-			printf("\n");
+			//printf("\n");
 		}
 		else if (mRadioTime >= 0)	
 		{
@@ -673,7 +673,7 @@ void HarbourMode::update(Angler::Game* context, float time, float deltaTime, boo
 			mRadioTime = 0;
 			mRadioCh = (mRadioCh + 1) % 6;
 
-			printf("%u\n", mRadioCh);
+			//printf("%u\n", mRadioCh);
 
 			context->getSound()->playSound(mRadioSound, false, 0x13001L, false);
 
@@ -698,7 +698,7 @@ void HarbourMode::update(Angler::Game* context, float time, float deltaTime, boo
 			{
 				mOwner->getSound()->updateState(mMusic[i], 0x14000L + i);
 			}
-			printf("\n");
+			//printf("\n");
 		}
 
 		mUpdateChildren(context, time, deltaTime);
@@ -739,7 +739,7 @@ void HarbourMode::loadContent()
 	mMusicBuffer[3]->loadFromFile("Harbor_Radio_Jazz02.ogg");
 	mMusicBuffer[4]->loadFromFile("Harbor_Radio_Jazz03.ogg");
 
-	mRadioBuffer->loadFromFile("radio_1.wav");
+	mRadioBuffer->loadFromFile("Radio_tuning.ogg");
 	mRadioSound->setBuffer(*mRadioBuffer);
 
 	for (int i = 0; i < 5; i++)
@@ -957,8 +957,8 @@ void HarbourMode::mShowRoom(int ind)
 		mOwner->getSound()->updateState(mMusic[i], 0x14000L + i + mRadioCh * 0x10);
 	}
 
-	int sizes[8] = { 1, 1, 1, 1, 256, 1, 1, 256 };
-	sf::Texture* textures[8] = { mTXHarbour, mTXBarHO, mTXMarketHO, mTXWorkshopHO, mTXUI, mTXBackButton, mTXCursor, mTXFont };
+	int sizes[8] = { 1, 1, 1, 1, 256, 1, 256, 1 };
+	sf::Texture* textures[8] = { mTXHarbour, mTXBarHO, mTXMarketHO, mTXWorkshopHO, mTXUI, mTXBackButton, mTXFont, mTXCursor };
 	if (ind == 0)
 	{
 		mOwner->setupGraphicsLayers(8, sizes, textures);

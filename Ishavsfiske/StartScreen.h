@@ -34,7 +34,9 @@ namespace Ishavsfiske
 		void mEnable(bool enabled);
 
 	private:
-		sf::Texture *mTextureBG, *mTexturePress;
+		sf::Texture *mTextureBG, *mTexturePress, *mTextureMenu, *mTextureCursor;
+
+		bool mStartMO, mQuitMO;
 
 		sf::Sound *mMusic;
 		sf::SoundBuffer *mMusicIntroBuff;

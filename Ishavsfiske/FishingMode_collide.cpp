@@ -70,7 +70,7 @@ void FishingMode::collide(Node *nodeA, Node *nodeB)
 				int indx = nodeB->getID()& 0xFFF;
 				if(mMap->getTile(indx) >= 0x10 && mMap->getTile(indx) <= 0x1F)
 				{
-					printf("%u\n", mMap->getTile(indx));
+					//printf("%u\n", mMap->getTile(indx));
 					//mShipBreaker->revert();
 					mOwner->throwEvent(IshavsfiskeGame::Events::Breaking);
 					mOwner->getSound()->playSound(mCollIceSound, false, 0x20005L, false);
@@ -82,7 +82,7 @@ void FishingMode::collide(Node *nodeA, Node *nodeB)
 				//Unbreakable ice
 				else if(mMap->getTile(indx) >= 0x20 && mMap->getTile(indx) <= 0x2F)
 				{
-					printf("%u\n", mMap->getTile(indx));
+					//printf("%u\n", mMap->getTile(indx));
 					//mShipBreaker->revert();
 					mOwner->getSound()->playSound(mCollIceSound, false, 0x20005L, false);
 					mShipBreaker->revert();
