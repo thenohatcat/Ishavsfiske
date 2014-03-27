@@ -53,7 +53,7 @@ void FishingMode::draw(Angler::Game* context, Angler::Graphics::GraphicsEngine* 
 				glPushMatrix();
 				glScalef(10/75.0f, 10/75.0f, 1);
 				glTranslatef(0.1f, 0.52f, 1);
-				if(mGetFish() < 1/3.0f);
+				if(mGetFish() < 1/3.0f)
 				{
 				graphics->draw(5, sf::Vector2f(0, 0), sf::Vector2f(1378/1500.0f, 0.0f), sf::Vector2f(122/1500.0f, 133/1600.0f));
 				}
