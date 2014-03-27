@@ -45,17 +45,16 @@ namespace Ishavsfiske
 		float mCalcRotation(float angle);
 		float mRotToShip;
 
-		bool mScared, mAttack;
+		bool mScared/*, mAttack, mAttacked, mSwim*/;
 
 		void revert();
 		float mTimeDiff;
 		std::vector<float> mOldRotations;
 		std::vector<sf::Vector2f> mOldTranslations;
-		std::vector<sf::Vector2f> mAnime;
+		bool mIsClose();
 
-		float mCropWidth, mCropHeight;
-		void mClearAnime(), mAddAnime();
-		int x;
+		Angler::Nodes::AnimatedNode *mAniSwim;
+		Angler::Nodes::AnimatedNode *mAniAttack;
 	};
 }
 

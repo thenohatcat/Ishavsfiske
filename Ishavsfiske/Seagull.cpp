@@ -64,7 +64,7 @@ void Seagull::update(Angler::Game* context, float time, float deltaTime, bool ch
 			mTimeDiff = 0;
 		}
 
-		if (!mScared && !isClose())
+		if (!mScared && !mIsClose())
 		{
 			if(!mLookAtShip())
 			{
@@ -84,7 +84,7 @@ void Seagull::update(Angler::Game* context, float time, float deltaTime, bool ch
 				mScared = false;
 			}
 		}
-		else if(isClose())
+		else if(mIsClose())
 		{
 			int r = rand() % 2;
 			switch(r)
@@ -142,10 +142,10 @@ void Seagull::mInit()
 	new Angler::Nodes::AnimatedNode(getID() + 0x123, s, 10, anime, 1/5.0f, 0.5f, 0.5f, 1/5.0f, 1); // ID?
 }
 
-bool Seagull::mAtShip()
-{
-	return mRootTranslation->getTranslation() == mFishPos;
-}
+//bool Seagull::mAtShip()
+//{
+//	return mRootTranslation->getTranslation() == mFishPos;
+//}
 
 bool Seagull::mLookAtShip()
 {
@@ -209,7 +209,7 @@ void Seagull::getPush()
 //	}
 //}
 
-bool Seagull::isClose()
+bool Seagull::mIsClose()
 {
 	float dis = sqrt((mShipFishDis.x * mShipFishDis.x) + (mShipFishDis.y * mShipFishDis.y));
 	/*cout << dis << endl;*/

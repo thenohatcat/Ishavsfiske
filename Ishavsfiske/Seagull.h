@@ -32,7 +32,6 @@ namespace Ishavsfiske
 		void revert();
 		void getPush();
 		bool collided();
-		bool isClose();
 		void startColTimer();
 	protected:
 		virtual void mInit();
@@ -40,7 +39,7 @@ namespace Ishavsfiske
 		sf::Vector2f mVel, mShipFishDis;
 
 		sf::Vector2f mFishPos;
-		bool mAtShip(), mLookAtShip();
+		bool /*mAtShip(),*/ mLookAtShip();
 		float mCalcRotation(float angle);
 		float mRotToShip;
 		bool mScared;
@@ -53,6 +52,8 @@ namespace Ishavsfiske
 		float mTimeDiff;
 		float mColTimeRec;
 		float mDTime;
+
+		bool mIsClose();
 	};
 }
 
