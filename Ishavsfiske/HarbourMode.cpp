@@ -41,6 +41,14 @@ void HarbourMode::mDrawHarbourRoom(Angler::Game* context, Angler::Graphics::Grap
 
 	if (mWorkshopIsMO)
 		graphics->draw(3);
+
+	//Exit
+	glPushMatrix();
+		glTranslatef(1.6f, 1.0f, 1.0f);
+		glScalef(1/20.0f, 1/20.0f, 1.0f);
+		graphics->draw(5, sf::Vector2f(1.0f, 1.0f), 
+			sf::Vector2f(0.0f, (mBackButtonIsMO ? (context->getMouseState().isButtonDown(sf::Mouse::Left) ? 2/3.0f : 1/3.0f) : 0.0f)), sf::Vector2f(0.5f, 1/3.0f));
+	glPopMatrix();
 }
 
 void HarbourMode::mDrawTrade(Angler::Game* context, Angler::Graphics::GraphicsEngine* graphics, float time, float deltaTime)
@@ -248,6 +256,7 @@ void HarbourMode::mDrawTrade(Angler::Game* context, Angler::Graphics::GraphicsEn
 	glPopMatrix();
 
 	
+	
 	glPushMatrix();
 		glTranslatef(13/40.0f, 31/40.0f, 0);
 		mFont->drawString(graphics, "Sell", 7, 0.85f);
@@ -292,6 +301,14 @@ void HarbourMode::mDrawRoom(Angler::Game* context, Angler::Graphics::GraphicsEng
 
 	if (mTrading)
 		mDrawTrade(context, graphics, time, deltaTime);
+
+	//Exit
+	glPushMatrix();
+		glTranslatef(1.6f, 1.0f, 1.0f);
+		glScalef(1/20.0f, 1/20.0f, 1.0f);
+		graphics->draw(5, sf::Vector2f(1.0f, 1.0f), 
+			sf::Vector2f(0.5f, (mBackButtonIsMO ? (context->getMouseState().isButtonDown(sf::Mouse::Left) ? 2/3.0f : 1/3.0f) : 0.0f)), sf::Vector2f(0.5f, 1/3.0f));
+	glPopMatrix();
 }
 
 void HarbourMode::draw(Angler::Game* context, Angler::Graphics::GraphicsEngine* graphics, float time, float deltaTime)
@@ -320,14 +337,6 @@ void HarbourMode::draw(Angler::Game* context, Angler::Graphics::GraphicsEngine* 
 			glScalef(3.0f, 3.0f, 1.0f);
 			glRotatef(35.0f * sin(mMenuButtonRot), 0, 0, 1);
 			graphics->draw(4, sf::Vector2f(10.0f/20.0f, 55.0f/108.0f), sf::Vector2f(400/1500.0f, 150/1600.0f), sf::Vector2f(20/1500.0f, 108/1600.0f));
-		glPopMatrix();
-
-		//Exit
-		glPushMatrix();
-			glTranslatef(1.6f, 1.0f, 1.0f);
-			glScalef(1/20.0f, 1/20.0f, 1.0f);
-			graphics->draw(5, sf::Vector2f(1.0f, 1.0f), 
-				sf::Vector2f(0.0f, (mBackButtonIsMO ? (context->getMouseState().isButtonDown(sf::Mouse::Left) ? 2/3.0f : 1/3.0f) : 0.0f)), sf::Vector2f(1.0f, 1/3.0f));
 		glPopMatrix();
 
 		//Cursor
@@ -710,7 +719,7 @@ void HarbourMode::loadContent()
 	mTXMarketHO->loadFromFile("Market_Hoverover.png");
 	mTXWorkshopHO->loadFromFile("Workshop_Hoverover.png");
 	mTXUI->loadFromFile("Sheet_1.png");
-	mTXBackButton->loadFromFile("Utpåhavet_knapp.png");
+	mTXBackButton->loadFromFile("knappsheet.png");
 	mTXCursor->loadFromFile("cursor_hand_sheet.png");
 
 	mTXFont->loadFromFile("font_bitmap.png");

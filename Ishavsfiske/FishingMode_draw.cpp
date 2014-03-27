@@ -428,7 +428,7 @@ void FishingMode::draw(Angler::Game* context, Angler::Graphics::GraphicsEngine* 
 				glTranslatef(1.40f, 1.0f, 1.0f);
 				glScalef(1/20.0f, 1/20.0f, 1.0f);
 				graphics->draw(8, sf::Vector2f(1.0f, 1.0f), 
-					sf::Vector2f(0.0f, (mBackButtonIsMO ? (context->getMouseState().isButtonDown(sf::Mouse::Left) ? 0/3.0f : 1/3.0f) : 2/3.0f)), sf::Vector2f(1.0f, 1/3.0f));
+					sf::Vector2f(0.0f, (mBackButtonIsMO ? (context->getMouseState().isButtonDown(sf::Mouse::Left) ? 0/3.0f : 1/3.0f) : 2/3.0f)), sf::Vector2f(0.5f, 1/3.0f));
 			glPopMatrix();
 
 			sf::Vector2f mousePos = sf::Vector2f(context->getMouseState().getPos());

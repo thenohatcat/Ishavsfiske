@@ -34,7 +34,7 @@ void FishingMode::loadContent()
 	mUIFont->loadFromFile("font_bitmap.png");
 	mTXGameOver->loadFromFile("game_over__.png");	
 	mTXSeagull->loadFromFile("FlyGull_animation_spritesheet.png");
-	mTXBackButton->loadFromFile("Utpåhavet_knapp.png");
+	mTXBackButton->loadFromFile("knappsheet.png");
 	mTXCursor->loadFromFile("cursor_hand_sheet.png");
 
 	mCollFishingBuff->loadFromFile("Fiskebåt_Kollision_01.wav");
