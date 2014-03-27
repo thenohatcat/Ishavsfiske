@@ -107,20 +107,21 @@ void MsgBox::draw(Angler::Game *context, Angler::Graphics::GraphicsEngine *graph
 				}
 				else
 				{
-					mFont->drawString(graphics, tmp, mTXTLayer, 0.8f);
+					mFont->drawString(graphics, tmp, mTXTLayer, 1.0f);
 					glScalef(1/40.0f, 1/40.0f, 1);
 						glTranslatef(0, 0.8f, 0);
 					glScalef(40.0f, 40.0f, 1);
 					tmp.clear();
 				}
 			}
-			mFont->drawString(graphics, tmp, mTXTLayer, 0.8f);
+			mFont->drawString(graphics, tmp, mTXTLayer, 1.0f);
 		glPopMatrix();
 	}
 }
 
 void MsgBox::loadContent()
 {
+
 }
 
 void MsgBox::show(std::string text, int bgLayer, int txtLayer, float time)

@@ -598,7 +598,7 @@ void FishingMode::draw(Angler::Game* context, Angler::Graphics::GraphicsEngine* 
 					glScalef(40.0, 40.0f, 1);
 					char c[32];
 					sprintf_s(c, "Timer: %02u:%02u", (int)floor(mTimer/60), (int)floor(fmod(mTimer,60)));
-					mFont->drawString(graphics, c, 7, 0.9f);
+					mFont->drawString(graphics, c, 7, 1.0f);
 
 				glPopMatrix();
 			}

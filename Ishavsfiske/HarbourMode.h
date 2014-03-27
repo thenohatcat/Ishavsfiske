@@ -49,7 +49,7 @@ namespace Ishavsfiske
 
 		Font *mFont;
 
-		sf::Texture *mTXBarHO, *mTXWorkshopHO, *mTXMarketHO, *mTXUI, *mTXBackButton, *mTXCursor, *mTXFont;
+		sf::Texture *mTXBarHO, *mTXWorkshopHO, *mTXMarketHO, *mTXUI, *mTXBackButton, *mTXCursor, *mTXButton, *mTXFont;
 		std::vector<sf::Vector2f> mBarMOS, mWorkshopMOS, mMarketMOS, mMenuButtonMOS, mRadioMOS, mBackButtonMOS,
 			mSellButtonMOS;
 		bool mBarIsMO, mWorkshopIsMO, mMarketIsMO, mMenuButtonIsMO, mRadioIsMO, mBackButtonIsMO, mSellButtonIsMO;

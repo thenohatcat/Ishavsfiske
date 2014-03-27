@@ -24,6 +24,7 @@ void Font::drawString(Angler::Graphics::GraphicsEngine* graphics, std::string st
 		if (st[i] >= 32 && st[i] <= 128)
 		{
 			graphics->draw(layer, sf::Vector2f(leftDistance[st[i]], 0), 
+			//graphics->draw(layer, sf::Vector2f(0, 0), 
 				sf::Vector2f(
 					(((st[i]-32)%16)*(1/16.0f)),
 					(((st[i]-32)/16)*(1/6.0f))
@@ -33,6 +34,7 @@ void Font::drawString(Angler::Graphics::GraphicsEngine* graphics, std::string st
 				);
 		}
 		glTranslatef(rightDistance[st[i]], 0, 0);
+		//glTranslatef(1, 0, 0);
 	}
 	glPopMatrix();
 }
