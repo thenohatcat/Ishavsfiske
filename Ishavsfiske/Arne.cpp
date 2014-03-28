@@ -124,7 +124,7 @@ void Arne::mInit()
 	anime.push_back(sf::Vector2f(5/8.0f, 4/13.0f));
 	anime.push_back(sf::Vector2f(6/8.0f, 4/13.0f));
 	anime.push_back(sf::Vector2f(7/8.0f, 4/13.0f));
-	mAniSwim = new Angler::Nodes::AnimatedNode(getID() + 0x600, s, 12, anime, 1/8.0f, 0.5f, 0.5f, 1/8.0f, 6/13.0f); // ID?
+	mAniSwim = new Angler::Nodes::AnimatedNode(getID() + 0x600, s, 2, anime, 1/8.0f, 0.5f, 0.5f, 1/8.0f, 6/13.0f); // ID?
 
 	/*std::vector<sf::Vector2f> pts1;
 	pts1.push_back(sf::Vector2f(1, 0));
@@ -138,7 +138,7 @@ void Arne::mInit()
 	anime1.push_back(sf::Vector2f(75/1200.0f, 500/650.0f));
 	anime1.push_back(sf::Vector2f(150/1200.0f, 500/650.0f));
 	anime1.push_back(sf::Vector2f(225/1200.0f, 500/650.0f));
-	mAniAttack = new Angler::Nodes::AnimatedNode(getID() + 0x601, r, 12, anime1, 1/4.0f, 0.5f, 0.5f, 75/1200.0f, 125/650.0f); // ID?
+	mAniAttack = new Angler::Nodes::AnimatedNode(getID() + 0x601, r, 2, anime1, 1/4.0f, 0.5f, 0.5f, 75/1200.0f, 125/650.0f); // ID?
 	mAniAttack->show(false);
 }
 
