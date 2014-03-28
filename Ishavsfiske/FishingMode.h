@@ -14,6 +14,7 @@
 #include "IceBreaker.h"
 #include "FishingBoat.h"
 #include "Seagull.h"
+#include "Arne.h"
 #include "Map.h"
 #include "School.h"
 
@@ -37,6 +38,7 @@ namespace Ishavsfiske
 
 		IceBreaker *getIceBreaker();
 		FishingBoat *getShipFishing();
+		Arne *getArne(); // Get Arne
 
 		void draw(Angler::Game* context, Angler::Graphics::GraphicsEngine* graphics, float time, float deltaTime);
 		void endDraw(Angler::Game* context, Angler::Graphics::GraphicsEngine* graphics, float time, float deltaTime);
@@ -61,7 +63,7 @@ namespace Ishavsfiske
 		bool mMenuButtonIsMO, mBackButtonIsMO;
 		float mMenuButtonRot;
 
-		sf::Texture *mTXMap, *mTXUI, *mTXSchool, *mUIFont, *mTXGameOver, *mTXBackButton, *mTXCursor, *mTXSeagull;
+		sf::Texture *mTXMap, *mTXUI, *mTXSchool, *mUIFont, *mTXGameOver, *mTXBackButton, *mTXCursor, *mTXSeagull, *mTXSeaLayer;
 		
 		sf::Sound *mRepair, *mFishing;
 		sf::SoundBuffer *mRepairBuff, *mFishingBuff;
@@ -73,6 +75,7 @@ namespace Ishavsfiske
 		sf::SoundBuffer *mSeaAmbientBuff;
 
 		Angler::Nodes::Translation *mFishBase;
+		Angler::Nodes::Translation *mSeagullBase; // Seagullbase
 
 		void mMoveFrame(float fishingDX, float fishingDY, float breakerDX, float breakerDY, bool fishingX, bool fishingY, bool moveMapX, bool moveMapY);
 
@@ -83,7 +86,12 @@ namespace Ishavsfiske
 		
 		Ship *mShipFishing, *mShipBreaker;
 
-		Animal *mSeagull;
+		Seagull *mSeagull;
+		Arne *mArne;
+
+		// Seagull
+		int mSeagullID;
+		std::vector<Seagull*> mSeagulls;
 
 		Ishavsfiske::IshavsfiskeGame *mOwner;
 
@@ -110,7 +118,7 @@ namespace Ishavsfiske
 		bool mCanRepair;
 		bool mCanFish;
 		bool mMapFrozen;
-		bool mSpawnFish;
+		bool mSpawnFish, mSpawnSeagull; // added spawnseagull
 
 		bool mRunTimer;
 		float mTimer;

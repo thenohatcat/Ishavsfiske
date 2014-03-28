@@ -1,0 +1,65 @@
+//Version: 0.1.5
+//Author: Sihao Li
+//Contributors:
+
+#ifndef INC_ARNE_H
+#define INC_ARNE_H
+
+#ifdef ISHAV_0_1_5
+
+
+#include "Animal.h"
+
+namespace Ishavsfiske
+{
+	class IshavsfiskeGame;
+
+	class Arne
+		: public Animal
+	{
+	public:
+		Arne(unsigned long id, Angler::Node *parent, Angler::Game *owner);
+		Arne(unsigned long id, Angler::Game *owner);
+
+		virtual ~Arne();
+
+		void update(Angler::Game *context, float time, float deltaTime, bool changed);
+
+		virtual void attack();
+
+		virtual void collide();
+
+		sf::Vector2f getVel();
+
+		void block();
+
+		void setPosition(float x, float y);
+	protected:
+		virtual void mInit();
+	private:
+		void throttle(float vx, float vy);
+		sf::Vector2f mVel, mShipIceBDis;
+
+		sf::Vector2f mIceBPos;
+		bool mAtShip(), mLookAtShip();
+		float mCalcRotation(float angle);
+		float mRotToShip;
+
+		bool mScared/*, mAttack, mAttacked, mSwim*/;
+
+		void revert();
+		float mTimeDiff;
+		std::vector<float> mOldRotations;
+		std::vector<sf::Vector2f> mOldTranslations;
+		bool mIsClose();
+
+		Angler::Nodes::AnimatedNode *mAniSwim;
+		Angler::Nodes::AnimatedNode *mAniAttack;
+	};
+}
+
+#else
+#error Arne.h: Wrong version 0.1.5
+#endif
+
+#endif

@@ -44,19 +44,11 @@ namespace Ishavsfiske
 
 		Angler::Nodes::Translation *mRootTranslation;
 		Angler::Nodes::Rotation *mRootRotation;
-	private:
-		sf::Vector2f mVel, mShipFishDis, mShipIceBDis;
-
-		sf::Vector2f mFishPos, mIceBPos;
-		bool mAtShip(), mLookAtShip();
-		float mCalcRotation(float angle);
-		float mRotToShip;
 
 		int mDirection(sf::Vector2f position);
 
-		void mSetSpeed(float vx, float vy);
-
-		bool mScared;
+		bool mBlocked;
+	private:
 	};
 }
 

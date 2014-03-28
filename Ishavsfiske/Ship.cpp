@@ -82,6 +82,9 @@ void Ship::update(Angler::Game *context, float time, float deltaTime, bool chang
 	{
 		mChanged |= changed;
 	
+		// v0.1.5.a22
+		mArneVel = ((IshavsfiskeGame*) context)->getArne()->getVel();
+
 		if (mTimeDiff > 0.005f && !mBlocked)
 		{
 			mOldRotations.push_back(mRootRotation->getRotation());
@@ -193,4 +196,10 @@ void Ship::setPosition(sf::Vector2f pos)
 void Ship::setRotation(float r)
 {
 	mRootRotation->setRotation(r);
+}
+
+// Knockback
+void Ship::knockback()
+{
+	mVel = mArneVel;
 }

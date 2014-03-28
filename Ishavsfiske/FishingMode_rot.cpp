@@ -12,14 +12,14 @@
 using namespace Ishavsfiske;
 
 FishingMode::FishingMode(unsigned long id, Angler::Node *parent, Ishavsfiske::IshavsfiskeGame *owner)
-	: Node(id, parent), mOwner(owner), mSchoolID(0), mTimer(122), mTutorialStage(0), mTutorialStageTime(-1),
+	: Node(id, parent), mOwner(owner), mSchoolID(0), mSeagullID(0), mTimer(122), mTutorialStage(0), mTutorialStageTime(-1),
 	mFishMaximum(150)
 {
 
 }
 
 FishingMode::FishingMode(unsigned long id, Ishavsfiske::IshavsfiskeGame *owner)
-	: Node(id), mOwner(owner), mSchoolID(0), mTimer(122), mTutorialStage(0), mTutorialStageTime(-1),
+	: Node(id), mOwner(owner), mSchoolID(0), mSeagullID(0), mTimer(122), mTutorialStage(0), mTutorialStageTime(-1),
 	mFishMaximum(150)
 {
 
@@ -33,6 +33,12 @@ IceBreaker *FishingMode::getIceBreaker()
 FishingBoat *FishingMode::getShipFishing()
 {
 	return (FishingBoat*)mShipFishing;
+}
+
+// Get Arne
+Arne *FishingMode::getArne()
+{
+	return (Arne*)mArne;
 }
 
 Map *FishingMode::getMap()
@@ -59,6 +65,7 @@ float FishingMode::mGetFish()
 void FishingMode::mReset()
 {
 	mSchoolID = 0;
+	mSeagullID = 0; // Modified by v0.1.5.a22
 	mTimer = 122;
 	mTutorialStage = 0;
 	mTutorialStageTime = -1;

@@ -11,6 +11,9 @@
 #include "IshavsfiskeGame.h"
 #include "FishingMode.h"
 
+#include <Angler\HelpFunctions.h>
+#include <iostream>
+
 using namespace Angler;
 using namespace Ishavsfiske;
 
@@ -133,6 +136,51 @@ void FishingMode::collide(Node *nodeA, Node *nodeB)
 	#ifdef _DEBUG
 				printf("Fishingboat and Icebreaker collided\n");
 	#endif
+			}
+		}
+		//// if mArne collides
+		//if((nodeA->getID() >= 0x60000000 && nodeA->getID() <= 0x69000000) || (nodeA->getID() >= 0x60000000 && nodeA->getID() <= 0x69000000))
+		//{
+		//	if (nodeB->getID() == 0x00022102 || nodeB->getID() == 0x00022102)
+		//	{
+		//		mShipBreaker
+		//	}
+		//}
+
+		//// if mSeagull collides
+		//if((nodeA->getID() && 0xF000FFFF == 0x40002000) && (nodeB->getID() && 0xF000FFFF == 0x40002000))
+		//{
+		//	Seagull *seagull = nullptr;
+		//	if (nodeB->getID() && 0xF000FFFF == 0x40002000)/* && nodeB->getID() && 0xF000FFFF == 0x40002000)*/
+		//	{
+		//		seagull = (Seagull*)(nodeA);
+		//		seagull->revert();
+		//	}
+		//	else if(nodeB->getID() && 0xF000FFFF == 0x40002000)/* && nodeB->getID() <= 0x4FFFFFFF)*/
+		//	{
+		//		seagull = (Seagull*)(nodeB);
+		//		seagull->revert();
+		//	}
+		//}
+
+		//if((((nodeA->getID() & 0xF000FFFF) == 0x40002000) && ((nodeB->getID() & 0xF000FFFF) == 0x40002000)))
+		//{
+		//	Seagull *seagullA, *seagullB;
+		//	seagullA = (Seagull*)Angler::HelpFunctions::Nodes::getNode(nodeA->getID() & 0xFFFF0000, this);
+		//	seagullB = (Seagull*)Angler::HelpFunctions::Nodes::getNode(nodeB->getID() & 0xFFFF0000, this);
+		//	if(seagullA->isClose() || seagullB->isClose())
+		//	{
+		//		seagullA->revert();
+		//		seagullB->revert();
+		//		/*std::cout << std::endl;*/
+		//	}
+		//}
+
+		if (nodeA->getID() == 0x60003000 || nodeB->getID() == 0x60003000)
+		{
+			if (nodeA->getID() == 0x00022102 || nodeB->getID() == 0x00022102)
+			{
+				mArne->attack();
 			}
 		}
 	}

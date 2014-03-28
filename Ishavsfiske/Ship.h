@@ -33,6 +33,7 @@ namespace Ishavsfiske
 		void update(Angler::Game *context, float time, float deltaTime, bool changed);
 
 		void revert();
+		void knockback(); // Knockback when arne rams into ship
 
 		void setPosition(sf::Vector2f v);
 		void setRotation(float r);
@@ -67,6 +68,7 @@ namespace Ishavsfiske
 		std::vector<sf::Vector2f> mOldTranslations;
 
 		float mTimeDiff;
+		sf::Vector2f mArneVel; // Arnes velocity
 	};
 }
 
