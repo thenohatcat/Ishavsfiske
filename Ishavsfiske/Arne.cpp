@@ -24,13 +24,13 @@ using namespace Ishavsfiske;
 using namespace Angler::Nodes;
 
 Arne::Arne(unsigned long id, Angler::Node *parent, Angler::Game *owner)
-	: Animal(id, parent, owner), mVel(0, -0.05), mTimeDiff(0), mScared(false)
+	: Animal(id, parent, owner), mVel(0, -0.05f), mTimeDiff(0), mScared(false)
 {
 	mInit();
 }
 
 Arne::Arne(unsigned long id, Angler::Game *owner)
-	: Animal(id, owner), mVel(0, -0.05), mTimeDiff(0), mScared(false)
+	: Animal(id, owner), mVel(0, -0.05f), mTimeDiff(0), mScared(false)
 {
 	mInit();
 }
@@ -93,6 +93,7 @@ void Arne::attack()
 	mAniAttack->show(true);
 	mAniSwim->show(false);
 	mVel.y = 0;
+	cout << "A" << endl;
 }
 
 void Arne::mInit()
@@ -108,11 +109,11 @@ void Arne::mInit()
 	Angler::Nodes::Rotation *r = new Angler::Nodes::Rotation(getID() + 0x0235, t, 180);
 
 	std::vector<sf::Vector2f> pts;
-	pts.push_back(sf::Vector2f(1, 0));
-	pts.push_back(sf::Vector2f(0, 0));
-	pts.push_back(sf::Vector2f(0, 70/200.0f));
-	pts.push_back(sf::Vector2f(1, 70/200.0f));
-	new Angler::Nodes::CollisionNode(getID() + 0x3000, s, pts, 0);
+	pts.push_back(sf::Vector2f(70/400.0f, -0.5f));
+	pts.push_back(sf::Vector2f(-70/400.0f, -0.5f));
+	pts.push_back(sf::Vector2f(-70/400.0f, 0.5f));
+	pts.push_back(sf::Vector2f(70/400.0f, 0.5f));
+	new Angler::Nodes::CollisionNode(getID() + 0x3000, s, pts, 1);
 
 	std::vector<sf::Vector2f> anime;
 	anime.push_back(sf::Vector2f(0, 4/13.0f));
